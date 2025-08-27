@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento de Vocabulário</title>
+    <!-- Inclui a biblioteca Tailwind CSS para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #D8BFD8, #ADD8E6); /* Gradiente lilás para azul claro */
+            background-attachment: fixed; /* Fixa o gradiente para que ele não role */
+            color: #333;
+        }
+    </style>
+</head>
+<body class="p-8 flex flex-col items-center min-h-screen">
+
+    <div class="bg-white bg-opacity-90 p-8 rounded-lg shadow-2xl w-full max-w-2xl">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Treinamento de Vocabulário</h1>
+        
+        <!-- Botão principal para sortear todos os itens -->
+        <div class="flex justify-center mb-8">
+            <button onclick="sortear()" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                Sortear Tudo
+            </button>
+        </div>
+
+        <div class="space-y-6">
+            <!-- Seção Frase -->
+            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Frase</h2>
+                <div class="flex items-center space-x-4 mb-4">
+                    <span id="fraseText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+                    <button onclick="showFrases()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+                </div>
+                <!-- Campo de detalhes com estilo destacado -->
+                <div id="fraseDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+            </div>
+
+            <!-- Seção Verbo (Inglês para Português) -->
+            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Inglês para Português)</h2>
+                <div class="flex items-center space-x-4 mb-4">
+                    <span id="verboText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+                    <button onclick="showVerbos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+                </div>
+                <!-- Campo de detalhes com estilo destacado -->
+                <div id="verboDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+            </div>
+
+            <!-- Seção Verbo (Português para Inglês) -->
+            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Português para Inglês)</h2>
+                <div class="flex items-center space-x-4 mb-4">
+                    <span id="verboPtEnText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+                    <button onclick="showVerbosPtEn()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+                </div>
+                <!-- Campo de detalhes com estilo destacado -->
+                <div id="verboPtEnDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+            </div>
+            
+            <!-- Nova Seção Phrasal Verbs -->
+            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Phrasal Verbs</h2>
+                <div class="flex items-center space-x-4 mb-4">
+                    <span id="phrasalVerbText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+                    <button onclick="showPhrasalVerbs()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+                </div>
+                <!-- Campo de detalhes com estilo destacado -->
+                <div id="phrasalVerbDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+            </div>
+
+            <!-- Seção Adjetivo -->
+            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Adjetivo</h2>
+                <div class="flex items-center space-x-4 mb-4">
+                    <span id="adjetivoText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+                    <button onclick="showAdjetivos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+                </div>
+                <!-- Campo de detalhes com estilo destacado -->
+                <div id="adjetivoDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+            </div>
+
+            <!-- Seção Advérbio -->
+            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Advérbio</h2>
+                <div class="flex items-center space-x-4 mb-4">
+                    <span id="adverbioText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+                    <button onclick="showAdverbios()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+                </div>
+                <!-- Campo de detalhes com estilo destacado -->
+                <div id="adverbioDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+            </div>
+        </div>
+
+        <!-- Botão para inserir novos dados -->
+        <div class="mt-8 flex justify-center">
+            <button onclick="toggleAddDataModal()" class="px-6 py-3 bg-gray-400 text-gray-800 rounded-full shadow hover:bg-gray-500 transition duration-300 transform hover:scale-105">
+                + Inserir Novo Dado
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal para inserir dados -->
+    <div id="addDataModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <button onclick="toggleAddDataModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Inserir Novo Dado</h2>
+
+            <form id="addDataForm" onsubmit="event.preventDefault(); addData();">
+                <div class="mb-4">
+                    <label for="dataType" class="block text-gray-700 font-semibold mb-2">Tipo de Dado:</label>
+                    <select id="dataType" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="frase">Frase</option>
+                        <option value="verbo">Verbo (Inglês para Português)</option>
+                        <option value="verboPtEn">Verbo (Português para Inglês)</option>
+                        <option value="phrasalVerb">Phrasal Verb</option>
+                        <option value="adjetivo">Adjetivo</option>
+                        <option value="adverbio">Advérbio</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="dataText" class="block text-gray-700 font-semibold mb-2">Texto (Inglês/Frase):</label>
+                    <input type="text" id="dataText" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+
+                <!-- Campos de detalhes adicionais -->
+                <div id="extraFields" class="mb-4">
+                    <div class="mb-2">
+                        <label for="detail1" class="block text-gray-700">Detalhe 1 (Ex: Passado Simples/Tradução):</label>
+                        <input type="text" id="detail1" class="w-full p-3 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-2">
+                        <label for="detail2" class="block text-gray-700">Detalhe 2 (Ex: Particípio Passado):</label>
+                        <input type="text" id="detail2" class="w-full p-3 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-2">
+                        <label for="detail3" class="block text-gray-700">Detalhe 3 (Ex: Tradução):</label>
+                        <input type="text" id="detail3" class="w-full p-3 border border-gray-300 rounded-md">
+                    </div>
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-bold rounded-full shadow-lg hover:bg-blue-700 transition">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Dados de exemplo para as listas.
+        // É aqui que você deve inserir os dados do seu Excel.
+        // O ID é o equivalente à coluna A do VLOOKUP no Excel.
+        // O "text" é o equivalente à coluna B.
+        // Os outros detalhes são as colunas subsequentes.
+        let frasesData = [
+            { id: 1, text: "The early bird gets the worm.", detail1: "O pássaro que madruga pega a minhoca." },
+            { id: 2, text: "A picture is worth a thousand words.", detail1: "Uma imagem vale mais que mil palavras." },
+            { id: 3, text: "An apple a day keeps the doctor away.", detail1: "Uma maçã por dia mantém o médico afastado." },
+            { id: 4, text: "Where there's a will, there's a way.", detail1: "Onde há vontade, há um caminho." },
+            { id: 5, text: "It's a piece of cake.", detail1: "É moleza." }
+        ];
+
+        let verbosData = [
+            { id: 1, text: "run", detail1: "ran", detail2: "run", detail3: "correr" },
+            { id: 2, text: "eat", detail1: "ate", detail2: "eaten", detail3: "comer" },
+            { id: 3, text: "sleep", detail1: "slept", detail2: "slept", detail3: "dormir" },
+            { id: 4, text: "write", detail1: "wrote", detail2: "written", detail3: "escrever" },
+            { id: 5, text: "read", detail1: "read", detail2: "read", detail3: "ler" }
+        ];
+
+        // Lista de Phrasal Verbs, com tradução no detail1
+        let phrasalVerbsData = [
+            { id: 1, text: "break down", detail1: "quebrar, avariar, desmoronar" },
+            { id: 2, text: "get up", detail1: "levantar-se" },
+            { id: 3, text: "look forward to", detail1: "aguardar ansiosamente" },
+            { id: 4, text: "put off", detail1: "adiar" },
+            { id: 5, text: "take off", detail1: "decolar, tirar (roupa)" },
+            { id: 6, text: "turn on", detail1: "ligar" },
+            { id: 7, text: "turn off", detail1: "desligar" },
+            { id: 8, text: "get along with", detail1: "se dar bem com" },
+            { id: 9, text: "look up", detail1: "procurar (em um dicionário, lista)" },
+            { id: 10, text: "call off", detail1: "cancelar" }
+        ];
+        
+        let adjetivosData = [
+            { id: 1, text: "happy", detail1: "feliz" },
+            { id: 2, text: "sad", detail1: "triste" },
+            { id: 3, text: "brave", detail1: "corajoso" },
+            { id: 4, text: "tall", detail1: "alto" },
+            { id: 5, text: "beautiful", detail1: "bonito" }
+        ];
+
+        let adverbiosData = [
+            { id: 1, text: "quickly", detail1: "rapidamente" },
+            { id: 2, text: "slowly", detail1: "lentamente" },
+            { id: 3, text: "happily", detail1: "alegremente" },
+            { id: 4, text: "carefully", detail1: "cuidadosamente" },
+            { id: 5, text: "well", detail1: "bem" }
+        ];
+
+        // Mapeia o nome do tipo de dado para o array correspondente
+        const dataMap = {
+            frase: frasesData,
+            verbo: verbosData,
+            phrasalVerb: phrasalVerbsData,
+            adjetivo: adjetivosData,
+            adverbio: adverbiosData
+        };
+
+        // Funções de VLOOKUP (recreadas para arrays)
+        function vLookup(text, dataArray, colIndex) {
+            const item = dataArray.find(d => d.text === text);
+            if (!item) {
+                return null;
+            }
+            switch(colIndex) {
+                case 2: return item.detail1;
+                case 3: return item.detail2;
+                case 4: return item.detail3;
+                default: return null;
+            }
+        }
+
+        function clearContents() {
+            document.getElementById('fraseDetails').textContent = '';
+            document.getElementById('verboDetails').textContent = '';
+            document.getElementById('verboPtEnDetails').textContent = '';
+            document.getElementById('phrasalVerbDetails').textContent = ''; // Limpa o novo campo
+            document.getElementById('adjetivoDetails').textContent = '';
+            document.getElementById('adverbioDetails').textContent = '';
+        }
+
+        // Simula a macro Sortear
+        function sortear() {
+            clearContents();
+
+            // Frases
+            const randomFraseIndex = Math.floor(Math.random() * frasesData.length);
+            document.getElementById('fraseText').textContent = frasesData[randomFraseIndex].text;
+
+            // Verbos (Inglês -> Português)
+            const randomVerboIndex = Math.floor(Math.random() * verbosData.length);
+            document.getElementById('verboText').textContent = verbosData[randomVerboIndex].text;
+
+            // Verbos (Português -> Inglês)
+            const randomVerboPtEnIndex = Math.floor(Math.random() * verbosData.length);
+            document.getElementById('verboPtEnText').textContent = verbosData[randomVerboPtEnIndex].detail3;
+
+            // Phrasal Verbs
+            const randomPhrasalVerbIndex = Math.floor(Math.random() * phrasalVerbsData.length);
+            document.getElementById('phrasalVerbText').textContent = phrasalVerbsData[randomPhrasalVerbIndex].text;
+
+            // Adjetivos
+            const randomAdjetivoIndex = Math.floor(Math.random() * adjetivosData.length);
+            document.getElementById('adjetivoText').textContent = adjetivosData[randomAdjetivoIndex].text;
+
+            // Advérbios
+            const randomAdverbioIndex = Math.floor(Math.random() * adverbiosData.length);
+            document.getElementById('adverbioText').textContent = adverbiosData[randomAdverbioIndex].text;
+        }
+
+        // Funções para mostrar detalhes (simulando as macros individuais)
+        function showFrases() {
+            const text = document.getElementById('fraseText').textContent;
+            const detail = vLookup(text, frasesData, 2);
+            document.getElementById('fraseDetails').textContent = detail ? `Tradução: ${detail}` : 'Detalhe não encontrado.';
+        }
+
+        function showVerbos() {
+            const text = document.getElementById('verboText').textContent;
+            const detail1 = vLookup(text, verbosData, 2);
+            const detail2 = vLookup(text, verbosData, 3);
+            const detail3 = vLookup(text, verbosData, 4);
+            let details = '';
+            if (detail1) details += `Passado Simples: ${detail1}`;
+            if (detail2) details += `, Particípio Passado: ${detail2}`;
+            if (detail3) details += `, Tradução: ${detail3}`;
+            document.getElementById('verboDetails').textContent = details || 'Detalhes não encontrados.';
+        }
+
+        function showVerbosPtEn() {
+            const textPt = document.getElementById('verboPtEnText').textContent;
+            const item = verbosData.find(d => d.detail3 === textPt);
+            if (item) {
+                const details = `Presente: ${item.text}, Passado Simples: ${item.detail1}, Particípio Passado: ${item.detail2}`;
+                document.getElementById('verboPtEnDetails').textContent = details;
+            } else {
+                document.getElementById('verboPtEnDetails').textContent = 'Detalhes não encontrados.';
+            }
+        }
+
+        // Função para mostrar detalhes do Phrasal Verb
+        function showPhrasalVerbs() {
+            const text = document.getElementById('phrasalVerbText').textContent;
+            const detail = vLookup(text, phrasalVerbsData, 2);
+            document.getElementById('phrasalVerbDetails').textContent = detail ? `Tradução: ${detail}` : 'Detalhe não encontrado.';
+        }
+
+        function showAdjetivos() {
+            const text = document.getElementById('adjetivoText').textContent;
+            const detail = vLookup(text, adjetivosData, 2);
+            document.getElementById('adjetivoDetails').textContent = detail ? `Tradução: ${detail}` : 'Detalhe não encontrado.';
+        }
+
+        function showAdverbios() {
+            const text = document.getElementById('adverbioText').textContent;
+            const detail = vLookup(text, adverbiosData, 2);
+            document.getElementById('adverbioDetails').textContent = detail ? `Tradução: ${detail}` : 'Detalhe não encontrado.';
+        }
+
+        // Lógica do modal para inserção de dados
+        function toggleAddDataModal() {
+            const modal = document.getElementById('addDataModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function addData() {
+            const dataType = document.getElementById('dataType').value;
+            const dataText = document.getElementById('dataText').value;
+            const detail1 = document.getElementById('detail1').value;
+            const detail2 = document.getElementById('detail2').value;
+            const detail3 = document.getElementById('detail3').value;
+
+            let newData = {
+                id: dataMap[dataType] ? dataMap[dataType].length + 1 : 1,
+                text: dataText,
+            };
+
+            // Adiciona detalhes dependendo do tipo de dado
+            if (dataType === 'frase' || dataType === 'adjetivo' || dataType === 'adverbio' || dataType === 'phrasalVerb') {
+                newData.detail1 = detail1;
+            }
+            if (dataType === 'verbo' || dataType === 'verboPtEn') {
+                newData.detail1 = detail1;
+                newData.detail2 = detail2;
+                newData.detail3 = detail3;
+            }
+
+            if (dataType === 'verboPtEn') {
+                verbosData.push(newData);
+            } else {
+                dataMap[dataType].push(newData);
+            }
+            
+            document.getElementById('addDataForm').reset();
+            toggleAddDataModal();
+            
+            // Opcional: mostrar uma mensagem de sucesso
+            console.log(`Novo dado adicionado a ${dataType}s:`, newData);
+            alert(`"${dataText}" foi adicionado com sucesso à lista de ${dataType}s!`);
+        }
+    </script>
+</body>
+</html>
