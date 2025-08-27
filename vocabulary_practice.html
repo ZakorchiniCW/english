@@ -8,17 +8,68 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        
+        /* Tema Claro (padrão) */
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #D8BFD8, #ADD8E6); /* Gradiente lilás para azul claro */
-            background-attachment: fixed; /* Fixa o gradiente para que ele não role */
+            background: linear-gradient(135deg, #D8BFD8, #ADD8E6);
+            background-attachment: fixed;
             color: #333;
+        }
+        .container {
+            background-color: white;
+        }
+        .card {
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+        .details-box {
+            background-color: #fffbeb;
+            color: #4b5563;
+        }
+
+        /* Tema Escuro */
+        body.dark {
+            background: linear-gradient(135deg, #1f2937, #111827);
+            color: #e5e7eb;
+        }
+        body.dark .container {
+            background-color: #1f2937;
+            background-opacity: 0.95;
+        }
+        body.dark .card {
+            background-color: #374151;
+            border-color: #4b5563;
+        }
+        body.dark .details-box {
+            background-color: #6b7280;
+            color: #f3f4f6;
+        }
+        body.dark .text-gray-800 {
+            color: #e5e7eb;
+        }
+        body.dark .text-gray-700 {
+            color: #d1d5db;
+        }
+        body.dark .text-gray-900 {
+            color: #f3f4f6;
+        }
+        body.dark .bg-gray-50 {
+            background-color: #374151;
+        }
+        body.dark .border-gray-200 {
+            border-color: #4b5563;
         }
     </style>
 </head>
 <body class="p-8 flex flex-col items-center min-h-screen">
 
-    <div class="bg-white bg-opacity-90 p-8 rounded-lg shadow-2xl w-full max-w-2xl">
+    <div class="bg-white bg-opacity-90 p-8 rounded-lg shadow-2xl w-full max-w-2xl relative container">
+        <!-- Botão para alternar o tema -->
+        <button id="theme-toggle" onclick="toggleTheme()" class="absolute top-4 right-4 px-4 py-2 text-sm font-bold rounded-full shadow-lg transition duration-300">
+            ☀️
+        </button>
+
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Treinamento de Vocabulário</h1>
         
         <!-- Botão principal para sortear todos os itens -->
@@ -27,72 +78,73 @@
                 Sortear Tudo
             </button>
         </div>
-
-        <div class="space-y-6">
+        
+        <!-- Contêiner principal com a grade de duas colunas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Seção Frase -->
-            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+            <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Frase</h2>
                 <div class="flex items-center space-x-4 mb-4">
                     <span id="fraseText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
                     <button onclick="showFrases()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
                 </div>
                 <!-- Campo de detalhes com estilo destacado -->
-                <div id="fraseDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+                <div id="fraseDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
             </div>
 
             <!-- Seção Verbo (Inglês para Português) -->
-            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+            <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Inglês para Português)</h2>
                 <div class="flex items-center space-x-4 mb-4">
                     <span id="verboText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
                     <button onclick="showVerbos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
                 </div>
                 <!-- Campo de detalhes com estilo destacado -->
-                <div id="verboDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+                <div id="verboDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
             </div>
 
             <!-- Seção Verbo (Português para Inglês) -->
-            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+            <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Português para Inglês)</h2>
                 <div class="flex items-center space-x-4 mb-4">
                     <span id="verboPtEnText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
                     <button onclick="showVerbosPtEn()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
                 </div>
                 <!-- Campo de detalhes com estilo destacado -->
-                <div id="verboPtEnDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+                <div id="verboPtEnDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
             </div>
             
             <!-- Nova Seção Phrasal Verbs -->
-            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+            <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Phrasal Verbs</h2>
                 <div class="flex items-center space-x-4 mb-4">
                     <span id="phrasalVerbText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
                     <button onclick="showPhrasalVerbs()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
                 </div>
                 <!-- Campo de detalhes com estilo destacado -->
-                <div id="phrasalVerbDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+                <div id="phrasalVerbDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
             </div>
 
             <!-- Seção Adjetivo -->
-            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+            <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Adjetivo</h2>
                 <div class="flex items-center space-x-4 mb-4">
                     <span id="adjetivoText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
                     <button onclick="showAdjetivos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
                 </div>
                 <!-- Campo de detalhes com estilo destacado -->
-                <div id="adjetivoDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+                <div id="adjetivoDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
             </div>
 
             <!-- Seção Advérbio -->
-            <div class="bg-gray-50 bg-opacity-70 p-6 rounded-lg border border-gray-200">
+            <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Advérbio</h2>
                 <div class="flex items-center space-x-4 mb-4">
                     <span id="adverbioText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
                     <button onclick="showAdverbios()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
                 </div>
                 <!-- Campo de detalhes com estilo destacado -->
-                <div id="adverbioDetails" class="mt-2 p-3 bg-yellow-100 rounded-md font-semibold text-gray-700"></div>
+                <div id="adverbioDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
             </div>
         </div>
 
@@ -354,6 +406,42 @@
             console.log(`Novo dado adicionado a ${dataType}s:`, newData);
             alert(`"${dataText}" foi adicionado com sucesso à lista de ${dataType}s!`);
         }
+
+        // Lógica do tema dia/noite
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeButton(isDark);
+        }
+
+        function updateThemeButton(isDark) {
+            if (isDark) {
+                themeToggleBtn.textContent = '☀️';
+                themeToggleBtn.classList.remove('bg-gray-200', 'text-gray-800');
+                themeToggleBtn.classList.add('bg-gray-700', 'text-white');
+            } else {
+                themeToggleBtn.textContent = '🌙';
+                themeToggleBtn.classList.remove('bg-gray-700', 'text-white');
+                themeToggleBtn.classList.add('bg-gray-200', 'text-gray-800');
+            }
+        }
+
+        // Carrega o tema do localStorage ao carregar a página
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+                updateThemeButton(true);
+            } else {
+                updateThemeButton(false);
+            }
+        }
+
+        // Chama a função para carregar o tema
+        window.onload = loadTheme;
     </script>
 </body>
 </html>
