@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treine Inglês</title>
+    <title>Treinamento de Vocabulário</title>
     <!-- Inclui a biblioteca Tailwind CSS para estilização -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -33,6 +33,10 @@
             background: linear-gradient(135deg, #1f2937, #111827);
             color: #e5e7eb;
         }
+	
+	body.dark .bg-white {
+    background-color: #1f2937; /* Ou uma cor escura de sua preferência */
+}
         body.dark .container {
             background-color: #1f2937;
             background-opacity: 0.95;
@@ -86,70 +90,70 @@
         <div id="mainContent" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Seção Frase -->
             <div class="p-6 rounded-lg border card">
-                <h2 class="text-xl font-semibold text-gray-700 mb-4">Frase</h2>
-                <div class="flex items-center space-x-4 mb-4">
-                    <span id="fraseText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
-                    <button onclick="showFrases()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
-                </div>
-                <!-- Campo de detalhes com estilo destacado -->
-                <div id="fraseDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
-            </div>
-
-            <!-- Seção Verbo (Inglês para Português) -->
-            <div class="p-6 rounded-lg border card">
-                <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Inglês para Português)</h2>
-                <div class="flex items-center space-x-4 mb-4">
-                    <span id="verboText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
-                    <button onclick="showVerbos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
-                </div>
-                <!-- Campo de detalhes com estilo destacado -->
-                <div id="verboDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
-            </div>
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Frase</h2>
+    <div class="flex items-center space-x-4 mb-4">
+        <span id="fraseText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+        <button onclick="sortearFrase()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
+        <button onclick="showFrases()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+    </div>
+    <div id="fraseDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+</div>
 
             <!-- Seção Verbo (Português para Inglês) -->
-            <div class="p-6 rounded-lg border card">
-                <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Português para Inglês)</h2>
-                <div class="flex items-center space-x-4 mb-4">
-                    <span id="verboPtEnText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
-                    <button onclick="showVerbosPtEn()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
-                </div>
-                <!-- Campo de detalhes com estilo destacado -->
-                <div id="verboPtEnDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
-            </div>
-            
+           <div class="p-6 rounded-lg border card">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Inglês para Português)</h2>
+    <div class="flex items-center space-x-4 mb-4">
+        <span id="verboText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+        <button onclick="sortearVerbo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
+        <button onclick="showVerbos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+    </div>
+    <div id="verboDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+</div>
+
+            <!-- Seção Verbo (Inglês para Português) -->
+          <div class="p-6 rounded-lg border card">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Português para Inglês)</h2>
+    <div class="flex items-center space-x-4 mb-4">
+        <span id="verboPtEnText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+        <button onclick="sortearVerboPtEn()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
+        <button onclick="showVerbosPtEn()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+    </div>
+    <div id="verboPtEnDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+</div>
+
             <!-- Nova Seção Phrasal Verbs -->
-            <div class="p-6 rounded-lg border card">
-                <h2 class="text-xl font-semibold text-gray-700 mb-4">Phrasal Verbs</h2>
-                <div class="flex items-center space-x-4 mb-4">
-                    <span id="phrasalVerbText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
-                    <button onclick="showPhrasalVerbs()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
-                </div>
-                <!-- Campo de detalhes com estilo destacado -->
-                <div id="phrasalVerbDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
-            </div>
+          <div class="p-6 rounded-lg border card">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Phrasal Verbs</h2>
+    <div class="flex items-center space-x-4 mb-4">
+        <span id="phrasalVerbText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+        <button onclick="sortearPhrasalVerb()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
+        <button onclick="showPhrasalVerbs()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+    </div>
+    <div id="phrasalVerbDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+</div>
+
 
             <!-- Seção Adjetivo -->
-            <div class="p-6 rounded-lg border card">
-                <h2 class="text-xl font-semibold text-gray-700 mb-4">Adjetivo</h2>
-                <div class="flex items-center space-x-4 mb-4">
-                    <span id="adjetivoText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
-                    <button onclick="showAdjetivos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
-                </div>
-                <!-- Campo de detalhes com estilo destacado -->
-                <div id="adjetivoDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
-            </div>
+          <div class="p-6 rounded-lg border card">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Adjetivos</h2>
+    <div class="flex items-center space-x-4 mb-4">
+        <span id="adjetivoText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+        <button onclick="sortearAdjetivo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
+        <button onclick="showAdjetivos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+    </div>
+    <div id="adjetivoDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+</div>
 
             <!-- Seção Advérbio -->
-            <div class="p-6 rounded-lg border card">
-                <h2 class="text-xl font-semibold text-gray-700 mb-4">Advérbio</h2>
-                <div class="flex items-center space-x-4 mb-4">
-                    <span id="adverbioText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
-                    <button onclick="showAdverbios()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
-                </div>
-                <!-- Campo de detalhes com estilo destacado -->
-                <div id="adverbioDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
-            </div>
-        </div>
+           <div class="p-6 rounded-lg border card">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Advérbios</h2>
+    <div class="flex items-center space-x-4 mb-4">
+        <span id="adverbioText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+        <button onclick="sortearAdverbio()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
+        <button onclick="showAdverbios()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+    </div>
+    <div id="adverbioDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+</div>
 
         <!-- Botão para inserir novos dados -->
         <div class="mt-8 flex justify-center">
@@ -359,45 +363,76 @@
         }
 
         // Simula a macro Sortear
-        function sortear() {
-            clearContents();
+       // A função sortear() principal agora chama as funções individuais
+function sortear() {
+    clearContents();
+    sortearFrase();
+    sortearVerbo();
+    sortearVerboPtEn();
+    sortearPhrasalVerb();
+    sortearAdjetivo();
+    sortearAdverbio();
+}
 
-            // Frases
-            if (frasesData.length > 0) {
-                const randomFraseIndex = Math.floor(Math.random() * frasesData.length);
-                document.getElementById('fraseText').textContent = frasesData[randomFraseIndex].text;
-            }
+           // Função para sortear apenas Frases
+function sortearFrase() {
+    clearContents();
+    if (frasesData.length > 0) {
+        const randomFraseIndex = Math.floor(Math.random() * frasesData.length);
+        document.getElementById('fraseText').textContent = frasesData[randomFraseIndex].text;
+        document.getElementById('fraseDetails').textContent = '';
+    }
+}
 
-            // Verbos (Inglês -> Português)
-            if (verbosData.length > 0) {
-                const randomVerboIndex = Math.floor(Math.random() * verbosData.length);
-                document.getElementById('verboText').textContent = verbosData[randomVerboIndex].text;
-            }
+// Função para sortear apenas Verbos (Inglês -> Português)
+function sortearVerbo() {
+    clearContents();
+    if (verbosData.length > 0) {
+        const randomVerboIndex = Math.floor(Math.random() * verbosData.length);
+        document.getElementById('verboText').textContent = verbosData[randomVerboIndex].text;
+        document.getElementById('verboDetails').textContent = '';
+    }
+}
 
-            // Verbos (Português -> Inglês)
-            if (verbosData.length > 0) {
-                const randomVerboPtEnIndex = Math.floor(Math.random() * verbosData.length);
-                document.getElementById('verboPtEnText').textContent = verbosData[randomVerboPtEnIndex].detail3;
-            }
+// Função para sortear apenas Verbos (Português -> Inglês)
+function sortearVerboPtEn() {
+    clearContents();
+    if (verbosData.length > 0) {
+        const randomVerboPtEnIndex = Math.floor(Math.random() * verbosData.length);
+        document.getElementById('verboPtEnText').textContent = verbosData[randomVerboPtEnIndex].detail3;
+        document.getElementById('verboPtEnDetails').textContent = '';
+    }
+}
 
-            // Phrasal Verbs
-            if (phrasalVerbsData.length > 0) {
-                const randomPhrasalVerbIndex = Math.floor(Math.random() * phrasalVerbsData.length);
-                document.getElementById('phrasalVerbText').textContent = phrasalVerbsData[randomPhrasalVerbIndex].text;
-            }
+// Função para sortear apenas Phrasal Verbs
+function sortearPhrasalVerb() {
+    clearContents();
+    if (phrasalVerbsData.length > 0) {
+        const randomPhrasalVerbIndex = Math.floor(Math.random() * phrasalVerbsData.length);
+        document.getElementById('phrasalVerbText').textContent = phrasalVerbsData[randomPhrasalVerbIndex].text;
+        document.getElementById('phrasalVerbDetails').textContent = '';
+    }
+}
 
-            // Adjetivos
-            if (adjetivosData.length > 0) {
-                const randomAdjetivoIndex = Math.floor(Math.random() * adjetivosData.length);
-                document.getElementById('adjetivoText').textContent = adjetivosData[randomAdjetivoIndex].text;
-            }
+// Função para sortear apenas Adjetivos
+function sortearAdjetivo() {
+    clearContents();
+    if (adjetivosData.length > 0) {
+        const randomAdjetivoIndex = Math.floor(Math.random() * adjetivosData.length);
+        document.getElementById('adjetivoText').textContent = adjetivosData[randomAdjetivoIndex].text;
+        document.getElementById('adjetivoDetails').textContent = '';
+    }
+}
 
-            // Advérbios
-            if (adverbiosData.length > 0) {
-                const randomAdverbioIndex = Math.floor(Math.random() * adverbiosData.length);
-                document.getElementById('adverbioText').textContent = adverbiosData[randomAdverbioIndex].text;
-            }
-        }
+// Função para sortear apenas Advérbios
+function sortearAdverbio() {
+    clearContents();
+    if (adverbiosData.length > 0) {
+        const randomAdverbioIndex = Math.floor(Math.random() * adverbiosData.length);
+        document.getElementById('adverbioText').textContent = adverbiosData[randomAdverbioIndex].text;
+        document.getElementById('adverbioDetails').textContent = '';
+    }
+}
 
         // Funções para mostrar detalhes (simulando as macros individuais)
         function showFrases() {
@@ -529,4 +564,3 @@
     </script>
 </body>
 </html>
-
