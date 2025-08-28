@@ -92,68 +92,75 @@
             <!-- Seção Frase -->
             <div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Frase</h2>
-    <div class="flex items-center space-x-4 mb-4">
-        <span id="fraseText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+    <span id="fraseText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">...</span>
+    <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearFrase()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
-        <button onclick="showFrases()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+        <button onclick="showFrases()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
     </div>
-    <div id="fraseDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
-</div>
+    <div id="fraseDetails" class="mt-4 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+			</div>
 
             <!-- Seção Verbo (Português para Inglês) -->
-           <div class="p-6 rounded-lg border card">
-    <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Inglês para Português)</h2>
-    <div class="flex items-center space-x-4 mb-4">
-        <span id="verboText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+<div class="p-6 rounded-lg border card">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Português para Inglês)</h2>
+    <span id="verboText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">...</span>
+    <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearVerbo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
-        <button onclick="showVerbos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+        <button onclick="showVerbos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
     </div>
-    <div id="verboDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+    <div id="verboDetails" class="mt-4 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
 </div>
+			
 
             <!-- Seção Verbo (Inglês para Português) -->
-          <div class="p-6 rounded-lg border card">
-    <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Português para Inglês)</h2>
-    <div class="flex items-center space-x-4 mb-4">
-        <span id="verboPtEnText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+
+<div class="p-6 rounded-lg border card">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Inglês para português)</h2>
+    <span id="verboPtEnText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">...</span>
+    <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearVerboPtEn()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
-        <button onclick="showVerbosPtEn()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+        <button onclick="showVerbosPtEn()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
     </div>
-    <div id="verboPtEnDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+    <div id="verboPtEnDetails" class="mt-4 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
 </div>
+			
 
             <!-- Nova Seção Phrasal Verbs -->
-          <div class="p-6 rounded-lg border card">
+<div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Phrasal Verbs</h2>
-    <div class="flex items-center space-x-4 mb-4">
-        <span id="phrasalVerbText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+    <span id="phrasalVerbText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">...</span>
+    <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearPhrasalVerb()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
-        <button onclick="showPhrasalVerbs()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+        <button onclick="showPhrasalVerbs()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
     </div>
-    <div id="phrasalVerbDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+    <div id="phrasalVerbDetails" class="mt-4 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
 </div>
+
+			
 
 
             <!-- Seção Adjetivo -->
-          <div class="p-6 rounded-lg border card">
+<div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Adjetivos</h2>
-    <div class="flex items-center space-x-4 mb-4">
-        <span id="adjetivoText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+    <span id="adjetivoText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">...</span>
+    <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearAdjetivo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
-        <button onclick="showAdjetivos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+        <button onclick="showAdjetivos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
     </div>
-    <div id="adjetivoDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+    <div id="adjetivoDetails" class="mt-4 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
 </div>
 
+			
+
             <!-- Seção Advérbio -->
-           <div class="p-6 rounded-lg border card">
+<div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Advérbios</h2>
-    <div class="flex items-center space-x-4 mb-4">
-        <span id="adverbioText" class="text-lg text-gray-900 font-medium flex-1 p-2 bg-white rounded-md border border-gray-300">...</span>
+    <span id="adverbioText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">...</span>
+    <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearAdverbio()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
-        <button onclick="showAdverbios()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Detalhes</button>
+        <button onclick="showAdverbios()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
     </div>
-    <div id="adverbioDetails" class="mt-2 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+    <div id="adverbioDetails" class="mt-4 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
 </div>
 
         <!-- Botão para inserir novos dados -->
@@ -565,4 +572,5 @@ function sortearAdverbio() {
     </script>
 </body>
 </html>
+
 
