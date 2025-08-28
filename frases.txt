@@ -1,0 +1,113 @@
+how can i help you?;Como posso te ajudar?
+how do i get to this situation?;como faço para chegar até essa situação?
+how do i identify this situation?;como eu faço para identificar essa situação?
+how do i identify it?;como faço para identificá-lo?
+when do i use this tool?;quando eu uso essa ferramenta?
+When should I use this tool?;quando eu devo usar essa ferramenta?
+how do i adjust this?;como eu ajusto isso?
+What is the correct adjustment point for this?;qual é o ponto correto de ajuste disso?
+but  do i do this after doing that?;mas eu faço isso somente após fazer aquilo?
+who sets the correct value for the parameters?;quem define os valores dos parametros?
+what do i need to do to confirm the choice?;o que preciso fazer para confirmar a escolha?
+How long does it take to load the system?;quanto tempo leva para carregar o sistema?
+how are you?;Como vai você?
+what's your name?;Qual é seu nome?
+where are you from?;De onde você é?
+what do you do for a living?;Você trabalha com o que?
+can you help me with this?;Você pode me ajudar com isso?
+what time is it?;Que horas são?
+how much does this cost?;Quanto isso cust?
+where is the nearest bus stop?;Onde é o ponto de onibus mais perto?
+do you speak english?Você fala inglês?
+can i get the bill, please?;Por favor, posso pagar a conta
+what are your hobbies?;Quais são os seus hobbies?
+how was your day?;como foi seu dia?
+do you have any plans for the weekend?;você tem algum plano para o fim de semana?
+can you repeat that, please?;por favor você pode repetir isso ?
+what did you say?;o que você disse?
+i'm sorry, i didn't catch that.;Desculpe, não percebi?
+could you speak more slowly, please?;por favor, você poderia falar mais devagar?
+where do you work?;onde você trabalha?
+what do you think about this?;o que você acha disso?
+can i ask you a question?;posso te fazer uma pergunta?
+how's the weather today?;Como está o tempo hoje?
+what time do you usually wake up?;A que horas você geralmente acorda?
+do you have any siblings?;Você tem irmãos?
+what's your favorite food?;Qual é a sua comida favorita?
+can you recommend a good restaurant?;Você pode recomendar um bom restaurante?
+how do you get to work?;Como você vai para o trabalho?
+do you like to travel?;Você gosta de viajar?
+what's your favorite movie?;Qual é o seu filme favorito?
+do you have any pets?;Você tem animais de estimação?
+what kind of music do you like?;Que tipo de música você gosta?
+have you read any good books lately?;Você leu algum livro bom recentemente?
+what's your favorite sport?;Qual é o seu esporte favorito?
+do you play any instruments?;Você toca algum instrumento?
+how do you spend your free time?;Como você passa seu tempo livre?
+what's your favorite holiday?;Qual é o seu feriado favorito?
+do you enjoy cooking?;Você gosta de cozinhar?
+what's your dream job?;Qual é o seu trabalho dos sonhos?
+have you ever been to another country?;Você já esteve em outro país?
+what's your favorite season?;Qual é a sua estação favorita?
+do you like to exercise?;Você gosta de se exercitar?
+what's your favorite color?;Qual é a sua cor favorita?
+do you like to read?;Você gosta de ler?
+what's your favorite tv show?;Qual é o seu programa de TV favorito?
+do you have any pets?;Você tem animais de estimação?
+what's your favorite type of cuisine?;Qual é o seu tipo de culinária favorita?
+do you like to cook?;Você gosta de cozinhar?
+what's your favorite dessert?;Qual é a sua sobremesa favorita?
+do you like to go to the beach?;Você gosta de ir à praia?
+what's your favorite drink?;Qual é a sua bebida favorita?
+do you like to dance?;Você gosta de dançar?
+what's your favorite book?;Qual é o seu livro favorito?
+do you like to watch movies?;Você gosta de assistir filmes?
+what's your favorite animal?;Qual é o seu animal favorito?
+do you like to play sports?;Você gosta de praticar esportes?
+what's your favorite hobby?;Qual é o seu hobby favorito?
+do you like to listen to music?;Você gosta de ouvir música?
+what's your favorite song?;Qual é a sua música favorita?
+do you like to go hiking?;Você gosta de fazer trilhas?
+what's your favorite place to visit?;Qual é o seu lugar favorito para visitar?
+do you like to go shopping?;Você gosta de fazer compras?
+what's your favorite ice cream flavor?;Qual é o seu sabor de sorvete favorito?
+do you like to go to the movies?;Você gosta de ir ao cinema?
+what's your favorite pizza topping?;Qual é a sua cobertura de pizza favorita?
+do you like to play video games?;Você gosta de jogar videogames?
+what's your favorite board game?;Qual é o seu jogo de tabuleiro favorito?
+do you like to go to concerts?;Você gosta de ir a shows?
+what's your favorite flower?;Qual é a sua flor favorita?
+do you like to go to museums?;Você gosta de ir a museus?
+what's your favorite fruit?;Qual é a sua fruta favorita?
+do you like to go to parks?;Você gosta de ir a parques?
+what's your favorite vegetable?;Qual é o seu vegetal favorito?
+do you like to go to the gym?;Você gosta de ir à academia?
+what's your favorite snack?;Qual é o seu lanche favorito?
+do you like to go to the theater?;Você gosta de ir ao teatro?
+what's your favorite candy?;Qual é o seu doce favorito?
+do you like to go to the zoo?;Você gosta de ir ao zoológico?
+what's your favorite breakfast food?;Qual é a sua comida favorita para o café da manhã?
+do you like to go to the library?;Você gosta de ir à biblioteca?
+what's your favorite lunch food?;Qual é a sua comida favorita para o almoço?
+do you like to go to the aquarium?;Você gosta de ir ao aquário?
+what's your favorite dinner food?;Qual é a sua comida favorita para o jantar?
+do you like to go to the amusement park?;Você gosta de ir ao parque de diversões?
+what's your favorite fast food restaurant?;Qual é o seu restaurante de fast food favorito?
+do you like to go to the countryside?;Você gosta de ir ao campo?
+what's your favorite type of coffee?;Qual é o seu tipo de café favorito?
+do you like to go to the mountains?;Você gosta de ir às montanhas?
+what's your favorite type of tea?;Qual é o seu tipo de chá favorito?
+do you like to go to the city?;Você gosta de ir à cidade?
+what's your favorite type of juice?;Qual é o seu tipo de suco favorito?
+do you like to go to the lake?;Você gosta de ir ao lago?
+what's your favorite type of soda?;Qual é o seu tipo de refrigerante favorito?
+do you like to go to the river?;Você gosta de ir ao rio?
+what's your favorite type of water?;Qual é o seu tipo de água favorito?
+do you like to go to the forest?;Você gosta de ir à floresta?
+what's your favorite type of bread?;Qual é o seu tipo de pão favorito?
+do you like to go to the desert?;Você gosta de ir ao deserto?
+what's your favorite type of pasta?;Qual é o seu tipo de massa favorito?
+do you like to go to the island?;Você gosta de ir à ilha?
+what's your favorite type of rice?;Qual é o seu tipo de arroz favorito?
+do you like to go to the beach?;Você gosta de ir à praia?
+what's your favorite type of soup?;Qual é o seu tipo de sopa favorito?

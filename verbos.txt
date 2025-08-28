@@ -1,0 +1,346 @@
+erguer, levantar;arise;arose;arisen
+acordar, despertar;awake;awoke;awoken
+ser, estar;be;was / were;been
+suportar, aguentar;bear;bore;borne
+bater, espancar, superar, vibrar, palpitar;beat;beat;beaten
+tornar-se;become;became;become
+começar, iniciar;begin;began;begun
+curvar, entortar, franzir,;bend;bent;bent
+apostar;bet;bet;bet
+morder, engolir a isca;bite;bit;bitten
+sangrar;bleed;bled;bled
+soprar, assobiar;blow;blew;blown
+quebrar, romper;break;broke;broken
+trazer, servir;bring;brought;brought
+construir, fabricar;build;built;built
+queimar, incendiar, carbonizar;burn;burnt;burnt
+comprar;buy;bought;bought
+arremessar, jogar, derrubar, moldar;cast;cast;cast
+pegar, capturar, entender, adquirir;catch;caught;caught
+escolher, selecionar, preferir;choose;chose;chosen
+vir, chegar;come;came;come
+custar;cost;cost;cost
+cortar, partir, reduzir, recortar, castrar;cut;cut;cut
+distribuir, repartir, espalhar, negociar;deal;dealt;dealt
+cavar, escavar;dig;dug;dug
+fazer;do;did;done
+desenhar, extrair, sair;draw;drew;drawn
+beber;drink;drank;drunk
+dirigir, guiar;drive;drove;driven
+comer;eat;ate;eaten
+cair, abater-se, decrescer, diminuir;fall;fell;fallen
+alimentar, nutrir;feed;fed;fed
+sentir, notar;feel;felt;felt
+lutar, brigar;fight;fought;fought
+achar, encontrar;find;found;found
+voar;fly;flew;flown
+proibir;forbid;forbade;forbidden
+esquecer(-se);forget;forgot;forgotten
+perdoar;forgive;forgave;forgiven
+abandonar, desertar, largar; abrir mão de;forsake;forsook;forsaken
+congelar;freeze;froze;frozen
+obter, conseguir;get;got;got
+dar;give;gave;given
+ir;go;went;gone
+crescer, florescer, germinar;grow;grew;grown
+pendurar, suspender;hang;hung;hung
+ter, possuir;have;had;had
+ouvir, escutar, ter notícias;hear;heard;heard
+esconder(-se), ocultar;hide;hid;hidden
+bater, chocar-se;hit;hit;hit
+segurar, agarrar;hold;held;held
+ferir(-se), machucar;hurt;hurt;hurt
+manter, conservar, preservar;keep;kept;kept
+ajoelhar-se;kneel;knelt;knelt
+tricotar;knit;knit;knit
+saber, conhecer;know;knew;known
+pôr, colocar, derrubar, deitar;lay;laid;laid
+conduzir, liderar, comandar;lead;led;led
+saltar, pular, cobrir (os animais);leap;leapt;leapt
+aprender, ficar sabendo;learn;learnt;learnt
+partir, deixar, sair;leave;left;left
+emprestar;lend;lent;lent
+permitir, deixar;let;let;let
+deitar;lie;lay;lain
+acender, iluminar;light;lit;lit
+perder;lose;lost;lost
+fazer, criar, elaborar;make;made;made
+significar, querer dizer;mean;meant;meant
+encontrar(-se), reunir(-se);meet;met;met
+pagar;pay;paid;paid
+pôr, colocar;put;put;put
+desistir, abandonar;quit;quit;quit
+ler, interpretar;read;read;read
+cavalgar, andar de bicicleta ou carro;ride;rode;ridden
+soar, tocar (campainha, telefone);ring;rang;rung
+erguer-se, levantar-se;rise;rose;risen
+correr, apressar-se;run;ran;run
+serrar;saw;sawed;sawn
+dizer;say;said;said
+ver, perceber;see;saw;seen
+procurar, pedir, almejar;seek;sought;sought
+vender;sell;sold;sold
+enviar, mandar;send;sent;sent
+pôr, dispor, ajustar;set;set;set
+costurar, coser;sew;sewed;sewn
+sacudir, agitar, apertar a mão (em cumprimento);shake;shook;shaken
+brilhar;shine;shone;shone
+atirar, ferir com tiro;shoot;shot;shot
+mostrar, apresentar;show;showed;shown
+cortar em pedaços, picar, retalhar, rasgar;shred;shred;shred
+contrair, encolher, recuar;shrink;shrank;shrunk
+fechar, cerrar; tampar;shut;shut;shut
+cantar;sing;sang;sung
+afundar;sink;sank;sunk
+sentar(-se);sit;sat;sat
+matar, assassinar, destruir, arruinar;slay;slew;slain
+dormir;sleep;slept;slept
+escorregar, deslizar;slide;slid;slid
+atirar, arremessar;sling;slung;slung
+cheirar;smell;smelt;smelt
+semear;sow;sowed;sown
+falar;speak;spoke;spoken
+soletrar;spell;spelt;spelt
+gastar (dinheiro), passar (tempo);spend;spent;spent
+derramar;spill;spilt;spilt
+girar;spin;spun;spun
+cuspir;spit;spat;spit
+estragar, destruir, mimar;spoil;spoilt;spoilt
+espalhar, estender;spread;spread;spread
+saltar, lançar-se, libertar-se;spring;sprang;sprung
+ficar ou pôr-se de pé;stand;stood;stood
+roubar, furtar;steal;stole;stolen
+cravar, fincar;stick;stuck;stuck
+picar, ferroar;sting;stung;stung
+feder; enojar;stink;stank;stunk
+bater, golpear;strike;struck;struck
+amarrar, pendurar, enfiar, esticar;string;strung;strung
+aspirar, tentar, esforçar-se;strive;strove;striven
+jurar;swear;swore;sworn
+suar;sweat;sweat;sweat
+varrer;sweep;swept;swept
+inchar (-se), crescer, encher (os pneus);swell;swelled;swollen
+nadar;swim;swam;swum
+balançar;swing;swung;swung
+tomar, pegar, levar;take;took;taken
+ensinar;teach;taught;taught
+chorar, lacrimejar; rasgar, rachar;tear;tore;torn
+dizer, contar;tell;told;told
+pensar, achar;think;thought;thought
+ter sucesso;thrive;throve;thriven
+lançar, atirar;throw;threw;thrown
+empurrar;thrust;thrust;thrust
+acordar;wake;woke;woken
+vestir, usar, trajar;wear;wore;worn
+tecer, trançar;weave;wove;woven
+ganhar, vencer;win;won;won
+girar, enrolar-se;wind;wound;wound
+escrever;write;wrote;written
+torcer;wring;wrung;wrung
+morder;bite;bit;bitten
+queimar;burn;burnt;burnt
+cancelar;call off;called off;called off
+carregar;carry;carried;carried
+escolher;choose;chose;chosen
+custar;cust;cust;cust
+lidar;deal;dealt;dealt
+aproveitar;enjoy;enjoyed;enjoyed
+preencher;fill;filled;filled
+descobrir (c/ pistas);figure out;figured out;figured out
+desistir, abandonar;give up;gave up;given up
+crescer, florescer, germinar;grow;grew;grown
+esperar (expectativa);expect;expected;expected
+esperar (tempo);wait;waited;waited
+esperar (esperança);hope;hoped;hoped
+convidar;invite;invited;invited
+perder;lose;lost;lost
+estragar;mess up;messed up;messed up
+mover;move;moved;moved
+perceber;realize;realized;realized
+pegar (ir buscar);pick up;picked up;picked up
+puxar;pull;pulled;pulled
+empurrar;push;pushed;pushed
+para (definitivamente);quit;quit;quit
+arruinar;ruin;ruined;ruined
+vender;sell;sold;sold
+jurar;swear;swore;sworn
+mostrar, apresentar;show;showed;showed
+lançar, atirar;throw;threw;thrown
+virar;turn;turned;turned
+tratar;treat;treated;treated
+concordar;agree;agreeded;agreeded
+encontrar(sem pistas);find out;found out;found out
+começar, iniciar;start;started;started
+encontrar;find;found;found
+perdoar ;forgive;forgave;forgiven
+acontecer;happen;happened;happened
+procurar por;look for;looked for;looked for
+resolver/escolher a dedo;solve;solved;solved
+assobiar;whistle;whistled;whistled
+aconselhar;advise;advised;advised
+construir, fabricar;build;built;built
+trazer, servir;bring;brought;brought
+continuar;carry on;carried on;carried on
+entrar;come in;came in;come in
+reclamar;complain;complained;complained
+entregar;delivery;deliveried;deliveried
+morrer;die;died;died
+desenhar;draw;drew;drown
+misturar;mix;mixed;mixed
+dever;owe;owed;owed
+dar role;hang out;hung out;hung out
+se divertir;have fun;had fun;had fun
+escutar;hear;heard;heard
+esconder(-se), ocultar;hide;hid;hidden
+bater;hit;hit;hit
+segurar, agarrar;hold;held;held
+abraçar;hug;hugged;hugged
+machucar;hurt;hurt;hurt
+se juntar;join;joined;joined
+manter ;keep;kept;kept
+matar, assassinar, destruir, arruinar;kill;killed;killed
+rir;laught;laughted;laughted
+pegar emprestado;borrow;borowed;borrowed
+emprestar para;lend;lent;lent
+deixar;let;let;let
+mentir;lie;lied;lied
+parecer com;look like;looked like;looked like
+sentir falta;miss;missed;missed
+oferecer;offer;offered;offered
+fazer xixi;pee;peed;peed
+planejar;plan;plained;plained
+prometer;promise;promised;promised
+perceber;notice;noticed;noticed
+receber;receive;received;received
+salvar;save;saved;saved
+gritar parecer;scream;screamed;screamed
+enviar, mandar;send;sent;sent
+sentar(-se);sit;sat;sat
+cheirar;smell;smelled;smelled
+sorrir;smile;smiled;smiled
+desligar;turn off;turned off;turned off
+ser/estar;be;was/were;been
+tornar-se;become;became;become
+começar;begin;began;begun
+quebrar;break;broke;broken
+trazer;bring;brought;brought
+construir;build;built;built
+comprar;buy;bought;bought
+pegar;catch;caught;caught
+escolher;choose;chose;chosen
+vir;come;came;come
+fazer;do;did;done
+beber;drink;drank;drunk
+dirigir;drive;drove;drove
+comer;eat;ate;eaten
+cair;fall;fell;fallen
+sentir;feel;felt;felt
+encontrar;find;found;found
+voar;fly;flew;flown
+esquecer;forget;forgot;forgotten
+obter;get;got;tem
+dar;give;gave;given
+ir;go;went;gone
+ter;have;had;had
+ouvir;hear;heard;heard
+saber/conhecer;know;knew;known
+deixar/partir;leave;left;left
+fazer;make;made;made
+encontrar;meet;met;met
+ler;read;read;read
+correr;run;ran;run
+dizer;say;said;said
+ver;see;saw;seen
+vender;sell;sold;sold
+enviar;send;sent;sent
+cantar;sing;sang;sung
+sentar;sit;sat;sat
+falar;speak;spoke;spoken
+gastar;spend;spent;spent
+tomar;take;took;taken
+ensinar;teach;taught;taught
+contar;tell;told;told
+pensar;think;thought;thought
+entender;understand;understood;understood
+vestir;wear;wore;worn
+escrever;write;wrote;written
+convidar para sair;Ask out;asked out;asked out
+apoiar;Back up;backed up;backed up
+explodir;Blow up;blew up;blown up
+quebrar, desmoronar;Break down;broke down;broken down
+terminar (relacionamento);Break up;broke up;broken up
+mencionar, criar (criança);Bring up;brought up;brought up
+cancelar;Call off;called off;called off
+continuar;Carry on;carried on;carried on
+alcançar;Catch up;caught up;caught up
+fazer check-in;Check in;checked in;checked in
+fazer check-out, verificar;Check out;checked out;checked out
+encontrar por acaso;Come across;came across;come across
+inventar, criar;Come up with;came up with;come up with
+reduzir;Cut down on;cut down on;cut down on
+deixar (alguém), cair no sono;Drop off;dropped off;dropped off
+descobrir, entender;Figure out;figured out;figured out
+descobrir;Find out;found out;found out
+dar-se bem;Get along;got along;got along
+escapar;Get away;got away;got away
+superar;Get over;got over;got over
+desistir;Give up;gave up;given up
+continuar;Go on;went on;gone on
+crescer;Grow up;grew up;grown up
+passar tempo junto;Hang out;hung out;hung out
+esperar, segurar firme;Hold on;held on;held on
+cuidar de;Look after;looked after;looked after
+ansiar por;Look forward to;looked forward to;looked forward to
+procurar (informação);Look up;looked up;looked up
+inventar, reconciliar;Make up;made up;made up
+pegar, buscar;Pick up;picked up;picked up
+adiar;Put off;put off;put off
+vestir, ligar (aparelho);Put on;put on;put on
+encontrar por acaso;Run into;ran into;run into
+ficar sem;Run out of;ran out of;run out of
+configurar, estabelecer;Set up;set up;set up
+aparecer, comparecer;Show up;showed up;shown up
+decolar, tirar (roupa);Take off;took off;taken off
+cuidar de;Take care of;took care of;taken care of
+recusar, diminuir (volume);Turn down;turned down;turned down
+aparecer, aumentar (volume);Turn up;turned up;turned up
+acordar;Wake up;woke up;woken up
+exercitar-se, resolver;Work out;worked out;worked out
+invadir;Break in;broke in;broken in
+escapar, começar (repentinamente);Break out;broke out;broken out
+causar;Bring about;brought about;brought about
+derrubar;Bring down;brought down;brought down
+introduzir;Bring in;brought in;brought in
+lançar, destacar;Bring out;brought out;brought out
+retornar a ligação;Call back;called back;called back
+ligar para alguém;Call up;called up;called up
+realizar;Carry out;carried out;carried out
+verificar, fazer check-out;Check out;checked out;checked out
+voltar;Come back;came back;come back
+entrar;Come in;came in;come in
+sair, ser publicado;Come out;came out;come out
+cortar, interromper;Cut off;cut off;cut off
+visitar rapidamente;Drop by;dropped by;dropped by
+abandonar (escola, curso);Drop out;dropped out;dropped out
+desmoronar;Fall apart;fell apart;fallen apart
+ficar para trás;Fall behind;fell behind;fallen behind
+cair;Fall off;fell off;fallen off
+preencher, substituir;Fill in;filled in;filled in
+preencher (completo);Fill out;filled out;filled out
+descobrir;Find out;found out;found out
+dar-se bem com;Get along with;got along with;got along with
+voltar;Get back;got back;got back
+entrar;Get in;got in;got in
+descer (de um veículo);Get off;got off;got off
+subir (em um veículo);Get on;got on;got on
+sair;Get out;got out;got out
+superar;Get over;got over;got over
+passar por, completar;Get through;got through;got through
+doar, revelar;Give away;gave away;given away
+devolver;Give back;gave back;given back
+ceder;Give in;gave in;given in
+distribuir;Give out;gave out;given out
+perseguir;Go after;went after;gone after
+prosseguir;Go ahead;went ahead;gone ahead
+voltar;Go back;went back;gone back
+explodir, disparar;Go off;went off;gone off

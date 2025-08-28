@@ -1,0 +1,100 @@
+Call off;Cancelar
+Break down;Quebrar/Ter um colapso emocional
+Look after;Cuidar de
+Take off;Decolar/Remover/Tirar
+Put up with;Tolerar
+Turn on;Ligar/Ativar
+Turn off;Desligar/Desativar
+Bring up;Criar (uma criança)/Mencionar um tópico
+Get along with (someone);Dar-se bem com (alguém)
+Give up;Desistir
+Give in;Ceder
+Run out of;Acabar/Esgotar
+Look forward to;Aguardar ansiosamente (algo)
+Come up with;Inventar/Criar
+Go through;Passar por/Examinar
+Turn up;Aparecer/Aumentar o volume
+Put off;Adiar
+Pick up;Pegar/Aprender rapidamente
+Set up;Configurar/Estabelecer
+Get over;Superar/Recuperar-se de algo
+Give away;Dar de graça/Revelar
+Look up;Pesquisar/Olhar para cima
+Run into;Encontrar/Esbarrar com
+Break up;Terminar um relacionamento
+Put on;Vestir/Colocar
+Take up;Começar/Aceitar um hobby ou atividade
+Take care of;Cuidar de/Tomar conta de
+Go on;Continuar/Prosseguir
+Come across;Encontrar por acaso
+Turn down;Recusar/Diminuir
+Check out;Verificar/Explorar
+Look out;Cuidado/Prestar atenção
+Look for;Procurar/Buscar
+Give back;Devolver
+Settle down;Estabelecer-se/Acomodar-se
+Take care;Cuidar/Tomar cuidado
+Put away;Guardar/Arrumar
+Break through;Romper/Superar
+Get by;Passar (por uma situação difícil)
+Run away;Fugir
+Look into;Investigar/Examinar
+Turn in;Entregar/Apresentar
+Bring back;Trazer de volta
+Show up;Aparecer/Comparecer
+Hang out;Sair/Passar o tempo com alguém
+Look like;Parecer/Se assemelhar a algo ou alguém
+Take over;Assumir o controle de/Tomar conta de
+Come out;Sair/Aparecer
+Put in;Instalar/Colocar
+Get up;Levantar-se/Acordar
+Take care of;Cuidar de/Tomar conta de
+Break in;Arrombar/Entrar à força
+Break out;Começar/Irromper
+Check in;Fazer check-in/Registrar-se
+Go back;Voltar/Retornar
+Give in to;Ceder a/Render-se a
+Look up to;Admirar/Respeitar
+Show off;Exibir/Mostrar-se
+Hang up;Desligar (telefone)
+Put out;Apagar (fogo)/Lançar (disco)
+Come up;Surgir/Acontecer
+Break up with;Terminar um relacionamento com
+Turn out to be;Acabar sendo/Resultar se
+Run over;Atropelar/Passar por cima
+Give out;Distribuir/Esgotar-se
+Get in;Entrar/Chegar
+Put off by;Ser desencorajado por
+Look down on;Desprezar/Olhar com desdém
+Take in;Aceitar/Compreender
+Check out of;Fazer check-out (hotel)
+Go off;Sair/Explodir
+Set off;Partir/Disparar
+Come up to;Aproximar-se de
+Turn back;Voltar/Retroceder
+Break up into;Dividir em partes
+Bring up in;Criar/Educar em
+Get out of;Sair de/Evitar
+Give away to;Doar/Revelar a alguém
+Look up in;Procurar em/Consultar
+Run into with;Encontrar com
+Put forward;Apresentar/Propor
+Turn over;Virar/Passar uma página
+Take after;Parecer-se com/Levar após
+Take on;Assumir/Aceitar
+Check on;Verificar/Checar
+Get over with;Superar/Terminar (algo desagradável)
+Go out with;Namorar/Sair com
+Put up to;Encorajar/Desafiar
+Look forward;Aguardar ansiosamente
+Hang on;Aguentar/Esperar
+Put through;Conectar/Fazer uma ligação
+Run out;Esgotar/Ficar sem
+Break out of;Escapar de/Romper com
+Show up at;Chegar a/Comparecer a
+Turn around;Virar/Mudar de direção
+Come over;Visitar/Chegar
+Take down;Anotar/Derrubar
+Give up on;Desistir de/Abandonar
+Set out;Partir/Começar uma jornada
+Get through;Passar (por uma dificuldade)
