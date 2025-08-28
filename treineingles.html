@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treine Inglês</title>
+    <title>Treinamento de Vocabulário</title>
     <!-- Inclui a biblioteca Tailwind CSS para estilização -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -78,9 +78,12 @@
                 Sortear Tudo
             </button>
         </div>
+
+        <!-- Indicador de carregamento -->
+        <div id="loadingMessage" class="text-center text-lg text-gray-600 my-4">Carregando dados...</div>
         
         <!-- Contêiner principal com a grade de duas colunas -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div id="mainContent" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Seção Frase -->
             <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Frase</h2>
@@ -207,59 +210,20 @@
             </form>
         </div>
     </div>
+
+    <!-- Container para a mensagem de feedback -->
+    <div id="messageBox" class="fixed bottom-16 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-y-full transition-transform duration-300">
+        <!-- Mensagem será inserida aqui via JavaScript -->
+    </div>
     
     <script>
-        // Dados de exemplo para as listas.
-        // É aqui que você deve inserir os dados do seu Excel.
-        // O ID é o equivalente à coluna A do VLOOKUP no Excel.
-        // O "text" é o equivalente à coluna B.
-        // Os outros detalhes são as colunas subsequentes.
-        let frasesData = [
-            { id: 1, text: "The early bird gets the worm.", detail1: "O pássaro que madruga pega a minhoca." },
-            { id: 2, text: "A picture is worth a thousand words.", detail1: "Uma imagem vale mais que mil palavras." },
-            { id: 3, text: "An apple a day keeps the doctor away.", detail1: "Uma maçã por dia mantém o médico afastado." },
-            { id: 4, text: "Where there's a will, there's a way.", detail1: "Onde há vontade, há um caminho." },
-            { id: 5, text: "It's a piece of cake.", detail1: "É moleza." }
-        ];
-
-        let verbosData = [
-            { id: 1, text: "run", detail1: "ran", detail2: "run", detail3: "correr" },
-            { id: 2, text: "eat", detail1: "ate", detail2: "eaten", detail3: "comer" },
-            { id: 3, text: "sleep", detail1: "slept", detail2: "slept", detail3: "dormir" },
-            { id: 4, text: "write", detail1: "wrote", detail2: "written", detail3: "escrever" },
-            { id: 5, text: "read", detail1: "read", detail2: "read", detail3: "ler" }
-        ];
-
-        // Lista de Phrasal Verbs, com tradução no detail1
-        let phrasalVerbsData = [
-            { id: 1, text: "break down", detail1: "quebrar, avariar, desmoronar" },
-            { id: 2, text: "get up", detail1: "levantar-se" },
-            { id: 3, text: "look forward to", detail1: "aguardar ansiosamente" },
-            { id: 4, text: "put off", detail1: "adiar" },
-            { id: 5, text: "take off", detail1: "decolar, tirar (roupa)" },
-            { id: 6, text: "turn on", detail1: "ligar" },
-            { id: 7, text: "turn off", detail1: "desligar" },
-            { id: 8, text: "get along with", detail1: "se dar bem com" },
-            { id: 9, text: "look up", detail1: "procurar (em um dicionário, lista)" },
-            { id: 10, text: "call off", detail1: "cancelar" }
-        ];
+        // Variáveis globais para armazenar os dados carregados
+        let frasesData = [];
+        let verbosData = [];
+        let phrasalVerbsData = [];
+        let adjetivosData = [];
+        let adverbiosData = [];
         
-        let adjetivosData = [
-            { id: 1, text: "happy", detail1: "feliz" },
-            { id: 2, text: "sad", detail1: "triste" },
-            { id: 3, text: "brave", detail1: "corajoso" },
-            { id: 4, text: "tall", detail1: "alto" },
-            { id: 5, text: "beautiful", detail1: "bonito" }
-        ];
-
-        let adverbiosData = [
-            { id: 1, text: "quickly", detail1: "rapidamente" },
-            { id: 2, text: "slowly", detail1: "lentamente" },
-            { id: 3, text: "happily", detail1: "alegremente" },
-            { id: 4, text: "carefully", detail1: "cuidadosamente" },
-            { id: 5, text: "well", detail1: "bem" }
-        ];
-
         // Mapeia o nome do tipo de dado para o array correspondente
         const dataMap = {
             frase: frasesData,
@@ -269,6 +233,108 @@
             adverbio: adverbiosData
         };
 
+        // URLs dos arquivos de dados no GitHub
+        const githubUrls = {
+            frase: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/frases.txt',
+            verbo: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/verbos.txt',
+            phrasalVerb: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/phrasal-verbs.txt',
+            adjetivo: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/adjetivos.txt',
+            adverbio: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/adverbios.txt'
+        };
+
+        // Função para mostrar uma mensagem de feedback
+        function showMessage(message, type = 'success') {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.className = `fixed bottom-16 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transform translate-y-0 transition-transform duration-300`;
+            if (type === 'success') {
+                messageBox.classList.add('bg-green-500', 'text-white');
+            } else if (type === 'error') {
+                messageBox.classList.add('bg-red-500', 'text-white');
+            } else {
+                messageBox.classList.add('bg-gray-700', 'text-white');
+            }
+
+            setTimeout(() => {
+                messageBox.classList.remove('translate-y-0');
+                messageBox.classList.add('translate-y-full');
+            }, 3000);
+        }
+
+        // Função assíncrona para carregar os dados de um arquivo remoto
+        async function loadDataFromGithub() {
+            try {
+                const loadingMessage = document.getElementById('loadingMessage');
+                const mainContent = document.getElementById('mainContent');
+
+                loadingMessage.classList.remove('hidden');
+                mainContent.classList.add('hidden');
+
+                // Carrega todos os arquivos em paralelo
+                const [
+                    frasesResponse,
+                    verbosResponse,
+                    phrasalVerbsResponse,
+                    adjetivosResponse,
+                    adverbiosResponse
+                ] = await Promise.all([
+                    fetch(githubUrls.frase),
+                    fetch(githubUrls.verbo),
+                    fetch(githubUrls.phrasalVerb),
+                    fetch(githubUrls.adjetivo),
+                    fetch(githubUrls.adverbio)
+                ]);
+
+                // Processa a resposta de frases
+                const frasesText = await frasesResponse.text();
+                frasesData = frasesText.split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1] = line.split(';');
+                    return { id: index + 1, text, detail1 };
+                });
+
+                // Processa a resposta de verbos
+                const verbosText = await verbosResponse.text();
+                verbosData = verbosText.split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1, detail2, detail3] = line.split(';');
+                    return { id: index + 1, text, detail1, detail2, detail3 };
+                });
+                
+                // Processa a resposta de phrasal verbs
+                const phrasalVerbsText = await phrasalVerbsResponse.text();
+                phrasalVerbsData = phrasalVerbsText.split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1] = line.split(';');
+                    return { id: index + 1, text, detail1 };
+                });
+                
+                // Processa a resposta de adjetivos
+                const adjetivosText = await adjetivosResponse.text();
+                adjetivosData = adjetivosText.split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1] = line.split(';');
+                    return { id: index + 1, text, detail1 };
+                });
+
+                // Processa a resposta de advérbios
+                const adverbiosText = await adverbiosResponse.text();
+                adverbiosData = adverbiosText.split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1] = line.split(';');
+                    return { id: index + 1, text, detail1 };
+                });
+
+                // Mostra o conteúdo principal após o carregamento
+                loadingMessage.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                showMessage('Dados carregados com sucesso!', 'success');
+
+                // Apenas exibe o conteúdo após o carregamento completo
+                sortear();
+
+            } catch (error) {
+                console.error('Erro ao carregar os dados:', error);
+                document.getElementById('loadingMessage').textContent = 'Erro ao carregar os dados. Por favor, verifique as URLs.';
+                showMessage('Erro ao carregar os dados.', 'error');
+            }
+        }
+        
         // Funções de VLOOKUP (recreadas para arrays)
         function vLookup(text, dataArray, colIndex) {
             const item = dataArray.find(d => d.text === text);
@@ -297,28 +363,40 @@
             clearContents();
 
             // Frases
-            const randomFraseIndex = Math.floor(Math.random() * frasesData.length);
-            document.getElementById('fraseText').textContent = frasesData[randomFraseIndex].text;
+            if (frasesData.length > 0) {
+                const randomFraseIndex = Math.floor(Math.random() * frasesData.length);
+                document.getElementById('fraseText').textContent = frasesData[randomFraseIndex].text;
+            }
 
             // Verbos (Inglês -> Português)
-            const randomVerboIndex = Math.floor(Math.random() * verbosData.length);
-            document.getElementById('verboText').textContent = verbosData[randomVerboIndex].text;
+            if (verbosData.length > 0) {
+                const randomVerboIndex = Math.floor(Math.random() * verbosData.length);
+                document.getElementById('verboText').textContent = verbosData[randomVerboIndex].text;
+            }
 
             // Verbos (Português -> Inglês)
-            const randomVerboPtEnIndex = Math.floor(Math.random() * verbosData.length);
-            document.getElementById('verboPtEnText').textContent = verbosData[randomVerboPtEnIndex].detail3;
+            if (verbosData.length > 0) {
+                const randomVerboPtEnIndex = Math.floor(Math.random() * verbosData.length);
+                document.getElementById('verboPtEnText').textContent = verbosData[randomVerboPtEnIndex].detail3;
+            }
 
             // Phrasal Verbs
-            const randomPhrasalVerbIndex = Math.floor(Math.random() * phrasalVerbsData.length);
-            document.getElementById('phrasalVerbText').textContent = phrasalVerbsData[randomPhrasalVerbIndex].text;
+            if (phrasalVerbsData.length > 0) {
+                const randomPhrasalVerbIndex = Math.floor(Math.random() * phrasalVerbsData.length);
+                document.getElementById('phrasalVerbText').textContent = phrasalVerbsData[randomPhrasalVerbIndex].text;
+            }
 
             // Adjetivos
-            const randomAdjetivoIndex = Math.floor(Math.random() * adjetivosData.length);
-            document.getElementById('adjetivoText').textContent = adjetivosData[randomAdjetivoIndex].text;
+            if (adjetivosData.length > 0) {
+                const randomAdjetivoIndex = Math.floor(Math.random() * adjetivosData.length);
+                document.getElementById('adjetivoText').textContent = adjetivosData[randomAdjetivoIndex].text;
+            }
 
             // Advérbios
-            const randomAdverbioIndex = Math.floor(Math.random() * adverbiosData.length);
-            document.getElementById('adverbioText').textContent = adverbiosData[randomAdverbioIndex].text;
+            if (adverbiosData.length > 0) {
+                const randomAdverbioIndex = Math.floor(Math.random() * adverbiosData.length);
+                document.getElementById('adverbioText').textContent = adverbiosData[randomAdverbioIndex].text;
+            }
         }
 
         // Funções para mostrar detalhes (simulando as macros individuais)
@@ -407,9 +485,7 @@
             document.getElementById('addDataForm').reset();
             toggleAddDataModal();
             
-            // Opcional: mostrar uma mensagem de sucesso
-            console.log(`Novo dado adicionado a ${dataType}s:`, newData);
-            alert(`"${dataText}" foi adicionado com sucesso à lista de ${dataType}s!`);
+            showMessage(`"${dataText}" foi adicionado com sucesso à lista de ${dataType}s!`, 'success');
         }
 
         // Lógica do tema dia/noite
@@ -445,9 +521,11 @@
             }
         }
 
-        // Chama a função para carregar o tema
-        window.onload = loadTheme;
+        // Chama a função para carregar os dados e o tema ao carregar a página
+        window.onload = () => {
+            loadTheme();
+            loadDataFromGithub();
+        };
     </script>
 </body>
 </html>
-
