@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treine Inglês</title>
     <!-- Inclui a biblioteca Tailwind CSS para estilização -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./Treine Inglêsv3_files/saved_resource"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
         
@@ -515,11 +515,8 @@ function showVerbosPtEn() {
 
 // Função para ler o texto em voz alta
 
-if (input && input.textContent) {
-            textToSpeak = (input.textContent || "").trim();
-        } else if (typeof input === "number") {
-            textToSpeak = String(input);
-        }
+// O código abaixo é o correto
+const textToSpeak = document.getElementById(elementId).textContent;
         if (!textToSpeak) {
             console.warn("speakText: texto vazio.");
         }
