@@ -1,3 +1,32 @@
+again; novamente
+ago; atrás
+almost; quase
+already; já
+also; também
+always; sempre
+during; durante
+even; até mesmo
+finally; finalmente
+here; aqui
+just; apenas/só
+lately; ultimamente
+maybe; talvez
+most; a maioria
+never; nunca
+now; agora
+often; frequentemente
+only; apenas/somente
+so; então
+sometimes; às vezes
+soon; em breve
+still; ainda
+then; então
+there; lá/aí
+together; juntos
+too; também/demais
+usually; geralmente
+very; muito
+yet; ainda
 Quickly;Rapidamente
 Slowly;Lentamente
 Carefully;Cuidadosamente
@@ -183,3 +212,4 @@ Angrily;Zangadamente
 Excitedly;Animadamente
 Tiredly;Cansadamente
 Bravely;Corajosamente
+
