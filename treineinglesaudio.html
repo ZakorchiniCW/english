@@ -379,14 +379,22 @@ async function loadDataFromGithub() {
     }
 }
 
-        function clearContents() {
-            document.getElementById('fraseDetails').textContent = '';
-            document.getElementById('verboDetails').textContent = '';
-            document.getElementById('verboPtEnDetails').textContent = '';
-            document.getElementById('phrasalVerbDetails').textContent = ''; // Limpa o novo campo
-            document.getElementById('adjetivoDetails').textContent = '';
-            document.getElementById('adverbioDetails').textContent = '';
-        }
+    // Função para limpar os conteúdos das áreas de detalhe
+function clearContents() {
+    // Certifique-se de que os IDs abaixo existem no seu HTML
+    document.getElementById('fraseDetails').textContent = '';
+    document.getElementById('verboPtEnDetails').textContent = '';
+    document.getElementById('adjetivoDetails').textContent = '';
+    document.getElementById('phrasalVerbsDetails').textContent = '';
+    document.getElementById('adverbioDetails').textContent = '';
+    
+    // Limpar o campo de input de Português para Inglês
+    const verboEnPtInput = document.getElementById('verboEnPtInput');
+    if (verboEnPtInput) {
+        verboEnPtInput.value = '';
+        document.getElementById('verboEnPtDetails').textContent = '';
+    }
+}
 
         // Simula a macro Sortear
        // A função sortear() principal agora chama as funções individuais
