@@ -212,4 +212,72 @@ Angrily;Zangadamente
 Excitedly;Animadamente
 Tiredly;Cansadamente
 Bravely;Corajosamente
+about (Preposição); sobre
+above (Preposição); acima
+across (Preposição); através
+after (Preposição); depois
+against (Preposição); contra
+along (Preposição); ao longo
+among (Preposição); entre (vários)
+around (Preposição); em volta de
+at (Preposição); em/no/na
+before (Preposição); antes
+behind (Preposição); atrás de
+below (Preposição); abaixo
+beneath (Preposição); abaixo
+beside (Preposição); ao lado de
+between (Preposição); entre (dois)
+by (Preposição); por
+down (Preposição); para baixo
+during (Preposição); durante
+except (Preposição); exceto
+for (Preposição); para
+from (Preposição); de/origem
+in (Preposição); em/dentro
+inside (Preposição); dentro
+into (Preposição); para dentro
+like (Preposição); como
+near (Preposição); perto
+of (Preposição); de
+off (Preposição); desligado/fora
+on (Preposição); em/sobre
+onto (Preposição); em
+out (Preposição); fora
+outside (Preposição); fora
+over (Preposição); acima de
+past (Preposição); passado
+since (Preposição); desde
+through (Preposição); através de
+throughout (Preposição); durante
+to (Preposição); para
+toward (Preposição); em direção a
+under (Preposição); sob/embaixo
+underneath (Preposição); debaixo
+until (Preposição); até
+with (Preposição); com
+without (Preposição); sem
+a/an (Determinante); um/uma
+all (Determinante); todos
+a lot of (Determinante); muito/muitos
+another (Determinante); outro/outra
+any (Determinante); qualquer
+each (Determinante); cada
+either (Determinante); qualquer um dos dois
+enough (Determinante); suficiente
+every (Determinante); cada/todo
+few (Determinante); poucos
+half (Determinante); metade
+less (Determinante); menos
+many (Determinante); muitos
+more (Determinante); mais
+much (Determinante); muito
+neither (Determinante); nenhum dos dois
+none (Determinante); nenhum
+other (Determinante); outro/outra
+some (Determinante); algum/alguns
+that (Determinante); aquele/aquela
+the (Determinante); o/a/os/as
+these (Determinante); estes/estas
+this (Determinante); este/esta
+those (Determinante); aqueles/aquelas
 
