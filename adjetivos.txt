@@ -1,338 +1,280 @@
-Happy;Feliz
-Sad;Triste
-Angry;Zangado
-Excited;Animado
-Tired;Cansado
-Brave;Corajoso
-Calm;Calmo
-Careful;Cuidadoso
-Clever;Esperto
-Confident;Confiante
-Curious;Curioso
-Dangerous;Perigoso
-Delicious;Delicioso
-Difficult;Difícil
-Easy;Fácil
-Famous;Famoso
-Friendly;Amigável
-Funny;Engraçado
-Generous;Generoso
-Gentle;Gentil
-Great;Ótimo
-Happy;Feliz
-Healthy;Saudável
-Honest;Honesto
-Important;Importante
-Interesting;Interessante
-Kind;Bondoso
-Lazy;Preguiçoso
-Lucky;Sortudo
-Nervous;Nervoso
-Nice;Agradável
-Polite;Educado
-Poor;Pobre
-Rich;Rico
-Serious;Sério
-Shy;Tímido
-Silly;Bobo
-Smart;Inteligente
-Strong;Forte
-Stupid;Estúpido
-Successful;Bem-sucedido
-Tall;Alto
-Thin;Magro
-Ugly;Feio
-Weak;Fraco
-Wealthy;Rico
-Wise;Sábio
-Young;Jovem
-Old;Velho
-Beautiful;Bonito
-Big;Grande
-Bitter;Amargo
-Black;Preto
-Blue;Azul
-Bright;Brilhante
-Broad;Largo
-Broken;Quebrado
-Busy;Ocupado
-Cheap;Barato
-Clean;Limpo
-Clear;Claro
-Cold;Frio
-Cool;Fresco
-Crazy;Louco
-Dark;Escuro
-Deep;Profundo
-Dry;Seco
-Early;Cedo
-Fast;Rápido
-Fat;Gordo
-Fresh;Fresco
-Full;Cheio
-Good;Bom
-Hard;Duro
-Heavy;Pesado
-High;Alto
-Hot;Quente
-Huge;Enorme
-Late;Tarde
-Light;Leve
-Long;Longo
-Loud;Alto (som)
-Low;Baixo
-Narrow;Estreito
-Near;Perto
-New;Novo
-Old;Velho
-Open;Aberto
-Quick;Rápido
-Quiet;Quieto
-Rare;Raro
-Red;Vermelho
-Rich;Rico
-Right;Certo
-Rough;Áspero
-Round;Redondo
-Sad;Triste
-Safe;Seguro
-Salty;Salgado
-Short;Curto
-Simple;Simples
-Slow;Devagar
-Small;Pequeno
-Soft;Macio
-Solid;Sólido
-Sour;Azedo
-Strong;Forte
-Sweet;Doce
-Tall;Alto
-Thick;Grosso
-Thin;Fino
-Tight;Apertado
-Tiny;Minúsculo
-Warm;Morno
-Weak;Fraco
-Wet;Molhado
-Wide;Largo
-Wild;Selvagem
-Wise;Sábio
-Young;Jovem
-Afraid;Com medo
-Alive;Vivo
-Angry;Zangado
-Awake;Acordado
-Bad;Mau
-Beautiful;Bonito
-Blind;Cego
-Boring;Chato
-Brave;Corajoso
-Bright;Brilhante
-Busy;Ocupado
-Calm;Calmo
-Careful;Cuidadoso
-Cheap;Barato
-Clean;Limpo
-Clear;Claro
-Clever;Esperto
-Cold;Frio
-Comfortable;Confortável
-Confident;Confiante
-Crazy;Louco
-Curious;Curioso
-Dangerous;Perigoso
-Dark;Escuro
-Deep;Profundo
-Delicious;Delicioso
-Difficult;Difícil
-Dirty;Sujo
-Dry;Seco
-Early;Cedo
-Easy;Fácil
-Empty;Vazio
-Famous;Famoso
-Fast;Rápido
-Fat;Gordo
-Friendly;Amigável
-Funny;Engraçado
-Generous;Generoso
-Gentle;Gentil
-Good;Bom
-Great;Ótimo
-Happy;Feliz
-Healthy;Saudável
-Heavy;Pesado
-High;Alto
-Honest;Honesto
-Hot;Quente
-Huge;Enorme
-Important;Importante
-Interesting;Interessante
-Kind;Bondoso
-Large;Grande
-Lazy;Preguiçoso
-Light;Leve
-Little;Pequeno
-Long;Longo
-Loud;Alto (som)
-Low;Baixo
-Lucky;Sortudo
-Narrow;Estreito
-Nervous;Nervoso
-Nice;Agradável
-Old;Velho
-Open;Aberto
-Polite;Educado
-Poor;Pobre
-Quick;Rápido
-Quiet;Quieto
-Rare;Raro
-Rich;Rico
-Right;Certo
-Rough;Áspero
-Round;Redondo
-Sad;Triste
-Safe;Seguro
-Salty;Salgado
-Short;Curto
-Simple;Simples
-Slow;Devagar
-Small;Pequeno
-adventurous; aventureiro
-amazing; incrível
-alive; vivo
-alone; sozinho
-afraid; com medo
-angry; bravo
-anxious; ansioso
-awesome; incrível/fantástico
-bad; mau/ruim
-beautiful; bonito/bonita
-better; melhor
-best; melhor
-big; grande
-boring; chato
-brave; corajoso
-bright; brilhante
-busy; ocupado
-casual; casual
-challenging; desafiador
-cheap; barato
-clean; limpo
-clumsy; desastrado
-cold; frio
-competitive; competitivo
-comfortable; confortável
-cool; legal
-confused; confuso
-cozy; aconchegante
-crazy; maluco
-cute; fofo
-dangerous; perigoso
-dark; escuro
-dead; morto
-dedicated; dedicado
-different; diferente
-difficult; difícil
-dirty; sujo
-early; cedo
-easy; fácil
-easygoing; tranquilo/descomplicado
-embarrassed; com vergonha
-excellent; excelente
-exciting; empolgante
-expensive; caro
-famous; famoso
-fancy; chique/elegante
-fast; rápido
-favorite; favorito
-friendly; amigável
-fun; divertido
-funny; engraçado
-glad; contente/feliz
-good; bom
-great; ótimo
-grumpy; mal-humorado
-happy; feliz
-hard; duro/difícil
-handsome; bonito (para homem)
-hardworking; trabalhador
-healthy; saudável
-heavy; pesado
-honest; honesto
-hot; quente
-huge; enorme
-hungry; com fome
-intelligent; inteligente
-interesting; interessante
-incredible; inacreditável
-jealous; com ciúmes
-little; pequeno
-long; longo
-last; último
-lazy; preguiçoso
-large; grande
-late; atrasado
-lonely; solitário
-lovely; adorável
-lucky; sortudo
-married; casado
-messy; bagunçado
-near; perto
-new; novo
-next; próximo
-nervous; nervoso
-old; velho
-optimistic; otimista
-organized; organizado
-outgoing; extrovertido
-polite; educado
-productive; produtivo
-perfect; perfeito
-punctual; pontual
-poor; pobre
-popular; popular
-professional; profissional
-quiet; quieto
-responsible; responsável
-rich; rico
-romantic; romântico
-ridiculous; ridículo
-scary; assustador
-safe; seguro
-short; curto/baixo
-sad; triste
-secret; secreto
-smart; esperto
-sleepy; com sono
-slim; magro
-selfish; egoísta
-serious; sério
-sensitive; sensível
-spacious; espaçoso
-studious; estudioso
-shy; tímido
-sick; doente
-single; solteiro/único
-strong; forte
-stubborn; teimoso
-skilled; habilidoso
-same; mesmo
-successful; bem-sucedido
-talkative; tagarela
-tall; alto
-talented; talentoso
-trendy; na moda
-true; verdadeiro
-tasty; saboroso
-thirsty; com sede
-tiring; cansativo
-tired; cansado
-ugly; feio
-weak; fraco
-wild; selvagem
-worried; preocupado
-wrong; errado
-well; bem
-weird; estranho
-young; jovem
+Happy;Feliz;;
+Sad;Triste;;
+Angry;Zangado;;
+Excited;Animado;;
+Tired;Cansado;;
+Brave;Corajoso;;
+Calm;Calmo;;
+Careful;Cuidadoso;;
+Clever;Esperto;;
+Confident;Confiante;;
+Curious;Curioso;;
+Dangerous;Perigoso;;
+Delicious;Delicioso;;
+Difficult;Difícil;;
+Easy;Fácil;;
+Famous;Famoso;;
+Friendly;Amigável;;
+Funny;Engraçado;;
+Generous;Generoso;;
+Gentle;Gentil;;
+Great;Ótimo;;
+Happy;Feliz;;
+Healthy;Saudável;;
+Honest;Honesto;;
+Important;Importante;;
+Interesting;Interessante;;
+Kind;Bondoso;;
+Lazy;Preguiçoso;;
+Lucky;Sortudo;;
+Nervous;Nervoso;;
+Nice;Agradável;;
+Polite;Educado;;
+Poor;Pobre;;
+Rich;Rico;;
+Serious;Sério;;
+Shy;Tímido;;
+Silly;Bobo;;
+Smart;Inteligente;;
+Strong;Forte;;
+Stupid;Estúpido;;
+Successful;Bem-sucedido;;
+Tall;Alto;;
+Thin;Magro;;
+Ugly;Feio;;
+Weak;Fraco;;
+Wealthy;Rico;;
+Wise;Sábio;;
+Young;Jovem;;
+Old;Velho;;
+Beautiful;Bonito;;
+Big;Grande;;
+Bitter;Amargo;;
+Black;Preto;;
+Blue;Azul;;
+Bright;Brilhante;;
+Broad;Largo;;
+Broken;Quebrado;;
+Brown;Marrom;;
+Calm;Calmo;;
+Cheap;Barato;;
+Clean;Limpo;;
+Cold;Frio;;
+Comfortable;Confortável;;
+Cool;Fresco/Legal;;
+Crazy;Louco;;
+Crispy;Crocante;;
+Cruel;Cruel;;
+Curly;Cacheado;;
+Cute;Fofo;;
+Dark;Escuro;;
+Deep;Profundo;;
+Dirty;Sujo;;
+Dry;Seco;;
+Dull;Desinteressante;;
+Empty;Vazio;;
+Evil;Malvado;;
+Expensive;Caro;;
+Fabulous;Fabuloso;;
+Fair;Justo;;
+Fast;Rápido;;
+Fat;Gordo;;
+Flat;Plano;;
+Foolish;Tolo;;
+Free;Livre;;
+Fresh;Fresco;;
+Full;Cheio;;
+Generous;Generoso;;
+Good;Bom;;
+Grateful;Grato;;
+Green;Verde;;
+Grey;Cinza;;
+Handsome;Bonito (homem);;
+Happy;Feliz;;
+Hard;Duro/Difícil;;
+Heavy;Pesado;;
+High;Alto;;
+Honest;Honesto;;
+Hot;Quente;;
+Huge;Enorme;;
+Hungry;Com fome;;
+Kind;Gentil;;
+Large;Grande;;
+Late;Atrasado;;
+Light;Leve;;
+Little;Pequeno;;
+Long;Longo;;
+Loud;Alto (som);;
+Low;Baixo;;
+Modern;Moderno;;
+Nasty;Nojento;;
+Narrow;Estreito;;
+New;Novo;;
+Nice;Agradável;;
+Noisy;Barulhento;;
+Old;Velho;;
+Peaceful;Pacífico;;
+Pretty;Bonito/Bonita;;
+Proud;Orgulhoso;;
+Pure;Puro;;
+Quick;Rápido;;
+Quiet;Quieto;;
+Red;Vermelho;;
+Relaxed;Relaxado;;
+Right;Certo/Direito;;
+Round;Redondo;;
+Rude;Rude;;
+Salty;Salgado;;
+Sharp;Afiado;;
+Shiny;Brilhante;;
+Short;Curto/Baixo;;
+Simple;Simples;;
+Slow;Lento;;
+Small;Pequeno;;
+Smooth;Suave;;
+Soft;Macio;;
+Sour;Azedo;;
+Spicy;Apimentado;;
+Square;Quadrado;;
+Sticky;Pegajoso;;
+Strong;Forte;;
+Sweet;Doce;;
+Tall;Alto;;
+Tasty;Saboroso;;
+Thick;Grosso;;
+Thin;Fino/Magro;;
+Tired;Cansado;;
+Ugly;Feio;;
+Warm;Morno/Quente;;
+Wet;Molhado;;
+White;Branco;;
+Wide;Largo;;
+Wrong;Errado;;
+Yellow;Amarelo;;
+Young;Jovem;;
+Zesty;Saboroso/picante;;
+absurd; absurdo;;
+aggressive; agressivo;;
+alive; vivo;;
+amazing; incrível;;
+annoying; irritante;;
+anxious; ansioso;;
+ashamed; envergonhado;;
+awful; horrível;;
+beautiful; bonito;;
+boring; chato;;
+brave; corajoso;;
+busy; ocupado;;
+calm; calmo;;
+charming; charmoso;;
+cheerful; alegre;;
+clever; esperto;;
+comfortable; confortável;;
+confident; confiante;;
+confused; confuso;;
+cozy; aconchegante;;
+curious; curioso;;
+dangerous; perigoso;;
+delightful; encantador;;
+depressed; deprimido;;
+determined; determinado;;
+disappointed; desapontado;;
+embarrassed; envergonhado;;
+energetic; energético;;
+enormous; enorme;;
+enthusiastic; entusiasmado;;
+excited; animado;;
+fantastic; fantástico;;
+foolish; tolo;;
+fortunate; afortunado;;
+friendly; amigável;;
+funny; engraçado;;
+generous; generoso;;
+gentle; gentil;;
+grateful; grato;;
+grumpy; mal-humorado;;
+happy; feliz;;
+hard; duro/difícil;;
+handsome; bonito (para homem);;
+hardworking; trabalhador;;
+healthy; saudável;;
+heavy; pesado;;
+honest; honesto;;
+hot; quente;;
+huge; enorme;;
+hungry; com fome;;
+intelligent; inteligente;;
+interesting; interessante;;
+incredible; inacreditável;;
+jealous; com ciúmes;;
+little; pequeno;;
+long; longo;;
+last; último;;
+lazy; preguiçoso;;
+large; grande;;
+late; atrasado;;
+lonely; solitário;;
+lovely; adorável;;
+lucky; sortudo;;
+married; casado;;
+messy; bagunçado;;
+near; perto;;
+new; novo;;
+next; próximo;;
+nervous; nervoso;;
+old; velho;;
+optimistic; otimista;;
+organized; organizado;;
+outgoing; extrovertido;;
+polite; educado;;
+productive; produtivo;;
+perfect; perfeito;;
+punctual; pontual;;
+poor; pobre;;
+popular; popular;;
+professional; profissional;;
+quiet; quieto;;
+responsible; responsável;;
+rich; rico;;
+romantic; romântico;;
+ridiculous; ridículo;;
+scary; assustador;;
+safe; seguro;;
+short; curto/baixo;;
+sad; triste;;
+secret; secreto;;
+smart; esperto;;
+sleepy; com sono;;
+slim; magro;;
+selfish; egoísta;;
+serious; sério;;
+sensitive; sensível;;
+spacious; espaçoso;;
+studious; estudioso;;
+shy; tímido;;
+sick; doente;;
+single; solteiro/único;;
+strong; forte;;
+successful; bem-sucedido;;
+stupid; estúpido;;
+superb; excelente;;
+sweet; doce;;
+tall; alto;;
+thankful; agradecido;;
+thoughtful; atencioso;;
+tight; apertado;;
+tiny; minúsculo;;
+tired; cansado;;
+tough; resistente;;
+ugly; feio;;
+unhappy; infeliz;;
+useful; útil;;
+useless; inútil;;
+warm; quente;;
+weak; fraco;;
+wealthy; rico;;
+weird; estranho;;
+wonderful; maravilhoso;;
+worried; preocupado;;
+wrong; errado;;
+young; jovem;;
