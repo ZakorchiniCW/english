@@ -641,9 +641,22 @@ const textToSpeak = document.getElementById(elementId).textContent;
 // Função para ler o texto em voz alta
 function speakText(elementId) {
     const textToSpeak = document.getElementById(elementId).textContent;
+    
+    // Verifica se o texto não está vazio para evitar erros
+    if (!textToSpeak) {
+        console.warn("speakText: O texto para a leitura está vazio.");
+        return;
+    }
+    
+    // Verifica se o navegador suporta a funcionalidade
+    if (!("speechSynthesis" in window)) {
+        alert("Seu navegador não suporta a leitura de texto em voz alta.");
+        return;
+    }
+    
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     
-    // Opcional: Configurações de voz (idioma, etc.)
+    // Configurações de voz
     utterance.lang = 'en-US'; // Define o idioma para inglês americano
     
     // Inicia a pronúncia
