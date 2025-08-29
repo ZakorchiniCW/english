@@ -522,7 +522,6 @@ if (input && input.textContent) {
         }
         if (!textToSpeak) {
             console.warn("speakText: texto vazio.");
-            return;
         }
         if (!("speechSynthesis" in window)) {
             alert("Seu navegador não suporta a leitura de texto em voz alta.");
