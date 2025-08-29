@@ -24,629 +24,85 @@ cortar, partir, reduzir, recortar, castrar;cut;cut;cut
 distribuir, repartir, espalhar, negociar;deal;dealt;dealt
 cavar, escavar;dig;dug;dug
 fazer;do;did;done
-desenhar, extrair, sair;draw;drew;drawn
+desenhar, sacar, arrastar;draw;drew;drawn
+sonhar;dream;dreamt / dreamed;dreamt / dreamed
 beber;drink;drank;drunk
-dirigir, guiar;drive;drove;driven
-comer;eat;ate;eaten
-cair, abater-se, decrescer, diminuir;fall;fell;fallen
-alimentar, nutrir;feed;fed;fed
-sentir, notar;feel;felt;felt
-lutar, brigar;fight;fought;fought
-achar, encontrar;find;found;found
-voar;fly;flew;flown
-proibir;forbid;forbade;forbidden
-esquecer(-se);forget;forgot;forgotten
-perdoar;forgive;forgave;forgiven
-abandonar, desertar, largar; abrir mão de;forsake;forsook;forsaken
-congelar;freeze;froze;frozen
-obter, conseguir;get;got;got
-dar;give;gave;given
-ir;go;went;gone
-crescer, florescer, germinar;grow;grew;grown
-pendurar, suspender;hang;hung;hung
-ter, possuir;have;had;had
-ouvir, escutar, ter notícias;hear;heard;heard
-esconder(-se), ocultar;hide;hid;hidden
-bater, chocar-se;hit;hit;hit
-segurar, agarrar;hold;held;held
-ferir(-se), machucar;hurt;hurt;hurt
-manter, conservar, preservar;keep;kept;kept
-ajoelhar-se;kneel;knelt;knelt
-tricotar;knit;knit;knit
-saber, conhecer;know;knew;known
-pôr, colocar, derrubar, deitar;lay;laid;laid
-conduzir, liderar, comandar;lead;led;led
-saltar, pular, cobrir (os animais);leap;leapt;leapt
-aprender, ficar sabendo;learn;learnt;learnt
-partir, deixar, sair;leave;left;left
-emprestar;lend;lent;lent
-permitir, deixar;let;let;let
-deitar;lie;lay;lain
-acender, iluminar;light;lit;lit
-perder;lose;lost;lost
-fazer, criar, elaborar;make;made;made
-significar, querer dizer;mean;meant;meant
-encontrar(-se), reunir(-se);meet;met;met
-pagar;pay;paid;paid
-pôr, colocar;put;put;put
-desistir, abandonar;quit;quit;quit
-ler, interpretar;read;read;read
-cavalgar, andar de bicicleta ou carro;ride;rode;ridden
-soar, tocar (campainha, telefone);ring;rang;rung
-erguer-se, levantar-se;rise;rose;risen
-correr, apressar-se;run;ran;run
-serrar;saw;sawed;sawn
-dizer;say;said;said
-ver, perceber;see;saw;seen
-procurar, pedir, almejar;seek;sought;sought
-vender;sell;sold;sold
-enviar, mandar;send;sent;sent
-pôr, dispor, ajustar;set;set;set
-costurar, coser;sew;sewed;sewn
-sacudir, agitar, apertar a mão (em cumprimento);shake;shook;shaken
-brilhar;shine;shone;shone
-atirar, ferir com tiro;shoot;shot;shot
-mostrar, apresentar;show;showed;shown
-cortar em pedaços, picar, retalhar, rasgar;shred;shred;shred
-contrair, encolher, recuar;shrink;shrank;shrunk
-fechar, cerrar; tampar;shut;shut;shut
-cantar;sing;sang;sung
-afundar;sink;sank;sunk
-sentar(-se);sit;sat;sat
-matar, assassinar, destruir, arruinar;slay;slew;slain
-dormir;sleep;slept;slept
-escorregar, deslizar;slide;slid;slid
-atirar, arremessar;sling;slung;slung
-cheirar;smell;smelt;smelt
-semear;sow;sowed;sown
-falar;speak;spoke;spoken
-soletrar;spell;spelt;spelt
-gastar (dinheiro), passar (tempo);spend;spent;spent
-derramar;spill;spilt;spilt
-girar;spin;spun;spun
-cuspir;spit;spat;spit
-estragar, destruir, mimar;spoil;spoilt;spoilt
-espalhar, estender;spread;spread;spread
-saltar, lançar-se, libertar-se;spring;sprang;sprung
-ficar ou pôr-se de pé;stand;stood;stood
-roubar, furtar;steal;stole;stolen
-cravar, fincar;stick;stuck;stuck
-picar, ferroar;sting;stung;stung
-feder; enojar;stink;stank;stunk
-bater, golpear;strike;struck;struck
-amarrar, pendurar, enfiar, esticar;string;strung;strung
-aspirar, tentar, esforçar-se;strive;strove;striven
-jurar;swear;swore;sworn
-suar;sweat;sweat;sweat
-varrer;sweep;swept;swept
-inchar (-se), crescer, encher (os pneus);swell;swelled;swollen
-nadar;swim;swam;swum
-balançar;swing;swung;swung
-tomar, pegar, levar;take;took;taken
-ensinar;teach;taught;taught
-chorar, lacrimejar; rasgar, rachar;tear;tore;torn
-dizer, contar;tell;told;told
-pensar, achar;think;thought;thought
-ter sucesso;thrive;throve;thriven
-lançar, atirar;throw;threw;thrown
-empurrar;thrust;thrust;thrust
-acordar;wake;woke;woken
-vestir, usar, trajar;wear;wore;worn
-tecer, trançar;weave;wove;woven
-ganhar, vencer;win;won;won
-girar, enrolar-se;wind;wound;wound
-escrever;write;wrote;written
-torcer;wring;wrung;wrung
-morder;bite;bit;bitten
-queimar;burn;burnt;burnt
-cancelar;call off;called off;called off
-carregar;carry;carried;carried
-escolher;choose;chose;chosen
-custar;cust;cust;cust
-lidar;deal;dealt;dealt
-aproveitar;enjoy;enjoyed;enjoyed
-preencher;fill;filled;filled
-descobrir (c/ pistas);figure out;figured out;figured out
-desistir, abandonar;give up;gave up;given up
-crescer, florescer, germinar;grow;grew;grown
-esperar (expectativa);expect;expected;expected
-esperar (tempo);wait;waited;waited
-esperar (esperança);hope;hoped;hoped
-convidar;invite;invited;invited
-perder;lose;lost;lost
-estragar;mess up;messed up;messed up
-mover;move;moved;moved
-perceber;realize;realized;realized
-pegar (ir buscar);pick up;picked up;picked up
-puxar;pull;pulled;pulled
-empurrar;push;pushed;pushed
-para (definitivamente);quit;quit;quit
-arruinar;ruin;ruined;ruined
-vender;sell;sold;sold
-jurar;swear;swore;sworn
-mostrar, apresentar;show;showed;showed
-lançar, atirar;throw;threw;thrown
-virar;turn;turned;turned
-tratar;treat;treated;treated
-concordar;agree;agreeded;agreeded
-encontrar(sem pistas);find out;found out;found out
-começar, iniciar;start;started;started
-encontrar;find;found;found
-perdoar ;forgive;forgave;forgiven
-acontecer;happen;happened;happened
-procurar por;look for;looked for;looked for
-resolver/escolher a dedo;solve;solved;solved
-assobiar;whistle;whistled;whistled
-aconselhar;advise;advised;advised
-construir, fabricar;build;built;built
-trazer, servir;bring;brought;brought
-continuar;carry on;carried on;carried on
-entrar;come in;came in;come in
-reclamar;complain;complained;complained
-entregar;delivery;deliveried;deliveried
-morrer;die;died;died
-desenhar;draw;drew;drown
-misturar;mix;mixed;mixed
-dever;owe;owed;owed
-dar role;hang out;hung out;hung out
-se divertir;have fun;had fun;had fun
-escutar;hear;heard;heard
-esconder(-se), ocultar;hide;hid;hidden
-bater;hit;hit;hit
-segurar, agarrar;hold;held;held
-abraçar;hug;hugged;hugged
-machucar;hurt;hurt;hurt
-se juntar;join;joined;joined
-manter ;keep;kept;kept
-matar, assassinar, destruir, arruinar;kill;killed;killed
-rir;laught;laughted;laughted
-pegar emprestado;borrow;borowed;borrowed
-emprestar para;lend;lent;lent
-deixar;let;let;let
-mentir;lie;lied;lied
-parecer com;look like;looked like;looked like
-sentir falta;miss;missed;missed
-oferecer;offer;offered;offered
-fazer xixi;pee;peed;peed
-planejar;plan;plained;plained
-prometer;promise;promised;promised
-perceber;notice;noticed;noticed
-receber;receive;received;received
-salvar;save;saved;saved
-gritar parecer;scream;screamed;screamed
-enviar, mandar;send;sent;sent
-sentar(-se);sit;sat;sat
-cheirar;smell;smelled;smelled
-sorrir;smile;smiled;smiled
-desligar;turn off;turned off;turned off
-ser/estar;be;was/were;been
-tornar-se;become;became;become
-começar;begin;began;begun
-quebrar;break;broke;broken
-trazer;bring;brought;brought
-construir;build;built;built
-comprar;buy;bought;bought
-pegar;catch;caught;caught
-escolher;choose;chose;chosen
-vir;come;came;come
-fazer;do;did;done
-beber;drink;drank;drunk
-dirigir;drive;drove;drove
+dirigir;drive;drove;driven
 comer;eat;ate;eaten
 cair;fall;fell;fallen
-sentir;feel;felt;felt
-encontrar;find;found;found
-voar;fly;flew;flown
+alimentar;feed;fed;fed
+sentir, sentir-se;feel;felt;felt
+lutar;fight;fought;fought
+encontrar, achar;find;found;found
+voar, pilotar;fly;flew;flown
+proibir;forbid;forbade;forbidden
 esquecer;forget;forgot;forgotten
-obter;get;got;tem
+perdoar;forgive;forgave;forgiven
+congelar;freeze;froze;frozen
+ter, obter, conseguir, chegar;get;got;gotten
 dar;give;gave;given
 ir;go;went;gone
+crescer, plantar;grow;grew;grown
+pendurar;hang;hung;hung
 ter;have;had;had
 ouvir;hear;heard;heard
-saber/conhecer;know;knew;known
-deixar/partir;leave;left;left
-fazer;make;made;made
-encontrar;meet;met;met
+esconder, ocultar;hide;hid;hidden
+bater;hit;hit;hit
+segurar, abraçar, agarrar;hold;held;held
+machucar;hurt;hurt;hurt
+manter;keep;kept;kept
+saber, conhecer;know;knew;known
+pôr, deitar, assentar;lay;laid;laid
+conduzir, liderar;lead;led;led
+sair, partir;leave;left;left
+emprestar;lend;lent;lent
+deixar, permitir;let;let;let
+deitar-se, jazer;lie;lay;lain
+perder;lose;lost;lost
+fazer, fabricar;make;made;made
+significar;mean;meant;meant
+conhecer, encontrar;meet;met;met
+pagar;pay;paid;paid
+pôr, colocar;put;put;put
 ler;read;read;read
+andar de, cavalgar;ride;rode;ridden
+tocar (sino), soar;ring;rang;rung
+erguer-se, levantar-se;rise;rose;risen
 correr;run;ran;run
 dizer;say;said;said
 ver;see;saw;seen
 vender;sell;sold;sold
 enviar;send;sent;sent
+ajustar, arrumar, pôr, marcar;set;set;set
+tremer;shake;shook;shaken
+brilhar;shine;shone;shone
+atirar, atuar, filmar;shoot;shot;shot
+mostrar;show;showed;shown
+encolher;shrink;shrank;shrunk
+fechar, encerrar;shut;shut;shut
 cantar;sing;sang;sung
+afundar;sink;sank;sunk
 sentar;sit;sat;sat
+dormir;sleep;slept;slept
+deslizar, escorregar;slide;slid;slid
 falar;speak;spoke;spoken
-gastar;spend;spent;spent
-tomar;take;took;taken
+gastar, passar (tempo);spend;spent;spent
+ficar, permanecer;stand;stood;stood
+roubar;steal;stole;stolen
+nadar;swim;swam;swum
+levar, tirar, pegar;take;took;taken
 ensinar;teach;taught;taught
-contar;tell;told;told
+rasgar;tear;tore;torn
+dizer;tell;told;told
 pensar;think;thought;thought
+arremessar, jogar;throw;threw;thrown
 entender;understand;understood;understood
-vestir;wear;wore;worn
+acordar, despertar;wake;woke;woken
+vestir, usar;wear;wore;worn
+vencer, ganhar;win;won;won
 escrever;write;wrote;written
-convidar para sair;Ask out;asked out;asked out
-apoiar;Back up;backed up;backed up
-explodir;Blow up;blew up;blown up
-quebrar, desmoronar;Break down;broke down;broken down
-terminar (relacionamento);Break up;broke up;broken up
-mencionar, criar (criança);Bring up;brought up;brought up
-cancelar;Call off;called off;called off
-continuar;Carry on;carried on;carried on
-alcançar;Catch up;caught up;caught up
-fazer check-in;Check in;checked in;checked in
-fazer check-out, verificar;Check out;checked out;checked out
-encontrar por acaso;Come across;came across;come across
-inventar, criar;Come up with;came up with;come up with
-reduzir;Cut down on;cut down on;cut down on
-deixar (alguém), cair no sono;Drop off;dropped off;dropped off
-descobrir, entender;Figure out;figured out;figured out
-descobrir;Find out;found out;found out
-dar-se bem;Get along;got along;got along
-escapar;Get away;got away;got away
-superar;Get over;got over;got over
-desistir;Give up;gave up;given up
-continuar;Go on;went on;gone on
-crescer;Grow up;grew up;grown up
-passar tempo junto;Hang out;hung out;hung out
-esperar, segurar firme;Hold on;held on;held on
-cuidar de;Look after;looked after;looked after
-ansiar por;Look forward to;looked forward to;looked forward to
-procurar (informação);Look up;looked up;looked up
-inventar, reconciliar;Make up;made up;made up
-pegar, buscar;Pick up;picked up;picked up
-adiar;Put off;put off;put off
-vestir, ligar (aparelho);Put on;put on;put on
-encontrar por acaso;Run into;ran into;run into
-ficar sem;Run out of;ran out of;run out of
-configurar, estabelecer;Set up;set up;set up
-aparecer, comparecer;Show up;showed up;shown up
-decolar, tirar (roupa);Take off;took off;taken off
-cuidar de;Take care of;took care of;taken care of
-recusar, diminuir (volume);Turn down;turned down;turned down
-aparecer, aumentar (volume);Turn up;turned up;turned up
-acordar;Wake up;woke up;woken up
-exercitar-se, resolver;Work out;worked out;worked out
-invadir;Break in;broke in;broken in
-escapar, começar (repentinamente);Break out;broke out;broken out
-causar;Bring about;brought about;brought about
-derrubar;Bring down;brought down;brought down
-introduzir;Bring in;brought in;brought in
-lançar, destacar;Bring out;brought out;brought out
-retornar a ligação;Call back;called back;called back
-ligar para alguém;Call up;called up;called up
-realizar;Carry out;carried out;carried out
-verificar, fazer check-out;Check out;checked out;checked out
-voltar;Come back;came back;come back
-entrar;Come in;came in;come in
-sair, ser publicado;Come out;came out;come out
-cortar, interromper;Cut off;cut off;cut off
-visitar rapidamente;Drop by;dropped by;dropped by
-abandonar (escola, curso);Drop out;dropped out;dropped out
-desmoronar;Fall apart;fell apart;fallen apart
-ficar para trás;Fall behind;fell behind;fallen behind
-cair;Fall off;fell off;fallen off
-preencher, substituir;Fill in;filled in;filled in
-preencher (completo);Fill out;filled out;filled out
-descobrir;Find out;found out;found out
-dar-se bem com;Get along with;got along with;got along with
-voltar;Get back;got back;got back
-entrar;Get in;got in;got in
-descer (de um veículo);Get off;got off;got off
-subir (em um veículo);Get on;got on;got on
-sair;Get out;got out;got out
-superar;Get over;got over;got over
-passar por, completar;Get through;got through;got through
-doar, revelar;Give away;gave away;given away
-devolver;Give back;gave back;given back
-ceder;Give in;gave in;given in
-distribuir;Give out;gave out;given out
-perseguir;Go after;went after;gone after
-prosseguir;Go ahead;went ahead;gone ahead
-voltar;Go back;went back;gone back
-explodir, disparar;Go off;went off;gone off
-concordar; agree; agreed; agreed
-responder; answer; answered; answered
-chegar; arrive; arrived; arrived
-perguntar/pedir; ask; asked; asked
-começar; begin; began; begun
+pedir; ask; asked; asked
 acreditar; believe; believed; believed
-quebrar; break; broke; broken
-trazer; bring; brought; brought
-construir; build; built; built
-comprar; buy; bought; bought
-ligar; call; called; called
-trocar; change; changed; changed
-limpar; clean; cleaned; cleaned
-fechar; close; closed; closed
-vir; come; came; come
-cozinhar; cook; cooked; cooked
-escolher; choose; chose; chosen
-custar; cost; cost; cost
-chorar; cry; cried; cried
-cortar; cut; cut; cut
-dançar; dance; danced; danced
-decidir; decide; decided; decided
-morrer; die; died; died
-fazer; do; did; done
-desenhar; draw; drew; drawn
-sonhar; dream; dreamed; dreamed
-beber; drink; drank; drunk
-dirigir; drive; drove; driven
-comer; eat; ate; eaten
-aproveitar; enjoy; enjoyed; enjoyed
-explicar; explain; explained; explained
-cair; fall; fell; fallen
-sentir; feel; felt; felt
-lutar; fight; fought; fought
-encontrar; find; found; found
-finalizar; finish; finished; finished
-voar; fly; flew; flown
-seguir; follow; followed; followed
-esquecer; forget; forgot; forgotten
-obter/conseguir/pegar; get; got; gotten
-dar; give; gave; given
-ir; go; went; gone
-crescer; grow; grew; grown
-acontecer; happen; happened; happened
-odiar; hate; hated; hated
-ter; have; had; had
-ouvir; hear; heard; heard
-ajudar; help; helped; helped
-segurar; hold; held; held
-machucar; hurt; hurt; hurt
-pretender; intend; intended; intended
-convidar; invite; invited; invited
-pular; jump; jumped; jumped
-manter; keep; kept; kept
-matar; kill; killed; killed
-beijar; kiss; kissed; kissed
-saber; know; knew; known
-rir; laugh; laughed; laughed
-aprender; learn; learned; learned
-deixar; leave; left; left
-emprestar (para); lend (to); lent (to); lent (to)
-mentir; lie; lied; lied
-gostar; like; liked; liked
-escutar; listen (to); listened (to); listened (to)
-viver/morar; live; lived; lived
-olhar; look; looked; looked
-procurar por; look for; looked for; looked for
-perder; lose; lost; lost
-amar; love; loved; loved
-fazer; make; made; made
-conhecer; meet; met; met
-perder (ocasião); miss; missed; missed
-mover; move; moved; moved
-precisar; need; needed; needed
-abrir; open; opened; opened
-pagar; pay; paid; paid
-jogar; play; played; played
-preferir; prefer; preferred; preferred
-prometer; promise; promised; promised
-colocar; put; put; put
-desistir/parar; quit; quit; quit
-trazer; bring; brought; brought
-continuar; carry on; carried on; carried on
-entrar; come in; came in; come in
-reclamar; complain; complained; complained
-entregar; deliver; delivered; delivered
-morrer; die; died; died
-desenhar; draw; drew; drawn
-misturar; mix; mixed; mixed
-dever; owe; owed; owed
-dar rolê; hang out; hung out; hung out
-se divertir; have fun; had fun; had fun
-escutar; hear; heard; heard
-esconder; hide; hid; hidden
-bater; hit; hit; hit
-segurar; hold; held; held
-abraçar; hug; hugged; hugged
-machucar; hurt; hurt; hurt
-se juntar; join; joined; joined
-manter; keep; kept; kept
-matar; kill; killed; killed
-rir; laugh; laughed; laughed
-pegar emprestado; borrow; borrowed; borrowed
-emprestar para; lend; lent; lent
-deixar; let; let; let
-mentir; lie; lied; lied
-parecer com; look like; looked like; looked like
-sentir falta; miss; missed; missed
-oferecer; offer; offered; offered
-fazer xixi; pee; peed; peed
-planejar; plan; planned; planned
-prometer; promise; promised; promised
-perceber; realize; realized; realized
-receber; receive; received; received
-salvar; save; saved; saved
-gritar; scream; screamed; screamed
-parecer; seem; seemed; seemed
-enviar; send; sent; sent
-sentar; sit; sat; sat
-cheirar; smell; smelled; smelled
-sorrir; smile; smiled; smiled
-desligar; turn off; turned off; turned off
-lavar; wash; washed; washed
-vestir; wear; wore; worn
-malhar; work out; worked out; worked out
-preocupar-se; worry; worried; worried
-lançar; launch; launched; launched
-esgotar; sell out; sold out; sold out
-performar; perform; performed; performed
-improvisar; improvise; improvised; improvised
-detonar; rock; rocked; rocked
-rebolar; twerk; twerked; twerked
-limpar (tirar algo de vista); declutter; decluttered; decluttered
-dobrar; fold; folded; folded
-limpar o chão; mop up; mopped up; mopped up
-guardar; put away; put away; put away
-enxaguar; rinse; rinsed; rinsed
-esfregar; scrub; scrubbed; scrubbed
-varrer; sweep; swept; swept
-jogar fora; throw away; threw away; thrown away
-sacudir; toss; tossed; tossed
-limpar com pano; wipe off; wiped off; wiped off
-conquistar; acquire; acquired; acquired
-abordar; approach; approached; approached
-analisar; analyse; analysed; analysed
-detectar; detect; detected; detected
-juntar; gather; gathered; gathered
-instalar; install; installed; installed
-medir; measure; measured; measured
-prevenir; prevent; prevented; prevented
-revisar; review; reviewed; reviewed
-trocar; shift; shifted; shifted
-pedir; order; ordered; ordered
-experimentar; taste; tasted; tasted
-morder; bite; bit; bitten
-mastigar; chew; chewed; chewed
-lamber; lick; licked; licked
-engolir; swallow; swallowed; swallowed
-jantar; dine; dined; dined
-banquetear; feast; feasted; feasted
-mordiscar; nibble; nibbled; nibbled
-tomar um gole; sip; sipped; sipped
-esconder; hide; hid; hidden
-reduzir; downsize; downsized; downsized
-dispensar; dismiss; dismissed; dismissed
-pedir demissão; resign; resigned; resigned
-candidatar-se; apply for; applied for; applied for
-gerenciar; manage; managed; managed
-desenvolver; develop; developed; developed
-ganhar; earn; earned; earned
-aposentar-se; retire; retired; retired
-empregar; employ; employed; employed
-despejar; evict; evicted; evicted
-habitar; inhabit; inhabited; inhabited
-mudar-se para; move in; moved in; moved in
-deixar passar (vista grossa); overlook; overlooked; overlooked
-assinar; sign; signed; signed
-alugar; rent; rented; rented
-reparar; repair; repaired; repaired
-renovar; renew; renewed; renewed
-renovar; renovate; renovated; renovated
-mudar-se; move out; moved out; moved out
-ler; read; read; read
-lembrar; remember; remembered; remembered
-descansar; rest; rested; rested
-correr; run; ran; run
-dizer; say; said; said
-ver; see; saw; seen
-vender; sell; sold; sold
-enviar; send; sent; sent
-mostrar; show; showed; showed
-cantar; sing; sang; sung
-sentar; sit; sat; sat
-dormir; sleep; slept; slept
-falar (idioma); speak; spoke; spoken
-gastar; spend; spent; spent
-começar; start; started; started
-ficar; stay; stayed; stayed
-parar; stop; stopped; stopped
-estudar; study; studied; studied
-nadar; swim; swam; swam
-levar; take; took; taken
-conversar com; talk; talked; talked
-ensinar; teach; taught; taught
-contar para; tell; told; told
-pensar; think; thought; thought
-viajar; travel; traveled; traveled
-tentar; try; tried; tried
-entender; understand; understood; understood
-visitar; visit; visited; visited
-esperar; wait; waited; waited
-andar; walk; walked; walked
-querer; want; wanted; wanted
-lavar; wash; washed; washed
-assistir; watch; watched; watched
-trabalhar; work; worked; worked
-ganhar; win; won; won
-escrever; write; wrote; written
-vestir; wear; wore; worn
-acordar; wake up; woke up; woken up
-aquecer-se; warm up; warmed; warmed
-perguntar-se; wonder; wondered; wondered
-espirrar; sneeze; sneezed; sneezed
-tossir; cough; coughed; coughed
-bocejar; yawn; yawned; yawned
-respirar; breathe; breathed; breathed
-roncar; snore; snored; snored
-suar; sweat; sweated; sweated
-arrotar; burp; burped; burped
-franzir; frown; frowned; frowned
-corar; blush; blushed; blushed
-piscar; blink; blinked; blinked
-trazer a tona/cuidar de; bring up; brought up; brought up
-esgotar-se; burn out; burned out; burned out
-cabelar; call off; called off; called off
-executar; carry out; carried out; carried out
-anotar (rapidamente); jot down; jotted down; jotted down
-dispensar; lay off; laid off; laid off
-supervisionar; oversee; oversaw; overseen
-adiar; put off; put off; put off
-recrutar; recruit; recruited; recruited
-afrouxar; slack off; slacked off; slacked off
-passar fio dental; floss; flossed; flossed
-vestir; put on; put on; put on
-decolar; take off; took off; taken off
-deixar em casa; drop by; dropped by; dropped by
-arrumar; tidy up; tidied up; tidied up
-sair apressado; dash off; dashed off; dashed off
-refrescar; freshen up; freshened up; freshened up
-deitar; lie down; lied down; lied down
-cochilar; doze off; dozed off; dozed off
-dormir mais; sleep in; slept in; slept in
-ameaçar; assault; assaulted; assaulted
-culpar; blame; blamed; blamed
-xingar; cuss; cussed; cussed
-desesperar; despair; despaired; despaired
-distorcer (situação); gaslight; gaslighted; gaslighted
-gemer; moan; moaned; moaned
-importunar; nag; nagged; nagged
-emburrar; sulk; sulked; sulked
-gritar palavras; shout; shouted; shouted
-ameaçar; threaten; threatened; threatened
-ensaio; rehearse; rehearsed; rehearsed
-colaborar; collaborate; collaborated; collaborated
-gravar; record; recorded; recorded
-publicar; publish; published; published
-pegar/conseguir/obter; get; got; gotten
-roubar; steal; stole; stolen
-confiar; trust; trusted; trusted
-permitir; allow; allowed; allowed
-cuidar; care; cared; cared
-se mudar; move; moved; moved
-apostar; bet; bet; bet
-pertencer; belong; belonged; belonged
-lidar; deal; dealt; dealt
-encorajar; encourage; encouraged; encouraged
-estabelecer; establish; established; established
-falhar; fail; failed; failed
-esquecer; forget; forgot; forgotten
-descobrir (c/pistas); figure out; figured out; figured out
-desistir; give up; gave up; given up
-crescer; grow up; grew up; grown up
-esperar; hope; hoped; hoped
-introduzir; introduce; introduced; introduced
-aprender; learn; learned; learned
-gerenciar; manage; managed; managed
-propor; propose; proposed; proposed
-levantar; lift; lifted; lifted
-perder; lose; lost; lost
-criar; make up; made up; made up
-perceber; notice; noticed; noticed
-abrir; open; opened; opened
-pegar; pick up; picked up; picked up
-empurrar; pull; pulled; pulled
-puxar; push; pushed; pushed
-se deparar/esbarrar em; run into; ran into; run into
-se arrepender; regret; regretted; regretted
-relembrar; remind; reminded; reminded
-pilotar; ride; rode; riden
-subir; rise; rose; risen
-mandar mensagem; text; texted; texted
-lançar; throw; threw; thrown
-durar; last; lasted; lasted
 morder; bite; bit; bitten
 queimar; burn; burned; burnt
 cancelar; call off; called off; called off
@@ -680,11 +136,3 @@ tratar; treat; treated; treated
 concordar; agree; agreed; agreed
 encontrar (s/pistas); find out; found out; found out
 começar; begin; began; begun
-encontrar; find; found; found
-perdoar; forgive; forgave; forgiven
-acontecer; happen; happened; happened
-procurar por; look for; looked for; looked for
-resolver/escolher a dedo; sort out; sorted out; sorted out
-assobiar; whistle; whistled; whistled
-aconselhar; advise; advised; advised
-construir; build; built; built
