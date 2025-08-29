@@ -515,7 +515,7 @@ function showVerbosPtEn() {
 
 // Função para ler o texto em voz alta
 
-else if (input && input.textContent) {
+if (input && input.textContent) {
             textToSpeak = (input.textContent || "").trim();
         } else if (typeof input === "number") {
             textToSpeak = String(input);
