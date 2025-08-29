@@ -525,29 +525,6 @@ function showVerbosPtEn() {
             document.getElementById('adverbioDetails').textContent = detail ? `Tradução: ${detail}` : 'Detalhe não encontrado.';
         }
 
-        var utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.lang = "en-US";
-        var speakNow = function() {
-            try {
-                var voices = window.speechSynthesis.getVoices() || [];
-                var pref = voices.find(function(v){ return v && v.lang && v.lang.toLowerCase().startsWith("en"); });
-                if (pref) utterance.voice = pref;
-            } catch(e) { console.warn(e); }
-            // Cancelar falas anteriores para evitar sobreposição
-            try { window.speechSynthesis.cancel(); } catch(e){}
-            window.speechSynthesis.speak(utterance);
-        };
-        // Se vozes ainda não carregaram, aguarda evento
-        if ((window.speechSynthesis.getVoices && window.speechSynthesis.getVoices().length === 0) &&
-            window.speechSynthesis.addEventListener) {
-            var once = function() { window.speechSynthesis.removeEventListener("voiceschanged", once); speakNow(); };
-            window.speechSynthesis.addEventListener("voiceschanged", once);
-            // tenta disparar carregamento
-            window.speechSynthesis.getVoices();
-            setTimeout(speakNow, 300);
-        } else {
-            speakNow();
-}
 // Lógica do modal para inserção de dados
         function toggleAddDataModal() {
             const modal = document.getElementById('addDataModal');
