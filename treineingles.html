@@ -403,14 +403,35 @@ function sortearVerbo() {
 }
 
 // Função para sortear apenas Verbos (Português -> Inglês)
+// Função para sortear apenas Verbos (Inglês -> Português)
 function sortearVerboPtEn() {
     clearContents();
     if (verbosData.length > 0) {
         const randomVerboPtEnIndex = Math.floor(Math.random() * verbosData.length);
-        document.getElementById('verboPtEnText').textContent = verbosData[randomVerboPtEnIndex].detail3;
+        // Exibe o verbo em inglês (presente), que é a segunda posição da chave.
+        document.getElementById('verboPtEnText').textContent = verbosData[randomVerboPtEnIndex].text;
         document.getElementById('verboPtEnDetails').textContent = '';
     }
 }
+
+// Função para mostrar os detalhes do verbo (Inglês -> Português)
+function showVerbosPtEn() {
+    const textEn = document.getElementById('verboPtEnText').textContent;
+    const item = verbosData.find(d => d.text.trim() === textEn.trim());
+    if (item) {
+        // Formata a string para exibir as informações em linhas separadas.
+        const details = `
+            Passado Simples: ${item.detail1}
+            Particípio Passado: ${item.detail2}
+            Tradução: ${item.detail3}
+        `;
+        document.getElementById('verboPtEnDetails').textContent = details.trim();
+    } else {
+        document.getElementById('verboPtEnDetails').textContent = 'Detalhes não encontrados.';
+    }
+}
+
+		
 
 // Função para sortear apenas Phrasal Verbs
 function sortearPhrasalVerb() {
@@ -461,16 +482,6 @@ function sortearAdverbio() {
             document.getElementById('verboDetails').textContent = details || 'Detalhes não encontrados.';
         }
 
-        function showVerbosPtEn() {
-            const textPt = document.getElementById('verboPtEnText').textContent;
-            const item = verbosData.find(d => d.detail3 === textPt);
-            if (item) {
-                const details = `Presente: ${item.text}, Passado Simples: ${item.detail1}, Particípio Passado: ${item.detail2}`;
-                document.getElementById('verboPtEnDetails').textContent = details;
-            } else {
-                document.getElementById('verboPtEnDetails').textContent = 'Detalhes não encontrados.';
-            }
-        }
 
         // Função para mostrar detalhes do Phrasal Verb
         function showPhrasalVerbs() {
@@ -572,6 +583,7 @@ function sortearAdverbio() {
     </script>
 </body>
 </html>
+
 
 
 
