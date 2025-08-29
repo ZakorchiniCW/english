@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treine Inglês</title>
     <!-- Inclui a biblioteca Tailwind CSS para estilização -->
-    <script src="./Treine Inglês1_files/saved_resource"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
         
@@ -635,17 +635,16 @@ else if (input && input.textContent) {
             loadDataFromGithub();
         };
     
-function speakText(input) {
-        console.log("speakText called with:", input);
-
-    try {
-        // Aceita ID (string), elemento DOM, ou texto direto.
-        var textToSpeak = "";
-        if (typeof input === "string") {
-            var el = document.getElementById(input);
-            if (el) textToSpeak = (el.textContent || el.innerText || "").trim();
-            else textToSpeak = input.trim();
-        } 
+function speakText(elementId) {
+    const textToSpeak = document.getElementById(elementId).textContent;
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    
+    // Opcional: Configurações de voz (idioma, etc.)
+    utterance.lang = 'en-US'; // Define o idioma para inglês americano
+    
+    // Inicia a pronúncia
+    window.speechSynthesis.speak(utterance);
+}
 </script>
 
 
