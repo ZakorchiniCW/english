@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treine Inglês</title>
     <!-- Inclui a biblioteca Tailwind CSS para estilização -->
-    <script src="./Treine Inglês1_files/saved_resource"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
         
@@ -525,7 +525,6 @@ if (input && input.textContent) {
         }
         if (!("speechSynthesis" in window)) {
             alert("Seu navegador não suporta a leitura de texto em voz alta.");
-            return;
         }
         var utterance = new SpeechSynthesisUtterance(textToSpeak);
         utterance.lang = "en-US";
