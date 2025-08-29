@@ -1,123 +1,50 @@
-How can we prevent a world war from happening?;Como podemos evitar que uma guerra mundial aconteça?
-How can we preserve the future for the next generation?;Como podemos preservar o futuro para a próxima geração?
-How do you think your country will change in the future?;Como você acha que seu país vai mudar no futuro?
-How will cellphones change in the future?;Como os celulares vão mudar no futuro?
-How will computers change in the future?;Como os computadores vão mudar no futuro?
-How will the development of robots that think change your future?;Como o desenvolvimento de robôs que pensam vai mudar seu futuro?
-How will the United States and the world order change in the future?;Como os Estados Unidos e a ordem mundial vão mudar no futuro?
-How will transportation develop in future times?;Como o transporte vai se desenvolver no futuro?
-How will technology change?;Como a tecnologia vai mudar?
-How will the human race look like in 1,000,000 years?;Como a raça humana será daqui a 1.000.000 de anos?
-How old will people live to be in the future?;Até que idade as pessoas viverão no futuro?
-If it were possible to read minds, would you want to?;Se fosse possível ler mentes, você gostaria?
-If you could fly on a rocket faster than light, and return to Earth in 1,000 years, would you do it?;Se você pudesse voar em um foguete mais rápido que a luz, e voltar para a Terra em 1.000 anos, você faria isso?
-If you could live under the ocean, would you want to?;Se você pudesse viver debaixo do oceano, você gostaria?
-If so, what will it look like?;Se sim, como será?
-Is it possible to know the future?;É possível saber o futuro?
-Is there anything that does not yet exist that you would like to see invented?;Existe algo que ainda não existe que você gostaria de ver inventado?
-In what ways?;De que maneira?
-Should land on the moon be bought and sold?;A terra na lua deveria ser comprada e vendida?
-Should the world solve all of it's problems before humans move into space?;O mundo deveria resolver todos os seus problemas antes que os humanos se mudem para o espaço?
-The next 1000 years?;Nos próximos 1000 anos?
-Think of examples.;Pense em exemplos.
-What are its implications?;Quais são suas implicações?
-What are the positive and negative effects of technology in the future?;Quais são os efeitos positivos e negativos da tecnologia no futuro?
-What do you hope to do in your life?;O que você espera fazer na sua vida?
-What do you hope to travel before you die?;Para onde você espera viajar antes de morrer?
-What evidence is there for or against this hypothesis?;Que evidências existem a favor ou contra essa hipótese?
-What is it?;O que é isso?
-What is the definition of a "robot"?;Qual é a definição de um "robô"?
-What is the future of money?;Qual é o futuro do dinheiro?
-What is the job you would like to have in future?;Qual é o emprego que você gostaria de ter no futuro?
-What is your lifetime dream?;Qual é o seu sonho de vida?
-What kind of developments might happen in health care in the future?;Que tipo de desenvolvimentos podem acontecer na área da saúde no futuro?
-What new kinds of energy might be used in the next 100 years?;Que novos tipos de energia podem ser usados nos próximos 100 anos?
-What type of job would you like to do in the future?;Que tipo de emprego você gostaria de ter no futuro?
-What will education be like in the future?;Como será a educação no futuro?
-What will future houses look like?;Como serão as casas do futuro?
-What will the cars of the future do?;O que os carros do futuro farão?
-What will the future be like?;Como será o futuro?
-What will the human race look like in 1,000,000 years?;Como a raça humana será daqui a 1.000.000 de anos?
-What would you change?;O que você mudaria?
-What does the future hold?;O que o futuro nos reserva?
-What if we could make molecule-sized robots, what could we do with them?;E se pudéssemos fazer robôs do tamanho de uma molécula, o que poderíamos fazer com eles?
-What if you could program your children's genetics?;E se você pudesse programar a genética de seus filhos?
-When do you want to start a family?;Quando você quer começar uma família?
-Where do you plan on going to college?;Onde você planeja fazer faculdade?
-Where do you plan on going in the future?;Onde você planeja ir no futuro?
-Where did the word "robot" come from?;De onde veio a palavra "robô"?
-Who invented the very first computer?;Quem inventou o primeiro computador?
-Who should live on the moon?;Quem deveria viver na lua?
-Will they get jobs too?;Eles também conseguirão empregos?
-Will robots be as smart as people?;Robôs serão tão inteligentes quanto as pessoas?
-Will robots take our jobs?;Robôs tomarão nossos empregos?
-Will there be any forests left?;Vão sobrar florestas?
-Will there be one global culture?;Haverá uma cultura global?
-Will you make much money in that job?;Você vai ganhar muito dinheiro nesse emprego?
-Would you become half-robot if it meant living 1000 years?;Você se tornaria meio robô se isso significasse viver 1000 anos?
-Would you like to have a robot in your house?;Você gostaria de ter um robô em sua casa?
-Would you like to live in a city inside a building?;Você gostaria de viver em uma cidade dentro de um prédio?
-Would you like to live in cyberspace?;Você gostaria de viver no ciberespaço?
-Would you want to?;Você gostaria?
-A film like The Matrix has explored the idea that we might be living in virtual reality.;Um filme como Matrix explorou a ideia de que poderíamos estar vivendo em uma realidade virtual.
-Can fortune-tellers predict the future?;Cartomantes podem prever o futuro?
-Can robots tie shoes?;Robôs podem amarrar sapatos?
-Can you think of movies that have robots in them?;Você consegue pensar em filmes que têm robôs neles?
-Do you believe animals can be preserved?;Você acredita que os animais podem ser preservados?
-Do you believe faster-than-light travel is possible?;Você acredita que a viagem mais rápida que a luz é possível?
-Do you enjoy this movie?;Você gosta deste filme?
-Do you get that type of job?;Você consegue esse tipo de emprego?
-Do you know ISAAC ASIMOV?;Você conhece ISAAC ASIMOV?
-Do you know who you are marrying?;Você sabe com quem você vai se casar?
-Do you think the Earth will become overpopulated?;Você acha que a Terra ficará superpovoada?
-Do you think life will be more difficult or easier for our grandchildren?;Você acha que a vida será mais difícil ou mais fácil para nossos netos?
-Do you think we create a new problem with each invention?;Você acha que criamos um novo problema a cada invenção?
-Do you want to get married?;Você quer se casar?
-How do you get to this situation?;como faço para chegar até essa situação?
-How do you identify this situation?;como eu faço para identificar essa situação?
-How do you identify it?;como faço para identificá-lo?
-How do i adjust this?;como eu ajusto isso?
-How do i get to this situation?;como faço para chegar até essa situação?
-How do i identify this situation?;como eu faço para identificar essa situação?
-How do i identify it?;como faço para identificá-lo?
-How do i adjust this?;como eu ajusto isso?
-How is your family?;como está sua família?
-How will transportation develop in future times?;Como o transporte vai se desenvolver no futuro?
-If you can, do you want to have children?;se puder, você quer ter filhos?
-Is there anything that does not yet exist that you would like to see invented?;Existe algo que ainda não existe que você gostaria de ver inventado?
-In what ways?;De que maneira?
-Should the world solve all of it's problems before humans move into space?;O mundo deveria resolver todos os seus problemas antes que os humanos se mudem para o espaço?
-What are the positive and negative effects of technology in the future?;Quais são os efeitos positivos e negativos da tecnologia no futuro?
-What are your thoughts on being a parent?;quais são seus pensamentos sobre ser pai?
-What is it?;O que é isso?
-What is the correct adjustment point for this?;qual é o ponto correto de ajuste disso?
-What is the future of money?;Qual é o futuro do dinheiro?
-What is your lifetime dream?;Qual é o seu sonho de vida?
-What kind of a world would you like to live in?;Em que tipo de mundo você gostaria de viver?
-What kind of developments might happen in health care in the future?;Que tipo de desenvolvimentos podem acontecer na área da saúde no futuro?
-What new kinds of energy might be used in the next 100 years?;Que novos tipos de energia podem ser usados nos próximos 100 anos?
-What will education be like in the future?;Como será a educação no futuro?
-What will the cars of the future do?;O que os carros do futuro farão?
-What will the future be like?;Como será o futuro?
-What would you change?;O que você mudaria?
-What's your favorite breakfast food?;Qual é a sua comida favorita para o café da manhã?
-What's your favorite type of cereal?;Qual é o seu tipo de cereal favorito?
-What's your favorite type of coffee?;Qual é o seu tipo de café favorito?
-What's your favorite type of juice?;Qual é o seu tipo de suco favorito?
-What's your favorite type of tea?;Qual é o seu tipo de chá favorito?
-What's your favorite type of water?;Qual é o seu tipo de água favorito?
-When do you want to start a family?;Quando você quer começar uma família?
-Where do you plan on going to college?;Onde você planeja fazer faculdade?
-Where do you plan on going in the future?;Onde você planeja ir no futuro?
-Who invented the very first computer?;Quem inventou o primeiro computador?
-Will they get jobs too?;Eles também conseguirão empregos?
-Will robots be as smart as people?;Robôs serão tão inteligentes quanto as pessoas?
-Will robots take our jobs?;Robôs tomarão nossos empregos?
-Will there be any forests left?;Vão sobrar florestas?
-Will there be one global culture?;Haverá uma cultura global?
-Will you make much money in that job?;Você vai ganhar muito dinheiro nesse emprego?
-Would you become half-robot if it meant living 1000 years?;Você se tornaria meio robô se isso significasse viver 1000 anos?
-Would you like to have a robot in your house?;Você gostaria de ter um robô em sua casa?
-Would you like to live in a city inside a building?;Você gostaria de viver em uma cidade dentro de um prédio?
-Would you like to live in cyberspace?;Você gostaria de viver no ciberespaço?
-Would you want to?;Você gostaria?
+How can we prevent a world war from happening?;Como podemos evitar que uma guerra mundial aconteça?;;
+How can we preserve the future for the next generation?;Como podemos preservar o futuro para a próxima geração?;;
+How do you think your country will change in the future?;Como você acha que seu país vai mudar no futuro?;;
+How will cellphones change in the future?;Como os celulares vão mudar no futuro?;;
+How will computers change in the future?;Como os computadores vão mudar no futuro?;;
+How will the development of robots that think change your future?;Como o desenvolvimento de robôs que pensam vai mudar seu futuro?;;
+How will the United States and the world order change in the future?;Como os Estados Unidos e a ordem mundial vão mudar no futuro?;;
+How will transportation develop in future times?;Como o transporte vai se desenvolver no futuro?;;
+How will technology change?;Como a tecnologia vai mudar?;;
+How will the human race look like in 1,000,000 years?;Como a raça humana será daqui a 1.000.000 de anos?;;
+How old will people live to be in the future?;Até que idade as pessoas viverão no futuro?;;
+If it were possible to read minds, would you want to?;Se fosse possível ler mentes, você gostaria?;;
+If you could fly on a rocket faster than light, and return to Earth in 1,000 years, would you do it?;Se você pudesse voar em um foguete mais rápido que a luz, e voltar para a Terra em 1.000 anos, você faria isso?;;
+If you could live under the ocean, would you want to?;Se você pudesse viver debaixo do oceano, você gostaria?;;
+If you knew your future, would you want to know it?;Se você soubesse o seu futuro, você gostaria de saber?;;
+Is it possible for humans to go to the planet Mars?;É possível que os humanos vão para o planeta Marte?;;
+Is it possible to live forever?;É possível viver para sempre?;;
+Should our tax money be used for space exploration?;Nossos impostos deveriam ser usados para exploração espacial?;;
+What are the chances for another world war?;Quais são as chances de outra guerra mundial?;;
+What are your plans for the future?;Quais são seus planos para o futuro?;;
+What do you think is the biggest problem in our world today?;Qual você acha que é o maior problema em nosso mundo hoje?;;
+What do you think our life will be like in 100 years?;Como você acha que será a nossa vida daqui a 100 anos?;;
+What is your biggest fear for the future?;Qual é o seu maior medo para o futuro?;;
+What new technologies would you like to have?;Que novas tecnologias você gostaria de ter?;;
+What will be the biggest challenge for the next generation?;Qual será o maior desafio para a próxima geração?;;
+What will happen to the world in 500 years?;O que acontecerá com o mundo em 500 anos?;;
+What will happen to the world in 1000 years?;O que acontecerá com o mundo em 1000 anos?;;
+What would you do with a time machine?;O que você faria com uma máquina do tempo?;;
+What would you do if you were the president?;O que você faria se você fosse o presidente?;;
+What's the best time of day to exercise?;Qual é a melhor hora do dia para se exercitar?;;
+What's the most common excuse for being late?;Qual é a desculpa mais comum para se atrasar?;;
+What's your favorite type of cereal?;Qual é o seu tipo de cereal favorito?;;
+What's your favorite type of coffee?;Qual é o seu tipo de café favorito?;;
+What's your favorite type of juice?;Qual é o seu tipo de suco favorito?;;
+What's your favorite type of tea?;Qual é o seu tipo de chá favorito?;;
+What's your favorite type of water?;Qual é o seu tipo de água favorito?;;
+When do you want to start a family?;Quando você quer começar uma família?;;
+Where do you plan on going to college?;Onde você planeja fazer faculdade?;;
+Where do you plan on going in the future?;Onde você planeja ir no futuro?;;
+Who invented the very first computer?;Quem inventou o primeiro computador?;;
+Will they get jobs too?;Eles também conseguirão empregos?;;
+Will robots be as smart as people?;Robôs serão tão inteligentes quanto as pessoas?;;
+Will robots take our jobs?;Robôs tomarão nossos empregos?;;
+Will there be any forests left?;Vão sobrar florestas?;;
+Will there be one global culture?;Haverá uma cultura global?;;
+Will you make much money in that job?;Você vai ganhar muito dinheiro nesse emprego?;;
+Would you become half-robot if it meant living 1000 years?;Você se tornaria meio robô se isso significasse viver 1000 anos?;;
+Would you like to have a robot in your house?;Você gostaria de ter um robô em sua casa?;;
+Would you like to live in a city inside a building?;Você gostaria de viver em uma cidade dentro de um prédio?;;
+Would you like to live in cyberspace?;Você gostaria de viver no ciberespaço?;;
