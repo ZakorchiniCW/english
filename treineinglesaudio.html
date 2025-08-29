@@ -525,16 +525,6 @@ function showVerbosPtEn() {
             document.getElementById('adverbioDetails').textContent = detail ? `Tradução: ${detail}` : 'Detalhe não encontrado.';
         }
 
-// Função para ler o texto em voz alta
-
-// O código abaixo é o correto
-const textToSpeak = document.getElementById(elementId).textContent;
-        if (!textToSpeak) {
-            console.warn("speakText: texto vazio.");
-        }
-        if (!("speechSynthesis" in window)) {
-            alert("Seu navegador não suporta a leitura de texto em voz alta.");
-        }
         var utterance = new SpeechSynthesisUtterance(textToSpeak);
         utterance.lang = "en-US";
         var speakNow = function() {
