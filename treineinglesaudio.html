@@ -635,6 +635,7 @@ else if (input && input.textContent) {
             loadDataFromGithub();
         };
     
+// Função para ler o texto em voz alta
 function speakText(elementId) {
     const textToSpeak = document.getElementById(elementId).textContent;
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
