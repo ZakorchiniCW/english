@@ -348,18 +348,18 @@
         }
         
         // Funções de VLOOKUP (recreadas para arrays)
-        function vLookup(text, dataArray, colIndex) {
-            const item = dataArray.find(d => d.text === text);
-            if (!item) {
-                return null;
-            }
-            switch(colIndex) {
-                case 2: return item.detail1;
-                case 3: return item.detail2;
-                case 4: return item.detail3;
-                default: return null;
-            }
-        }
+       function vLookup(text, dataArray, colIndex) {
+    const item = dataArray.find(d => d.text === text);
+    if (!item) {
+        return null;
+    }
+    switch(colIndex) {
+        case 2: return item.detail1;
+        case 3: return item.detail2;
+        case 4: return item.detail3;
+        default: return null;
+    }
+}
 
         function clearContents() {
             document.getElementById('fraseDetails').textContent = '';
@@ -392,46 +392,29 @@ function sortearFrase() {
     }
 }
 
-// Função para sortear apenas Verbos (Inglês -> Português)
+// Função para sortear apenas Verbos (Português -> Inglês)
 function sortearVerbo() {
     clearContents();
     if (verbosData.length > 0) {
         const randomVerboIndex = Math.floor(Math.random() * verbosData.length);
+        // Exibe a tradução em português, que é o 'text' na chave
         document.getElementById('verboText').textContent = verbosData[randomVerboIndex].text;
         document.getElementById('verboDetails').textContent = '';
     }
 }
 
-// Função para sortear apenas Verbos (Português -> Inglês)
+
 // Função para sortear apenas Verbos (Inglês -> Português)
 function sortearVerboPtEn() {
     clearContents();
     if (verbosData.length > 0) {
         const randomVerboPtEnIndex = Math.floor(Math.random() * verbosData.length);
-        // Exibe o verbo em inglês (presente), que é a segunda posição da chave.
-        document.getElementById('verboPtEnText').textContent = verbosData[randomVerboPtEnIndex].text;
+        // Exibe o verbo em inglês no presente, que é o 'detail1' na chave
+        document.getElementById('verboPtEnText').textContent = verbosData[randomVerboPtEnIndex].detail1;
         document.getElementById('verboPtEnDetails').textContent = '';
     }
 }
 
-// Função para mostrar os detalhes do verbo (Inglês -> Português)
-function showVerbosPtEn() {
-    const textEn = document.getElementById('verboPtEnText').textContent;
-    const item = verbosData.find(d => d.text.trim() === textEn.trim());
-    if (item) {
-        // Formata a string para exibir as informações em linhas separadas.
-        const details = `
-            Passado Simples: ${item.detail1}
-            Particípio Passado: ${item.detail2}
-            Tradução: ${item.detail3}
-        `;
-        document.getElementById('verboPtEnDetails').textContent = details.trim();
-    } else {
-        document.getElementById('verboPtEnDetails').textContent = 'Detalhes não encontrados.';
-    }
-}
-
-		
 
 // Função para sortear apenas Phrasal Verbs
 function sortearPhrasalVerb() {
@@ -470,18 +453,41 @@ function sortearAdverbio() {
             document.getElementById('fraseDetails').textContent = detail ? `Tradução: ${detail}` : 'Detalhe não encontrado.';
         }
 
-        function showVerbos() {
-            const text = document.getElementById('verboText').textContent;
-            const detail1 = vLookup(text, verbosData, 2);
-            const detail2 = vLookup(text, verbosData, 3);
-            const detail3 = vLookup(text, verbosData, 4);
-            let details = '';
-            if (detail1) details += `Passado Simples: ${detail1}`;
-            if (detail2) details += `, Particípio Passado: ${detail2}`;
-            if (detail3) details += `, Tradução: ${detail3}`;
-            document.getElementById('verboDetails').textContent = details || 'Detalhes não encontrados.';
-        }
 
+     // Função para mostrar os detalhes do verbo (Português -> Inglês)
+function showVerbos() {
+    const textPt = document.getElementById('verboText').textContent;
+    const item = verbosData.find(d => d.text.trim() === textPt.trim());
+    if (item) {
+        // Formata a string para exibir as formas do verbo em inglês
+        const details = `
+            Presente: ${item.detail1}
+            Passado Simples: ${item.detail2}
+            Particípio: ${item.detail3}
+        `;
+        document.getElementById('verboDetails').textContent = details.trim();
+    } else {
+        document.getElementById('verboDetails').textContent = 'Detalhes não encontrados.';
+    }
+}
+
+
+// Função para mostrar os detalhes do verbo (Inglês -> Português)
+function showVerbosPtEn() {
+    const textEn = document.getElementById('verboPtEnText').textContent;
+    const item = verbosData.find(d => d.detail1.trim() === textEn.trim());
+    if (item) {
+        // Formata a string para exibir as formas do verbo e a tradução
+        const details = `
+            Passado Simples: ${item.detail2}
+            Particípio: ${item.detail3}
+            Tradução: ${item.text}
+        `;
+        document.getElementById('verboPtEnDetails').textContent = details.trim();
+    } else {
+        document.getElementById('verboPtEnDetails').textContent = 'Detalhes não encontrados.';
+    }
+}
 
         // Função para mostrar detalhes do Phrasal Verb
         function showPhrasalVerbs() {
@@ -583,7 +589,6 @@ function sortearAdverbio() {
     </script>
 </body>
 </html>
-
 
 
 
