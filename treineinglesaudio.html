@@ -91,11 +91,7 @@
             <div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Frase</h2>
     <div class="flex items-center mb-4">
-        <span id="fraseText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block">Do you know who you are marrying?</span>
-    <button onclick="speakText(document.getElementById(\'fraseText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Frase</button>
-        <button onclick="speakText(&#39;fraseText&#39;)" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-            🔊
-        </button>
+        <span id="fraseText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block">Do you know who you are marrying?</span> <button onclick="speakText('fraseText')" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">🔊</button>
     </div>
     <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearFrase()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
@@ -107,8 +103,7 @@
             <!-- Seção Verbo (Português para Inglês) -->
 <div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Português para Inglês)</h2>
-    <span id="verboText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">voltar</span>
-    <button onclick="speakText(document.getElementById(\'verboText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Verbo</button>
+    <span id="verboText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">voltar</span> <button onclick="speakText('verboText')" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">🔊</button>
     <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearVerbo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
         <button onclick="showVerbos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
@@ -122,11 +117,7 @@
 <div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Inglês para Português)</h2>
     <div class="flex items-center mb-4">
-        <span id="verboPtEnText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span>
-    <button onclick="speakText(document.getElementById(\'verboPtEnText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Verbo</button>
-        <button onclick="speakText(&#39;verboPtEnText&#39;)" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-            🔊
-        </button>
+        <span id="verboPtEnText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span> <button onclick="speakText('verboPtEnText')" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">🔊</button>
     </div>
     <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearVerboPtEn()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
@@ -140,10 +131,7 @@
 <div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Phrasal Verbs</h2>
     <div class="flex items-center mb-4">
-        <span id="phrasalVerbsText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span>
-        <button onclick="speakText(&#39;phrasalVerbsText&#39;)" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-            🔊
-        </button>
+        <span id="phrasalVerbsText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span> <button onclick="speakText('phrasalVerbsText')" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">🔊</button>
     </div>
     <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearPhrasalVerbs()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
@@ -159,11 +147,7 @@
 <div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Adjetivos</h2>
     <div class="flex items-center mb-4">
-        <span id="adjetivoText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span>
-    <button onclick="speakText(document.getElementById(\'adjetivoText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Adjetivo</button>
-        <button onclick="speakText(&#39;adjetivoText&#39;)" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-            🔊
-        </button>
+        <span id="adjetivoText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span> <button onclick="speakText('adjetivoText')" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">🔊</button>
     </div>
     <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearAdjetivo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
@@ -178,11 +162,7 @@
 <div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Advérbios</h2>
     <div class="flex items-center mb-4">
-        <span id="adverbioText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span>
-    <button onclick="speakText(document.getElementById(\'adverbioText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Advérbio</button>
-        <button onclick="speakText(&#39;adverbioText&#39;)" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
-            🔊
-        </button>
+        <span id="adverbioText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span> <button onclick="speakText('adverbioText')" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">🔊</button>
     </div>
     <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearAdverbio()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
@@ -534,18 +514,56 @@ function showVerbosPtEn() {
         }
 
 // Função para ler o texto em voz alta
-function speakText(elementId) {
-    const textToSpeak = document.getElementById(elementId).textContent;
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    
-    // Opcional: Configurações de voz (idioma, etc.)
-    utterance.lang = 'en-US'; // Define o idioma para inglês americano
-    
-    // Inicia a pronúncia
-    window.speechSynthesis.speak(utterance);
-}
 
-        // Lógica do modal para inserção de dados
+function speakText(input) {
+    try {
+        // Aceita ID (string), elemento DOM, ou texto direto.
+        var textToSpeak = "";
+        if (typeof input === "string") {
+            var el = document.getElementById(input);
+            if (el) textToSpeak = (el.textContent || el.innerText || "").trim();
+            else textToSpeak = input.trim();
+        } else if (input && input.textContent) {
+            textToSpeak = (input.textContent || "").trim();
+        } else if (typeof input === "number") {
+            textToSpeak = String(input);
+        }
+        if (!textToSpeak) {
+            console.warn("speakText: texto vazio.");
+            return;
+        }
+        if (!("speechSynthesis" in window)) {
+            alert("Seu navegador não suporta a leitura de texto em voz alta.");
+            return;
+        }
+        var utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = "en-US";
+        var speakNow = function() {
+            try {
+                var voices = window.speechSynthesis.getVoices() || [];
+                var pref = voices.find(function(v){ return v && v.lang && v.lang.toLowerCase().startsWith("en"); });
+                if (pref) utterance.voice = pref;
+            } catch(e) { console.warn(e); }
+            // Cancelar falas anteriores para evitar sobreposição
+            try { window.speechSynthesis.cancel(); } catch(e){}
+            window.speechSynthesis.speak(utterance);
+        };
+        // Se vozes ainda não carregaram, aguarda evento
+        if ((window.speechSynthesis.getVoices && window.speechSynthesis.getVoices().length === 0) &&
+            window.speechSynthesis.addEventListener) {
+            var once = function() { window.speechSynthesis.removeEventListener("voiceschanged", once); speakNow(); };
+            window.speechSynthesis.addEventListener("voiceschanged", once);
+            // tenta disparar carregamento
+            window.speechSynthesis.getVoices();
+            setTimeout(speakNow, 300);
+        } else {
+            speakNow();
+        }
+    } catch(err) {
+        console.error("Erro em speakText:", err);
+    }
+}
+// Lógica do modal para inserção de dados
         function toggleAddDataModal() {
             const modal = document.getElementById('addDataModal');
             modal.classList.toggle('hidden');
@@ -639,20 +657,4 @@ function speakText(elementId) {
 
 
 </div>
-
-<script>
-    if (typeof sortear === "undefined") {
-        document.addEventListener("DOMContentLoaded", function() {
-            console.error("O script principal não foi carregado. Verifique o caminho do arquivo JavaScript.");
-            const msg = document.getElementById("loadingMessage");
-            if (msg) {
-                msg.classList.remove("hidden");
-                msg.innerText = "Erro: Script não carregado.";
-            } else {
-                alert("Erro: Script não carregado.");
-            }
-        });
-    }
-</script>
-
 </body></html>
