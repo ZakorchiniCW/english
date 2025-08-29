@@ -224,9 +224,7 @@
     </div>
 
     <!-- Container para a mensagem de feedback -->
-    <div id="messageBox" class="fixed bottom-16 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-y-full transition-transform duration-300">
-        <!-- Mensagem será inserida aqui via JavaScript -->
-    </div>
+    
     
     <script>
         // Variáveis globais para armazenar os dados carregados
@@ -255,23 +253,7 @@
         };
 
         // Função para mostrar uma mensagem de feedback
-        function showMessage(message, type = 'success') {
-            const messageBox = document.getElementById('messageBox');
-            messageBox.textContent = message;
-            messageBox.className = `fixed bottom-16 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transform translate-y-0 transition-transform duration-300`;
-            if (type === 'success') {
-                messageBox.classList.add('bg-green-500', 'text-white');
-            } else if (type === 'error') {
-                messageBox.classList.add('bg-red-500', 'text-white');
-            } else {
-                messageBox.classList.add('bg-gray-700', 'text-white');
-            }
-
-            setTimeout(() => {
-                messageBox.classList.remove('translate-y-0');
-                messageBox.classList.add('translate-y-full');
-            }, 3000);
-        }
+       
 
         // Função assíncrona para carregar os dados de um arquivo remoto
         async function loadDataFromGithub() {
@@ -459,31 +441,30 @@ function showVerbos() {
     const textPt = document.getElementById('verboText').textContent;
     const item = verbosData.find(d => d.text.trim() === textPt.trim());
     if (item) {
-        // Formata a string para exibir as formas do verbo em inglês
+        // Usa <br> para quebrar as linhas no HTML
         const details = `
-            Presente: ${item.detail1}
-            Passado Simples: ${item.detail2}
+            Presente: ${item.detail1}<br>
+            Passado Simples: ${item.detail2}<br>
             Particípio: ${item.detail3}
         `;
-        document.getElementById('verboDetails').textContent = details.trim();
+        document.getElementById('verboDetails').innerHTML = details.trim();
     } else {
         document.getElementById('verboDetails').textContent = 'Detalhes não encontrados.';
     }
 }
-
 
 // Função para mostrar os detalhes do verbo (Inglês -> Português)
 function showVerbosPtEn() {
     const textEn = document.getElementById('verboPtEnText').textContent;
     const item = verbosData.find(d => d.detail1.trim() === textEn.trim());
     if (item) {
-        // Formata a string para exibir as formas do verbo e a tradução
+        // Usa <br> para quebrar as linhas no HTML
         const details = `
-            Passado Simples: ${item.detail2}
-            Particípio: ${item.detail3}
+            Passado Simples: ${item.detail2}<br>
+            Particípio: ${item.detail3}<br>
             Tradução: ${item.text}
         `;
-        document.getElementById('verboPtEnDetails').textContent = details.trim();
+        document.getElementById('verboPtEnDetails').innerHTML = details.trim();
     } else {
         document.getElementById('verboPtEnDetails').textContent = 'Detalhes não encontrados.';
     }
