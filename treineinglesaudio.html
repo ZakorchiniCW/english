@@ -515,15 +515,7 @@ function showVerbosPtEn() {
 
 // Função para ler o texto em voz alta
 
-function speakText(input) {
-    try {
-        // Aceita ID (string), elemento DOM, ou texto direto.
-        var textToSpeak = "";
-        if (typeof input === "string") {
-            var el = document.getElementById(input);
-            if (el) textToSpeak = (el.textContent || el.innerText || "").trim();
-            else textToSpeak = input.trim();
-        } else if (input && input.textContent) {
+else if (input && input.textContent) {
             textToSpeak = (input.textContent || "").trim();
         } else if (typeof input === "number") {
             textToSpeak = String(input);
@@ -637,23 +629,24 @@ function speakText(input) {
         }
 
 // Função para ler o texto em voz alta
-function speakText(elementId) {
-    const textToSpeak = document.getElementById(elementId).textContent;
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    
-    // Opcional: Configurações de voz (idioma, etc.)
-    utterance.lang = 'en-US'; // Define o idioma para inglês americano
-    
-    // Inicia a pronúncia
-    window.speechSynthesis.speak(utterance);
-}
-
-        // Chama a função para carregar os dados e o tema ao carregar a página
+// Chama a função para carregar os dados e o tema ao carregar a página
         window.onload = () => {
             loadTheme();
             loadDataFromGithub();
         };
-    </script>
+    
+function speakText(input) {
+        console.log("speakText called with:", input);
+
+    try {
+        // Aceita ID (string), elemento DOM, ou texto direto.
+        var textToSpeak = "";
+        if (typeof input === "string") {
+            var el = document.getElementById(input);
+            if (el) textToSpeak = (el.textContent || el.innerText || "").trim();
+            else textToSpeak = input.trim();
+        } 
+</script>
 
 
 </div>
