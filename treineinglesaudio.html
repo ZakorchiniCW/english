@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- saved from url=(0061)https://zakorchinicw.github.io/english/treineinglesaudio.html -->
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,6 +92,7 @@
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Frase</h2>
     <div class="flex items-center mb-4">
         <span id="fraseText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block">Do you know who you are marrying?</span>
+    <button onclick="speakText(document.getElementById(\'fraseText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Frase</button>
         <button onclick="speakText(&#39;fraseText&#39;)" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
             🔊
         </button>
@@ -106,6 +108,7 @@
 <div class="p-6 rounded-lg border card">
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Português para Inglês)</h2>
     <span id="verboText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">voltar</span>
+    <button onclick="speakText(document.getElementById(\'verboText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Verbo</button>
     <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
         <button onclick="sortearVerbo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
         <button onclick="showVerbos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
@@ -120,6 +123,7 @@
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Inglês para Português)</h2>
     <div class="flex items-center mb-4">
         <span id="verboPtEnText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span>
+    <button onclick="speakText(document.getElementById(\'verboPtEnText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Verbo</button>
         <button onclick="speakText(&#39;verboPtEnText&#39;)" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
             🔊
         </button>
@@ -156,6 +160,7 @@
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Adjetivos</h2>
     <div class="flex items-center mb-4">
         <span id="adjetivoText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span>
+    <button onclick="speakText(document.getElementById(\'adjetivoText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Adjetivo</button>
         <button onclick="speakText(&#39;adjetivoText&#39;)" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
             🔊
         </button>
@@ -174,6 +179,7 @@
     <h2 class="text-xl font-semibold text-gray-700 mb-4">Advérbios</h2>
     <div class="flex items-center mb-4">
         <span id="adverbioText" class="flex-1 text-lg text-gray-900 font-medium p-2 bg-white rounded-md border border-gray-300 block"></span>
+    <button onclick="speakText(document.getElementById(\'adverbioText\').innerText)" class="ml-2 px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">🔊 Ouvir Advérbio</button>
         <button onclick="speakText(&#39;adverbioText&#39;)" class="ml-2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">
             🔊
         </button>
@@ -219,22 +225,22 @@
 
                 <div class="mb-4">
                     <label for="dataText" class="block text-gray-700 font-semibold mb-2">Texto (Inglês/Frase):</label>
-                    <input type="text" id="dataText" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required="">
+                    <input type="text" id="dataText" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required="" wfd-id="id0">
                 </div>
 
                 <!-- Campos de detalhes adicionais -->
                 <div id="extraFields" class="mb-4">
                     <div class="mb-2">
                         <label for="detail1" class="block text-gray-700">Detalhe 1 (Ex: Passado Simples/Tradução):</label>
-                        <input type="text" id="detail1" class="w-full p-3 border border-gray-300 rounded-md">
+                        <input type="text" id="detail1" class="w-full p-3 border border-gray-300 rounded-md" wfd-id="id1">
                     </div>
                     <div class="mb-2">
                         <label for="detail2" class="block text-gray-700">Detalhe 2 (Ex: Particípio Passado):</label>
-                        <input type="text" id="detail2" class="w-full p-3 border border-gray-300 rounded-md">
+                        <input type="text" id="detail2" class="w-full p-3 border border-gray-300 rounded-md" wfd-id="id2">
                     </div>
                     <div class="mb-2">
                         <label for="detail3" class="block text-gray-700">Detalhe 3 (Ex: Tradução):</label>
-                        <input type="text" id="detail3" class="w-full p-3 border border-gray-300 rounded-md">
+                        <input type="text" id="detail3" class="w-full p-3 border border-gray-300 rounded-md" wfd-id="id3">
                     </div>
                 </div>
 
@@ -632,4 +638,21 @@ function speakText(elementId) {
     </script>
 
 
-</div></body></html>
+</div>
+
+<script>
+    if (typeof sortear === "undefined") {
+        document.addEventListener("DOMContentLoaded", function() {
+            console.error("O script principal não foi carregado. Verifique o caminho do arquivo JavaScript.");
+            const msg = document.getElementById("loadingMessage");
+            if (msg) {
+                msg.classList.remove("hidden");
+                msg.innerText = "Erro: Script não carregado.";
+            } else {
+                alert("Erro: Script não carregado.");
+            }
+        });
+    }
+</script>
+
+</body></html>
