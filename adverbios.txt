@@ -1,181 +1,283 @@
-again;novamente;;
-ago;atrás;;
-almost;quase;;
-already;já;;
-also;também;;
-during;durante;;
-even;até mesmo;;
-finally;finalmente;;
-here;aqui;;
-just;apenas/só;;
-lately;ultimamente;;
-maybe;talvez;;
-most;a maioria;;
-never;nunca;;
-now;agora;;
-often;frequentemente;;
-only;apenas/somente;;
-so;então;;
-sometimes;às vezes;;
-soon;em breve;;
-still;ainda;;
-then;então;;
-there;lá/aí;;
-together;juntos;;
-too;também/demais;;
-usually;geralmente;;
-very;muito;;
-yet;ainda;;
-Quickly;Rapidamente;;
-Slowly;Lentamente;;
-Carefully;Cuidadosamente;;
-Easily;Facilmente;;
-Happily;Felizmente;;
-Sadly;Tristemente;;
+Abruptly;Abruptamente;;
+Actually;Na verdade;;
+Again;Novamente;;
+Ago;Atrás;;
+All;Todos;;
+Almost;Quase;;
+Already;Já;;
+Always;Sempre;;
 Angrily;Zangadamente;;
-Excitedly;Animadamente;;
-Tiredly;Cansadamente;;
-Bravely;Corajosamente;;
-Calmly;Calmamente;;
-Gently;Gentilmente;;
-Loudly;Alto (som);;
-Quietly;Silenciosamente;;
+Annually;Anualmente;;
+Anywhere;Em qualquer lugar;;
+Appropriately;Apropriadamente;;
+Awkwardly;Desajeitadamente;;
+Badly;Mal;;
+Barely;Quase não;;
+Basically;Basicamente;;
+Beautifully;Lindamente;;
 Brightly;Brilhantemente;;
-Darkly;Sombrio;;
-Deeply;Profundamente;;
-Lightly;Levemente;;
-Strongly;Fortemente;;
-Weakly;Debilmente;;
-Warmly;Calorosamente;;
-Coldly;Friamente;;
-Softly;Suavemente;;
-Roughly;Rudemente;;
-Smoothly;Suavemente;;
-Quickly;Rapidamente;;
-Slowly;Lentamente;;
+Calmly;Calmamente;;
 Carefully;Cuidadosamente;;
+Casually;Casualmente;;
+Cautiously;Cautelosamente;;
+Cheerfully;Alegremente;;
+Coldly;Friamente;;
+Commonly;Comumente;;
+Completely;Completamente;;
+Confidently;Com confiança;;
+Consciously;Conscientemente;;
+Consecutively;Consecutivamente;;
+Constantly;Constantemente;;
+Continuously;Continuamente;;
+Coolly;Friosamente;;
+Correctly;Corretamente;;
+Curiously;Curiosamente;;
+Currently;Atualmente;;
+Daily;Diariamente;;
+Darkly;Sombriamente;;
+Dearly;Caramente;;
+Deeply;Profundamente;;
+Delightfully;Agradavelmente;;
+Differently;Diferentemente;;
+Directly;Diretamente;;
+Downhill;Morro abaixo;;
+Downstairs;No andar de baixo;;
+Early;Cedo;;
+Easily;Facilmente;;
+Enough;Suficiente;;
+Entirely;Inteiramente;;
+Equally;Igualmente;;
+Especially;Especialmente;;
+Essentially;Essencialmente;;
+Eternally;Eternamente;;
+Even;Até mesmo;;
+Eventually;Eventualmente;;
+Ever;Sempre;;
+Everyday;Diariamente;;
+Everywhere;Em todos os lugares;;
+Excitedly;Animadamente;;
+Extremely;Extremamente;;
+Faithfully;Fielmente;;
+Far;Longe;;
+Fatally;Fatalmente;;
+Finally;Finalmente;;
+For;Para;;
+Frequently;Frequentemente;;
+Freely;Livremente;;
+Fully;Totalmente;;
+Furiously;Furiosamente;;
+Gently;Gentilmente;;
+Generously;Generosamente;;
+Gladly;De bom grado;;
+Gracefully;Graciosamente;;
+Gradually;Gradualmente;;
+Happily;Felizmente;;
+Hard;Duro;;
+Hardly;Quase não;;
+Heavily;Pesadamente;;
+Here;Aqui;;
+Highly;Altamente;;
+Honestly;Honestamente;;
+Hopefully;Com sorte;;
+How;Como;;
+Hugely;Imensamente;;
+Immediately;Imediatamente;;
+Incessantly;Incessantemente;;
+Incredibly;Incrivelmente;;
+Instead;Ao invés disso;;
+Into;Para dentro;;
+Ironic;Ironicamente;;
+Jealous;Ciumentamente;;
+Joyfully;Alegremente;;
+Just;Apenas;;
+Lately;Ultimamente;;
+Later;Mais tarde;;
+Lazily;Preguiçosamente;;
+Lightly;Levemente;;
+Loudly;Alto;;
+Lovingly;Com carinho;;
+Madly;Loucamente;;
+Mainly;Principalmente;;
+Maybe;Talvez;;
+Monthly;Mensalmente;;
+More;Mais;;
+Most;A maioria;;
+Mostly;Principalmente;;
+Much;Muito;;
+Mysteriously;Misteriosamente;;
+Naturally;Naturalmente;;
+Nearly;Quase;;
+Necessarily;Necessariamente;;
+Negatively;Negativamente;;
+Nervously;Nervosamente;;
+Never;Nunca;;
+Newly;Recentemente;;
+Nicely;Agradavelmente;;
+Nimbly;Agilmente;;
+Noisily;Barulhentamente;;
+Normally;Normalmente;;
+Nostalgically;Nostalgicamente;;
+Now;Agora;;
+Nowhere;Em nenhum lugar;;
+Occasionally;Ocasionalmente;;
+Often;Frequentemente;;
+Only;Apenas;;
+Openly;Abertamente;;
+Outside;Lado de fora;;
+Over;Acima;;
+Overly;Excessivamente;;
+Painfully;Dolorosamente;;
+Partially;Parcialmente;;
+Particularly;Particularmente;;
+Patiently;Pacientemente;;
+Perfectly;Perfeitamente;;
+Personally;Pessoalmente;;
+Physically;Fisicamente;;
+Playfully;Brincalhonamente;;
+Possibly;Possivelmente;;
+Powerfully;Poderosamente;;
+Precisely;Precisamente;;
+Presently;Atualmente;;
+Privately;Privadamente;;
+Properly;Corretamente;;
+Proudly;Orgulhosamente;;
+Publicly;Publicamente;;
+Purely;Puramente;;
+Purposefully;Propositalmente;;
+Quickly;Rapidamente;;
 Quietly;Silenciosamente;;
-Loudly;Alto (som);;
-happily;felizmente;;
-sadly;tristemente;;
-angrily;zangadamente;;
-excitedly;animadamente;;
-tiredly;cansadamente;;
-bravely;corajosamente;;
-calmly;calmamente;;
-gently;gentilmente;;
-beautifully;lindamente;;
-dangerously;perigosamente;;
-quickly;rapidamente;;
-slowly;lentamente;;
-carefully;cuidadosamente;;
-easily;facilmente;;
-happily;felizmente;;
-sadly;tristemente;;
-angrily;zangadamente;;
-excitedly;animadamente;;
-tiredly;cansadamente;;
-bravely;corajosamente;;
-calmly;calmamente;;
-gently;gentilmente;;
-loudly;alto (som);;
-quietly;silenciosamente;;
-brightly;brilhantemente;;
-darkly;sombrio;;
-deeply;profundamente;;
-lightly;levemente;;
-strongly;fortemente;;
-weakly;debilmente;;
-warmly;calorosamente;;
-coldly;friamente;;
-softly;suavemente;;
-roughly;rudemente;;
-smoothly;suavemente;;
-abroad (Advérbio de lugar); no exterior;;
-after (Advérbio de tempo); depois;;
-away (Advérbio de lugar); longe;;
-before (Advérbio de tempo); antes;;
-everywhere (Advérbio de lugar); em todo lugar;;
-far (Advérbio de lugar); longe;;
-late (Advérbio de tempo); tarde;;
-near (Advérbio de lugar); perto;;
-never (Advérbio de frequência); nunca;;
-off (Advérbio de lugar); fora;;
-on (Advérbio de lugar); em;;
-out (Advérbio de lugar); fora;;
-rarely (Advérbio de frequência); raramente;;
-so (Advérbio de intensidade); tão;;
-soon (Advérbio de tempo); em breve;;
-then (Advérbio de tempo); então;;
-there (Advérbio de lugar); lá;;
-too (Advérbio de intensidade); também;;
-very (Advérbio de intensidade); muito;;
-yesterday (Advérbio de tempo); ontem;;
-about (Preposição); sobre;;
-above (Preposição); acima;;
-across (Preposição); através;;
-after (Preposição); depois;;
-against (Preposição); contra;;
-along (Preposição); ao longo;;
-among (Preposição); entre;;
-around (Preposição); ao redor;;
-at (Preposição); em;;
-before (Preposição); antes;;
-behind (Preposição); atrás;;
-below (Preposição); abaixo;;
-beneath (Preposição); debaixo;;
-beside (Preposição); ao lado de;;
-between (Preposição); entre;;
-by (Preposição); por/perto de;;
-down (Preposição); para baixo;;
-during (Preposição); durante;;
-except (Preposição); exceto;;
-for (Preposição); para;;
-from (Preposição); de/origem;;
-in (Preposição); em/dentro;;
-inside (Preposição); dentro;;
-into (Preposição); para dentro;;
-like (Preposição); como;;
-near (Preposição); perto;;
-of (Preposição); de;;
-off (Preposição); desligado/fora;;
-on (Preposição); em/sobre;;
-onto (Preposição); em;;
-out (Preposição); fora;;
-outside (Preposição); fora;;
-over (Preposição); acima de;;
-past (Preposição); passado;;
-since (Preposição); desde;;
-through (Preposição); através de;;
-throughout (Preposição); durante;;
-to (Preposição); para;;
-toward (Preposição); em direção a;;
-under (Preposição); sob/embaixo;;
-underneath (Preposição); debaixo;;
-until (Preposição); até;;
-with (Preposição); com;;
-without (Preposição); sem;;
-a/an (Determinante); um/uma;;
-all (Determinante); todos;;
-a lot of (Determinante); muito/muitos;;
-another (Determinante); outro/outra;;
-any (Determinante); qualquer;;
-each (Determinante); cada;;
-either (Determinante); qualquer um dos dois;;
-enough (Determinante); suficiente;;
-every (Determinante); cada/todo;;
-few (Determinante); poucos;;
-half (Determinante); metade;;
-less (Determinante); menos;;
-many (Determinante); muitos;;
-more (Determinante); mais;;
-much (Determinante); muito;;
-neither (Determinante); nenhum dos dois;;
-none (Determinante); nenhum;;
-other (Determinante); outro/outra;;
-some (Determinante); algum/alguns;;
-that (Determinante); aquele/aquela;;
-the (Determinante); o/a/os/as;;
-these (Determinante); estes/estas;;
-this (Determinante); este/esta;;
-those (Determinante); aqueles/aquelas;;
+Quite;Bastante;;
+Rarely;Raramente;;
+Rationally;Racionalmente;;
+Readily;Prontamente;;
+Really;Realmente;;
+Recently;Recentemente;;
+Regularly;Regularmente;;
+Relatively;Relativamente;;
+Reliably;Confiavelmente;;
+Repeatedly;Repetidamente;;
+Responsibly;Responsavelmente;;
+Sadly;Tristemente;;
+Safely;Com segurança;;
+Satisfactorily;Satisfatoriamente;;
+Secretly;Secretamente;;
+Selfishly;Egoisticamente;;
+Sensibly;Sensatamente;;
+Seriously;Seriamente;;
+Shortly;Em breve;;
+Shyly;Timidamente;;
+Silently;Silenciosamente;;
+Simply;Simplesmente;;
+Sincerely;Sinceramente;;
+Slowly;Lentamente;;
+Smoothly;Suavemente;;
+So;Então;;
+Softly;Suavemente;;
+Sometime;Alguma hora;;
+Soon;Em breve;;
+Somewhere;Em algum lugar;;
+Strongly;Fortemente;;
+Suddenly;De repente;;
+Sweetly;Docemente;;
+Tactfully;Com tato;;
+Tenderly;Ternamente;;
+Thankfully;Agradecidamente;;
+Then;Então;;
+There;Lá;;
+Therefor;Portanto;;
+Thoroughly;Completamente;;
+Timidly;Timidamente;;
+Tirelessly;Incessantemente;;
+Together;Juntos;;
+Tonight;Esta noite;;
+Too;Também;;
+Totally;Totalmente;;
+Towards;Em direção a;;
+Truly;Verdadeiramente;;
+Truthfully;Verdadeiramente;;
+Typically;Tipicamente;;
+Under;Abaixo;;
+Upstairs;No andar de cima;;
+Usually;Geralmente;;
+Very;Muito;;
+Violently;Violentamente;;
+Visibly;Visivelmente;;
+Warmly;Calorosamente;;
+Weakly;Fracamente;;
+Well;Bem;;
+When;Quando;;
+Where;Onde;;
+Widely;Amplamente;;
+Wildly;Descontroladamente;;
+Wisely;Sabiamente;;
+Wonderfully;Maravilhosamente;;
+Yearly;Anualmente;;
+Yet;Ainda;;
+about (Preposição); sobre
+above (Preposição); acima
+across (Preposição); através
+after (Preposição); depois
+against (Preposição); contra
+along (Preposição); ao longo
+among (Preposição); entre (vários)
+around (Preposição); em volta de
+at (Preposição); em/no/na
+before (Preposição); antes
+behind (Preposição); atrás de
+below (Preposição); abaixo
+beneath (Preposição); abaixo
+beside (Preposição); ao lado de
+between (Preposição); entre (dois)
+by (Preposição); por
+down (Preposição); para baixo
+during (Preposição); durante
+except (Preposição); exceto
+for (Preposição); para
+from (Preposição); de/origem
+in (Preposição); em/dentro
+inside (Preposição); dentro
+into (Preposição); para dentro
+like (Preposição); como
+near (Preposição); perto
+of (Preposição); de
+off (Preposição); desligado/fora
+on (Preposição); em/sobre
+onto (Preposição); em
+out (Preposição); fora
+outside (Preposição); fora
+over (Preposição); acima de
+past (Preposição); passado
+since (Preposição); desde
+through (Preposição); através de
+throughout (Preposição); durante
+to (Preposição); para
+toward (Preposição); em direção a
+under (Preposição); sob/embaixo
+underneath (Preposição); debaixo
+until (Preposição); até
+with (Preposição); com
+without (Preposição); sem
+a/an (Determinante); um/uma
+all (Determinante); todos
+a lot of (Determinante); muito/muitos
+another (Determinante); outro/outra
+any (Determinante); qualquer
+each (Determinante); cada
+either (Determinante); qualquer um dos dois
+enough (Determinante); suficiente
+every (Determinante); cada/todo
+few (Determinante); poucos
+half (Determinante); metade
+less (Determinante); menos
+many (Determinante); muitos
+more (Determinante); mais
+much (Determinante); muito
+neither (Determinante); nenhum dos dois
+none (Determinante); nenhum
+other (Determinante); outro/outra
+some (Determinante); algum/alguns
+that (Determinante); aquele/aquela
+the (Determinante); o/a/os/as
+these (Determinante); estes/estas
+this (Determinante); este/esta
+those (Determinante); aqueles/aquelas
