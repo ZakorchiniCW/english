@@ -233,7 +233,7 @@
 
         async function loadDataFromGithub() {
             const githubBaseUrl = 'https://raw.githubusercontent.com/zakorchinicw/english/main/';
-            const files = ['phrases.txt', 'verbs.txt', 'adjectives.txt', 'phrasal_verbs.txt', 'idioms.txt'];
+            const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'phrasal_verbs.txt', 'adverbios.txt'];
 
             try {
                 const results = await Promise.all(files.map(file => fetch(githubBaseUrl + file).then(res => res.text())));
