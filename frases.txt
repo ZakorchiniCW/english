@@ -1,6 +1,3 @@
-Com base no conteúdo do arquivo fonte3.txt que você forneceu, organizei as frases em ordem alfabética pela versão em inglês, eliminei as linhas em branco e as formatei no padrão solicitado: frase em inglês;frase em português;;.
-
-Lista de Frases Organizada
 Act your part in play;Fazer sua parte na peça;;
 Admire her lovely handwriting;Admirar a linda caligrafia dela;;
 Admire the garden view;Admirar a vista do jardim;;
@@ -551,3 +548,4 @@ Zip your file immediately;Compactar seu arquivo imediatamente;;
 Zip your hoodie tight;Fechar seu moletom com zíper firmemente;;
 Zoom in on the picture;Aumentar o zoom na imagem;;
 Zoom the image fully;Aumentar o zoom totalmente na imagem;;
+
