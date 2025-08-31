@@ -231,7 +231,6 @@
             "Incredible!"
         ];
 
-        // Função para carregar os dados do GitHub
         async function loadDataFromGithub() {
             const githubBaseUrl = 'https://raw.githubusercontent.com/zakorchinicw/english/main/';
             const files = ['phrases.txt', 'verbs.txt', 'adjectives.txt', 'phrasal_verbs.txt', 'idioms.txt'];
@@ -273,22 +272,24 @@
         function generateQuestion() {
             answerButtonsContainer.innerHTML = '';
             messageBox.classList.remove('show');
+            
             const questionAndCorrectAnswer = getRandomItem(allData);
             const englishText = questionAndCorrectAnswer[0];
             const portugueseCorrectTranslation = questionAndCorrectAnswer[1];
 
-            const incorrectTranslations = [];
-            const allTranslationsExceptCorrect = allData.filter(item => item[1] !== portugueseCorrectTranslation);
+            const allTranslationsExceptCorrect = allData.filter(item => item[1] !== portugueseCorrectTranslation).map(item => item[1]);
+            const uniqueIncorrectTranslations = [];
+            
+            const shuffledIncorrects = shuffleArray(allTranslationsExceptCorrect);
 
-            while (incorrectTranslations.length < 5 && allTranslationsExceptCorrect.length > 0) {
-                const randomIndex = Math.floor(Math.random() * allTranslationsExceptCorrect.length);
-                const incorrectTranslation = allTranslationsExceptCorrect.splice(randomIndex, 1)[0][1];
-                if (!incorrectTranslations.includes(incorrectTranslation)) {
-                    incorrectTranslations.push(incorrectTranslation);
+            while (uniqueIncorrectTranslations.length < 5 && shuffledIncorrects.length > 0) {
+                const translation = shuffledIncorrects.shift();
+                if (translation && !uniqueIncorrectTranslations.includes(translation)) {
+                    uniqueIncorrectTranslations.push(translation);
                 }
             }
 
-            const allAnswers = shuffleArray([portugueseCorrectTranslation, ...incorrectTranslations]);
+            const allAnswers = shuffleArray([portugueseCorrectTranslation, ...uniqueIncorrectTranslations]);
 
             questionBox.textContent = englishText;
 
@@ -342,4 +343,4 @@
         window.onload = loadDataFromGithub;
     </script>
 </body>
-    </html>
+</html>
