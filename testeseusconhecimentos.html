@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Seus Conhecimentos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        /* Tema Escuro - Cores de Fundo */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1f2937, #111827);
+            background-attachment: fixed;
+            color: #e5e7eb;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background-color: #1f2937;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative; /* Necessário para o posicionamento da mensagem */
+        }
+        
+        .top-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .return-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: #4b5563;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.5em;
+            line-height: 1;
+            transition: background-color 0.3s;
+        }
+
+        .return-btn:hover {
+            background-color: #6b7280;
+        }
+
+        .question-and-controls {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .question-box {
+            flex-grow: 1;
+            padding: 1.25rem;
+            border: 1px solid #4b5563;
+            border-radius: 8px;
+            background-color: #374151;
+            text-align: center;
+            font-size: 1.25em;
+            font-weight: bold;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .message-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2rem;
+            background-color: #38a169; /* Cor verde para sucesso */
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 1.25em;
+            font-weight: bold;
+            z-index: 10;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            white-space: pre-wrap;
+        }
+
+        .message-box.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .counter {
+            background-color: #4b5563;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 1.2em;
+        }
+
+        #correct-counter, #incorrect-counter {
+            font-weight: bold;
+            color: #d1d5db;
+        }
+
+        .score-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .answer-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .answer-btn {
+            padding: 1rem;
+            background-color: #4b5563;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .answer-btn:hover {
+            background-color: #6b7280;
+        }
+
+        .answer-btn:active {
+            transform: scale(0.98);
+        }
+
+        .answer-btn.correct {
+            background-color: #38a169; /* Verde */
+        }
+
+        .answer-btn.incorrect {
+            background-color: #e53e3e; /* Vermelho */
+        }
+
+        .answer-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-section">
+            <a href="Treine Inglês.html" class="return-btn">⌫</a>
+            <div class="question-and-controls">
+                <div id="question-box" class="question-box">Carregando...</div>
+            </div>
+        </div>
+
+        <div id="message-box" class="message-box"></div>
+
+        <div class="score-container">
+            <div class="counter">Acertos: <span id="correct-counter">0</span></div>
+            <div class="counter">Erros: <span id="incorrect-counter">0</span></div>
+        </div>
+
+        <div id="answer-buttons" class="answer-buttons">
+            <button class="answer-btn" data-correct="false">Opção 1</button>
+            <button class="answer-btn" data-correct="false">Opção 2</button>
+            <button class="answer-btn" data-correct="false">Opção 3</button>
+            <button class="answer-btn" data-correct="false">Opção 4</button>
+        </div>
+
+        <div class="control-buttons">
+            <button id="refresh-btn" class="return-btn">Próxima</button>
+        </div>
+    </div>
+
+    <script>
+        const questionBox = document.getElementById('question-box');
+        const answerButtonsContainer = document.getElementById('answer-buttons');
+        const refreshBtn = document.getElementById('refresh-btn');
+        const messageBox = document.getElementById('message-box');
+        const correctCounter = document.getElementById('correct-counter');
+        const incorrectCounter = document.getElementById('incorrect-counter');
+
+        let correctCount = 0;
+        let incorrectCount = 0;
+        
+        let frasesData = [];
+        let verbosData = [];
+        let adjetivosData = [];
+        let phrasalVerbsData = [];
+        let idiomsData = [];
+
+        const motivationalPhrases = [
+            "Excelente!",
+            "Muito bem!",
+            "Incrível!",
+            "Mandou bem!",
+            "Perfeito!"
+        ];
+
+        // Função para carregar os dados do GitHub
+        async function loadDataFromGithub() {
+            const githubBaseUrl = 'https://raw.githubusercontent.com/zakorchinicw/english/main/';
+            const files = ['phrases.txt', 'verbs.txt', 'adjectives.txt', 'phrasal_verbs.txt', 'idioms.txt'];
+
+            try {
+                const results = await Promise.all(files.map(file => fetch(githubBaseUrl + file).then(res => res.text())));
+
+                frasesData = results[0].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
+                verbosData = results[1].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
+                adjetivosData = results[2].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
+                phrasalVerbsData = results[3].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
+                idiomsData = results[4].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
+
+                console.log('Dados carregados com sucesso!');
+                generateQuestion(); // Gera a primeira pergunta após o carregamento dos dados
+            } catch (error) {
+                console.error('Erro ao carregar os dados:', error);
+                questionBox.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
+            }
+        }
+
+        // Função para obter um item aleatório de um array
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // Função para embaralhar um array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Função para gerar uma nova pergunta de múltipla escolha
+        function generateQuestion() {
+            const categories = [frasesData, verbosData, adjetivosData, phrasalVerbsData, idiomsData];
+            const currentCategory = getRandomItem(categories.filter(c => c.length > 0));
+
+            if (currentCategory.length < 4) {
+                questionBox.textContent = "Não há dados suficientes para gerar perguntas de múltipla escolha.";
+                answerButtonsContainer.innerHTML = '';
+                return;
+            }
+
+            // Seleciona a pergunta correta
+            const correctItem = getRandomItem(currentCategory);
+            const questionText = correctItem[1]; // A pergunta é a tradução em português
+            const correctAnswer = correctItem[0]; // A resposta correta é a frase em inglês
+
+            // Seleciona 3 respostas incorretas (diferentes da correta)
+            const incorrectAnswers = [];
+            const allItemsExceptCorrect = currentCategory.filter(item => item[0] !== correctAnswer);
+            while (incorrectAnswers.length < 3 && allItemsExceptCorrect.length > 0) {
+                const randomIndex = Math.floor(Math.random() * allItemsExceptCorrect.length);
+                const incorrectItem = allItemsExceptCorrect.splice(randomIndex, 1)[0];
+                incorrectAnswers.push(incorrectItem[0]);
+            }
+
+            // Combina a resposta correta com as incorretas e embaralha
+            const allAnswers = shuffleArray([correctAnswer, ...incorrectAnswers]);
+
+            // Atualiza a interface
+            questionBox.textContent = questionText;
+            answerButtonsContainer.innerHTML = ''; // Limpa os botões antigos
+
+            allAnswers.forEach(answer => {
+                const button = document.createElement('button');
+                button.classList.add('answer-btn');
+                button.textContent = answer;
+                if (answer === correctAnswer) {
+                    button.dataset.correct = 'true';
+                } else {
+                    button.dataset.correct = 'false';
+                }
+                answerButtonsContainer.appendChild(button);
+            });
+            
+            // Adiciona o ouvinte de evento aos novos botões
+            document.querySelectorAll('.answer-btn').forEach(button => {
+                button.addEventListener('click', () => checkAnswer(button));
+            });
+        }
+
+        function checkAnswer(button) {
+            const isCorrect = button.dataset.correct === 'true';
+            
+            // Desabilita todos os botões após a primeira seleção
+            const answerButtons = document.querySelectorAll('.answer-btn');
+            answerButtons.forEach(btn => btn.disabled = true);
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+                correctCount++;
+                
+                const randomPhrase = getRandomItem(motivationalPhrases);
+                messageBox.textContent = `${randomPhrase}\nVamos à próxima?`;
+                messageBox.classList.add('show');
+
+                setTimeout(() => {
+                    messageBox.classList.remove('show');
+                    generateQuestion();
+                }, 1500);
+            } else {
+                button.classList.add('incorrect');
+                incorrectCount++;
+                const correctAnswerBtn = document.querySelector('.answer-btn[data-correct="true"]');
+                if (correctAnswerBtn) {
+                    correctAnswerBtn.classList.add('correct');
+                }
+                
+                setTimeout(() => {
+                    generateQuestion();
+                }, 1500);
+            }
+
+            correctCounter.textContent = correctCount;
+            incorrectCounter.textContent = incorrectCount;
+        }
+        
+        refreshBtn.addEventListener('click', generateQuestion);
+
+        window.onload = loadDataFromGithub;
+    </script>
+</body>
+</html>
