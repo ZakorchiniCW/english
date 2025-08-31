@@ -8,7 +8,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-        /* Tema Escuro - Cores de Fundo */
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #1f2937, #111827);
@@ -25,7 +24,7 @@
 
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             background-color: #1f2937;
             padding: 2.5rem;
             border-radius: 12px;
@@ -33,7 +32,7 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            position: relative; /* Necessário para o posicionamento da mensagem */
+            position: relative;
         }
         
         .top-section {
@@ -91,7 +90,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 2rem;
-            background-color: #38a169; /* Cor verde para sucesso */
+            background-color: #38a169;
             color: white;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -117,9 +116,13 @@
             font-size: 1.2em;
         }
 
-        #correct-counter, #incorrect-counter {
+        #correct-counter {
             font-weight: bold;
-            color: #d1d5db;
+            color: #48bb78; /* Verde */
+        }
+        #incorrect-counter {
+            font-weight: bold;
+            color: #fc8181; /* Vermelho */
         }
 
         .score-container {
@@ -132,6 +135,11 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
+        }
+        @media (min-width: 600px) {
+            .answer-buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         .answer-btn {
@@ -154,11 +162,11 @@
         }
 
         .answer-btn.correct {
-            background-color: #38a169; /* Verde */
+            background-color: #38a169;
         }
 
         .answer-btn.incorrect {
-            background-color: #e53e3e; /* Vermelho */
+            background-color: #e53e3e;
         }
 
         .answer-btn:disabled {
@@ -190,14 +198,10 @@
         </div>
 
         <div id="answer-buttons" class="answer-buttons">
-            <button class="answer-btn" data-correct="false">Opção 1</button>
-            <button class="answer-btn" data-correct="false">Opção 2</button>
-            <button class="answer-btn" data-correct="false">Opção 3</button>
-            <button class="answer-btn" data-correct="false">Opção 4</button>
-        </div>
+            </div>
 
         <div class="control-buttons">
-            <button id="refresh-btn" class="return-btn">Próxima</button>
+            <button id="refresh-btn" class="return-btn">Atualizar</button>
         </div>
     </div>
 
@@ -212,18 +216,19 @@
         let correctCount = 0;
         let incorrectCount = 0;
         
-        let frasesData = [];
-        let verbosData = [];
-        let adjetivosData = [];
-        let phrasalVerbsData = [];
-        let idiomsData = [];
+        let allData = [];
 
         const motivationalPhrases = [
-            "Excelente!",
-            "Muito bem!",
-            "Incrível!",
-            "Mandou bem!",
-            "Perfeito!"
+            "You got it!",
+            "Excellent!",
+            "Way to go!",
+            "Keep up the great work!",
+            "Fantastic!",
+            "Well done!",
+            "Unbelievable!",
+            "Amazing job!",
+            "That's perfect!",
+            "Incredible!"
         ];
 
         // Função para carregar os dados do GitHub
@@ -233,27 +238,30 @@
 
             try {
                 const results = await Promise.all(files.map(file => fetch(githubBaseUrl + file).then(res => res.text())));
-
-                frasesData = results[0].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
-                verbosData = results[1].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
-                adjetivosData = results[2].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
-                phrasalVerbsData = results[3].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
-                idiomsData = results[4].split('\n').map(line => line.trim()).filter(line => line.length > 0).map(line => line.split(' - '));
-
+                allData = results.flatMap(text => 
+                    text.split('\n')
+                        .map(line => line.trim())
+                        .filter(line => line.length > 0)
+                        .map(line => line.split(' - '))
+                );
+                
+                if (allData.length < 6) {
+                    questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
+                    return;
+                }
+                
                 console.log('Dados carregados com sucesso!');
-                generateQuestion(); // Gera a primeira pergunta após o carregamento dos dados
+                generateQuestion();
             } catch (error) {
                 console.error('Erro ao carregar os dados:', error);
                 questionBox.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
             }
         }
 
-        // Função para obter um item aleatório de um array
         function getRandomItem(arr) {
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        // Função para embaralhar um array
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -262,43 +270,33 @@
             return array;
         }
 
-        // Função para gerar uma nova pergunta de múltipla escolha
         function generateQuestion() {
-            const categories = [frasesData, verbosData, adjetivosData, phrasalVerbsData, idiomsData];
-            const currentCategory = getRandomItem(categories.filter(c => c.length > 0));
+            answerButtonsContainer.innerHTML = '';
+            messageBox.classList.remove('show');
+            const questionAndCorrectAnswer = getRandomItem(allData);
+            const englishText = questionAndCorrectAnswer[0];
+            const portugueseCorrectTranslation = questionAndCorrectAnswer[1];
 
-            if (currentCategory.length < 4) {
-                questionBox.textContent = "Não há dados suficientes para gerar perguntas de múltipla escolha.";
-                answerButtonsContainer.innerHTML = '';
-                return;
+            const incorrectTranslations = [];
+            const allTranslationsExceptCorrect = allData.filter(item => item[1] !== portugueseCorrectTranslation);
+
+            while (incorrectTranslations.length < 5 && allTranslationsExceptCorrect.length > 0) {
+                const randomIndex = Math.floor(Math.random() * allTranslationsExceptCorrect.length);
+                const incorrectTranslation = allTranslationsExceptCorrect.splice(randomIndex, 1)[0][1];
+                if (!incorrectTranslations.includes(incorrectTranslation)) {
+                    incorrectTranslations.push(incorrectTranslation);
+                }
             }
 
-            // Seleciona a pergunta correta
-            const correctItem = getRandomItem(currentCategory);
-            const questionText = correctItem[1]; // A pergunta é a tradução em português
-            const correctAnswer = correctItem[0]; // A resposta correta é a frase em inglês
+            const allAnswers = shuffleArray([portugueseCorrectTranslation, ...incorrectTranslations]);
 
-            // Seleciona 3 respostas incorretas (diferentes da correta)
-            const incorrectAnswers = [];
-            const allItemsExceptCorrect = currentCategory.filter(item => item[0] !== correctAnswer);
-            while (incorrectAnswers.length < 3 && allItemsExceptCorrect.length > 0) {
-                const randomIndex = Math.floor(Math.random() * allItemsExceptCorrect.length);
-                const incorrectItem = allItemsExceptCorrect.splice(randomIndex, 1)[0];
-                incorrectAnswers.push(incorrectItem[0]);
-            }
-
-            // Combina a resposta correta com as incorretas e embaralha
-            const allAnswers = shuffleArray([correctAnswer, ...incorrectAnswers]);
-
-            // Atualiza a interface
-            questionBox.textContent = questionText;
-            answerButtonsContainer.innerHTML = ''; // Limpa os botões antigos
+            questionBox.textContent = englishText;
 
             allAnswers.forEach(answer => {
                 const button = document.createElement('button');
                 button.classList.add('answer-btn');
                 button.textContent = answer;
-                if (answer === correctAnswer) {
+                if (answer === portugueseCorrectTranslation) {
                     button.dataset.correct = 'true';
                 } else {
                     button.dataset.correct = 'false';
@@ -306,7 +304,6 @@
                 answerButtonsContainer.appendChild(button);
             });
             
-            // Adiciona o ouvinte de evento aos novos botões
             document.querySelectorAll('.answer-btn').forEach(button => {
                 button.addEventListener('click', () => checkAnswer(button));
             });
@@ -315,16 +312,15 @@
         function checkAnswer(button) {
             const isCorrect = button.dataset.correct === 'true';
             
-            // Desabilita todos os botões após a primeira seleção
-            const answerButtons = document.querySelectorAll('.answer-btn');
-            answerButtons.forEach(btn => btn.disabled = true);
-            
             if (isCorrect) {
                 button.classList.add('correct');
                 correctCount++;
                 
+                const answerButtons = document.querySelectorAll('.answer-btn');
+                answerButtons.forEach(btn => btn.disabled = true);
+                
                 const randomPhrase = getRandomItem(motivationalPhrases);
-                messageBox.textContent = `${randomPhrase}\nVamos à próxima?`;
+                messageBox.textContent = `${randomPhrase}\nNext?`;
                 messageBox.classList.add('show');
 
                 setTimeout(() => {
@@ -334,14 +330,7 @@
             } else {
                 button.classList.add('incorrect');
                 incorrectCount++;
-                const correctAnswerBtn = document.querySelector('.answer-btn[data-correct="true"]');
-                if (correctAnswerBtn) {
-                    correctAnswerBtn.classList.add('correct');
-                }
-                
-                setTimeout(() => {
-                    generateQuestion();
-                }, 1500);
+                button.disabled = true;
             }
 
             correctCounter.textContent = correctCount;
@@ -353,4 +342,4 @@
         window.onload = loadDataFromGithub;
     </script>
 </body>
-</html>
+    </html>
