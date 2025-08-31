@@ -35,7 +35,6 @@ Curiously;Curiosamente;;
 Currently;Atualmente;;
 Daily;Diariamente;;
 Darkly;Sombriamente;;
-Dearly;Caramente;;
 Deeply;Profundamente;;
 Delightfully;Agradavelmente;;
 Differently;Diferentemente;;
@@ -137,7 +136,6 @@ Playfully;Brincalhonamente;;
 Possibly;Possivelmente;;
 Powerfully;Poderosamente;;
 Precisely;Precisamente;;
-Presently;Atualmente;;
 Privately;Privadamente;;
 Properly;Corretamente;;
 Proudly;Orgulhosamente;;
@@ -281,3 +279,4 @@ the (Determinante); o/a/os/as
 these (Determinante); estes/estas
 this (Determinante); este/esta
 those (Determinante); aqueles/aquelas
+
