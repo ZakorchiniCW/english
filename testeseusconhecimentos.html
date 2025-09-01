@@ -247,6 +247,7 @@
                 
                 await Promise.all(fetchPromises);
 
+                // Verifica se há dados suficientes em qualquer categoria
                 const totalEntries = Object.values(allData).flat().length;
                 if (totalEntries < 6) {
                     questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
@@ -276,33 +277,23 @@
             answerButtonsContainer.innerHTML = '';
             messageBox.classList.remove('show');
             
-            const availableFiles = files.filter(file => allData[file] && allData[file].length >= 6);
-            if (availableFiles.length === 0) {
-                 questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
-                 return;
-            }
-            const selectedFile = getRandomItem(availableFiles);
-            const dataFromFile = allData[selectedFile];
-
-            const questionAndCorrectAnswer = getRandomItem(dataFromFile);
+            // Filtra os arquivos para excluir 'verbos.txt'
+            const quizFiles = files.filter(file => file !== 'verbos.txt');
             
-            let displayQuestion, correctAnswer;
-
-            if (selectedFile === 'verbos.txt') {
-                displayQuestion = questionAndCorrectAnswer[0]; 
-                correctAnswer = questionAndCorrectAnswer[1]; 
-            } else {
-                displayQuestion = questionAndCorrectAnswer[0]; 
-                correctAnswer = questionAndCorrectAnswer[1]; 
-            }
+            const availableData = quizFiles.flatMap(file => allData[file] || []);
             
-            const allPossibleAnswers = Object.values(allData).flat().map(item => {
-                if (selectedFile === 'verbos.txt') {
-                    return item[1]; 
-                } else {
-                    return item[1]; 
-                }
-            });
+            if (availableData.length < 6) {
+                questionBox.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
+                return;
+            }
+
+            // Sorteia uma linha do arquivo
+            const questionAndCorrectAnswer = getRandomItem(availableData);
+            
+            const displayQuestion = questionAndCorrectAnswer[0]; // Inglês
+            const correctAnswer = questionAndCorrectAnswer[1]; // Português
+            
+            const allPossibleAnswers = availableData.map(item => item[1]);
 
             const uniqueIncorrectAnswers = [];
             const shuffledPossibleAnswers = shuffleArray(allPossibleAnswers);
