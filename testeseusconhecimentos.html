@@ -216,7 +216,8 @@
         let correctCount = 0;
         let incorrectCount = 0;
         
-        let allData = [];
+        let allData = {};
+        const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'phrasalverbs.txt', 'adverbios.txt'];
 
         const motivationalPhrases = [
             "You got it!",
@@ -233,18 +234,21 @@
 
         async function loadDataFromGithub() {
             const githubBaseUrl = 'https://raw.githubusercontent.com/zakorchinicw/english/main/';
-            const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'phrasalverbs.txt', 'adverbios.txt'];
 
             try {
-                const results = await Promise.all(files.map(file => fetch(githubBaseUrl + file).then(res => res.text())));
-                allData = results.flatMap(text => 
-                    text.split('\n')
+                const fetchPromises = files.map(async (file) => {
+                    const response = await fetch(githubBaseUrl + file);
+                    const text = await response.text();
+                    const lines = text.split('\n')
                         .map(line => line.trim())
-                        .filter(line => line.length > 0)
-                        .map(line => line.split(' - '))
-                );
+                        .filter(line => line.length > 0);
+                    allData[file] = lines.map(line => line.split(' - '));
+                });
                 
-                if (allData.length < 6) {
+                await Promise.all(fetchPromises);
+
+                const totalEntries = Object.values(allData).flat().length;
+                if (totalEntries < 6) {
                     questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
                     return;
                 }
@@ -273,31 +277,58 @@
             answerButtonsContainer.innerHTML = '';
             messageBox.classList.remove('show');
             
-            const questionAndCorrectAnswer = getRandomItem(allData);
-            const englishText = questionAndCorrectAnswer[0];
-            const portugueseCorrectTranslation = questionAndCorrectAnswer[1];
+            // Sorteia um arquivo
+            const selectedFile = getRandomItem(files);
+            const dataFromFile = allData[selectedFile];
 
-            const allTranslationsExceptCorrect = allData.filter(item => item[1] !== portugueseCorrectTranslation).map(item => item[1]);
-            const uniqueIncorrectTranslations = [];
+            // Sorteia uma linha do arquivo
+            const questionAndCorrectAnswer = getRandomItem(dataFromFile);
             
-            const shuffledIncorrects = shuffleArray(allTranslationsExceptCorrect);
+            let displayQuestion, correctAnswer;
 
-            while (uniqueIncorrectTranslations.length < 5 && shuffledIncorrects.length > 0) {
-                const translation = shuffledIncorrects.shift();
-                if (translation && !uniqueIncorrectTranslations.includes(translation)) {
-                    uniqueIncorrectTranslations.push(translation);
+            if (selectedFile === 'verbs.txt') {
+                // Para verbos, a pergunta é em português e a resposta é em inglês
+                displayQuestion = questionAndCorrectAnswer[0]; // Português
+                correctAnswer = questionAndCorrectAnswer[1]; // Inglês
+            } else {
+                // Para os outros arquivos, a pergunta é em inglês e a resposta é em português
+                displayQuestion = questionAndCorrectAnswer[0]; // Inglês
+                correctAnswer = questionAndCorrectAnswer[1]; // Português
+            }
+            
+            // Pega todas as respostas possíveis (a da língua da resposta correta)
+            const allPossibleAnswers = Object.values(allData).flat().map(item => {
+                if (selectedFile === 'verbs.txt') {
+                    return item[1]; // Pega a parte em inglês para respostas incorretas
+                } else {
+                    return item[1]; // Pega a parte em português para respostas incorretas
+                }
+            });
+
+            const uniqueIncorrectAnswers = [];
+            const shuffledPossibleAnswers = shuffleArray(allPossibleAnswers);
+
+            while (uniqueIncorrectAnswers.length < 5 && shuffledPossibleAnswers.length > 0) {
+                const potentialAnswer = shuffledPossibleAnswers.shift();
+                if (potentialAnswer !== correctAnswer && !uniqueIncorrectAnswers.includes(potentialAnswer)) {
+                    uniqueIncorrectAnswers.push(potentialAnswer);
                 }
             }
 
-            const allAnswers = shuffleArray([portugueseCorrectTranslation, ...uniqueIncorrectTranslations]);
+            const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
+            
+            if (allAnswers.length < 6) {
+                questionBox.textContent = 'Dados insuficientes para gerar opções. Por favor, adicione mais palavras.';
+                return;
+            }
 
-            questionBox.textContent = englishText;
+            questionBox.textContent = displayQuestion;
 
             allAnswers.forEach(answer => {
                 const button = document.createElement('button');
                 button.classList.add('answer-btn');
                 button.textContent = answer;
-                if (answer === portugueseCorrectTranslation) {
+                if (answer === correctAnswer) {
                     button.dataset.correct = 'true';
                 } else {
                     button.dataset.correct = 'false';
