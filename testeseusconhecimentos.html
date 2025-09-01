@@ -261,6 +261,9 @@
                 }
                 
                 console.log('Passo 5: Dados suficientes para gerar o quiz.');
+                console.log('Conteúdo dos dados carregados:', allData);
+                generateQuestion();
+                
                 generateQuestion();
             } catch (error) {
                 console.error('Passo 6: Um erro ocorreu ao carregar os dados.', error);
