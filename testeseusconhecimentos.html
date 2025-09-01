@@ -217,7 +217,6 @@
         let incorrectCount = 0;
         
         let allData = {};
-        // Lista de arquivos com os nomes corretos
         const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'adverbios.txt', 'phrasalverbs.txt'];
 
         const motivationalPhrases = [
@@ -234,7 +233,8 @@
         ];
 
         async function loadDataFromGithub() {
-            const githubBaseUrl = 'https://raw.githubusercontent.com/zakorchinicw/english/main/';
+            // Caminho relativo para arquivos no mesmo repositório
+            const githubBaseUrl = './'; 
 
             try {
                 const fetchPromises = files.map(async (file) => {
@@ -278,7 +278,6 @@
             answerButtonsContainer.innerHTML = '';
             messageBox.classList.remove('show');
             
-            // Sorteia um arquivo que tenha pelo menos 6 opções
             const availableFiles = files.filter(file => allData[file] && allData[file].length >= 6);
             if (availableFiles.length === 0) {
                  questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
@@ -287,27 +286,23 @@
             const selectedFile = getRandomItem(availableFiles);
             const dataFromFile = allData[selectedFile];
 
-            // Sorteia uma linha do arquivo
             const questionAndCorrectAnswer = getRandomItem(dataFromFile);
             
             let displayQuestion, correctAnswer;
 
             if (selectedFile === 'verbos.txt') {
-                // Para verbos, a pergunta é em português e a resposta é em inglês
-                displayQuestion = questionAndCorrectAnswer[0]; // Português
-                correctAnswer = questionAndCorrectAnswer[1]; // Inglês
+                displayQuestion = questionAndCorrectAnswer[0]; 
+                correctAnswer = questionAndCorrectAnswer[1]; 
             } else {
-                // Para os outros arquivos, a pergunta é em inglês e a resposta é em português
-                displayQuestion = questionAndCorrectAnswer[0]; // Inglês
-                correctAnswer = questionAndCorrectAnswer[1]; // Português
+                displayQuestion = questionAndCorrectAnswer[0]; 
+                correctAnswer = questionAndCorrectAnswer[1]; 
             }
             
-            // Pega todas as respostas possíveis (a da língua da resposta correta)
             const allPossibleAnswers = Object.values(allData).flat().map(item => {
                 if (selectedFile === 'verbos.txt') {
-                    return item[1]; // Pega a parte em inglês para respostas incorretas
+                    return item[1]; 
                 } else {
-                    return item[1]; // Pega a parte em português para respostas incorretas
+                    return item[1]; 
                 }
             });
 
