@@ -277,8 +277,13 @@
             answerButtonsContainer.innerHTML = '';
             messageBox.classList.remove('show');
             
-            // Sorteia um arquivo
-            const selectedFile = getRandomItem(files);
+            // Sorteia um arquivo que tenha pelo menos 6 opções
+            const availableFiles = files.filter(file => allData[file] && allData[file].length >= 6);
+            if (availableFiles.length === 0) {
+                 questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
+                 return;
+            }
+            const selectedFile = getRandomItem(availableFiles);
             const dataFromFile = allData[selectedFile];
 
             // Sorteia uma linha do arquivo
