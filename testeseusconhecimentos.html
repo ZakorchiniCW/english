@@ -44,7 +44,7 @@
         }
 
         .return-btn {
-            /* Deixa o botão de retorno menor e mais sutil */
+            /* Botão de retorno menor e sutil */
             padding: 0.5rem 0.8rem;
             font-size: 1.2em;
             background-color: #4b5563;
@@ -59,6 +59,9 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            /* Tamanho fixo para que não ocupe muita largura em telas menores */
+            width: 48px; 
+            height: 48px;
         }
 
         .return-btn:hover {
@@ -158,22 +161,14 @@
         }
 
         .answer-buttons {
-            /* Altera para duas colunas em telas padrão */
+            /* Sempre 2 colunas, como na imagem */
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-        @media (min-width: 600px) {
-            .answer-buttons {
-                /* Mantém 3 colunas em telas maiores que 600px */
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        /* Ajuste para telas menores */
+        
+        /* Ajustes para telas menores, se necessário, mas mantendo 2 colunas para as respostas */
         @media (max-width: 599px) {
-            .answer-buttons {
-                grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
-            }
             .top-section {
                 flex-direction: column;
                 align-items: stretch;
@@ -187,9 +182,10 @@
                 justify-content: space-between;
                 width: 100%;
             }
-            .return-btn {
+            /* O return-btn já tem width e height fixos */
+            /* .return-btn {
                 width: 100%;
-            }
+            } */
         }
 
 
