@@ -233,31 +233,38 @@
         ];
 
         async function loadDataFromGithub() {
+            console.log('Passo 1: Iniciando o carregamento dos arquivos...');
             const githubBaseUrl = './'; 
 
             try {
                 const fetchPromises = files.map(async (file) => {
+                    console.log(`Passo 2: Tentando carregar o arquivo: ${file}`);
                     const response = await fetch(githubBaseUrl + file);
+                    if (!response.ok) {
+                        throw new Error(`Falha ao carregar o arquivo: ${file}. Status: ${response.status}`);
+                    }
                     const text = await response.text();
                     const lines = text.split('\n')
                         .map(line => line.trim())
                         .filter(line => line.length > 0);
                     allData[file] = lines.map(line => line.split(' - '));
+                    console.log(`Passo 3: Arquivo ${file} carregado com sucesso.`);
                 });
                 
                 await Promise.all(fetchPromises);
+                console.log('Passo 4: Todos os arquivos foram carregados. Verificando dados...');
 
-                // Verifica se há dados suficientes em qualquer categoria
                 const totalEntries = Object.values(allData).flat().length;
                 if (totalEntries < 6) {
                     questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
                     return;
                 }
                 
+                console.log('Passo 5: Dados suficientes para gerar o quiz. Chamando a função de geração de perguntas.');
                 generateQuestion();
             } catch (error) {
-                console.error('Erro ao carregar os dados:', error);
-                questionBox.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
+                console.error('Passo 6: Um erro ocorreu ao carregar os dados.', error);
+                questionBox.textContent = 'Erro ao carregar os dados. Verifique o console para mais detalhes.';
             }
         }
 
@@ -274,14 +281,17 @@
         }
 
         function generateQuestion() {
+            console.log('Passo 7: Iniciando a função de geração de perguntas...');
             answerButtonsContainer.innerHTML = '';
             messageBox.classList.remove('show');
             
             // Filtra os arquivos para excluir 'verbos.txt'
             const quizFiles = files.filter(file => file !== 'verbos.txt');
+            console.log('Passo 8: Arquivos a serem usados para o quiz:', quizFiles);
             
             const availableData = quizFiles.flatMap(file => allData[file] || []);
-            
+            console.log('Passo 9: Conjunto de dados disponíveis:', availableData);
+
             if (availableData.length < 6) {
                 questionBox.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
                 return;
@@ -289,9 +299,12 @@
 
             // Sorteia uma linha do arquivo
             const questionAndCorrectAnswer = getRandomItem(availableData);
+            console.log('Passo 10: Pergunta e resposta selecionadas:', questionAndCorrectAnswer);
             
             const displayQuestion = questionAndCorrectAnswer[0]; // Inglês
             const correctAnswer = questionAndCorrectAnswer[1]; // Português
+            console.log('Passo 11: Pergunta a ser exibida:', displayQuestion);
+            console.log('Passo 12: Resposta correta:', correctAnswer);
             
             const allPossibleAnswers = availableData.map(item => item[1]);
 
@@ -306,6 +319,7 @@
             }
 
             const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
+            console.log('Passo 13: Todas as respostas (correta + erradas) que serão usadas nos botões:', allAnswers);
             
             if (allAnswers.length < 6) {
                 questionBox.textContent = 'Dados insuficientes para gerar opções. Por favor, adicione mais palavras.';
@@ -313,6 +327,7 @@
             }
 
             questionBox.textContent = displayQuestion;
+            console.log('Passo 14: Definindo o texto da pergunta na página.');
 
             allAnswers.forEach(answer => {
                 const button = document.createElement('button');
@@ -329,6 +344,7 @@
             document.querySelectorAll('.answer-btn').forEach(button => {
                 button.addEventListener('click', () => checkAnswer(button));
             });
+            console.log('Passo 15: Botões de resposta criados e adicionados ao container.');
         }
 
         function checkAnswer(button) {
