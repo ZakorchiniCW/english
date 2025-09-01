@@ -217,7 +217,8 @@
         let incorrectCount = 0;
         
         let allData = {};
-        const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'phrasalverbs.txt', 'adverbios.txt'];
+        // Lista de arquivos com os nomes corretos
+        const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'adverbios.txt', 'phrasalverbs.txt'];
 
         const motivationalPhrases = [
             "You got it!",
@@ -291,7 +292,7 @@
             
             let displayQuestion, correctAnswer;
 
-            if (selectedFile === 'verbs.txt') {
+            if (selectedFile === 'verbos.txt') {
                 // Para verbos, a pergunta é em português e a resposta é em inglês
                 displayQuestion = questionAndCorrectAnswer[0]; // Português
                 correctAnswer = questionAndCorrectAnswer[1]; // Inglês
@@ -303,7 +304,7 @@
             
             // Pega todas as respostas possíveis (a da língua da resposta correta)
             const allPossibleAnswers = Object.values(allData).flat().map(item => {
-                if (selectedFile === 'verbs.txt') {
+                if (selectedFile === 'verbos.txt') {
                     return item[1]; // Pega a parte em inglês para respostas incorretas
                 } else {
                     return item[1]; // Pega a parte em português para respostas incorretas
