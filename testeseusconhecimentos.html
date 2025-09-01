@@ -40,24 +40,25 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 1rem; /* Ajustado para melhor espaçamento em mobile */
+            gap: 1rem;
         }
 
         .return-btn {
-            padding: 0.75rem 1.5rem;
+            /* Deixa o botão de retorno menor e mais sutil */
+            padding: 0.5rem 0.8rem;
+            font-size: 1.2em;
             background-color: #4b5563;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
-            font-size: 1.5em;
             line-height: 1;
             transition: background-color 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0; /* Impede o encolhimento do botão */
+            flex-shrink: 0;
         }
 
         .return-btn:hover {
@@ -68,7 +69,7 @@
             flex-grow: 1;
             display: flex;
             align-items: center;
-            gap: 0.75rem; /* Espaçamento entre a pergunta e os controles */
+            gap: 0.75rem;
             flex-wrap: wrap;
         }
 
@@ -91,11 +92,11 @@
         .control-buttons-top {
             display: flex;
             gap: 0.5rem;
-            flex-shrink: 0; /* Impede o encolhimento dos botões */
+            flex-shrink: 0;
         }
 
         .control-buttons-top .btn-icon {
-            width: 48px; /* Tamanho fixo para ícones */
+            width: 48px;
             height: 48px;
             border-radius: 8px;
             display: flex;
@@ -110,21 +111,21 @@
         }
 
         #refresh-btn-top {
-            background-color: #5a67d8; /* Azul */
+            background-color: #5a67d8;
         }
         #refresh-btn-top:hover {
             background-color: #727ee9;
         }
 
         #correct-display {
-            background-color: #48bb78; /* Verde */
+            background-color: #48bb78;
         }
         #correct-display:hover {
             background-color: #64d193;
         }
 
         #incorrect-display {
-            background-color: #fc8181; /* Vermelho */
+            background-color: #fc8181;
         }
         #incorrect-display:hover {
             background-color: #ff9191;
@@ -157,12 +158,14 @@
         }
 
         .answer-buttons {
+            /* Altera para duas colunas em telas padrão */
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
         @media (min-width: 600px) {
             .answer-buttons {
+                /* Mantém 3 colunas em telas maiores que 600px */
                 grid-template-columns: repeat(3, 1fr);
             }
         }
@@ -172,7 +175,7 @@
                 grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
             }
             .top-section {
-                flex-direction: column; /* Empilha os elementos na parte superior */
+                flex-direction: column;
                 align-items: stretch;
             }
             .question-and-controls {
@@ -181,11 +184,11 @@
                 width: 100%;
             }
             .control-buttons-top {
-                justify-content: space-between; /* Distribui os botões na linha */
+                justify-content: space-between;
                 width: 100%;
             }
             .return-btn {
-                width: 100%; /* Botão de retorno ocupa largura total */
+                width: 100%;
             }
         }
 
@@ -246,10 +249,10 @@
     <script>
         const questionBox = document.getElementById('question-box');
         const answerButtonsContainer = document.getElementById('answer-buttons');
-        const refreshBtnTop = document.getElementById('refresh-btn-top'); // Novo botão de refresh
+        const refreshBtnTop = document.getElementById('refresh-btn-top');
         const messageBox = document.getElementById('message-box');
-        const correctDisplay = document.getElementById('correct-display'); // Novo display de acertos
-        const incorrectDisplay = document.getElementById('incorrect-display'); // Novo display de erros
+        const correctDisplay = document.getElementById('correct-display');
+        const incorrectDisplay = document.getElementById('incorrect-display');
 
         let correctCount = 0;
         let incorrectCount = 0;
@@ -281,7 +284,6 @@
                         .map(line => line.trim())
                         .filter(line => line.length > 0);
                     
-                    // CORREÇÃO AQUI: usa o ponto e vírgula como separador
                     allData[file] = lines.map(line => line.split(';').filter(item => item.trim() !== ''));
                 });
                 
@@ -316,7 +318,6 @@
             answerButtonsContainer.innerHTML = '';
             messageBox.classList.remove('show');
             
-            // Filtra os arquivos para excluir 'verbos.txt'
             const quizFiles = files.filter(file => file !== 'verbos.txt');
             
             const availableData = quizFiles.flatMap(file => allData[file] || []);
@@ -328,16 +329,14 @@
 
             const questionAndCorrectAnswer = getRandomItem(availableData);
             
-            const displayQuestion = questionAndCorrectAnswer[0]; // Inglês
-            const correctAnswer = questionAndCorrectAnswer[1]; // Português
+            const displayQuestion = questionAndCorrectAnswer[0];
+            const correctAnswer = questionAndCorrectAnswer[1];
             
-            // Pega todas as possíveis respostas (apenas as traduções em português)
             const allPossibleAnswers = availableData.map(item => item[1]);
 
             const uniqueIncorrectAnswers = [];
             const shuffledPossibleAnswers = shuffleArray(allPossibleAnswers);
 
-            // Seleciona 5 respostas incorretas únicas
             while (uniqueIncorrectAnswers.length < 5 && shuffledPossibleAnswers.length > 0) {
                 const potentialAnswer = shuffledPossibleAnswers.shift();
                 if (potentialAnswer !== correctAnswer && !uniqueIncorrectAnswers.includes(potentialAnswer)) {
@@ -345,7 +344,6 @@
                 }
             }
 
-            // Combina a resposta correta com as incorretas e embaralha
             const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
             
             if (allAnswers.length < 6) {
@@ -400,7 +398,7 @@
             incorrectDisplay.textContent = incorrectCount;
         }
         
-        refreshBtnTop.addEventListener('click', generateQuestion); // Evento para o novo botão de refresh
+        refreshBtnTop.addEventListener('click', generateQuestion);
 
         window.onload = loadDataFromGithub;
     </script>
