@@ -233,20 +233,26 @@
         ];
 
         async function loadDataFromGithub() {
-            // Caminho relativo para arquivos no mesmo repositório
+            console.log('Passo 1: Iniciando o carregamento dos arquivos...');
             const githubBaseUrl = './'; 
 
             try {
                 const fetchPromises = files.map(async (file) => {
+                    console.log(`Passo 2: Tentando carregar o arquivo: ${file}`);
                     const response = await fetch(githubBaseUrl + file);
+                    if (!response.ok) {
+                        throw new Error(`Falha ao carregar o arquivo: ${file}. Status: ${response.status}`);
+                    }
                     const text = await response.text();
                     const lines = text.split('\n')
                         .map(line => line.trim())
                         .filter(line => line.length > 0);
                     allData[file] = lines.map(line => line.split(' - '));
+                    console.log(`Passo 3: Arquivo ${file} carregado com sucesso.`);
                 });
                 
                 await Promise.all(fetchPromises);
+                console.log('Passo 4: Todos os arquivos foram carregados. Verificando dados...');
 
                 const totalEntries = Object.values(allData).flat().length;
                 if (totalEntries < 6) {
@@ -254,11 +260,11 @@
                     return;
                 }
                 
-                console.log('Dados carregados com sucesso!');
+                console.log('Passo 5: Dados suficientes para gerar o quiz.');
                 generateQuestion();
             } catch (error) {
-                console.error('Erro ao carregar os dados:', error);
-                questionBox.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
+                console.error('Passo 6: Um erro ocorreu ao carregar os dados.', error);
+                questionBox.textContent = 'Erro ao carregar os dados. Verifique o console para mais detalhes.';
             }
         }
 
@@ -275,6 +281,7 @@
         }
 
         function generateQuestion() {
+            console.log('Passo 7: Gerando uma nova pergunta...');
             answerButtonsContainer.innerHTML = '';
             messageBox.classList.remove('show');
             
@@ -340,6 +347,7 @@
             document.querySelectorAll('.answer-btn').forEach(button => {
                 button.addEventListener('click', () => checkAnswer(button));
             });
+            console.log('Passo 8: Pergunta gerada com sucesso.');
         }
 
         function checkAnswer(button) {
