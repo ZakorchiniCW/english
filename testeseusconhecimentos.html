@@ -225,3 +225,184 @@
 </head>
 <body>
     <div class="container">
+        <div class="top-section">
+            <a href="treineinglesteste.html" class="return-btn">⌫</a>
+            <div class="question-and-controls">
+                <div id="question-box" class="question-box">Carregando...</div>
+                <div class="control-buttons-top">
+                    <button id="refresh-btn-top" class="btn-icon">↻</button>
+                    <div id="correct-display" class="btn-icon">0</div>
+                    <div id="incorrect-display" class="btn-icon">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="message-box" class="message-box"></div>
+
+        <div id="answer-buttons" class="answer-buttons">
+            </div>
+    </div>
+
+    <script>
+        const questionBox = document.getElementById('question-box');
+        const answerButtonsContainer = document.getElementById('answer-buttons');
+        const refreshBtnTop = document.getElementById('refresh-btn-top'); // Novo botão de refresh
+        const messageBox = document.getElementById('message-box');
+        const correctDisplay = document.getElementById('correct-display'); // Novo display de acertos
+        const incorrectDisplay = document.getElementById('incorrect-display'); // Novo display de erros
+
+        let correctCount = 0;
+        let incorrectCount = 0;
+        
+        let allData = {};
+        const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'adverbios.txt', 'phrasalverbs.txt'];
+
+        const motivationalPhrases = [
+            "You got it!",
+            "Excellent!",
+            "Way to go!",
+            "Keep up the great work!",
+            "Fantastic!",
+            "Well done!",
+            "Unbelievable!",
+            "Amazing job!",
+            "That's perfect!",
+            "Incredible!"
+        ];
+
+        async function loadDataFromGithub() {
+            const githubBaseUrl = './'; 
+
+            try {
+                const fetchPromises = files.map(async (file) => {
+                    const response = await fetch(githubBaseUrl + file);
+                    const text = await response.text();
+                    const lines = text.split('\n')
+                        .map(line => line.trim())
+                        .filter(line => line.length > 0);
+                    
+                    // CORREÇÃO AQUI: usa o ponto e vírgula como separador
+                    allData[file] = lines.map(line => line.split(';').filter(item => item.trim() !== ''));
+                });
+                
+                await Promise.all(fetchPromises);
+
+                const totalEntries = Object.values(allData).flat().length;
+                if (totalEntries < 6) {
+                    questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
+                    return;
+                }
+                
+                generateQuestion();
+            } catch (error) {
+                console.error('Erro ao carregar os dados:', error);
+                questionBox.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
+            }
+        }
+
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function generateQuestion() {
+            answerButtonsContainer.innerHTML = '';
+            messageBox.classList.remove('show');
+            
+            // Filtra os arquivos para excluir 'verbos.txt'
+            const quizFiles = files.filter(file => file !== 'verbos.txt');
+            
+            const availableData = quizFiles.flatMap(file => allData[file] || []);
+            
+            if (availableData.length < 6) {
+                questionBox.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
+                return;
+            }
+
+            const questionAndCorrectAnswer = getRandomItem(availableData);
+            
+            const displayQuestion = questionAndCorrectAnswer[0]; // Inglês
+            const correctAnswer = questionAndCorrectAnswer[1]; // Português
+            
+            // Pega todas as possíveis respostas (apenas as traduções em português)
+            const allPossibleAnswers = availableData.map(item => item[1]);
+
+            const uniqueIncorrectAnswers = [];
+            const shuffledPossibleAnswers = shuffleArray(allPossibleAnswers);
+
+            // Seleciona 5 respostas incorretas únicas
+            while (uniqueIncorrectAnswers.length < 5 && shuffledPossibleAnswers.length > 0) {
+                const potentialAnswer = shuffledPossibleAnswers.shift();
+                if (potentialAnswer !== correctAnswer && !uniqueIncorrectAnswers.includes(potentialAnswer)) {
+                    uniqueIncorrectAnswers.push(potentialAnswer);
+                }
+            }
+
+            // Combina a resposta correta com as incorretas e embaralha
+            const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
+            
+            if (allAnswers.length < 6) {
+                questionBox.textContent = 'Dados insuficientes para gerar opções. Por favor, adicione mais palavras.';
+                return;
+            }
+
+            questionBox.textContent = displayQuestion;
+
+            allAnswers.forEach(answer => {
+                const button = document.createElement('button');
+                button.classList.add('answer-btn');
+                button.textContent = answer;
+                if (answer === correctAnswer) {
+                    button.dataset.correct = 'true';
+                } else {
+                    button.dataset.correct = 'false';
+                }
+                answerButtonsContainer.appendChild(button);
+            });
+            
+            document.querySelectorAll('.answer-btn').forEach(button => {
+                button.addEventListener('click', () => checkAnswer(button));
+            });
+        }
+
+        function checkAnswer(button) {
+            const isCorrect = button.dataset.correct === 'true';
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+                correctCount++;
+                
+                const answerButtons = document.querySelectorAll('.answer-btn');
+                answerButtons.forEach(btn => btn.disabled = true);
+                
+                const randomPhrase = getRandomItem(motivationalPhrases);
+                messageBox.textContent = `${randomPhrase}\nNext?`;
+                messageBox.classList.add('show');
+
+                setTimeout(() => {
+                    messageBox.classList.remove('show');
+                    generateQuestion();
+                }, 1500);
+            } else {
+                button.classList.add('incorrect');
+                incorrectCount++;
+                button.disabled = true;
+            }
+
+            correctDisplay.textContent = correctCount;
+            incorrectDisplay.textContent = incorrectCount;
+        }
+        
+        refreshBtnTop.addEventListener('click', generateQuestion); // Evento para o novo botão de refresh
+
+        window.onload = loadDataFromGithub;
+    </script>
+</body>
+</html>
