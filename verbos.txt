@@ -466,7 +466,7 @@ telefonar;phone;phoned;phoned;;
 terminar;finish;finished;finished;;
 terminar (relacionamento);break up;broke up;broken up;;
 testar;test;tested;tested;;
-tomar;take;took;taken;;
+tomar (banho), pegar;take;took;taken;;
 tomar um gole;sip;sipped;sipped;;
 tocar;touch;touched;touched;;
 tornar-se;become;became;become;;
@@ -498,3 +498,4 @@ voar;fly;flew;flown;;
 voltar;come back;came back;come back;;
 voltar;get back;got back;got back;;
 voltar;go back;went back;gone back;;
+
