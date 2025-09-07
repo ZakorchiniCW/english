@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<!-- saved from url=(0061)https://zakorchinicw.github.io/english/testaraprendizado.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ELDVDP0M7R"></script>
+<script async="" src="./Testar Aprendizado_files/js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -10,11 +10,10 @@
 
   gtag('config', 'G-ELDVDP0M7R');
 </script>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testar Aprendizado</title>
-   
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
@@ -44,35 +43,19 @@
             gap: 1.5rem;
             position: relative;
         }
-
-        .question-box {
-            /* Alterado para flexbox para alinhar os botões */
+        
+        .top-section {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 0.75rem;
-
-            padding: 1rem; /* Padding ajustado */
-            border: 1px solid #4b5563;
-            border-radius: 4px;
-            background-color: #374151;
-            text-align: center;
-            font-size: 1.25em;
-            font-weight: bold;
-            min-height: 60px;
-            transition: background-color 0.3s;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        #question-text {
-            flex-grow: 1; /* Permite que o texto da pergunta ocupe o espaço restante */
-            text-align: center;
-        }
-        
         .return-btn {
-            /* Tamanho ajustado para se encaixar na question-box */
-            width: 32px;
-            height: 32px;
-            font-size: 1em;
+            /* Botão de retorno menor e sutil */
+            padding: 0.5rem 0.8rem;
+            font-size: 1.2em;
             background-color: #4b5563;
             color: white;
             border: none;
@@ -85,10 +68,37 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            /* Tamanho fixo para que não ocupe muita largura em telas menores */
+            width: 40px; 
+            height: 40px;
         }
 
         .return-btn:hover {
             background-color: #6b7280;
+        }
+
+        .question-and-controls {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .question-box {
+            flex-grow: 1;
+            padding: 1.25rem;
+            border: 1px solid #4b5563;
+            border-radius: 4px;
+            background-color: #374151;
+            text-align: center;
+            font-size: 1.25em;
+            font-weight: bold;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
         }
 
         .control-buttons-top {
@@ -98,14 +108,13 @@
         }
 
         .control-buttons-top .btn-icon {
-            /* Tamanho ajustado para se encaixar na question-box */
-            width: 36px;
-            height: 36px;
+            width: 48px;
+            height: 48px;
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1em; /* Tamanho da fonte ajustado */
+            font-size: 1.2em;
             font-weight: bold;
             color: white;
             cursor: pointer;
@@ -134,6 +143,7 @@
             background-color: #ff9191;
         }
 
+
         .message-box {
             position: absolute;
             top: 50%;
@@ -160,25 +170,33 @@
         }
 
         .answer-buttons {
+            /* Sempre 2 colunas, como na imagem */
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-
-        /* --- Início das mudanças para telas menores --- */
+        
+        /* Ajustes para telas menores, se necessário, mas mantendo 2 colunas para as respostas */
         @media (max-width: 599px) {
-            .question-box {
+            .top-section {
                 flex-direction: column;
                 align-items: stretch;
-                padding: 8px;
             }
-
+            .question-and-controls {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
             .control-buttons-top {
-                justify-content: center;
-                margin-top: 1rem; /* Adiciona espaço acima dos botões */
+                justify-content: space-between;
+                width: 100%;
             }
+            /* O return-btn já tem width e height fixos */
+            /* .return-btn {
+                width: 100%;
+            } */
         }
-        /* --- Fim das mudanças para telas menores --- */
+
 
         .answer-btn {
             padding: 1rem;
