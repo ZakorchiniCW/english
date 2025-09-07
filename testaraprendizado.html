@@ -215,13 +215,15 @@
 </head>
 <body>
     <div class="container">
-        <div id="question-box" class="question-box">
+        <div class="top-section">
             <a href="https://zakorchinicw.github.io/english/treineingles.html" class="return-btn">←</a>
-            <span id="question-text">Carregando...</span>
-            <div class="control-buttons-top">
-                <button id="refresh-btn-top" class="btn-icon">↻</button>
-                <div id="correct-display" class="btn-icon">0</div>
-                <div id="incorrect-display" class="btn-icon">0</div>
+            <div class="question-and-controls">
+                <div id="question-box" class="question-box"></div>
+                <div class="control-buttons-top">
+                    <button id="refresh-btn-top" class="btn-icon">↻</button>
+                    <div id="correct-display" class="btn-icon">0</div>
+                    <div id="incorrect-display" class="btn-icon">0</div>
+                </div>
             </div>
         </div>
         
@@ -231,7 +233,7 @@
     </div>
 
     <script>
-        const questionText = document.getElementById('question-text');
+        const questionBox = document.getElementById('question-box');
         const answerButtonsContainer = document.getElementById('answer-buttons');
         const refreshBtnTop = document.getElementById('refresh-btn-top');
         const messageBox = document.getElementById('message-box');
@@ -275,14 +277,14 @@
 
                 const totalEntries = Object.values(allData).flat().length;
                 if (totalEntries < 6) {
-                    questionText.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
+                    questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
                     return;
                 }
                 
                 generateQuestion();
             } catch (error) {
                 console.error('Erro ao carregar os dados:', error);
-                questionText.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
+                questionBox.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
             }
         }
 
@@ -304,19 +306,29 @@
             
             const quizFiles = files.filter(file => file !== 'verbos.txt');
             
-            const availableData = quizFiles.flatMap(file => allData[file] || []);
-            
+            const availableData = quizFiles.flatMap(file => allData[file].map(item => ({ question: item[0], answer: item[1], category: file })));
+
             if (availableData.length < 6) {
-                questionText.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
+                questionBox.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
                 return;
             }
 
             const questionAndCorrectAnswer = getRandomItem(availableData);
             
-            const displayQuestion = questionAndCorrectAnswer[0];
-            const correctAnswer = questionAndCorrectAnswer[1];
-            
-            const allPossibleAnswers = availableData.map(item => item[1]);
+            const displayQuestion = questionAndCorrectAnswer.question;
+            const correctAnswer = questionAndCorrectAnswer.answer;
+            const questionCategory = questionAndCorrectAnswer.category;
+
+            let allPossibleAnswers = [];
+
+            if (questionCategory === 'frases.txt') {
+                allPossibleAnswers = allData['frases.txt'].map(item => item[1]);
+            } else {
+                const nonPhraseFiles = quizFiles.filter(file => file !== 'frases.txt');
+                nonPhraseFiles.forEach(file => {
+                    allPossibleAnswers = allPossibleAnswers.concat(allData[file].map(item => item[1]));
+                });
+            }
 
             const uniqueIncorrectAnswers = [];
             const shuffledPossibleAnswers = shuffleArray(allPossibleAnswers);
@@ -327,15 +339,15 @@
                     uniqueIncorrectAnswers.push(potentialAnswer);
                 }
             }
-
-            const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
             
-            if (allAnswers.length < 6) {
-                questionText.textContent = 'Dados insuficientes para gerar opções. Por favor, adicione mais palavras.';
+            if (uniqueIncorrectAnswers.length < 5) {
+                questionBox.textContent = `Dados insuficientes para gerar opções de resposta na categoria "${questionCategory}". Por favor, adicione mais itens.`;
                 return;
             }
 
-            questionText.textContent = displayQuestion;
+            const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
+            
+            questionBox.textContent = displayQuestion;
 
             allAnswers.forEach(answer => {
                 const button = document.createElement('button');
@@ -387,5 +399,4 @@
         window.onload = loadDataFromGithub;
     </script>
 </body>
-</html>  
-  
+</html>
