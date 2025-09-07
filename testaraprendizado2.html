@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script async="" src="./Testar Aprendizado_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ELDVDP0M7R');
+</script>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testar Aprendizado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1f2937, #111827);
+            background-attachment: fixed;
+            color: #e5e7eb;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #1f2937;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .question-box {
+            /* Alterado para flexbox para alinhar os botões */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+
+            padding: 1rem; /* Padding ajustado */
+            border: 1px solid #4b5563;
+            border-radius: 4px;
+            background-color: #374151;
+            text-align: center;
+            font-size: 1.25em;
+            font-weight: bold;
+            min-height: 50px;
+            transition: background-color 0.3s;
+        }
+
+        #question-text {
+            flex-grow: 1; /* Permite que o texto da pergunta ocupe o espaço restante */
+            text-align: center;
+        }
+        
+        .return-btn {
+            /* Tamanho ajustado para se encaixar na question-box */
+            width: 36px;
+            height: 36px;
+            font-size: 1em;
+            background-color: #4b5563;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            line-height: 1;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .return-btn:hover {
+            background-color: #6b7280;
+        }
+
+        .control-buttons-top {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .control-buttons-top .btn-icon {
+            /* Tamanho ajustado para se encaixar na question-box */
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1em; /* Tamanho da fonte ajustado */
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        #refresh-btn-top {
+            background-color: #5a67d8;
+        }
+        #refresh-btn-top:hover {
+            background-color: #727ee9;
+        }
+
+        #correct-display {
+            background-color: #48bb78;
+        }
+        #correct-display:hover {
+            background-color: #64d193;
+        }
+
+        #incorrect-display {
+            background-color: #fc8181;
+        }
+        #incorrect-display:hover {
+            background-color: #ff9191;
+        }
+
+        .message-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2rem;
+            background-color: #38a169;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 1.25em;
+            font-weight: bold;
+            z-index: 10;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            white-space: pre-wrap;
+        }
+
+        .message-box.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .answer-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 599px) {
+            .question-box {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                align-items: stretch;
+            }
+            .question-box > div {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: stretch;
+            }
+            .control-buttons-top {
+                justify-content: center;
+            }
+        }
+
+        .answer-btn {
+            padding: 1rem;
+            background-color: #4b5563;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .answer-btn:hover {
+            background-color: #6b7280;
+        }
+
+        .answer-btn:active {
+            transform: scale(0.98);
+        }
+
+        .answer-btn.correct {
+            background-color: #38a169;
+        }
+
+        .answer-btn.incorrect {
+            background-color: #e53e3e;
+        }
+
+        .answer-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="question-box" class="question-box">
+            <a href="https://zakorchinicw.github.io/english/treineingles.html" class="return-btn">←</a>
+            <span id="question-text">Carregando...</span>
+            <div class="control-buttons-top">
+                <button id="refresh-btn-top" class="btn-icon">↻</button>
+                <div id="correct-display" class="btn-icon">0</div>
+                <div id="incorrect-display" class="btn-icon">0</div>
+            </div>
+        </div>
+        
+        <div id="message-box" class="message-box"></div>
+
+        <div id="answer-buttons" class="answer-buttons"></div>
+    </div>
+
+    <script>
+        const questionText = document.getElementById('question-text');
+        const answerButtonsContainer = document.getElementById('answer-buttons');
+        const refreshBtnTop = document.getElementById('refresh-btn-top');
+        const messageBox = document.getElementById('message-box');
+        const correctDisplay = document.getElementById('correct-display');
+        const incorrectDisplay = document.getElementById('incorrect-display');
+
+        let correctCount = 0;
+        let incorrectCount = 0;
+        
+        let allData = {};
+        const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'adverbios.txt', 'phrasalverbs.txt'];
+
+        const motivationalPhrases = [
+            "You got it!",
+            "Excellent!",
+            "Way to go!",
+            "Keep up the great work!",
+            "Fantastic!",
+            "Well done!",
+            "Unbelievable!",
+            "Amazing job!",
+            "That's perfect!",
+            "Incredible!"
+        ];
+
+        async function loadDataFromGithub() {
+            const githubBaseUrl = './'; 
+
+            try {
+                const fetchPromises = files.map(async (file) => {
+                    const response = await fetch(githubBaseUrl + file);
+                    const text = await response.text();
+                    const lines = text.split('\n')
+                        .map(line => line.trim())
+                        .filter(line => line.length > 0);
+                    
+                    allData[file] = lines.map(line => line.split(';').filter(item => item.trim() !== ''));
+                });
+                
+                await Promise.all(fetchPromises);
+
+                const totalEntries = Object.values(allData).flat().length;
+                if (totalEntries < 6) {
+                    questionText.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
+                    return;
+                }
+                
+                generateQuestion();
+            } catch (error) {
+                console.error('Erro ao carregar os dados:', error);
+                questionText.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
+            }
+        }
+
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function generateQuestion() {
+            answerButtonsContainer.innerHTML = '';
+            messageBox.classList.remove('show');
+            
+            const quizFiles = files.filter(file => file !== 'verbos.txt');
+            
+            const availableData = quizFiles.flatMap(file => allData[file] || []);
+            
+            if (availableData.length < 6) {
+                questionText.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
+                return;
+            }
+
+            const questionAndCorrectAnswer = getRandomItem(availableData);
+            
+            const displayQuestion = questionAndCorrectAnswer[0];
+            const correctAnswer = questionAndCorrectAnswer[1];
+            
+            const allPossibleAnswers = availableData.map(item => item[1]);
+
+            const uniqueIncorrectAnswers = [];
+            const shuffledPossibleAnswers = shuffleArray(allPossibleAnswers);
+
+            while (uniqueIncorrectAnswers.length < 5 && shuffledPossibleAnswers.length > 0) {
+                const potentialAnswer = shuffledPossibleAnswers.shift();
+                if (potentialAnswer !== correctAnswer && !uniqueIncorrectAnswers.includes(potentialAnswer)) {
+                    uniqueIncorrectAnswers.push(potentialAnswer);
+                }
+            }
+
+            const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
+            
+            if (allAnswers.length < 6) {
+                questionText.textContent = 'Dados insuficientes para gerar opções. Por favor, adicione mais palavras.';
+                return;
+            }
+
+            questionText.textContent = displayQuestion;
+
+            allAnswers.forEach(answer => {
+                const button = document.createElement('button');
+                button.classList.add('answer-btn');
+                button.textContent = answer;
+                if (answer === correctAnswer) {
+                    button.dataset.correct = 'true';
+                } else {
+                    button.dataset.correct = 'false';
+                }
+                answerButtonsContainer.appendChild(button);
+            });
+            
+            document.querySelectorAll('.answer-btn').forEach(button => {
+                button.addEventListener('click', () => checkAnswer(button));
+            });
+        }
+
+        function checkAnswer(button) {
+            const isCorrect = button.dataset.correct === 'true';
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+                correctCount++;
+                
+                const answerButtons = document.querySelectorAll('.answer-btn');
+                answerButtons.forEach(btn => btn.disabled = true);
+                
+                const randomPhrase = getRandomItem(motivationalPhrases);
+                messageBox.textContent = `${randomPhrase}`;
+                messageBox.classList.add('show');
+
+                setTimeout(() => {
+                    messageBox.classList.remove('show');
+                    generateQuestion();
+                }, 1500);
+            } else {
+                button.classList.add('incorrect');
+                incorrectCount++;
+                button.disabled = true;
+            }
+
+            correctDisplay.textContent = correctCount;
+            incorrectDisplay.textContent = incorrectCount;
+        }
+        
+        refreshBtnTop.addEventListener('click', generateQuestion);
+
+        window.onload = loadDataFromGithub;
+    </script>
+</body>
+</html>
