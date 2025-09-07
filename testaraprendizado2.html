@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testar Aprendizado</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
@@ -154,23 +152,19 @@
             gap: 1rem;
         }
 
+        /* --- Início das mudanças para telas menores --- */
         @media (max-width: 599px) {
             .question-box {
                 flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
                 align-items: stretch;
             }
-            .question-box > div {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: stretch;
-            }
+
             .control-buttons-top {
                 justify-content: center;
+                margin-top: 1rem; /* Adiciona espaço acima dos botões */
             }
         }
+        /* --- Fim das mudanças para telas menores --- */
 
         .answer-btn {
             padding: 1rem;
@@ -379,4 +373,5 @@
         window.onload = loadDataFromGithub;
     </script>
 </body>
-</html>
+</html>  
+  
