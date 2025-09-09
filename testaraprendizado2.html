@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ELDVDP0M7R');
+</script>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testar Aprendizado</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
@@ -31,35 +40,19 @@
             gap: 1.5rem;
             position: relative;
         }
-
-        .question-box {
-            /* Alterado para flexbox para alinhar os botões */
+        
+        .top-section {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 0.75rem;
-
-            padding: 1rem; /* Padding ajustado */
-            border: 1px solid #4b5563;
-            border-radius: 4px;
-            background-color: #374151;
-            text-align: center;
-            font-size: 1.25em;
-            font-weight: bold;
-            min-height: 50px;
-            transition: background-color 0.3s;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        #question-text {
-            flex-grow: 1; /* Permite que o texto da pergunta ocupe o espaço restante */
-            text-align: center;
-        }
-        
         .return-btn {
-            /* Tamanho ajustado para se encaixar na question-box */
-            width: 36px;
-            height: 36px;
-            font-size: 1em;
+            /* Botão de retorno menor e sutil */
+            padding: 0.5rem 0.8rem;
+            font-size: 1.2em;
             background-color: #4b5563;
             color: white;
             border: none;
@@ -72,10 +65,37 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            /* Tamanho fixo para que não ocupe muita largura em telas menores */
+            width: 40px; 
+            height: 40px;
         }
 
         .return-btn:hover {
             background-color: #6b7280;
+        }
+
+        .question-and-controls {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .question-box {
+            flex-grow: 1;
+            padding: 1.25rem;
+            border: 1px solid #4b5563;
+            border-radius: 4px;
+            background-color: #374151;
+            text-align: center;
+            font-size: 1.25em;
+            font-weight: bold;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
         }
 
         .control-buttons-top {
@@ -85,14 +105,13 @@
         }
 
         .control-buttons-top .btn-icon {
-            /* Tamanho ajustado para se encaixar na question-box */
-            width: 36px;
-            height: 36px;
+            width: 48px;
+            height: 48px;
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1em; /* Tamanho da fonte ajustado */
+            font-size: 1.2em;
             font-weight: bold;
             color: white;
             cursor: pointer;
@@ -121,6 +140,16 @@
             background-color: #ff9191;
         }
 
+        /* Novo estilo para o botão de compartilhar */
+        #share-btn {
+            background-color: #25d366; /* Cor do WhatsApp */
+        }
+
+        #share-btn:hover {
+            background-color: #128c7e;
+        }
+
+
         .message-box {
             position: absolute;
             top: 50%;
@@ -147,25 +176,29 @@
         }
 
         .answer-buttons {
+            /* Sempre 2 colunas, como na imagem */
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-
-        /* --- Início das mudanças para telas menores --- */
+        
+        /* Ajustes para telas menores, se necessário, mas mantendo 2 colunas para as respostas */
         @media (max-width: 599px) {
-            .question-box {
+            .top-section {
                 flex-direction: column;
                 align-items: stretch;
-              padding: 4px;
             }
-
+            .question-and-controls {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
             .control-buttons-top {
-                justify-content: center;
-                margin-top: 1rem; /* Adiciona espaço acima dos botões */
+                justify-content: space-between;
+                width: 100%;
             }
         }
-        /* --- Fim das mudanças para telas menores --- */
+
 
         .answer-btn {
             padding: 1rem;
@@ -202,13 +235,18 @@
 </head>
 <body>
     <div class="container">
-        <div id="question-box" class="question-box">
+        <div class="top-section">
             <a href="https://zakorchinicw.github.io/english/treineingles.html" class="return-btn">←</a>
-            <span id="question-text">Carregando...</span>
-            <div class="control-buttons-top">
-                <button id="refresh-btn-top" class="btn-icon">↻</button>
-                <div id="correct-display" class="btn-icon">0</div>
-                <div id="incorrect-display" class="btn-icon">0</div>
+            <div class="question-and-controls">
+                <div id="question-box" class="question-box"></div>
+                <div class="control-buttons-top">
+                    <button id="refresh-btn-top" class="btn-icon">↻</button>
+                    <div id="correct-display" class="btn-icon">0</div>
+                    <div id="incorrect-display" class="btn-icon">0</div>
+                    <button id="share-btn" class="btn-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    </button>
+                </div>
             </div>
         </div>
         
@@ -218,12 +256,13 @@
     </div>
 
     <script>
-        const questionText = document.getElementById('question-text');
+        const questionBox = document.getElementById('question-box');
         const answerButtonsContainer = document.getElementById('answer-buttons');
         const refreshBtnTop = document.getElementById('refresh-btn-top');
         const messageBox = document.getElementById('message-box');
         const correctDisplay = document.getElementById('correct-display');
         const incorrectDisplay = document.getElementById('incorrect-display');
+        const shareBtn = document.getElementById('share-btn');
 
         let correctCount = 0;
         let incorrectCount = 0;
@@ -262,14 +301,14 @@
 
                 const totalEntries = Object.values(allData).flat().length;
                 if (totalEntries < 6) {
-                    questionText.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
+                    questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
                     return;
                 }
                 
                 generateQuestion();
             } catch (error) {
                 console.error('Erro ao carregar os dados:', error);
-                questionText.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
+                questionBox.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
             }
         }
 
@@ -291,19 +330,29 @@
             
             const quizFiles = files.filter(file => file !== 'verbos.txt');
             
-            const availableData = quizFiles.flatMap(file => allData[file] || []);
-            
+            const availableData = quizFiles.flatMap(file => allData[file].map(item => ({ question: item[0], answer: item[1], category: file })));
+
             if (availableData.length < 6) {
-                questionText.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
+                questionBox.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
                 return;
             }
 
             const questionAndCorrectAnswer = getRandomItem(availableData);
             
-            const displayQuestion = questionAndCorrectAnswer[0];
-            const correctAnswer = questionAndCorrectAnswer[1];
-            
-            const allPossibleAnswers = availableData.map(item => item[1]);
+            const displayQuestion = questionAndCorrectAnswer.question;
+            const correctAnswer = questionAndCorrectAnswer.answer;
+            const questionCategory = questionAndCorrectAnswer.category;
+
+            let allPossibleAnswers = [];
+
+            if (questionCategory === 'frases.txt') {
+                allPossibleAnswers = allData['frases.txt'].map(item => item[1]);
+            } else {
+                const nonPhraseFiles = quizFiles.filter(file => file !== 'frases.txt');
+                nonPhraseFiles.forEach(file => {
+                    allPossibleAnswers = allPossibleAnswers.concat(allData[file].map(item => item[1]));
+                });
+            }
 
             const uniqueIncorrectAnswers = [];
             const shuffledPossibleAnswers = shuffleArray(allPossibleAnswers);
@@ -314,15 +363,15 @@
                     uniqueIncorrectAnswers.push(potentialAnswer);
                 }
             }
-
-            const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
             
-            if (allAnswers.length < 6) {
-                questionText.textContent = 'Dados insuficientes para gerar opções. Por favor, adicione mais palavras.';
+            if (uniqueIncorrectAnswers.length < 5) {
+                questionBox.textContent = `Dados insuficientes para gerar opções de resposta na categoria "${questionCategory}". Por favor, adicione mais itens.`;
                 return;
             }
 
-            questionText.textContent = displayQuestion;
+            const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
+            
+            questionBox.textContent = displayQuestion;
 
             allAnswers.forEach(answer => {
                 const button = document.createElement('button');
@@ -371,8 +420,14 @@
         
         refreshBtnTop.addEventListener('click', generateQuestion);
 
+        shareBtn.addEventListener('click', () => {
+            const shareText = "Melhore seu vocabulário praticando nesta página!";
+            const shareUrl = "https://zakorchinicw.github.io/english/testaraprendizado.html";
+            const fullMessage = encodeURIComponent(`${shareText} ${shareUrl}`);
+            window.open(`https://api.whatsapp.com/send?text=${fullMessage}`, '_blank');
+        });
+
         window.onload = loadDataFromGithub;
     </script>
 </body>
-</html>  
-  
+</html>
