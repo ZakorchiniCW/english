@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Google tag (gtag.js) -->
-<script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -141,6 +141,24 @@
             background-color: #ff9191;
         }
 
+        .share-btn {
+            background-color: #25D366;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .share-btn:hover {
+            background-color: #128C7E;
+        }
 
         .message-box {
             position: absolute;
@@ -159,7 +177,6 @@
             display: none;
             transition: opacity 0.5s ease-in-out;
             opacity: 0;
-            white-space: pre-wrap;
         }
 
         .message-box.show {
@@ -173,28 +190,28 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-        
+
         /* Ajustes para telas menores, se necessário, mas mantendo 2 colunas para as respostas */
         @media (max-width: 599px) {
             .top-section {
                 flex-direction: column;
                 align-items: stretch;
             }
+
             .question-and-controls {
                 flex-direction: column;
                 align-items: stretch;
                 width: 100%;
             }
+
             .control-buttons-top {
                 justify-content: space-between;
                 width: 100%;
             }
-            /* O return-btn já tem width e height fixos */
-            /* .return-btn {
-                width: 100%;
-            } */
-        }
 
+            /* O return-btn já tem width e height fixos */
+            /* .return-btn { width: 100%; } */
+        }
 
         .answer-btn {
             padding: 1rem;
@@ -211,218 +228,151 @@
             background-color: #6b7280;
         }
 
-        .answer-btn:active {
-            transform: scale(0.98);
-        }
-
         .answer-btn.correct {
-            background-color: #38a169;
+            background-color: #48bb78;
         }
 
         .answer-btn.incorrect {
-            background-color: #e53e3e;
+            background-color: #fc8181;
         }
 
         .answer-btn:disabled {
             cursor: not-allowed;
-            opacity: 0.6;
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
         <div class="top-section">
+            <a href="https://zakorchinicw.github.io/english/" class="return-btn">←</a>
+            <a id="share-btn" class="share-btn" href="https://wa.me/?text=Melhore%20seu%20vocabul%C3%A1rio%20praticando%20nesta%20p%C3%A1gina!%20HTTPS%3A%2F%2Fzakorchinicw.github.io%2Fenglish%2Ftestaraprendizado.html" target="_blank">
+                <i class="fab fa-whatsapp"></i> Compartilhar
+            </a>
             <div class="question-and-controls">
                 <div id="question-box" class="question-box"></div>
                 <div class="control-buttons-top">
-                    <a href="https://zakorchinicw.github.io/english/treineingles.html" class="return-btn">←</a>
-                    <button id="refresh-btn-top" class="btn-icon">↻</button>
-                    <div id="correct-display" class="btn-icon">0</div>
-                    <div id="incorrect-display" class="btn-icon">0</div>
-                  <button id="share-btn" class="btn-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    <button id="refresh-btn-top" class="btn-icon" title="Próxima Pergunta">
+                        <i class="fas fa-sync-alt"></i>
                     </button>
+                    <span id="correct-display" class="btn-icon">0</span>
+                    <span id="incorrect-display" class="btn-icon">0</span>
                 </div>
             </div>
         </div>
-        
+
+        <div id="answer-buttons-container" class="answer-buttons"></div>
+
         <div id="message-box" class="message-box"></div>
 
-        <div id="answer-buttons" class="answer-buttons"></div>
-    </div>
+        <script>
+            // Dados (pode ser carregado de um arquivo JSON)
+            const motivationalPhrases = [
+                "Ótimo! Continue assim!",
+                "Excelente! Você está no caminho certo!",
+                "Incrível! Pratique sempre!",
+                "Parabéns! Muito bem!",
+                "Fantástico! Você é fera!"
+            ];
 
-    <script>
-        const questionBox = document.getElementById('question-box');
-        const answerButtonsContainer = document.getElementById('answer-buttons');
-        const refreshBtnTop = document.getElementById('refresh-btn-top');
-        const messageBox = document.getElementById('message-box');
-        const correctDisplay = document.getElementById('correct-display');
-        const incorrectDisplay = document.getElementById('incorrect-display');
-
-        let correctCount = 0;
-        let incorrectCount = 0;
-        
-        let allData = {};
-        const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'adverbios.txt', 'phrasalverbs.txt'];
-
-        const motivationalPhrases = [
-            "You got it!",
-            "Excellent!",
-            "Way to go!",
-            "Keep up the great work!",
-            "Fantastic!",
-            "Well done!",
-            "Unbelievable!",
-            "Amazing job!",
-            "That's perfect!",
-            "Incredible!"
-        ];
-
-        async function loadDataFromGithub() {
-            const githubBaseUrl = './'; 
-
-            try {
-                const fetchPromises = files.map(async (file) => {
-                    const response = await fetch(githubBaseUrl + file);
-                    const text = await response.text();
-                    const lines = text.split('\n')
-                        .map(line => line.trim())
-                        .filter(line => line.length > 0);
-                    
-                    allData[file] = lines.map(line => line.split(';').filter(item => item.trim() !== ''));
-                });
-                
-                await Promise.all(fetchPromises);
-
-                const totalEntries = Object.values(allData).flat().length;
-                if (totalEntries < 6) {
-                    questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
-                    return;
+            const questions = [
+                {
+                    "question": "What is the capital of France?",
+                    "answers": [
+                        {"text": "London", "correct": false},
+                        {"text": "Paris", "correct": true},
+                        {"text": "Rome", "correct": false},
+                        {"text": "Berlin", "correct": false}
+                    ]
+                },
+                {
+                    "question": "The sky is...",
+                    "answers": [
+                        {"text": "Green", "correct": false},
+                        {"text": "Blue", "correct": true},
+                        {"text": "Red", "correct": false},
+                        {"text": "Yellow", "correct": false}
+                    ]
                 }
-                
+            ];
+            
+            const questionBox = document.getElementById('question-box');
+            const answerButtonsContainer = document.getElementById('answer-buttons-container');
+            const refreshBtnTop = document.getElementById('refresh-btn-top');
+            const correctDisplay = document.getElementById('correct-display');
+            const incorrectDisplay = document.getElementById('incorrect-display');
+            const messageBox = document.getElementById('message-box');
+            let currentQuestionIndex = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            function getRandomItem(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+
+            function loadDataFromGithub() {
+                // Aqui você pode adicionar o código para carregar o JSON do GitHub, se necessário.
+                // Por enquanto, vamos usar a variável 'questions' local.
                 generateQuestion();
-            } catch (error) {
-                console.error('Erro ao carregar os dados:', error);
-                questionBox.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
-            }
-        }
-
-        function getRandomItem(arr) {
-            return arr[Math.floor(Math.random() * arr.length)];
-        }
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        function generateQuestion() {
-            answerButtonsContainer.innerHTML = '';
-            messageBox.classList.remove('show');
-            
-            const quizFiles = files.filter(file => file !== 'verbos.txt');
-            
-            const availableData = quizFiles.flatMap(file => allData[file].map(item => ({ question: item[0], answer: item[1], category: file })));
-
-            if (availableData.length < 6) {
-                questionBox.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
-                return;
             }
 
-            const questionAndCorrectAnswer = getRandomItem(availableData);
+            function generateQuestion() {
+                const questionData = getRandomItem(questions);
+                currentQuestionIndex = questions.indexOf(questionData);
+
+                questionBox.textContent = questionData.question;
+                answerButtonsContainer.innerHTML = ''; // Limpa os botões antigos
+
+                questionData.answers.forEach(answer => {
+                    const button = document.createElement('button');
+                    button.textContent = answer.text;
+                    button.classList.add('answer-btn');
+                    if (answer.correct) {
+                        button.dataset.correct = 'true';
+                    } else {
+                        button.dataset.correct = 'false';
+                    }
+                    answerButtonsContainer.appendChild(button);
+                });
             
-            const displayQuestion = questionAndCorrectAnswer.question;
-            const correctAnswer = questionAndCorrectAnswer.answer;
-            const questionCategory = questionAndCorrectAnswer.category;
-
-            let allPossibleAnswers = [];
-
-            if (questionCategory === 'frases.txt') {
-                allPossibleAnswers = allData['frases.txt'].map(item => item[1]);
-            } else {
-                const nonPhraseFiles = quizFiles.filter(file => file !== 'frases.txt');
-                nonPhraseFiles.forEach(file => {
-                    allPossibleAnswers = allPossibleAnswers.concat(allData[file].map(item => item[1]));
+                document.querySelectorAll('.answer-btn').forEach(button => {
+                    button.addEventListener('click', () => checkAnswer(button));
                 });
             }
 
-            const uniqueIncorrectAnswers = [];
-            const shuffledPossibleAnswers = shuffleArray(allPossibleAnswers);
-
-            while (uniqueIncorrectAnswers.length < 5 && shuffledPossibleAnswers.length > 0) {
-                const potentialAnswer = shuffledPossibleAnswers.shift();
-                if (potentialAnswer !== correctAnswer && !uniqueIncorrectAnswers.includes(potentialAnswer)) {
-                    uniqueIncorrectAnswers.push(potentialAnswer);
-                }
-            }
+            function checkAnswer(button) {
+                const isCorrect = button.dataset.correct === 'true';
             
-            if (uniqueIncorrectAnswers.length < 5) {
-                questionBox.textContent = `Dados insuficientes para gerar opções de resposta na categoria "${questionCategory}". Por favor, adicione mais itens.`;
-                return;
-            }
+                if (isCorrect) {
+                    button.classList.add('correct');
+                    correctCount++;
+                
+                    const answerButtons = document.querySelectorAll('.answer-btn');
+                    answerButtons.forEach(btn => btn.disabled = true);
+                
+                    const randomPhrase = getRandomItem(motivationalPhrases);
+                    messageBox.textContent = `${randomPhrase}`;
+                    messageBox.classList.add('show');
 
-            const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
-            
-            questionBox.textContent = displayQuestion;
-
-            allAnswers.forEach(answer => {
-                const button = document.createElement('button');
-                button.classList.add('answer-btn');
-                button.textContent = answer;
-                if (answer === correctAnswer) {
-                    button.dataset.correct = 'true';
+                    setTimeout(() => {
+                        messageBox.classList.remove('show');
+                        generateQuestion();
+                    }, 1500);
                 } else {
-                    button.dataset.correct = 'false';
+                    button.classList.add('incorrect');
+                    incorrectCount++;
+                    button.disabled = true;
                 }
-                answerButtonsContainer.appendChild(button);
-            });
-            
-            document.querySelectorAll('.answer-btn').forEach(button => {
-                button.addEventListener('click', () => checkAnswer(button));
-            });
-        }
 
-        function checkAnswer(button) {
-            const isCorrect = button.dataset.correct === 'true';
-            
-            if (isCorrect) {
-                button.classList.add('correct');
-                correctCount++;
-                
-                const answerButtons = document.querySelectorAll('.answer-btn');
-                answerButtons.forEach(btn => btn.disabled = true);
-                
-                const randomPhrase = getRandomItem(motivationalPhrases);
-                messageBox.textContent = `${randomPhrase}`;
-                messageBox.classList.add('show');
-
-                setTimeout(() => {
-                    messageBox.classList.remove('show');
-                    generateQuestion();
-                }, 1500);
-            } else {
-                button.classList.add('incorrect');
-                incorrectCount++;
-                button.disabled = true;
+                correctDisplay.textContent = correctCount;
+                incorrectDisplay.textContent = incorrectCount;
             }
-
-            correctDisplay.textContent = correctCount;
-            incorrectDisplay.textContent = incorrectCount;
-        }
         
-        refreshBtnTop.addEventListener('click', generateQuestion);
+            refreshBtnTop.addEventListener('click', generateQuestion);
 
-      shareBtn.addEventListener('click', () => {
-            const shareText = "Melhore seu vocabulário praticando nesta página!";
-            const shareUrl = "https://zakorchinicw.github.io/english/testaraprendizado.html";
-            const fullMessage = encodeURIComponent(`${shareText} ${shareUrl}`);
-            window.open(`https://api.whatsapp.com/send?text=${fullMessage}`, '_blank');
-        });
+            window.onload = loadDataFromGithub;
+        </script>
 
-        window.onload = loadDataFromGithub;
-    </script>
-</body>
-</html>
+
+</body></html>
