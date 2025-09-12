@@ -482,7 +482,7 @@ Visit your uncle this weekend;Visitar seu tio neste fim de semana;;
 Wait near the school gate;Esperar perto do portão da escola;;
 Wait outside the classroom;Esperar do lado de fora da sala de aula;;
 Wash your hands properly;Lavar as mãos corretamente;;
-Water plants every morning;Plantar de água todas as manhãs;;
+Water plants every morning;Águar as plantas todas as manhãs;;
 Wave at your classmates outside;Acenar para seus colegas de classe do lado de fora;;
 Wave goodbye to grandma;Acenar de adeus para a vovó;;
 Wave to your friends;Acenar para seus amigos;;
@@ -548,4 +548,5 @@ Zip your file immediately;Compactar seu arquivo imediatamente;;
 Zip your hoodie tight;Fechar seu moletom com zíper firmemente;;
 Zoom in on the picture;Aumentar o zoom na imagem;;
 Zoom the image fully;Aumentar o zoom totalmente na imagem;;
+
 
