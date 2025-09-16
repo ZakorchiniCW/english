@@ -672,4 +672,57 @@
         </script>
     </div>
 </body>
+    <script>
+    async function translateText() {
+        const inputText = document.getElementById('input-text').value.trim();
+        const outputTextarea = document.getElementById('output-text');
+        
+        if (inputText === '') {
+            outputTextarea.value = '';
+            return;
+        }
+
+        try {
+            const [translationToPt, translationToEn] = await Promise.all([
+                fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=pt&dt=t&q=${encodeURIComponent(inputText)}`)
+                    .then(res => res.json()),
+                fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=${encodeURIComponent(inputText)}`)
+                    .then(res => res.json())
+            ]);
+            
+            const translatedTextToPt = translationToPt[0][0][0];
+            const translatedTextToEn = translationToEn[0][0][0];
+
+            if (translatedTextToPt.toLowerCase() === inputText.toLowerCase()) {
+                outputTextarea.value = translatedTextToEn;
+            } else {
+                outputTextarea.value = translatedTextToPt;
+            }
+
+        } catch (error) {
+            console.error("Erro ao traduzir:", error);
+            outputTextarea.value = "Erro na tradução. Tente novamente.";
+        }
+    }
+
+    function clearFields() {
+        document.getElementById('input-text').value = '';
+        document.getElementById('output-text').value = '';
+    }
+
+    document.getElementById('translate-btn').addEventListener('click', translateText);
+    document.getElementById('input-text').addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            translateText();
+        }
+    });
+    document.getElementById('clear-btn').addEventListener('click', clearFields);
+    
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            clearFields();
+        }
+    });
+</script>
 </html>
