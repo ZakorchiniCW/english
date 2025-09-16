@@ -391,9 +391,9 @@
                     const randomSubstantivoIndex = Math.floor(Math.random() * substantivosData.length);
                     const item = substantivosData[randomSubstantivoIndex];
                     if (isSubstantivoEnToPt) {
-                        document.getElementById('substantivoText').textContent = item.detail1;
-                    } else {
                         document.getElementById('substantivoText').textContent = item.text;
+                    } else {
+                        document.getElementById('substantivoText').textContent = item.detail1;
                     }
                     document.getElementById('substantivoDetails').textContent = '';
                 }
@@ -403,7 +403,7 @@
                 const text = document.getElementById('substantivoText').textContent;
                 const item = substantivosData.find(d => d.text.trim() === text.trim() || d.detail1.trim() === text.trim());
                 if (item) {
-                    document.getElementById('substantivoDetails').textContent = isSubstantivoEnToPt ? `Tradução: ${item.text}` : `Tradução: ${item.detail1}`;
+                    document.getElementById('substantivoDetails').textContent = isSubstantivoEnToPt ? `Tradução: ${item.detail1}` : `Tradução: ${item.text}`;
                 } else {
                     document.getElementById('substantivoDetails').textContent = 'Detalhe não encontrado.';
                 }
@@ -456,9 +456,9 @@
                     const randomAdjetivoIndex = Math.floor(Math.random() * adjetivosData.length);
                     const item = adjetivosData[randomAdjetivoIndex];
                     if (isAdjetivoEnToPt) {
-                        document.getElementById('adjetivoText').textContent = item.detail1;
-                    } else {
                         document.getElementById('adjetivoText').textContent = item.text;
+                    } else {
+                        document.getElementById('adjetivoText').textContent = item.detail1;
                     }
                     document.getElementById('adjetivoDetails').textContent = '';
                 }
@@ -468,7 +468,7 @@
                 const text = document.getElementById('adjetivoText').textContent;
                 const item = adjetivosData.find(d => d.text.trim() === text.trim() || d.detail1.trim() === text.trim());
                 if (item) {
-                    document.getElementById('adjetivoDetails').textContent = isAdjetivoEnToPt ? `Tradução: ${item.text}` : `Tradução: ${item.detail1}`;
+                    document.getElementById('adjetivoDetails').textContent = isAdjetivoEnToPt ? `Tradução: ${item.detail1}` : `Tradução: ${item.text}`;
                 } else {
                     document.getElementById('adjetivoDetails').textContent = 'Detalhe não encontrado.';
                 }
@@ -484,9 +484,9 @@
                     const randomAdverbioIndex = Math.floor(Math.random() * adverbiosData.length);
                     const item = adverbiosData[randomAdverbioIndex];
                     if (isAdverbioEnToPt) {
-                        document.getElementById('adverbioText').textContent = item.detail1;
-                    } else {
                         document.getElementById('adverbioText').textContent = item.text;
+                    } else {
+                        document.getElementById('adverbioText').textContent = item.detail1;
                     }
                     document.getElementById('adverbioDetails').textContent = '';
                 }
@@ -496,7 +496,7 @@
                 const text = document.getElementById('adverbioText').textContent;
                 const item = adverbiosData.find(d => d.text.trim() === text.trim() || d.detail1.trim() === text.trim());
                 if (item) {
-                    document.getElementById('adverbioDetails').textContent = isAdverbioEnToPt ? `Tradução: ${item.text}` : `Tradução: ${item.detail1}`;
+                    document.getElementById('adverbioDetails').textContent = isAdverbioEnToPt ? `Tradução: ${item.detail1}` : `Tradução: ${item.text}`;
                 } else {
                     document.getElementById('adverbioDetails').textContent = 'Detalhe não encontrado.';
                 }
@@ -540,9 +540,9 @@
                     const randomPhrasalVerbIndex = Math.floor(Math.random() * phrasalVerbsData.length);
                     const item = phrasalVerbsData[randomPhrasalVerbIndex];
                     if (isPhrasalVerbEnToPt) {
-                        document.getElementById('phrasalVerbText').textContent = item.detail1;
-                    } else {
                         document.getElementById('phrasalVerbText').textContent = item.text;
+                    } else {
+                        document.getElementById('phrasalVerbText').textContent = item.detail1;
                     }
                     document.getElementById('phrasalVerbDetails').textContent = '';
                 }
@@ -552,7 +552,7 @@
                 const text = document.getElementById('phrasalVerbText').textContent;
                 const item = phrasalVerbsData.find(d => d.text.trim() === text.trim() || d.detail1.trim() === text.trim());
                 if (item) {
-                    document.getElementById('phrasalVerbDetails').textContent = isPhrasalVerbEnToPt ? `Tradução: ${item.text}` : `Tradução: ${item.detail1}`;
+                    document.getElementById('phrasalVerbDetails').textContent = isPhrasalVerbEnToPt ? `Tradução: ${item.detail1}` : `Tradução: ${item.text}`;
                 } else {
                     document.getElementById('phrasalVerbDetails').textContent = 'Detalhe não encontrado.';
                 }
