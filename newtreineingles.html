@@ -215,13 +215,13 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="dataText" class="block text-gray-700 font-semibold mb-2" id="dataTextLabel">Texto (Português):</label>
+                        <label for="dataText" class="block text-gray-700 font-semibold mb-2" id="dataTextLabel">Texto (Inglês):</label>
                         <input type="text" id="dataText" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required="">
                     </div>
 
                     <div id="extraFields" class="mb-4">
                         <div class="mb-2">
-                            <label for="detail1" class="block text-gray-700" id="detail1Label">Detalhe 1 (Inglês):</label>
+                            <label for="detail1" class="block text-gray-700" id="detail1Label">Detalhe 1 (Tradução):</label>
                             <input type="text" id="detail1" class="w-full p-3 border border-gray-300 rounded-md">
                         </div>
                         <div class="mb-2" id="detail2Field">
@@ -407,6 +407,7 @@
                 } else {
                     document.getElementById('substantivoDetails').textContent = 'Detalhe não encontrado.';
                 }
+                setTimeout(sortearSubstantivo, 3000);
             }
 
             function swapSubstantivoMode() {
@@ -444,6 +445,7 @@
                 } else {
                     document.getElementById('verboDetails').textContent = 'Detalhes não encontrados.';
                 }
+                setTimeout(sortearVerbo, 3000);
             }
 
             function swapVerboMode() {
@@ -472,6 +474,7 @@
                 } else {
                     document.getElementById('adjetivoDetails').textContent = 'Detalhe não encontrado.';
                 }
+                setTimeout(sortearAdjetivo, 3000);
             }
 
             function swapAdjetivoMode() {
@@ -500,6 +503,7 @@
                 } else {
                     document.getElementById('adverbioDetails').textContent = 'Detalhe não encontrado.';
                 }
+                setTimeout(sortearAdverbio, 3000);
             }
             
             function swapAdverbioMode() {
@@ -528,6 +532,7 @@
                 } else {
                     document.getElementById('fraseDetails').textContent = 'Detalhe não encontrado.';
                 }
+                setTimeout(sortearFrase, 3000);
             }
             
             function swapFraseMode() {
@@ -556,6 +561,7 @@
                 } else {
                     document.getElementById('phrasalVerbDetails').textContent = 'Detalhe não encontrado.';
                 }
+                setTimeout(sortearPhrasalVerb, 3000);
             }
 
             function swapPhrasalVerbMode() {
