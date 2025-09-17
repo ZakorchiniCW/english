@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+    <script async="" src="./Testar Aprendizado_files/js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,7 +43,7 @@
 
         .header {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
             margin-bottom: 20px;
         }
@@ -60,6 +60,7 @@
             gap: 20px;
             font-size: 1.2em;
             font-weight: 600;
+            margin-top: 10px;
         }
 
         .score-box {
@@ -97,16 +98,10 @@
 
         #answer-buttons {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr; /* Força 2 colunas */
             gap: 15px;
         }
 
-        @media (min-width: 600px) {
-            #answer-buttons {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
         .answer-btn {
             background-color: #4b5563;
             color: #f3f4f6;
@@ -117,6 +112,7 @@
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
+            word-wrap: break-word; /* Garante que o texto não ultrapasse o botão */
         }
 
         .answer-btn:hover {
@@ -175,6 +171,7 @@
 
         .button-group {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
             align-items: center;
@@ -194,6 +191,13 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
+        }
+        
+        @media (max-width: 400px) {
+            .link-btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
         }
 
         .whatsapp-btn {
@@ -462,4 +466,5 @@
     </script>
 
 
-</body></html>
+</body>
+</html>
