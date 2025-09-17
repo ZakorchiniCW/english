@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+<!-- saved from url=(0056)https://zakorchinicw.github.io/english/treineingles.html -->
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z71GY77XP8"></script>
+<script async="" src="./Treine Inglês_files/js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -83,17 +84,12 @@
 
         <div class="flex justify-center mb-6">
             <div class="flex items-center space-x-2">
-                <button class="bg-blue-600 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400" style="margin-right: 30px;" onclick="sortear()">
+                <button class="bg-blue-600 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400" style="margin-right: 10px;" onclick="sortear()">
                     Atualizar Todos
                 </button>
-                <a href="https://zakorchinicw.github.io/english/testaraprendizado.html" class="bg-green-500 text-white font-bold py-2 px-4 rounded-full hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400" style="margin-right: 30px;">
+                <a href="https://zakorchinicw.github.io/english/testaraprendizado.html" class="bg-green-500 text-white font-bold py-2 px-4 rounded-full hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
                     Testar Aprendizado
                 </a>
-                <a href="https://wa.me/?text=Treine%20seu%20vocabul%C3%A1rio%20https%3A%2F%2Fzakorchinicw.github.io%2Fenglish%2Ftestaraprendizado.html" target="_blank" class="btn-icon" title="Compartilhar no WhatsApp" style="background-color: #25D366;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-        <path d="M12.04 2.167A9.873 9.873 0 0 0 2.19 12.001a9.852 9.852 0 0 0 4.197 7.915L5.798 21.5l2.459-1.31a10.05 10.05 0 0 0 3.784.811c5.448 0 9.864-4.415 9.864-9.849 0-5.435-4.416-9.85-9.865-9.85zm4.814 13.918c-.276.549-.806.735-1.503.407-.28-.135-1.642-.676-1.897-.751-.255-.075-.439-.038-.623.339-.184.377-.714.936-1.071 1.059-.356.124-.623.109-1.153-.153-.53-.262-2.228-1.018-2.793-3.14-.566-2.122.096-3.111.439-3.66.343-.549.548-.52.825-.52.277 0 .409.038.623.509.214.469.714 1.764.766 1.897.051.133.037.266-.076.401-.113.134-.184.224-.368.409-.184.185-.383.37-.501.52-.117.15-.224.28-.109.52.115.24 1.153 1.897 1.458 1.897.305 0 .396-.135.58-.269.184-.135.53-.269.806-.182.276.09.92.356 1.071.699.15.342.15.526.075.903z"/>
-    </svg>
-</a>
             </div>
         </div>
 
@@ -103,17 +99,19 @@
 
             <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Inglês para português)</h2>
-                <span id="verboPtEnText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">earn</span>
+                <span id="verboPtEnText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">miss</span>
                 <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
                     <button onclick="sortearVerboPtEn()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
                     <button onclick="showVerbosPtEn()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
                 </div>
-                <div id="verboPtEnDetails" class="mt-4 p-3 rounded-md font-semibold text-gray-700 details-box"></div>
+                <div id="verboPtEnDetails" class="mt-4 p-3 rounded-md font-semibold text-gray-700 details-box">Passado Simples: missed<br>
+                        Particípio: missed<br>
+                        Tradução: errar</div>
             </div>
             
             <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Verbo (Português para Inglês)</h2>
-                <span id="verboText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">introduzir</span>
+                <span id="verboText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">deixar, permitir</span>
                 <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
                     <button onclick="sortearVerbo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
                     <button onclick="showVerbos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
@@ -123,7 +121,7 @@
 
             <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Adjetivos</h2>
-                <span id="adjetivoText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">Adventurous</span>
+                <span id="adjetivoText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">Kooky</span>
                 <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
                     <button onclick="sortearAdjetivo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
                     <button onclick="showAdjetivos()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
@@ -133,7 +131,7 @@
 
             <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Advérbios / Preposições / Determinantes</h2>
-                <span id="adverbioText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">Gradually</span>
+                <span id="adverbioText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">Tactfully</span>
                 <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
                     <button onclick="sortearAdverbio()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
                     <button onclick="showAdverbios()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
@@ -143,7 +141,7 @@
 
             <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Frase</h2>
-                <span id="fraseText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">Blow away the candle</span>
+                <span id="fraseText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">Slice the bread evenly</span>
                 <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
                     <button onclick="sortearFrase()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
                     <button onclick="showFrases()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
@@ -153,7 +151,7 @@
 
             <div class="p-6 rounded-lg border card">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Phrasal Verbs</h2>
-                <span id="phrasalVerbText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">Eat out</span>
+                <span id="phrasalVerbText" class="text-lg text-gray-900 font-medium w-full p-2 bg-white rounded-md border border-gray-300 mb-4 block">Keep up</span>
                 <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
                     <button onclick="sortearPhrasalVerb()" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Atualizar</button>
                     <button onclick="showPhrasalVerbs()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">Conferir</button>
@@ -181,12 +179,12 @@
                     <div class="mb-4">
                         <label for="dataType" class="block text-gray-700 font-semibold mb-2">Tipo de Dado:</label>
                         <select id="dataType" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="frase">Frases</option>
-                            <option value="verbo">Verbos (Inglês para Português)</option>
-                            <option value="verboPtEn">Verbos (Português para Inglês)</option>
-                            <option value="phrasalVerb">Phrasal Verbs</option>
-                            <option value="adjetivo">Adjetivos</option>
-                            <option value="adverbio">Advérbios</option>
+                            <option value="frase">Frase</option>
+                            <option value="verbo">Verbo (Inglês para Português)</option>
+                            <option value="verboPtEn">Verbo (Português para Inglês)</option>
+                            <option value="phrasalVerb">Phrasal Verb</option>
+                            <option value="adjetivo">Adjetivo</option>
+                            <option value="adverbio">Advérbio</option>
                         </select>
                     </div>
 
@@ -588,133 +586,9 @@
             };
         </script>
     </div>
-<style>
-    /* Estilos para a caixa do tradutor */
-    .translator-container {
-        width: 100%;
-        margin-top: 2rem;
-        background-color: #374151;
-        border-radius: 8px;
-        padding: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-    .translator-container textarea {
-        flex: 1;
-        min-width: 150px;
-        max-width: 300px;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #4b5563;
-        background-color: #1f2937;
-        color: #e5e7eb;
-        font-family: 'Inter', sans-serif;
-        resize: none;
-        height: 60px;
-    }
-    .translator-container textarea:focus {
-        outline: none;
-        border-color: #5a67d8;
-    }
-    .translate-btn {
-        background-color: #5a67d8;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.3s;
-    }
-    .translate-btn:hover {
-        background-color: #727ee9;
-    }
-    .clear-btn {
-        background-color: #ef4444;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.3s;
-    }
-    .clear-btn:hover {
-        background-color: #dc2626;
-    }
-    @media (max-width: 500px) {
-        .translator-container {
-            flex-direction: column;
-            gap: 10px;
-        }
-        .translator-container textarea {
-            width: 100%;
-        }
-    }
-</style>
 
-<div class="translator-container">
-    <textarea id="input-text" placeholder="Digite aqui..."></textarea>
-    <button id="translate-btn" class="translate-btn">Traduzir</button>
-    <button id="clear-btn" class="clear-btn">Limpar</button>
-    <textarea id="output-text" placeholder="Tradução..." readonly></textarea>
-</div>
 
-<script>
-    async function translateText() {
-        const inputText = document.getElementById('input-text').value.trim();
-        const outputTextarea = document.getElementById('output-text');
-        
-        if (inputText === '') {
-            outputTextarea.value = '';
-            return;
-        }
 
-        try {
-            const [translationToPt, translationToEn] = await Promise.all([
-                fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=pt&dt=t&q=${encodeURIComponent(inputText)}`)
-                    .then(res => res.json()),
-                fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=${encodeURIComponent(inputText)}`)
-                    .then(res => res.json())
-            ]);
-            
-            const translatedTextToPt = translationToPt[0][0][0];
-            const translatedTextToEn = translationToEn[0][0][0];
 
-            if (translatedTextToPt.toLowerCase() === inputText.toLowerCase()) {
-                outputTextarea.value = translatedTextToEn;
-            } else {
-                outputTextarea.value = translatedTextToPt;
-            }
 
-        } catch (error) {
-            console.error("Erro ao traduzir:", error);
-            outputTextarea.value = "Erro na tradução. Tente novamente.";
-        }
-    }
-
-    function clearFields() {
-        document.getElementById('input-text').value = '';
-        document.getElementById('output-text').value = '';
-    }
-
-    document.getElementById('translate-btn').addEventListener('click', translateText);
-    document.getElementById('input-text').addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            translateText();
-        }
-    });
-    document.getElementById('clear-btn').addEventListener('click', clearFields);
-    
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            clearFields();
-        }
-    });
-</script>
-</body>
-</html>
+</body></html>
