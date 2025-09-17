@@ -256,27 +256,28 @@ until (Preposição); até
 with (Preposição); com
 without (Preposição); sem
 a/an (Determinante); um/uma
-all (Determinante); todos
-a lot of (Determinante); muito/muitos
-another (Determinante); outro/outra
-any (Determinante); qualquer
-each (Determinante); cada
-either (Determinante); qualquer um dos dois
-enough (Determinante); suficiente
-every (Determinante); cada/todo
-few (Determinante); poucos
-half (Determinante); metade
-less (Determinante); menos
-many (Determinante); muitos
-more (Determinante); mais
-much (Determinante); muito
-neither (Determinante); nenhum dos dois
-none (Determinante); nenhum
-other (Determinante); outro/outra
-some (Determinante); algum/alguns
-that (Determinante); aquele/aquela
-the (Determinante); o/a/os/as
-these (Determinante); estes/estas
-this (Determinante); este/esta
-those (Determinante); aqueles/aquelas
+all; todos
+a lot of; muito/muitos
+another; outro/outra
+any; qualquer
+each; cada
+either; qualquer um dos dois
+enough; suficiente
+every; cada/todo
+few; poucos
+half; metade
+less; menos
+many; muitos
+more; mais
+much; muito
+neither; nenhum dos dois
+none; nenhum
+other; outro/outra
+some; algum/alguns
+that; aquele/aquela
+the; o/a/os/as
+these; estes/estas
+this; este/esta
+those; aqueles/aquelas
+
 
