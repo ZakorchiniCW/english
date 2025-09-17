@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Google tag (gtag.js) -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<html lang="pt-BR">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script async="" src="./Testar Aprendizado_files/js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-ELDVDP0M7R');
+    </script>
 
-  gtag('config', 'G-ELDVDP0M7R');
-</script>
-    
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testar Aprendizado</title>
     <style>
@@ -33,279 +34,274 @@
             width: 100%;
             max-width: 800px;
             background-color: #1f2937;
-            padding: 2.5rem;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
         }
-        
-        .top-section {
+
+        .header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        .return-btn {
-            /* Botão de retorno menor e sutil */
-            padding: 0.2rem 0.3rem;
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #f3f4f6;
+            margin: 0;
+        }
+
+        .scores {
+            display: flex;
+            gap: 20px;
             font-size: 1.2em;
-            background-color: #4b5563;
-            color: white;
-            border: none;
-            border-radius: 1px;
-            cursor: pointer;
-            text-decoration: none;
-            line-height: 1;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            /* Tamanho fixo para que não ocupe muita largura em telas menores */
-            width: 24px; 
-            height: 24px;
+            font-weight: 600;
         }
 
-        .return-btn:hover {
-            background-color: #6b7280;
-        }
-
-        .question-and-controls {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .question-box {
-            flex-grow: 1;
-            padding: 1.25rem;
-            border: 1px solid #4b5563;
-            border-radius: 4px;
-            background-color: #374151;
-            text-align: center;
-            font-size: 1.25em;
-            font-weight: bold;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s;
-        }
-
-        .control-buttons-top {
-            display: flex;
-            gap: 0.5rem;
-            flex-shrink: 0;
-        }
-
-        .control-buttons-top .btn-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.0em;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            border: none;
-            transition: background-color 0.3s;
-        }
-
-        #refresh-btn-top {
-            background-color: #5a67d8;
-        }
-        #refresh-btn-top:hover {
-            background-color: #727ee9;
-        }
-
-        #correct-display {
-            background-color: #48bb78;
-        }
-        #correct-display:hover {
-            background-color: #64d193;
-        }
-
-        #incorrect-display {
-            background-color: #fc8181;
-        }
-        #incorrect-display:hover {
-            background-color: #ff9191;
-        }
-
-
-        .message-box {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 2rem;
-            background-color: #38a169;
-            color: white;
+        .score-box {
+            padding: 8px 16px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            font-size: 1.25em;
-            font-weight: bold;
-            z-index: 10;
-            display: none;
-            transition: opacity 0.5s ease-in-out;
-            opacity: 0;
-            white-space: pre-wrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .message-box.show {
-            display: block;
-            opacity: 1;
+        .correct {
+            background-color: #34d399;
+            color: #1f2937;
         }
 
-        .answer-buttons {
-            /* Sempre 2 colunas, como na imagem */
+        .incorrect {
+            background-color: #ef4444;
+            color: #1f2937;
+        }
+
+        .card {
+            background-color: #374151;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #question-text {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #f3f4f6;
+        }
+
+        #answer-buttons {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 15px;
         }
-        
-        /* Ajustes para telas menores, se necessário, mas mantendo 2 colunas para as respostas */
-        @media (max-width: 599px) {
-            .top-section {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .question-and-controls {
-                flex-direction: column;
-                align-items: stretch;
-                width: 100%;
-            }
-            .control-buttons-top {
-                justify-content: space-between;
-                width: 100%;
-            }
-            /* O return-btn já tem width e height fixos */
-            /* .return-btn {
-                width: 100%;
-            } */
-        }
-
 
         .answer-btn {
-            padding: 1rem;
             background-color: #4b5563;
-            color: white;
+            color: #f3f4f6;
+            padding: 15px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
             cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s, transform 0.1s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .answer-btn:hover {
             background-color: #6b7280;
-        }
-
-        .answer-btn:active {
-            transform: scale(0.98);
-        }
-
-        .answer-btn.correct {
-            background-color: #38a169;
-        }
-
-        .answer-btn.incorrect {
-            background-color: #e53e3e;
+            transform: translateY(-2px);
         }
 
         .answer-btn:disabled {
             cursor: not-allowed;
-            opacity: 0.6;
+            opacity: 0.5;
+        }
+
+        .answer-btn.correct {
+            background-color: #10b981;
+            color: #fff;
+            animation: pulse 1.5s infinite;
+        }
+
+        .answer-btn.incorrect {
+            background-color: #ef4444;
+            color: #fff;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #messageBox {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            background-color: #10b981;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            font-weight: 600;
+            transition: opacity 0.5s, transform 0.5s;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #messageBox.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        .refresh-btn {
+            background-color: #3b82f6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .loading-text {
+            color: #d1d5db;
         }
     </style>
 </head>
+
 <body>
+
     <div class="container">
-        <div class="top-section">
-            <div class="question-and-controls">
-                <div id="question-box" class="question-box"></div>
-                <div class="control-buttons-top">
-                    <a href="https://zakorchinicw.github.io/english/treineingles.html" class="return-btn">←</a>
-                    <button id="refresh-btn-top" class="btn-icon">↻</button>
-                    <div id="correct-display" class="btn-icon">0</div>
-                    <div id="incorrect-display" class="btn-icon">0</div>
-                    <a href="https://wa.me/?text=Treine%20seu%20vocabul%C3%A1rio%20https%3A%2F%2Fzakorchinicw.github.io%2Fenglish%2Ftestaraprendizado.html" target="_blank" class="btn-icon" title="Compartilhar no WhatsApp" style="background-color: #25D366;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-        <path d="M12.04 2.167A9.873 9.873 0 0 0 2.19 12.001a9.852 9.852 0 0 0 4.197 7.915L5.798 21.5l2.459-1.31a10.05 10.05 0 0 0 3.784.811c5.448 0 9.864-4.415 9.864-9.849 0-5.435-4.416-9.85-9.865-9.85zm4.814 13.918c-.276.549-.806.735-1.503.407-.28-.135-1.642-.676-1.897-.751-.255-.075-.439-.038-.623.339-.184.377-.714.936-1.071 1.059-.356.124-.623.109-1.153-.153-.53-.262-2.228-1.018-2.793-3.14-.566-2.122.096-3.111.439-3.66.343-.549.548-.52.825-.52.277 0 .409.038.623.509.214.469.714 1.764.766 1.897.051.133.037.266-.076.401-.113.134-.184.224-.368.409-.184.185-.383.37-.501.52-.117.15-.224.28-.109.52.115.24 1.153 1.897 1.458 1.897.305 0 .396-.135.58-.269.184-.135.53-.269.806-.182.276.09.92.356 1.071.699.15.342.15.526.075.903z"/>
-    </svg>
-</a>
+        <div class="header">
+            <button id="refresh-btn-top" class="refresh-btn">Próxima Pergunta</button>
+            <div class="scores">
+                <div class="score-box correct">
+                    Acertos: <span id="correct-count">0</span>
+                </div>
+                <div class="score-box incorrect">
+                    Erros: <span id="incorrect-count">0</span>
                 </div>
             </div>
         </div>
-        
-        <div id="message-box" class="message-box"></div>
 
-        <div id="answer-buttons" class="answer-buttons"></div>
+        <div id="loading-message" class="loading-text">Carregando dados...</div>
+
+        <div id="quiz-content" class="card" style="display: none;">
+            <h2 id="question-text"></h2>
+            <div id="answer-buttons"></div>
+        </div>
     </div>
 
+    <div id="messageBox"></div>
+
     <script>
-        const questionBox = document.getElementById('question-box');
-        const answerButtonsContainer = document.getElementById('answer-buttons');
-        const refreshBtnTop = document.getElementById('refresh-btn-top');
-        const messageBox = document.getElementById('message-box');
-        const correctDisplay = document.getElementById('correct-display');
-        const incorrectDisplay = document.getElementById('incorrect-display');
+        let frasesData = [];
+        let verbosData = [];
+        let phrasalVerbsData = [];
+        let adjetivosData = [];
+        let adverbiosData = [];
+        let substantivosData = [];
 
         let correctCount = 0;
         let incorrectCount = 0;
-        
-        let allData = {};
-        const files = ['frases.txt', 'verbos.txt', 'adjetivos.txt', 'adverbios.txt', 'phrasalverbs.txt'];
+        let currentQuestion = null;
+
+        const correctDisplay = document.getElementById('correct-count');
+        const incorrectDisplay = document.getElementById('incorrect-count');
+        const messageBox = document.getElementById('messageBox');
+        const refreshBtnTop = document.getElementById('refresh-btn-top');
+        const loadingMessage = document.getElementById('loading-message');
+        const quizContent = document.getElementById('quiz-content');
 
         const motivationalPhrases = [
-            "You got it!",
-            "Excellent!",
-            "Way to go!",
-            "Keep up the great work!",
-            "Fantastic!",
-            "Well done!",
-            "Unbelievable!",
-            "Amazing job!",
-            "That's perfect!",
-            "Incredible!"
+            "Excelente!", "Parabéns!", "Boa!", "Mandou bem!", "Isso aí!",
+            "Certíssimo!", "Continua assim!", "Muito bem!"
         ];
 
+        const dataTypes = ['frase', 'verbo', 'phrasalVerb', 'adjetivo', 'adverbio', 'substantivo'];
+
         async function loadDataFromGithub() {
-            const githubBaseUrl = './'; 
-
             try {
-                const fetchPromises = files.map(async (file) => {
-                    const response = await fetch(githubBaseUrl + file);
-                    const text = await response.text();
-                    const lines = text.split('\n')
-                        .map(line => line.trim())
-                        .filter(line => line.length > 0);
-                    
-                    allData[file] = lines.map(line => line.split(';').filter(item => item.trim() !== ''));
-                });
-                
-                await Promise.all(fetchPromises);
+                const urls = {
+                    frase: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/frases.txt',
+                    verbo: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/verbos.txt',
+                    phrasalVerb: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/phrasalverbs.txt',
+                    adjetivo: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/adjetivos.txt',
+                    adverbio: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/adverbios.txt',
+                    substantivo: 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/substantivos.txt'
+                };
 
-                const totalEntries = Object.values(allData).flat().length;
-                if (totalEntries < 6) {
-                    questionBox.textContent = 'Dados insuficientes para gerar o quiz. Por favor, adicione mais palavras.';
-                    return;
-                }
-                
+                const [
+                    frasesResponse,
+                    verbosResponse,
+                    phrasalVerbsResponse,
+                    adjetivosResponse,
+                    adverbiosResponse,
+                    substantivosResponse
+                ] = await Promise.all([
+                    fetch(urls.frase),
+                    fetch(urls.verbo),
+                    fetch(urls.phrasalVerb),
+                    fetch(urls.adjetivo),
+                    fetch(urls.adverbio),
+                    fetch(urls.substantivo)
+                ]);
+
+                frasesData = (await frasesResponse.text()).split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1] = line.split(';');
+                    return { id: index + 1, text, detail1, type: 'frase' };
+                });
+
+                verbosData = (await verbosResponse.text()).split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1, detail2, detail3] = line.split(';');
+                    return { id: index + 1, text, detail1, detail2, detail3, type: 'verbo' };
+                });
+
+                phrasalVerbsData = (await phrasalVerbsResponse.text()).split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1] = line.split(';');
+                    return { id: index + 1, text, detail1, type: 'phrasalVerb' };
+                });
+
+                adjetivosData = (await adjetivosResponse.text()).split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1] = line.split(';');
+                    return { id: index + 1, text, detail1, type: 'adjetivo' };
+                });
+
+                adverbiosData = (await adverbiosResponse.text()).split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1] = line.split(';');
+                    return { id: index + 1, text, detail1, type: 'adverbio' };
+                });
+
+                substantivosData = (await substantivosResponse.text()).split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                    const [text, detail1] = line.split(';');
+                    return { id: index + 1, text, detail1, type: 'substantivo' };
+                });
+
+                loadingMessage.style.display = 'none';
+                quizContent.style.display = 'block';
                 generateQuestion();
+
             } catch (error) {
                 console.error('Erro ao carregar os dados:', error);
-                questionBox.textContent = 'Erro ao carregar os dados. Tente recarregar a página.';
+                loadingMessage.textContent = 'Erro ao carregar os dados. Por favor, verifique as URLs.';
             }
         }
 
@@ -313,75 +309,81 @@
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
         function generateQuestion() {
+            const questionTextElement = document.getElementById('question-text');
+            const answerButtonsContainer = document.getElementById('answer-buttons');
+
             answerButtonsContainer.innerHTML = '';
             messageBox.classList.remove('show');
-            
-            const quizFiles = files.filter(file => file !== 'verbos.txt');
-            
-            const availableData = quizFiles.flatMap(file => allData[file].map(item => ({ question: item[0], answer: item[1], category: file })));
 
-            if (availableData.length < 6) {
-                questionBox.textContent = 'Dados insuficientes para gerar o quiz (mínimo de 6). Por favor, adicione mais frases, adjetivos, advérbios ou phrasal verbs.';
-                return;
+            const selectedType = getRandomItem(dataTypes);
+            let selectedData, questionText, correctAnswer, allOptions;
+            let otherOptions = [];
+
+            switch (selectedType) {
+                case 'frase':
+                    selectedData = getRandomItem(frasesData);
+                    questionText = selectedData.text;
+                    correctAnswer = selectedData.detail1;
+                    otherOptions = frasesData.filter(item => item !== selectedData).map(item => item.detail1);
+                    break;
+                case 'verbo':
+                    selectedData = getRandomItem(verbosData);
+                    questionText = selectedData.detail1;
+                    correctAnswer = selectedData.text;
+                    otherOptions = verbosData.filter(item => item !== selectedData).map(item => item.text);
+                    break;
+                case 'phrasalVerb':
+                    selectedData = getRandomItem(phrasalVerbsData);
+                    questionText = selectedData.text;
+                    correctAnswer = selectedData.detail1;
+                    otherOptions = phrasalVerbsData.filter(item => item !== selectedData).map(item => item.detail1);
+                    break;
+                case 'adjetivo':
+                    selectedData = getRandomItem(adjetivosData);
+                    questionText = selectedData.text;
+                    correctAnswer = selectedData.detail1;
+                    otherOptions = adjetivosData.filter(item => item !== selectedData).map(item => item.detail1);
+                    break;
+                case 'adverbio':
+                    selectedData = getRandomItem(adverbiosData);
+                    questionText = selectedData.text;
+                    correctAnswer = selectedData.detail1;
+                    otherOptions = adverbiosData.filter(item => item !== selectedData).map(item => item.detail1);
+                    break;
+                case 'substantivo':
+                    selectedData = getRandomItem(substantivosData);
+                    questionText = selectedData.text;
+                    correctAnswer = selectedData.detail1;
+                    otherOptions = substantivosData.filter(item => item !== selectedData).map(item => item.detail1);
+                    break;
             }
 
-            const questionAndCorrectAnswer = getRandomItem(availableData);
-            
-            const displayQuestion = questionAndCorrectAnswer.question;
-            const correctAnswer = questionAndCorrectAnswer.answer;
-            const questionCategory = questionAndCorrectAnswer.category;
+            questionTextElement.textContent = questionText;
+            currentQuestion = {
+                correctAnswer,
+                type: selectedType
+            };
 
-            let allPossibleAnswers = [];
+            const uniqueOptions = Array.from(new Set(otherOptions));
+            const shuffledOptions = uniqueOptions.sort(() => 0.5 - Math.random());
+            const finalOptions = shuffledOptions.slice(0, 3);
+            finalOptions.push(correctAnswer);
 
-            if (questionCategory === 'frases.txt') {
-                allPossibleAnswers = allData['frases.txt'].map(item => item[1]);
-            } else {
-                const nonPhraseFiles = quizFiles.filter(file => file !== 'frases.txt');
-                nonPhraseFiles.forEach(file => {
-                    allPossibleAnswers = allPossibleAnswers.concat(allData[file].map(item => item[1]));
-                });
-            }
+            const shuffledFinalOptions = finalOptions.sort(() => 0.5 - Math.random());
 
-            const uniqueIncorrectAnswers = [];
-            const shuffledPossibleAnswers = shuffleArray(allPossibleAnswers);
-
-            while (uniqueIncorrectAnswers.length < 5 && shuffledPossibleAnswers.length > 0) {
-                const potentialAnswer = shuffledPossibleAnswers.shift();
-                if (potentialAnswer !== correctAnswer && !uniqueIncorrectAnswers.includes(potentialAnswer)) {
-                    uniqueIncorrectAnswers.push(potentialAnswer);
-                }
-            }
-            
-            if (uniqueIncorrectAnswers.length < 5) {
-                questionBox.textContent = `Dados insuficientes para gerar opções de resposta na categoria "${questionCategory}". Por favor, adicione mais itens.`;
-                return;
-            }
-
-            const allAnswers = shuffleArray([correctAnswer, ...uniqueIncorrectAnswers]);
-            
-            questionBox.textContent = displayQuestion;
-
-            allAnswers.forEach(answer => {
+            shuffledFinalOptions.forEach(option => {
                 const button = document.createElement('button');
+                button.textContent = option;
                 button.classList.add('answer-btn');
-                button.textContent = answer;
-                if (answer === correctAnswer) {
+                if (option === correctAnswer) {
                     button.dataset.correct = 'true';
                 } else {
                     button.dataset.correct = 'false';
                 }
                 answerButtonsContainer.appendChild(button);
             });
-            
+
             document.querySelectorAll('.answer-btn').forEach(button => {
                 button.addEventListener('click', () => checkAnswer(button));
             });
@@ -389,14 +391,14 @@
 
         function checkAnswer(button) {
             const isCorrect = button.dataset.correct === 'true';
-            
+
             if (isCorrect) {
                 button.classList.add('correct');
                 correctCount++;
-                
+
                 const answerButtons = document.querySelectorAll('.answer-btn');
                 answerButtons.forEach(btn => btn.disabled = true);
-                
+
                 const randomPhrase = getRandomItem(motivationalPhrases);
                 messageBox.textContent = `${randomPhrase}`;
                 messageBox.classList.add('show');
@@ -414,10 +416,11 @@
             correctDisplay.textContent = correctCount;
             incorrectDisplay.textContent = incorrectCount;
         }
-        
+
         refreshBtnTop.addEventListener('click', generateQuestion);
 
         window.onload = loadDataFromGithub;
     </script>
-</body>
-</html>
+
+
+</body></html>
