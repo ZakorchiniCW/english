@@ -2,11 +2,12 @@
 <html lang="pt-BR">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script async="" src="./Testar Aprendizado_files/js"></script>
+    
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
+
         gtag('config', 'G-ELDVDP0M7R');
     </script>
 
@@ -100,6 +101,12 @@
             gap: 15px;
         }
 
+        @media (min-width: 600px) {
+            #answer-buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
         .answer-btn {
             background-color: #4b5563;
             color: #f3f4f6;
@@ -166,15 +173,35 @@
             transform: translateX(-50%) translateY(-10px);
         }
 
-        .refresh-btn {
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .link-btn {
             background-color: #3b82f6;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 8px;
             font-weight: 600;
+            text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .whatsapp-btn {
+            background-color: #25d366;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128c7e;
         }
 
         .refresh-btn:hover {
@@ -191,7 +218,16 @@
 
     <div class="container">
         <div class="header">
-            <button id="refresh-btn-top" class="refresh-btn">Próxima Pergunta</button>
+            <div class="button-group">
+                <a href="https://zakorchinicw.github.io/english/newtreineingles.html" class="link-btn">
+                    Voltar para Treinar
+                </a>
+                <a href="https://wa.me/?text=Teste%20seu%20aprendizado%20https%3A%2F%2Fzakorchinicw.github.io%2Fenglish%2Ftestaraprendizado.html" style="margin:10px" target="_blank" class="link-btn whatsapp-btn" title="Compartilhar no WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M12.04 2.167A9.873 9.873 0 0 0 2.19 12.001a9.852 9.852 0 0 0 4.197 7.915L5.798 21.5l2.459-1.31a10.05 10.05 0 0 0 3.784.811c5.448 0 9.864-4.415 9.864-9.849 0-5.435-4.416-9.85-9.865-9.85zm4.814 13.918c-.276.549-.806.735-1.503.407-.28-.135-1.642-.676-1.897-.751-.255-.075-.439-.038-.623.339-.184.377-.714.936-1.071 1.059-.356.124-.623.109-1.153-.153-.53-.262-2.228-1.018-2.793-3.14-.566-2.122.096-3.111.439-3.66.343-.549.548-.52.825-.52.277 0 .409.038.623.509.214.469.714 1.764.766 1.897.051.133.037.266-.076.401-.113.134-.184.224-.368.409-.184.185-.383.37-.501.52-.117.15-.224.28-.109.52.115.24 1.153 1.897 1.458 1.897.305 0 .396-.135.58-.269.184-.135.53-.269.806-.182.276.09.92.356 1.071.699.15.342.15.526.075.903z"></path>
+                    </svg>
+                </a>
+            </div>
             <div class="scores">
                 <div class="score-box correct">
                     Acertos: <span id="correct-count">0</span>
@@ -201,6 +237,9 @@
                 </div>
             </div>
         </div>
+        
+        <button id="refresh-btn-top" class="link-btn" style="width: 100%; margin-bottom: 20px;">Próxima Pergunta</button>
+
 
         <div id="loading-message" class="loading-text">Carregando dados...</div>
 
@@ -367,7 +406,7 @@
 
             const uniqueOptions = Array.from(new Set(otherOptions));
             const shuffledOptions = uniqueOptions.sort(() => 0.5 - Math.random());
-            const finalOptions = shuffledOptions.slice(0, 3);
+            const finalOptions = shuffledOptions.slice(0, 5); // Change to 5 to get 6 options total
             finalOptions.push(correctAnswer);
 
             const shuffledFinalOptions = finalOptions.sort(() => 0.5 - Math.random());
