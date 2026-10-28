@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Translation Duel Arena - Disputa de Tradução em Tempo Real</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            },
+            cyber: {
+              dark: '#0b0f19',
+              card: '#111827',
+              border: '#1f2937',
+              neonGreen: '#10b981',
+              neonRed: '#f43f5e',
+              neonGold: '#fbbf24'
+            }
+          },
+          animation: {
+            'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'bounce-short': 'bounce 0.5s ease-in-out 2',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
+    
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #0b0f19;
+      color: #f3f4f6;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Custom Glassmorphism */
+    .glass-panel {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-btn {
+      background: rgba(31, 41, 55, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.15s ease-in-out;
+    }
+
+    .glass-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0f19;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #374151;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between items-center p-3 sm:p-6 relative overflow-x-hidden">
+
+  <!-- Confetti Layer for Winner -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Main Container -->
+  <main class="w-full max-w-xl mx-auto my-auto flex flex-col justify-center items-center">
+
+    <!-- Header Logo -->
+    <header class="text-center mb-4 sm:mb-6">
+      <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/30 px-3 py-1 rounded-full mb-2">
+        <i class="fa-solid fa-bolt text-brand-500 text-xs sm:text-sm"></i>
+        <span class="text-xs font-semibold uppercase tracking-wider text-brand-500">Realtime English Duel</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-white flex items-center justify-center gap-2">
+        <span>TRANSLATION</span>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-purple-400 to-pink-500">ARENA</span>
+      </h1>
+    </header>
+
+    <!-- SECTION 1: USER HOME / SETUP ROOM -->
+    <section id="view-home" class="w-full glass-panel rounded-2xl p-5 sm:p-7 shadow-2xl space-y-5">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Seu Apelido / Player Name</label>
+          <div class="relative">
+            <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-gray-400"></i>
+            <input id="input-nickname" type="text" maxlength="15" placeholder="Ex: Alex_Pro" class="w-full bg-gray-900/90 border border-gray-700 rounded-xl pl-10 pr-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 font-semibold" />
+          </div>
+        </div>
+
+        <!-- Mode Selector Tabs -->
+        <div class="grid grid-cols-2 gap-2 p-1 bg-gray-900 rounded-xl border border-gray-800">
+          <button id="tab-create" onclick="switchHomeTab('create')" class="py-2.5 rounded-lg text-sm font-bold transition-all bg-brand-600 text-white shadow">
+            <i class="fa-solid fa-plus-circle mr-1"></i> Criar Sala
+          </button>
+          <button id="tab-join" onclick="switchHomeTab('join')" class="py-2.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white">
+            <i class="fa-solid fa-right-to-bracket mr-1"></i> Entrar em Sala
+          </button>
+        </div>
+
+        <!-- CREATE ROOM CONFIG -->
+        <div id="panel-create" class="space-y-4">
+          <!-- Game Limit Type -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Modo de Disputa</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="btn-mode-words" onclick="setGameMode('words')" class="p-3 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-left transition-all">
+                <div class="text-xs font-bold text-gray-400">LIMITADOR</div>
+                <div class="text-base font-extrabold text-white flex items-center justify-between">
+                  <span>Por Palavras</span>
+                  <i class="fa-solid fa-font text-brand-500"></i>
+                </div>
+              </button>
+              <button id="btn-mode-time" onclick="setGameMode('time')" class="p-3 rounded-xl border-2 border-gray-800 bg-gray-900 text-left hover:border-gray-700 transition-all">
+                <div class="text-xs font-bold text-gray-400">LIMITADOR</div>
+                <div class="text-base font-extrabold text-white flex items-center justify-between">
+                  <span>Por Tempo</span>
+                  <i class="fa-solid fa-stopwatch text-gray-500"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Limit Value -->
+          <div id="container-limit-value">
+            <label id="lbl-limit-value" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Quantidade de Palavras</label>
+            <div class="grid grid-cols-3 gap-2" id="group-word-limits">
+              <button onclick="setLimitValue(10)" class="btn-limit py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-sm">10 Palavras</button>
+              <button onclick="setLimitValue(20)" class="btn-limit py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-sm">20 Palavras</button>
+              <button onclick="setLimitValue(30)" class="btn-limit py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-sm">30 Palavras</button>
+            </div>
+            <div class="grid grid-cols-3 gap-2 hidden" id="group-time-limits">
+              <button onclick="setLimitValue(30)" class="btn-limit-time py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-sm">30 Segundos</button>
+              <button onclick="setLimitValue(60)" class="btn-limit-time py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-sm">60 Segundos</button>
+              <button onclick="setLimitValue(90)" class="btn-limit-time py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-sm">90 Segundos</button>
+            </div>
+          </div>
+
+          <!-- Options Grid Count (6 or 8) -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Opções de Resposta por Palavra</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="btn-opts-6" onclick="setOptionCount(6)" class="py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-sm">
+                6 Botões
+              </button>
+              <button id="btn-opts-8" onclick="setOptionCount(8)" class="py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold text-gray-300 hover:border-brand-500 transition text-sm">
+                8 Botões
+              </button>
+            </div>
+          </div>
+
+          <button onclick="handleCreateRoom()" class="w-full py-4 bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white font-black rounded-xl shadow-lg shadow-brand-500/25 active:scale-[0.98] transition text-base tracking-wide flex items-center justify-center gap-2">
+            <i class="fa-solid fa-gamepad"></i> CRIAR SALA DE DESAFIO
+          </button>
+        </div>
+
+        <!-- JOIN ROOM INPUT -->
+        <div id="panel-join" class="space-y-4 hidden">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Código da Sala</label>
+            <div class="relative">
+              <i class="fa-solid fa-key absolute left-3.5 top-3.5 text-gray-400"></i>
+              <input id="input-room-code" type="text" maxlength="6" uppercase placeholder="EX: A1B2C3" class="w-full bg-gray-900/90 border border-gray-700 rounded-xl pl-10 pr-4 py-3 text-white font-mono uppercase font-bold tracking-widest focus:outline-none focus:border-brand-500" />
+            </div>
+          </div>
+
+          <button onclick="handleJoinRoom()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-lg shadow-emerald-600/25 active:scale-[0.98] transition text-base tracking-wide flex items-center justify-center gap-2">
+            <i class="fa-solid fa-right-to-bracket"></i> ENTRAR NA ARENA
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: LOBBY / ROOM WAITING ROOM -->
+    <section id="view-lobby" class="w-full glass-panel rounded-2xl p-5 sm:p-7 shadow-2xl space-y-6 hidden">
+      <!-- Room Code Banner & Share -->
+      <div class="bg-gray-900/90 rounded-xl p-4 border border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <div>
+          <span class="text-xs font-bold uppercase text-gray-400 block">Código da Sala</span>
+          <span id="display-room-code" class="text-2xl font-mono font-black text-brand-500 tracking-widest">------</span>
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="copyRoomLink()" class="flex-1 sm:flex-none px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs font-bold text-gray-200 border border-gray-700 flex items-center justify-center gap-1.5 transition">
+            <i class="fa-regular fa-copy"></i> Copiar Link
+          </button>
+          <button onclick="shareWhatsApp()" class="flex-1 sm:flex-none px-3 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold text-white shadow-md flex items-center justify-center gap-1.5 transition">
+            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- Game Rules Summary -->
+      <div class="flex items-center justify-between text-xs font-semibold px-3 py-2 bg-brand-500/10 border border-brand-500/20 rounded-lg text-brand-300">
+        <span id="lobby-rule-mode"><i class="fa-solid fa-sliders mr-1"></i> Modo: --</span>
+        <span id="lobby-rule-options"><i class="fa-solid fa-grid-2 mr-1"></i> -- Opções</span>
+      </div>
+
+      <!-- Players List -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-gray-400 flex items-center gap-2">
+            <i class="fa-solid fa-users text-brand-500"></i> Participantes (<span id="player-count">0</span>)
+          </h2>
+          <span class="text-xs text-gray-500 italic">Atualizado em tempo real</span>
+        </div>
+
+        <div id="lobby-player-list" class="space-y-2 max-h-60 overflow-y-auto pr-1">
+          <!-- Players injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Lobby Action Controls -->
+      <div class="pt-2 border-t border-gray-800">
+        <div id="host-controls" class="space-y-2">
+          <button id="btn-start-game" onclick="triggerStartGame()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-black rounded-xl shadow-lg shadow-emerald-500/25 active:scale-[0.98] transition text-base tracking-wider flex items-center justify-center gap-2">
+            <i class="fa-solid fa-play"></i> INICIAR JOGO
+          </button>
+          <p class="text-center text-xs text-gray-400">Somente o anfitrião pode dar a partida.</p>
+        </div>
+
+        <div id="guest-waiting-msg" class="text-center py-3 text-sm font-semibold text-brand-400 animate-pulse hidden">
+          <i class="fa-solid fa-hourglass-half mr-2"></i> Aguardando o anfitrião iniciar o duelo...
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: COUNTDOWN OVERLAY -->
+    <div id="view-countdown" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex flex-col items-center justify-center hidden">
+      <div class="text-center space-y-4">
+        <span class="text-xl sm:text-2xl font-black uppercase text-brand-400 tracking-widest block">A disputa vai começar!</span>
+        <div id="countdown-num" class="text-8xl sm:text-9xl font-black text-white animate-bounce-short">3</div>
+        <p class="text-sm text-gray-400 font-semibold">Prepare-se no seu teclado / tela!</p>
+      </div>
+    </div>
+
+    <!-- SECTION 4: GAMEPLAY ARENA -->
+    <section id="view-game" class="w-full glass-panel rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4 hidden">
+      <!-- Top Gameplay Bar -->
+      <div class="flex items-center justify-between gap-2 pb-3 border-b border-gray-800 text-xs sm:text-sm font-bold">
+        <div class="flex items-center gap-2 bg-gray-900 px-3 py-1.5 rounded-lg border border-gray-800">
+          <i class="fa-solid fa-trophy text-amber-400"></i>
+          <span>Acertos: <strong id="game-score" class="text-emerald-400 text-base">0</strong></span>
+        </div>
+
+        <div id="game-progress-badge" class="flex items-center gap-2 bg-gray-900 px-3 py-1.5 rounded-lg border border-gray-800 text-brand-400">
+          <i class="fa-solid fa-stopwatch"></i>
+          <span id="game-tracker-text">--</span>
+        </div>
+      </div>
+
+      <!-- Target Word Card -->
+      <div class="bg-gradient-to-b from-gray-900 to-gray-950 border-2 border-brand-500/40 rounded-2xl p-6 sm:p-8 text-center shadow-inner relative overflow-hidden">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-400 mb-1 block">Traduza para o Português:</span>
+        <h2 id="target-word" class="text-3xl sm:text-5xl font-black tracking-wide text-white capitalize my-1">
+          LOADING...
+        </h2>
+        <div id="flash-feedback" class="absolute inset-0 pointer-events-none transition-opacity duration-200 opacity-0"></div>
+      </div>
+
+      <!-- Options Grid -->
+      <div id="options-grid" class="grid grid-cols-2 gap-2.5 sm:gap-3 pt-2">
+        <!-- Dynamic Option Buttons injected here -->
+      </div>
+    </section>
+
+    <!-- SECTION 5: RESULTS & LEADERBOARD -->
+    <section id="view-results" class="w-full glass-panel rounded-2xl p-5 sm:p-7 shadow-2xl space-y-6 text-center hidden">
+      <!-- Winner / Loser Banner -->
+      <div id="result-hero" class="py-4 space-y-2">
+        <div id="badge-result" class="text-5xl sm:text-7xl font-black tracking-widest drop-shadow-lg">
+          WINNER
+        </div>
+        <p id="result-subtitle" class="text-sm sm:text-base font-semibold text-gray-300">
+          Você venceu a disputa!
+        </p>
+      </div>
+
+      <!-- Leaderboard Table -->
+      <div class="bg-gray-900/90 rounded-xl border border-gray-800 overflow-hidden">
+        <div class="bg-gray-800/80 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-400 grid grid-cols-12 text-left">
+          <span class="col-span-2">Pos</span>
+          <span class="col-span-5">Jogador</span>
+          <span class="col-span-3 text-center">Acertos</span>
+          <span class="col-span-2 text-right">Tempo</span>
+        </div>
+        <div id="leaderboard-rows" class="divide-y divide-gray-800/60 max-h-64 overflow-y-auto">
+          <!-- Rows injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Rematch Actions -->
+      <div class="pt-2 flex flex-col gap-2">
+        <button id="btn-rematch" onclick="triggerRematch()" class="w-full py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-black rounded-xl shadow-lg shadow-brand-500/25 active:scale-[0.98] transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-rotate-right"></i> JOGAR NOVAMENTE / REVANCHE
+        </button>
+        <button onclick="leaveRoomAndHome()" class="w-full py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl transition text-sm">
+          Sair para o Menu Principal
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900 border border-brand-500/50 text-white px-4 py-2.5 rounded-xl shadow-2xl text-xs sm:text-sm font-semibold opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
+    <i class="fa-solid fa-circle-info text-brand-400"></i>
+    <span id="toast-msg">Mensagem</span>
+  </div>
+
+  <!-- FIREBASE MODULE & GAME ENGINE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Global variables from window environment or standard fallback
+    const appId = typeof window.__app_id !== 'undefined' ? window.__app_id : 'translation-duel-v1';
+    
+    // Default public Firebase fallback config if window config is missing
+    const firebaseConfig = typeof window.__firebase_config !== 'undefined' 
+      ? JSON.parse(window.__firebase_config) 
+      : {
+          apiKey: "AIzaSyDemoKeyTranslationDuel99",
+          authDomain: "translation-duel-demo.firebaseapp.com",
+          projectId: "translation-duel-demo",
+          storageBucket: "translation-duel-demo.appspot.com",
+          messagingSenderId: "123456789",
+          appId: "1:123456789:web:demo"
+        };
+
+    // Initialize Firebase
+    let app, auth, db;
+    let currentUser = null;
+    let userId = null;
+
+    try {
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+    } catch(err) {
+      console.warn("Firebase Init Error:", err);
+    }
+
+    // -------------------------------------------------------------
+    // DICTIONARY DATABASE (200 Frequent English Words & Translations)
+    // -------------------------------------------------------------
+    const DICTIONARY = [
+      { en: "house", pt: "casa" }, { en: "water", pt: "água" }, { en: "time", pt: "tempo" },
+      { en: "world", pt: "mundo" }, { en: "school", pt: "escola text" }, { en: "friend", pt: "amigo" },
+      { en: "life", pt: "vida" }, { en: "hand", pt: "mão" }, { en: "year", pt: "ano" },
+      { en: "day", pt: "dia" }, { en: "man", pt: "homem" }, { en: "woman", pt: "mulher" },
+      { en: "child", pt: "criança" }, { en: "city", pt: "cidade" }, { en: "book", pt: "livro" },
+      { en: "money", pt: "dinheiro" }, { en: "work", pt: "trabalho" }, { en: "night", pt: "noite" },
+      { en: "morning", pt: "manhã" }, { en: "car", pt: "carro" }, { en: "road", pt: "estrada" },
+      { en: "family", pt: "família" }, { en: "door", pt: "porta" }, { en: "room", pt: "quarto" },
+      { en: "mother", pt: "mãe" }, { en: "father", pt: "pai" }, { en: "sun", pt: "sol" },
+      { en: "moon", pt: "lua" }, { en: "food", pt: "comida" }, { en: "dog", pt: "cachorro" },
+      { en: "cat", pt: "gato" }, { en: "tree", pt: "árvore" }, { en: "bird", pt: "pássaro" },
+      { en: "paper", pt: "papel" }, { en: "letter", pt: "carta" }, { en: "table", pt: "mesa" },
+      { en: "chair", pt: "cadeira" }, { en: "light", pt: "luz" }, { en: "music", pt: "música" },
+      { en: "game", pt: "jogo" }, { en: "love", pt: "amor" }, { en: "mind", pt: "mente" },
+      { en: "heart", pt: "coração" }, { en: "head", pt: "cabeça" }, { en: "eye", pt: "olho" },
+      { en: "foot", pt: "pé" }, { en: "truth", pt: "verdade" }, { en: "story", pt: "história" },
+      { en: "question", pt: "pergunta" }, { en: "answer", pt: "resposta" }, { en: "number", pt: "número" },
+      { en: "color", pt: "cor" }, { en: "sound", pt: "som" }, { en: "place", pt: "lugar" },
+      { en: "power", pt: "poder" }, { en: "country", pt: "país" }, { en: "state", pt: "estado font" },
+      { en: "sea", pt: "mar" }, { en: "river", pt: "rio" }, { en: "earth", pt: "terra" },
+      { en: "fire", pt: "fogo" }, { en: "wind", pt: "vento" }, { en: "sky", pt: "céu" },
+      { en: "bread", pt: "pão" }, { en: "milk", pt: "leite" }, { en: "coffee", pt: "café" },
+      { en: "tea", pt: "chá" }, { en: "sugar", pt: "açúcar" }, { en: "fruit", pt: "fruta" },
+      { en: "star", pt: "estrela" }, { en: "flower", pt: "flor" }, { en: "store", pt: "loja" },
+      { en: "market", pt: "mercado" }, { en: "bank", pt: "banco" }, { en: "window", pt: "janela" },
+      { en: "bed", pt: "cama" }, { en: "fish", pt: "peixe" }, { en: "rain", pt: "chuva" },
+      { en: "snow", pt: "neve text" }, { en: "ice", pt: "gelo" }, { en: "gold", pt: "ouro" },
+      { en: "king", pt: "rei" }, { en: "queen", pt: "rainha" }, { en: "brother", pt: "irmão" },
+      { en: "sister", pt: "irmã" }, { en: "son", pt: "filho" }, { en: "daughter", pt: "filha" },
+      { en: "happy", pt: "feliz" }, { en: "fast", pt: "rápido" }, { en: "strong", pt: "forte" },
+      { en: "clean", pt: "limpo" }, { en: "dark", pt: "escuro" }, { en: "cold", pt: "frio" },
+      { en: "hot", pt: "quente" }, { en: "young", pt: "jovem" }, { en: "old", pt: "velho" },
+      { en: "small", pt: "pequeno" }, { en: "big", pt: "grande" }, { en: "new", pt: "novo" },
+      { en: "good", pt: "bom" }, { en: "easy", pt: "fácil" }, { en: "hard", pt: "difícil" },
+      { en: "beautiful", pt: "bonito" }, { en: "always", pt: "sempre" }, { en: "never", pt: "nunca" },
+      { en: "today", pt: "hoje" }, { en: "tomorrow", pt: "amanhã" }, { en: "yesterday", pt: "ontem" },
+      { en: "early", pt: "cedo" }, { en: "late", pt: "tarde" }, { en: "slow", pt: "lento" },
+      { en: "heavy", pt: "pesado" }, { en: "soft", pt: "macio" }, { en: "rich", pt: "rico" },
+      { en: "poor", pt: "pobre" }, { en: "healthy", pt: "saudável" }, { en: "safe", pt: "seguro" },
+      { en: "run", pt: "correr" }, { en: "walk", pt: "caminhar" }, { en: "speak", pt: "falar" },
+      { en: "read", pt: "ler" }, { en: "write", pt: "escrever" }, { en: "listen", pt: "ouvir" },
+      { en: "eat", pt: "comer" }, { en: "drink", pt: "beber" }, { en: "sleep", pt: "dormir" },
+      { en: "think", pt: "pensar" }, { en: "know", pt: "saber" }, { en: "make", pt: "fazer" },
+      { en: "give", pt: "dar" }, { en: "take", pt: "pegar" }, { en: "see", pt: "ver" },
+      { en: "look", pt: "olhar" }, { en: "come", pt: "vir" }, { en: "go", pt: "ir" },
+      { en: "help", pt: "ajudar" }, { en: "start", pt: "começar" }, { en: "stop", pt: "parar" },
+      { en: "open", pt: "abrir" }, { en: "close", pt: "fechar" }, { en: "buy", pt: "comprar" },
+      { en: "sell", pt: "vender" }, { en: "learn", pt: "aprender" }, { en: "teach", pt: "ensinar" },
+      { en: "fly", pt: "voar" }, { en: "swim", pt: "nadar" }, { en: "jump", pt: "pular" },
+      { en: "sing", pt: "cantar" }, { en: "dance", pt: "dançar" }, { en: "laugh", pt: "rir" }
+    ];
+
+    // -------------------------------------------------------------
+    // WEB AUDIO API SYNTHESIZER
+    // -------------------------------------------------------------
+    class SoundFx {
+      constructor() {
+        this.ctx = null;
+      }
+      init() {
+        if (!this.ctx) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+      playCorrect() {
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.12); // E5
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      }
+      playError() {
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.linearRampToValueAtTime(110, now + 0.2);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      }
+      playTick() {
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, now);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      }
+      playWinner() {
+        this.init();
+        if (!this.ctx) return;
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        notes.forEach((freq, idx) => {
+          const now = this.ctx.currentTime + idx * 0.12;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        });
+      }
+    }
+    const sfx = new SoundFx();
+
+    // -------------------------------------------------------------
+    // CONFETTI GENERATOR
+    // -------------------------------------------------------------
+    function fireConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const pieces = [];
+      const colors = ['#6366f1', '#10b981', '#f43f5e', '#fbbf24', '#a855f7'];
+
+      for (let i = 0; i < 120; i++) {
+        pieces.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speedY: Math.random() * 4 + 2,
+          speedX: (Math.random() - 0.5) * 2,
+          rot: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 5
+        });
+      }
+
+      let frame = 0;
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.y += p.speedY;
+          p.x += p.speedX;
+          p.rot += p.rotSpeed;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rot * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        });
+
+        frame++;
+        if (frame < 180) {
+          requestAnimationFrame(animate);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      animate();
+    }
+
+    // -------------------------------------------------------------
+    // STATE VARIABLES
+    // -------------------------------------------------------------
+    let roomCode = null;
+    let roomRef = null;
+    let unsubscribeRoom = null;
+    let isHost = false;
+    let currentRoomData = null;
+
+    // Room config local state
+    let gameMode = 'words'; // 'words' | 'time'
+    let limitValue = 20;    // 10, 20, 30 OR 30s, 60s, 90s
+    let optionCount = 6;    // 6 or 8 options
+
+    // Gameplay local state
+    let currentWordIdx = 0;
+    let myScore = 0;
+    let myErrors = 0;
+    let gameTimer = null;
+    let gameStartTime = null;
+    let gameEndTime = null;
+    let isGameFinished = false;
+
+    // -------------------------------------------------------------
+    // INITIALIZATION & AUTH
+    // -------------------------------------------------------------
+    async function initApp() {
+      try {
+        if (window.__initial_auth_token && auth) {
+          await signInWithCustomToken(auth, window.__initial_auth_token);
+        } else if (auth) {
+          await signInAnonymously(auth);
+        }
+      } catch (err) {
+        console.warn("Auth initialization fallback:", err);
+      }
+
+      userId = auth?.currentUser?.uid || 'user_' + Math.random().toString(36).substring(2, 9);
+
+      // Check URL query param for direct join code: ?room=XXXXXX
+      const urlParams = new URLSearchParams(window.location.search);
+      const roomParam = urlParams.get('room');
+      if (roomParam) {
+        document.getElementById('input-room-code').value = roomParam.toUpperCase();
+        switchHomeTab('join');
+        showToast(`Código ${roomParam.toUpperCase()} carregado do link!`);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // SEED & WORD LIST GENERATION
+    // -------------------------------------------------------------
+    function generateRoomWordList(totalWords, optCount) {
+      // Shuffle dictionary
+      const shuffled = [...DICTIONARY].sort(() => 0.5 - Math.random());
+      const selectedWords = shuffled.slice(0, Math.min(totalWords, DICTIONARY.length));
+
+      return selectedWords.map(target => {
+        // Find distractors
+        const otherPt = DICTIONARY
+          .filter(item => item.pt !== target.pt)
+          .map(item => item.pt);
+        
+        const distractors = otherPt.sort(() => 0.5 - Math.random()).slice(0, optCount - 1);
+        const options = [...distractors, target.pt].sort(() => 0.5 - Math.random());
+
+        return {
+          en: target.en,
+          pt: target.pt,
+          options: options
+        };
+      });
+    }
+
+    // -------------------------------------------------------------
+    // ROOM ACTIONS (Create / Join / Lobby)
+    // -------------------------------------------------------------
+    window.handleCreateRoom = async function() {
+      const name = document.getElementById('input-nickname').value.trim();
+      if (!name) {
+        showToast("Digite o seu apelido primeiro!");
+        return;
+      }
+
+      roomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+      isHost = true;
+
+      // Generate seed word list (enough words for either mode)
+      const maxWordCount = gameMode === 'words' ? limitValue : 100;
+      const wordList = generateRoomWordList(maxWordCount, optionCount);
+
+      const newRoom = {
+        code: roomCode,
+        hostId: userId,
+        status: 'lobby',
+        mode: gameMode,
+        limitValue: limitValue,
+        optionCount: optionCount,
+        wordList: wordList,
+        players: {
+          [userId]: {
+            name: name,
+            isHost: true,
+            status: 'ready',
+            score: 0,
+            errors: 0,
+            totalAnswered: 0,
+            finishTime: 0,
+            lastSeen: Date.now()
+          }
+        },
+        createdAt: Date.now()
+      };
+
+      try {
+        const roomDocPath = doc(db, 'artifacts', appId, 'public', 'data', 'rooms', roomCode);
+        await setDoc(roomDocPath, newRoom);
+        listenToRoom(roomCode);
+      } catch (err) {
+        console.error("Error creating room:", err);
+        showToast("Erro ao criar sala. Verifique a conexão.");
+      }
+    };
+
+    window.handleJoinRoom = async function() {
+      const name = document.getElementById('input-nickname').value.trim();
+      const code = document.getElementById('input-room-code').value.trim().toUpperCase();
+
+      if (!name) {
+        showToast("Digite o seu apelido!");
+        return;
+      }
+      if (!code || code.length < 4) {
+        showToast("Código de sala inválido!");
+        return;
+      }
+
+      roomCode = code;
+      isHost = false;
+
+      try {
+        const roomDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'rooms', roomCode);
+        const snap = await getDoc(roomDocRef);
+
+        if (!snap.exists()) {
+          showToast("Sala não encontrada! Verifique o código.");
+          return;
+        }
+
+        const roomData = snap.data();
+        if (roomData.status !== 'lobby') {
+          showToast("Esta partida já começou ou foi encerrada!");
+          return;
+        }
+
+        // Add player to room
+        const updatedPlayers = { ...roomData.players };
+        updatedPlayers[userId] = {
+          name: name,
+          isHost: false,
+          status: 'ready',
+          score: 0,
+          errors: 0,
+          totalAnswered: 0,
+          finishTime: 0,
+          lastSeen: Date.now()
+        };
+
+        await updateDoc(roomDocRef, { players: updatedPlayers });
+        listenToRoom(roomCode);
+      } catch (err) {
+        console.error("Error joining room:", err);
+        showToast("Erro ao entrar na sala.");
+      }
+    };
+
+    function listenToRoom(code) {
+      roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'rooms', code);
+
+      if (unsubscribeRoom) unsubscribeRoom();
+
+      unsubscribeRoom = onSnapshot(roomRef, (snapshot) => {
+        if (!snapshot.exists()) {
+          showToast("A sala foi encerrada.");
+          leaveRoomAndHome();
+          return;
+        }
+
+        currentRoomData = snapshot.data();
+        renderRoomState(currentRoomData);
+      }, (err) => {
+        console.error("Room snapshot error:", err);
+      });
+    }
+
+    // Heartbeat to update player lastSeen
+    setInterval(async () => {
+      if (roomRef && userId && currentRoomData) {
+        try {
+          const pPath = `players.${userId}.lastSeen`;
+          await updateDoc(roomRef, { [pPath]: Date.now() });
+        } catch(e){}
+      }
+    }, 10000);
+
+    // -------------------------------------------------------------
+    // UI ROOM RENDERER & STATE SWITCHER
+    // -------------------------------------------------------------
+    function renderRoomState(room) {
+      // Update Lobby info
+      document.getElementById('display-room-code').innerText = room.code;
+      document.getElementById('lobby-rule-mode').innerHTML = `<i class="fa-solid fa-sliders mr-1"></i> Modo: ${room.mode === 'words' ? room.limitValue + ' Palavras' : room.limitValue + ' Segundos'}`;
+      document.getElementById('lobby-rule-options').innerHTML = `<i class="fa-solid fa-grid-2 mr-1"></i> ${room.optionCount} Opções`;
+
+      // Render Players List
+      const playersListEl = document.getElementById('lobby-player-list');
+      const playerEntries = Object.entries(room.players || {});
+      document.getElementById('player-count').innerText = playerEntries.length;
+
+      const now = Date.now();
+      playersListEl.innerHTML = '';
+
+      playerEntries.forEach(([pId, p]) => {
+        // Check active state (if lastSeen > 15s ago, show disconnected red)
+        const isOnline = (now - (p.lastSeen || 0)) < 20000;
+        const statusColor = isOnline ? 'bg-emerald-500' : 'bg-rose-500';
+        const statusText = isOnline ? 'Pronto' : 'Desconectado';
+
+        const row = document.createElement('div');
+        row.className = `flex items-center justify-between p-3 rounded-xl border ${pId === userId ? 'bg-brand-500/10 border-brand-500/40' : 'bg-gray-900 border-gray-800'}`;
+        
+        row.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center font-bold text-xs uppercase text-brand-400">
+              ${p.name.substring(0, 2)}
+            </div>
+            <div>
+              <div class="font-bold text-sm text-white flex items-center gap-1.5">
+                ${p.name}
+                ${p.isHost ? '<span class="text-[10px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded border border-amber-500/30 font-extrabold"><i class="fa-solid fa-crown text-[9px]"></i> HOST</span>' : ''}
+                ${pId === userId ? '<span class="text-[10px] bg-brand-500/20 text-brand-300 px-1.5 py-0.5 rounded">VOCÊ</span>' : ''}
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full ${statusColor} ${isOnline ? 'animate-pulse' : ''}"></span>
+            <span class="text-xs font-semibold ${isOnline ? 'text-emerald-400' : 'text-rose-400'}">${statusText}</span>
+          </div>
+        `;
+        playersListEl.appendChild(row);
+      });
+
+      // Handle Host Controls
+      if (room.hostId === userId) {
+        document.getElementById('host-controls').classList.remove('hidden');
+        document.getElementById('guest-waiting-msg').classList.add('hidden');
+      } else {
+        document.getElementById('host-controls').classList.add('hidden');
+        document.getElementById('guest-waiting-msg').classList.remove('hidden');
+      }
+
+      // Handle Game Status Flow
+      if (room.status === 'lobby') {
+        switchView('lobby');
+      } else if (room.status === 'countdown') {
+        startCountdownOverlay(room.countdownStart);
+      } else if (room.status === 'playing') {
+        if (document.getElementById('view-game').classList.contains('hidden')) {
+          initGameplayUI(room);
+        }
+      } else if (room.status === 'finished') {
+        showResultsUI(room);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // COUNTDOWN SYSTEM
+    // -------------------------------------------------------------
+    let countdownInterval = null;
+
+    function startCountdownOverlay(startTime) {
+      switchView('countdown');
+      const numEl = document.getElementById('countdown-num');
+
+      if (countdownInterval) clearInterval(countdownInterval);
+
+      countdownInterval = setInterval(() => {
+        const remaining = Math.ceil((startTime + 3000 - Date.now()) / 1000);
+        if (remaining > 0) {
+          numEl.innerText = remaining;
+          sfx.playTick();
+        } else {
+          numEl.innerText = "GO!";
+          sfx.playCorrect();
+          clearInterval(countdownInterval);
+
+          // Host transitions room status to playing
+          if (currentRoomData && currentRoomData.hostId === userId) {
+            updateDoc(roomRef, { status: 'playing', gameStartTimestamp: Date.now() });
+          }
+        }
+      }, 300);
+    }
+
+    // -------------------------------------------------------------
+    // GAMEPLAY MECHANICS
+    // -------------------------------------------------------------
+    function initGameplayUI(room) {
+      switchView('game');
+      currentWordIdx = 0;
+      myScore = 0;
+      myErrors = 0;
+      isGameFinished = false;
+      gameStartTime = Date.now();
+
+      document.getElementById('game-score').innerText = '0';
+
+      if (room.mode === 'time') {
+        startTimerMode(room.limitValue);
+      } else {
+        updateProgressBadgeWords(0, room.limitValue);
+      }
+
+      renderWordQuestion();
+    }
+
+    function updateProgressBadgeWords(current, total) {
+      document.getElementById('game-tracker-text').innerText = `${current} / ${total} Palavras`;
+    }
+
+    function startTimerMode(seconds) {
+      const endTime = Date.now() + seconds * 1000;
+      if (gameTimer) clearInterval(gameTimer);
+
+      gameTimer = setInterval(() => {
+        const leftSec = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+        document.getElementById('game-tracker-text').innerText = `${leftSec}s Restantes`;
+
+        if (leftSec <= 0) {
+          clearInterval(gameTimer);
+          finishMyGame();
+        }
+      }, 250);
+    }
+
+    function renderWordQuestion() {
+      if (!currentRoomData || !currentRoomData.wordList) return;
+
+      const totalWords = currentRoomData.wordList.length;
+
+      // Check if finished by word limit
+      if (currentRoomData.mode === 'words' && currentWordIdx >= currentRoomData.limitValue) {
+        finishMyGame();
+        return;
+      }
+
+      // Loop around word list if time mode exceeds generated words
+      const wordObj = currentRoomData.wordList[currentWordIdx % totalWords];
+
+      document.getElementById('target-word').innerText = wordObj.en;
+
+      if (currentRoomData.mode === 'words') {
+        updateProgressBadgeWords(currentWordIdx, currentRoomData.limitValue);
+      }
+
+      // Render Option Buttons Grid
+      const grid = document.getElementById('options-grid');
+      grid.innerHTML = '';
+
+      // Grid column layout adjustment
+      const is8Opts = currentRoomData.optionCount === 8;
+      grid.className = `grid gap-2.5 sm:gap-3 pt-2 ${is8Opts ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2 sm:grid-cols-3'}`;
+
+      wordObj.options.forEach((optText) => {
+        const btn = document.createElement('button');
+        btn.className = "glass-btn py-3.5 sm:py-4 px-3 rounded-xl font-bold text-sm sm:text-base text-gray-100 hover:border-brand-500 hover:bg-brand-500/20 active:bg-brand-500/40 text-center capitalize transition shadow";
+        btn.innerText = optText;
+        btn.onclick = () => handleAnswerClick(optText, wordObj.pt, btn);
+        grid.appendChild(btn);
+      });
+    }
+
+    async function handleAnswerClick(selected, correct, btnEl) {
+      if (isGameFinished) return;
+
+      const flash = document.getElementById('flash-feedback');
+
+      if (selected === correct) {
+        myScore++;
+        sfx.playCorrect();
+        btnEl.classList.add('bg-emerald-600', 'border-emerald-400', 'text-white');
+        flash.className = "absolute inset-0 pointer-events-none transition-opacity duration-200 opacity-20 bg-emerald-500";
+      } else {
+        myErrors++;
+        sfx.playError();
+        btnEl.classList.add('bg-rose-600', 'border-rose-400', 'text-white');
+        flash.className = "absolute inset-0 pointer-events-none transition-opacity duration-200 opacity-20 bg-rose-500";
+      }
+
+      document.getElementById('game-score').innerText = myScore;
+
+      setTimeout(() => {
+        flash.style.opacity = '0';
+      }, 150);
+
+      currentWordIdx++;
+
+      // Sync score progress to Firestore
+      if (roomRef && userId) {
+        try {
+          const timeSpent = ((Date.now() - gameStartTime) / 1000).toFixed(1);
+          await updateDoc(roomRef, {
+            [`players.${userId}.score`]: myScore,
+            [`players.${userId}.errors`]: myErrors,
+            [`players.${userId}.totalAnswered`]: currentWordIdx,
+            [`players.${userId}.finishTime`]: parseFloat(timeSpent)
+          });
+        } catch (e){}
+      }
+
+      renderWordQuestion();
+    }
+
+    async function finishMyGame() {
+      if (isGameFinished) return;
+      isGameFinished = true;
+      if (gameTimer) clearInterval(gameTimer);
+
+      const timeSpent = ((Date.now() - gameStartTime) / 1000).toFixed(1);
+
+      if (roomRef && userId) {
+        try {
+          await updateDoc(roomRef, {
+            [`players.${userId}.status`]: 'finished',
+            [`players.${userId}.score`]: myScore,
+            [`players.${userId}.errors`]: myErrors,
+            [`players.${userId}.totalAnswered`]: currentWordIdx,
+            [`players.${userId}.finishTime`]: parseFloat(timeSpent)
+          });
+
+          // If host, check if all active players are finished to declare winner
+          if (isHost) {
+            checkAndEndRoom();
+          }
+        } catch(e){}
+      }
+    }
+
+    async function checkAndEndRoom() {
+      if (!currentRoomData || currentRoomData.status === 'finished') return;
+
+      const players = Object.values(currentRoomData.players || {});
+      const allFinished = players.every(p => p.status === 'finished');
+
+      if (allFinished) {
+        await updateDoc(roomRef, { status: 'finished' });
+      }
+    }
+
+    // Host manually or automatically triggers Start Game
+    window.triggerStartGame = async function() {
+      if (!isHost || !roomRef) return;
+      try {
+        await updateDoc(roomRef, {
+          status: 'countdown',
+          countdownStart: Date.now()
+        });
+      } catch (err) {
+        console.error("Failed to start game:", err);
+      }
+    };
+
+    // -------------------------------------------------------------
+    // RESULTS & LEADERBOARD
+    // -------------------------------------------------------------
+    function showResultsUI(room) {
+      switchView('results');
+
+      const players = Object.entries(room.players || {}).map(([id, p]) => ({
+        id,
+        ...p
+      }));
+
+      // Sort Leaderboard:
+      // Primary: Score (Descending)
+      // Secondary: Accuracy % (Descending)
+      // Tertiary: Finish time (Ascending)
+      players.sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        const accA = a.totalAnswered ? (a.score / a.totalAnswered) : 0;
+        const accB = b.totalAnswered ? (b.score / b.totalAnswered) : 0;
+        if (accB !== accA) return accB - accA;
+        return (a.finishTime || 0) - (b.finishTime || 0);
+      });
+
+      const winner = players[0];
+      const isMeWinner = winner && winner.id === userId;
+
+      const heroBadge = document.getElementById('badge-result');
+      const heroSub = document.getElementById('result-subtitle');
+
+      if (isMeWinner) {
+        heroBadge.innerText = "WINNER 🎉";
+        heroBadge.className = "text-5xl sm:text-7xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 drop-shadow-2xl animate-bounce-short";
+        heroSub.innerText = "Parabéns! Você foi o grande vencedor da disputa!";
+        sfx.playWinner();
+        fireConfetti();
+      } else {
+        heroBadge.innerText = "LOSER 💀";
+        heroBadge.className = "text-5xl sm:text-7xl font-black tracking-widest text-rose-500 drop-shadow-lg";
+        heroSub.innerText = `Vitória de ${winner ? winner.name : 'outro jogador'}. Treine mais para a próxima!`;
+      }
+
+      // Render Leaderboard Rows
+      const tbody = document.getElementById('leaderboard-rows');
+      tbody.innerHTML = '';
+
+      players.forEach((p, idx) => {
+        const isMe = p.id === userId;
+        const total = p.totalAnswered || (p.score + p.errors) || 1;
+        const accPct = Math.round((p.score / total) * 100);
+
+        let posIcon = `${idx + 1}º`;
+        if (idx === 0) posIcon = '🥇';
+        if (idx === 1) posIcon = '🥈';
+        if (idx === 2) posIcon = '🥉';
+
+        const row = document.createElement('div');
+        row.className = `px-4 py-3 text-xs sm:text-sm font-semibold grid grid-cols-12 items-center text-left ${isMe ? 'bg-brand-500/20 border-l-4 border-brand-500 text-white' : 'text-gray-300'}`;
+
+        row.innerHTML = `
+          <span class="col-span-2 text-base font-black">${posIcon}</span>
+          <span class="col-span-5 font-bold truncate ${isMe ? 'text-brand-300' : ''}">${p.name} ${isMe ? '(Você)' : ''}</span>
+          <span class="col-span-3 text-center">
+            <span class="text-emerald-400 font-bold">${p.score}</span> / <span class="text-gray-400">${p.score + p.errors}</span>
+            <span class="block text-[10px] text-gray-500">${accPct}% acerto</span>
+          </span>
+          <span class="col-span-2 text-right font-mono text-gray-400">${p.finishTime ? p.pfinishTime + 's' : '--'}</span>
+        `;
+        tbody.appendChild(row);
+      });
+
+      // Show Rematch button for Host
+      if (isHost) {
+        document.getElementById('btn-rematch').classList.remove('hidden');
+      } else {
+        document.getElementById('btn-rematch').classList.add('hidden');
+      }
+    }
+
+    window.triggerRematch = async function() {
+      if (!isHost || !roomRef) return;
+
+      // Generate new word list
+      const maxWordCount = currentRoomData.mode === 'words' ? currentRoomData.limitValue : 100;
+      const newWordList = generateRoomWordList(maxWordCount, currentRoomData.optionCount);
+
+      const resetPlayers = {};
+      Object.keys(currentRoomData.players || {}).forEach(pId => {
+        resetPlayers[pId] = {
+          ...currentRoomData.players[pId],
+          status: 'ready',
+          score: 0,
+          errors: 0,
+          totalAnswered: 0,
+          finishTime: 0
+        };
+      });
+
+      try {
+        await updateDoc(roomRef, {
+          status: 'lobby',
+          wordList: newWordList,
+          players: resetPlayers
+        });
+      } catch(err) {
+        console.error("Error triggering rematch:", err);
+      }
+    };
+
+    window.leaveRoomAndHome = function() {
+      if (unsubscribeRoom) unsubscribeRoom();
+      roomCode = null;
+      roomRef = null;
+      currentRoomData = null;
+      switchView('home');
+    };
+
+    // -------------------------------------------------------------
+    // HELPERS & UI CONTROLS
+    // -------------------------------------------------------------
+    window.switchHomeTab = function(tab) {
+      const btnCreate = document.getElementById('tab-create');
+      const btnJoin = document.getElementById('tab-join');
+      const panelCreate = document.getElementById('panel-create');
+      const panelJoin = document.getElementById('panel-join');
+
+      if (tab === 'create') {
+        btnCreate.className = "py-2.5 rounded-lg text-sm font-bold transition-all bg-brand-600 text-white shadow";
+        btnJoin.className = "py-2.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white";
+        panelCreate.classList.remove('hidden');
+        panelJoin.classList.add('hidden');
+      } else {
+        btnJoin.className = "py-2.5 rounded-lg text-sm font-bold transition-all bg-brand-600 text-white shadow";
+        btnCreate.className = "py-2.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white";
+        panelJoin.classList.remove('hidden');
+        panelCreate.classList.add('hidden');
+      }
+    };
+
+    window.setGameMode = function(mode) {
+      gameMode = mode;
+      const btnWords = document.getElementById('btn-mode-words');
+      const btnTime = document.getElementById('btn-mode-time');
+      const groupWords = document.getElementById('group-word-limits');
+      const groupTime = document.getElementById('group-time-limits');
+
+      if (mode === 'words') {
+        btnWords.className = "p-3 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-left transition-all";
+        btnTime.className = "p-3 rounded-xl border-2 border-gray-800 bg-gray-900 text-left hover:border-gray-700 transition-all";
+        groupWords.classList.remove('hidden');
+        groupTime.classList.add('hidden');
+        document.getElementById('lbl-limit-value').innerText = "Quantidade de Palavras";
+        limitValue = 20;
+      } else {
+        btnTime.className = "p-3 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-left transition-all";
+        btnWords.className = "p-3 rounded-xl border-2 border-gray-800 bg-gray-900 text-left hover:border-gray-700 transition-all";
+        groupTime.classList.remove('hidden');
+        groupWords.classList.add('hidden');
+        document.getElementById('lbl-limit-value').innerText = "Tempo de Partida (Segundos)";
+        limitValue = 60;
+      }
+    };
+
+    window.setLimitValue = function(val) {
+      limitValue = val;
+      const targetGroup = gameMode === 'words' ? 'group-word-limits' : 'group-time-limits';
+      const btns = document.querySelectorAll(`#${targetGroup} button`);
+      
+      btns.forEach(b => {
+        if (b.innerText.includes(val.toString())) {
+          b.className = "py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-sm";
+        } else {
+          b.className = "py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-sm";
+        }
+      });
+    };
+
+    window.setOptionCount = function(count) {
+      optionCount = count;
+      const btn6 = document.getElementById('btn-opts-6');
+      const btn8 = document.getElementById('btn-opts-8');
+
+      if (count === 6) {
+        btn6.className = "py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-sm";
+        btn8.className = "py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold text-gray-300 hover:border-brand-500 transition text-sm";
+      } else {
+        btn8.className = "py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-sm";
+        btn6.className = "py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold text-gray-300 hover:border-brand-500 transition text-sm";
+      }
+    };
+
+    window.copyRoomLink = function() {
+      const link = `${window.location.origin}${window.location.pathname}?room=${roomCode}`;
+      const tempInput = document.createElement('input');
+      document.body.appendChild(tempInput);
+      tempInput.value = link;
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast("Link copiado para a área de transferência!");
+    };
+
+    window.shareWhatsApp = function() {
+      const link = `${window.location.origin}${window.location.pathname}?room=${roomCode}`;
+      const msg = `⚡ Desafio de Tradução de Inglês! Vem disputar comigo no Translation Arena:\n\nLink do jogo: ${link}`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    function switchView(viewName) {
+      ['home', 'lobby', 'countdown', 'game', 'results'].forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (v === viewName) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    // Initialize on load
+    window.onload = () => {
+      initApp();
+    };
+  </script>
+</body>
+</html>
