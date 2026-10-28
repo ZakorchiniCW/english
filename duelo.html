@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translation Duel Arena - Desafio de Inglês</title>
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-green: #22c55e;
+      --accent-blue: #3b82f6;
+      --accent-red: #ef4444;
+      --accent-yellow: #eab308;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background-color: var(--bg-primary); color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; }
+
+    .container { width: 100%; max-width: 600px; background: var(--bg-card); padding: 25px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 10px; color: var(--accent-blue); }
+    p { color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem; }
+
+    .input-group { margin-bottom: 15px; text-align: left; }
+    label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted); }
+    input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 1rem; }
+
+    .btn { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px; transition: transform 0.1s, opacity 0.2s; }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--accent-blue); color: white; }
+    .btn-green { background: var(--accent-green); color: white; }
+    .btn-whatsapp { background: #25D366; color: white; }
+    .btn-email { background: #ea4335; color: white; }
+    .btn-copy { background: #64748b; color: white; }
+
+    .invite-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    @media (max-width: 480px) { .invite-buttons { grid-template-columns: 1fr; } }
+
+    .status-list { margin: 20px 0; text-align: left; background: #0f172a; padding: 15px; border-radius: 8px; }
+    .status-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #1e293b; }
+    .status-item:last-child { border-bottom: none; }
+    .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+    .badge-waiting { background: rgba(234, 179, 8, 0.2); color: var(--accent-yellow); }
+    .badge-ready { background: rgba(34, 197, 94, 0.2); color: var(--accent-green); }
+    .badge-left { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+
+    .hidden { display: none !important; }
+
+    /* Arena de Jogo */
+    .word-box { font-size: 2.2rem; font-weight: 800; color: var(--accent-yellow); margin: 20px 0; padding: 20px; background: #0f172a; border-radius: 12px; border: 2px dashed var(--accent-blue); word-break: break-word; }
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+    @media (max-width: 400px) { .options-grid { grid-template-columns: 1fr; } }
+    .option-btn { background: #334155; color: white; padding: 16px; border-radius: 8px; border: none; font-size: 1.05rem; cursor: pointer; transition: background 0.2s; }
+    .option-btn:hover { background: var(--accent-blue); }
+
+    .timer-bar { font-size: 1.2rem; font-weight: bold; color: var(--accent-green); margin-bottom: 10px; }
+    .countdown-screen { font-size: 5rem; font-weight: bold; color: var(--accent-yellow); animation: pulse 1s infinite; }
+
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+
+    /* Tela Final */
+    .winner-title { font-size: 3rem; font-weight: 900; color: var(--accent-green); text-shadow: 0 0 20px rgba(34, 197, 94, 0.5); }
+    .loser-title { font-size: 3rem; font-weight: 900; color: var(--accent-red); text-shadow: 0 0 20px rgba(239, 68, 68, 0.5); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- TELA 1: LOGIN E CRIAÇÃO/ENTRADA DA SALA -->
+  <div id="screen-setup">
+    <h1>⚔️ Translation Arena</h1>
+    <p>Desafie um amigo para uma disputa de tradução rápida!</p>
+
+    <div class="input-group">
+      <label for="player-name">Seu Nome / Apelido:</label>
+      <input type="text" id="player-name" placeholder="Ex: Cleiton" maxlength="15">
+    </div>
+
+    <div id="mode-selection" class="input-group">
+      <label for="game-mode">Tipo de Limitador do Desafio:</label>
+      <select id="game-mode" onchange="toggleModeOptions()">
+        <option value="words">Quantidade de Palavras</option>
+        <option value="time">Tempo Limite (Segundos)</option>
+      </select>
+    </div>
+
+    <div class="input-group" id="limit-words-group">
+      <label for="limit-words">Quantidade de Palavras:</label>
+      <select id="limit-words">
+        <option value="10">10 Palavras</option>
+        <option value="20" selected>20 Palavras</option>
+        <option value="50">50 Palavras</option>
+      </select>
+    </div>
+
+    <div class="input-group hidden" id="limit-time-group">
+      <label for="limit-time">Tempo Total em Segundos:</label>
+      <select id="limit-time">
+        <option value="30">30 Segundos</option>
+        <option value="60" selected>60 Segundos</option>
+        <option value="120">120 Segundos</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="options-count">Opções de Tradução por Palavra:</label>
+      <select id="options-count">
+        <option value="6" selected>6 Botoes de Resposta</option>
+        <option value="8">8 Botões de Resposta</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" onclick="createRoom()">Criar Nova Sala Desafio</button>
+  </div>
+
+  <!-- TELA 2: LOBBY DO ANFITRIÃO / ESPERA DE JOGADORES -->
+  <div id="screen-lobby" class="hidden">
+    <h2>Sala do Desafio</h2>
+    <p>Envie o convite para o seu oponente:</p>
+
+    <div class="invite-buttons">
+      <button class="btn btn-whatsapp" onclick="shareWhatsApp()">📱 WhatsApp</button>
+      <button class="btn btn-email" onclick="shareEmailDesktop()">✉️ E-mail (Desktop)</button>
+      <button class="btn btn-copy" onclick="copyLink()">📋 Copiar Link</button>
+    </div>
+
+    <div class="status-list">
+      <div style="font-weight: bold; margin-bottom: 10px;">Participantes na Sala:</div>
+      <div id="participants-container">
+        <!-- Gerado via JS -->
+      </div>
+    </div>
+
+    <button id="start-btn" class="btn btn-green hidden" onclick="startCountdown()">🚀 Iniciar Jogo</button>
+  </div>
+
+  <!-- TELA 3: CONTAGEM REGRESSIVA -->
+  <div id="screen-countdown" class="hidden">
+    <p>O DESAFIO VAI COMECAR EM...</p>
+    <div id="countdown-number" class="countdown-screen">3</div>
+  </div>
+
+  <!-- TELA 4: ARENA DO JOGO -->
+  <div id="screen-game" class="hidden">
+    <div class="timer-bar" id="game-status-bar">Palavra 1 de 20</div>
+    <div class="word-box" id="target-word">LOADING...</div>
+    <div class="options-grid" id="options-container">
+      <!-- Botões de tradução inseridos dinamicamente -->
+    </div>
+  </div>
+
+  <!-- TELA 5: RESULTADO FINAL -->
+  <div id="screen-result" class="hidden">
+    <div id="result-badge"></div>
+    <h2 id="result-title">RESULTADO</h2>
+    <p id="result-details" style="margin-top: 15px; font-size: 1.1rem; color: var(--text-main);"></p>
+    <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 25px;">Jogar Novamente</button>
+  </div>
+
+</div>
+
+<script>
+  // Dicionário das 1000 palavras mais usadas em inglês (Amostra para demonstração e jogo completo)
+  const DICTIONARY = [
+    { en: "the", pt: "o / a / os / as" }, { en: "be", pt: "ser / estar" }, { en: "to", pt: "para / a" },
+    { en: "of", pt: "de" }, { en: "and", pt: "e" }, { en: "a", pt: "um / uma" }, { en: "in", pt: "em / dentro" },
+    { en: "that", pt: "aquele / que" }, { en: "have", pt: "ter / haver" }, { en: "I", pt: "eu" },
+    { en: "it", pt: "ele / ela (objeto)" }, { en: "for", pt: "para / por" }, { en: "not", pt: "não" },
+    { en: "on", pt: "em / sobre" }, { en: "with", pt: "com" }, { en: "he", pt: "ele" },
+    { en: "as", pt: "como / enquanto" }, { en: "you", pt: "você / vocês" }, { en: "do", pt: "fazer" },
+    { en: "at", pt: "em / no / na" }, { en: "this", pt: "este / esta" }, { en: "but", pt: "mas / porém" },
+    { en: "his", pt: "dele" }, { en: "by", pt: "por / perto de" }, { en: "from", pt: "de / a partir de" },
+    { en: "they", pt: "eles / elas" }, { en: "we", pt: "nós" }, { en: "say", pt: "dizer" },
+    { en: "her", pt: "dela / a ela" }, { en: "she", pt: "ela" }, { en: "or", pt: "ou" },
+    { en: "an", pt: "um / uma (antes de vogal)" }, { en: "will", pt: "irá / vontade" }, { en: "my", pt: "meu / minha" },
+    { en: "one", pt: "um / número um" }, { en: "would", pt: "iria / gostaria" }, { en: "there", pt: "lá / ali" },
+    { en: "their", pt: "deles / delas" }, { en: "what", pt: "o que / qual" }, { en: "so", pt: "então / tão" },
+    { en: "up", pt: "para cima" }, { en: "out", pt: "fora" }, { en: "if", pt: "se" },
+    { en: "about", pt: "sobre / cerca de" }, { en: "who", pt: "quem" }, { en: "get", pt: "obter / pegar" },
+    { en: "which", pt: "qual / o qual" }, { en: "go", pt: "ir" }, { en: "me", pt: "mim / me" },
+    { en: "when", pt: "quando" }, { en: "make", pt: "fazer / criar" }, { en: "can", pt: "pode / conseguir" },
+    { en: "like", pt: "gostar / como" }, { en: "time", pt: "tempo / hora" }, { en: "no", pt: "não" },
+    { en: "just", pt: "apenas / só" }, { en: "him", pt: "ele / a ele" }, { en: "know", pt: "saber / conhecer" },
+    { en: "take", pt: "pegar / tomar" }, { en: "people", pt: "pessoas / povo" }, { en: "into", pt: "para dentro de" },
+    { en: "year", pt: "ano" }, { en: "your", pt: "seu / sua" }, { en: "good", pt: "bom / boa" },
+    { en: "some", pt: "algum / alguns" }, { en: "could", pt: "poderia" }, { en: "them", pt: "eles / elas (objeto)" },
+    { en: "see", pt: "ver" }, { en: "other", pt: "outro / outra" }, { en: "than", pt: "do que" },
+    { en: "then", pt: "então / depois" }, { en: "now", pt: "agora" }, { en: "look", pt: "olhar / parecer" },
+    { en: "only", pt: "somente / único" }, { en: "come", pt: "vir" }, { en: "its", pt: "dele / dela (objeto)" },
+    { en: "over", pt: "sobre / acima de" }, { en: "think", pt: "pensar / achar" }, { en: "also", pt: "também" },
+    { en: "back", pt: "atrás / de volta" }, { en: "after", pt: "depois / após" }, { en: "use", pt: "usar" },
+    { en: "two", pt: "dois" }, { en: "how", pt: "como / quão" }, { en: "our", pt: "nosso / nossa" },
+    { en: "work", pt: "trabalho / trabalhar" }, { en: "first", pt: "primeiro" }, { en: "well", pt: "bem" },
+    { en: "way", pt: "caminho / jeito" }, { en: "even", pt: "até mesmo / mesmo" }, { en: "new", pt: "novo / nova" },
+    { en: "want", pt: "querer" }, { en: "because", pt: "porque" }, { en: "any", pt: "qualquer / algum" },
+    { en: "these", pt: "estes / estas" }, { en: "give", pt: "dar" }, { en: "day", pt: "dia" },
+    { en: "most", pt: "mais / a maioria" }, { en: "us", pt: "nós (objeto)" }
+  ];
+
+  let peer = null;
+  let conn = null;
+  let isHost = false;
+  let roomId = null;
+  let myName = '';
+  let opponents = {};
+
+  let gameConfig = {
+    mode: 'words',
+    limit: 20,
+    optionsCount: 6,
+    seed: Math.floor(Math.random() * 10000)
+  };
+
+  let currentWordIndex = 0;
+  let score = 0;
+  let timerInterval = null;
+  let timeRemaining = 0;
+
+  // Alterna campos do formulário
+  function toggleModeOptions() {
+    const mode = document.getElementById('game-mode').value;
+    if (mode === 'words') {
+      document.getElementById('limit-words-group').classList.remove('hidden');
+      document.getElementById('limit-time-group').classList.add('hidden');
+    } else {
+      document.getElementById('limit-words-group').classList.add('hidden');
+      document.getElementById('limit-time-group').classList.remove('hidden');
+    }
+  }
+
+  // Verifica se entrou via link de convite
+  window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const room = urlParams.get('room');
+    if (room) {
+      roomId = room;
+      document.getElementById('mode-selection').classList.add('hidden');
+      document.getElementById('limit-words-group').classList.add('hidden');
+      document.getElementById('limit-time-group').classList.add('hidden');
+      document.querySelector('#screen-setup h1').innerText = "⚔️ Entrar no Desafio";
+      document.querySelector('#screen-setup button').innerText = "Entrar na Sala";
+      document.querySelector('#screen-setup button').setAttribute('onclick', 'joinRoom()');
+    }
+  };
+
+  function createRoom() {
+    myName = document.getElementById('player-name').value.trim() || 'Anfitrião';
+    isHost = true;
+    
+    gameConfig.mode = document.getElementById('game-mode').value;
+    gameConfig.limit = parseInt(document.getElementById(gameConfig.mode === 'words' ? 'limit-words' : 'limit-time').value);
+    gameConfig.optionsCount = parseInt(document.getElementById('options-count').value);
+
+    roomId = 'duel-' + Math.random().toString(36).substring(2, 8);
+    
+    peer = new Peer(roomId);
+
+    peer.on('open', () => {
+      showLobby();
+      updateParticipantsList();
+    });
+
+    peer.on('connection', (c) => {
+      conn = c;
+      setupConnectionHandlers();
+    });
+  }
+
+  function joinRoom() {
+    myName = document.getElementById('player-name').value.trim() || 'Convidado';
+    isHost = false;
+
+    peer = new Peer();
+    peer.on('open', () => {
+      conn = peer.connect(roomId);
+      setupConnectionHandlers();
+      showLobby();
+    });
+  }
+
+  function setupConnectionHandlers() {
+    conn.on('open', () => {
+      if (!isHost) {
+        // Envia nome para o anfitrião
+        conn.send({ type: 'JOIN', name: myName });
+      }
+    });
+
+    conn.on('data', (data) => {
+      if (data.type === 'JOIN' && isHost) {
+        opponents[conn.peer] = { name: data.name, status: 'ready', score: 0, finished: false };
+        updateParticipantsList();
+        document.getElementById('start-btn').classList.remove('hidden');
+        // Envia configurações para o convidado
+        conn.send({ type: 'CONFIG', config: gameConfig });
+      } else if (data.type === 'CONFIG' && !isHost) {
+        gameConfig = data.config;
+      } else if (data.type === 'START') {
+        runCountdown();
+      } else if (data.type === 'SCORE_UPDATE') {
+        opponents[conn.peer].score = data.score;
+        opponents[conn.peer].finished = data.finished;
+        checkGameEndCondition();
+      }
+    });
+
+    conn.on('close', () => {
+      if (opponents[conn.peer]) {
+        opponents[conn.peer].status = 'left';
+        updateParticipantsList();
+      }
+    });
+  }
+
+  function showLobby() {
+    document.getElementById('screen-setup').classList.add('hidden');
+    document.getElementById('screen-lobby').classList.remove('hidden');
+  }
+
+  function updateParticipantsList() {
+    const container = document.getElementById('participants-container');
+    container.innerHTML = `
+      <div class="status-item">
+        <span>👑 ${myName} (Você)</span>
+        <span class="badge badge-ready">Pronto</span>
+      </div>
+    `;
+
+    Object.keys(opponents).forEach(id => {
+      const opp = opponents[id];
+      const badgeClass = opp.status === 'ready' ? 'badge-ready' : 'badge-left';
+      const statusText = opp.status === 'ready' ? 'Aguardando Liberação' : 'Recusou / Saiu';
+      container.innerHTML += `
+        <div class="status-item">
+          <span>⚔️ ${opp.name}</span>
+          <span class="badge ${badgeClass}">${statusText}</span>
+        </div>
+      `;
+    });
+  }
+
+  // Links de Convite
+  function getShareUrl() {
+    return `${window.location.origin}${window.location.pathname}?room=${roomId}`;
+  }
+
+  function shareWhatsApp() {
+    const text = encodeURIComponent(`⚔️ Desafio de Tradução de Inglês!\nAceita o desafio? Clique no link para entrar na sala:\n${getShareUrl()}`);
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  }
+
+  function shareEmailDesktop() {
+    const subject = encodeURIComponent('Desafio de Tradução em Inglês - Translation Arena');
+    const body = encodeURIComponent(`Olá!\n\nEstou te desafiando para uma disputa de tradução em inglês na Translation Arena!\n\nClique no link abaixo para se conectar à sala e começar:\n${getShareUrl()}\n\nBoa sorte!`);
+    
+    // Tenta mailto padrão do sistema
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(getShareUrl());
+    alert('Link do desafio copiado para a área de transferência!');
+  }
+
+  function startCountdown() {
+    if (conn) conn.send({ type: 'START' });
+    runCountdown();
+  }
+
+  function runCountdown() {
+    document.getElementById('screen-lobby').classList.add('hidden');
+    document.getElementById('screen-countdown').classList.remove('hidden');
+    let count = 3;
+    const numEl = document.getElementById('countdown-number');
+
+    const interval = setInterval(() => {
+      count--;
+      if (count > 0) {
+        numEl.innerText = count;
+      } else {
+        clearInterval(interval);
+        startGame();
+      }
+    }, 1000);
+  }
+
+  function startGame() {
+    document.getElementById('screen-countdown').classList.add('hidden');
+    document.getElementById('screen-game').classList.remove('hidden');
+
+    currentWordIndex = 0;
+    score = 0;
+
+    if (gameConfig.mode === 'time') {
+      timeRemaining = gameConfig.limit;
+      startTimer();
+    }
+
+    renderCurrentWord();
+  }
+
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      timeRemaining--;
+      document.getElementById('game-status-bar').innerText = `⏱️ Tempo: ${timeRemaining}s | Acertos: ${score}`;
+      if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        endGame(true);
+      }
+    }, 1000);
+  }
+
+  function renderCurrentWord() {
+    if (gameConfig.mode === 'words' && currentWordIndex >= gameConfig.limit) {
+      endGame(true);
+      return;
+    }
+
+    if (gameConfig.mode === 'words') {
+      document.getElementById('game-status-bar').innerText = `Palavra ${currentWordIndex + 1} de ${gameConfig.limit} | Acertos: ${score}`;
+    }
+
+    const currentWordObj = DICTIONARY[currentWordIndex % DICTIONARY.length];
+    document.getElementById('target-word').innerText = currentWordObj.en.toUpperCase();
+
+    // Gerar opções aleatórias mantendo o mesmo conjunto para ambos
+    const options = [currentWordObj.pt];
+    while (options.length < gameConfig.optionsCount) {
+      const randIndex = (currentWordIndex + options.length * 7) % DICTIONARY.length;
+      const randPt = DICTIONARY[randIndex].pt;
+      if (!options.includes(randPt)) options.push(randPt);
+    }
+
+    // Embaralhar opções
+    options.sort(() => 0.5 - Math.random());
+
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerText = opt;
+      btn.onclick = () => selectAnswer(opt === currentWordObj.pt);
+      optionsContainer.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(isCorrect) {
+    if (isCorrect) score++;
+    currentWordIndex++;
+
+    if (conn) {
+      conn.send({ type: 'SCORE_UPDATE', score: score, finished: currentWordIndex >= gameConfig.limit });
+    }
+
+    renderCurrentWord();
+  }
+
+  function endGame(finished) {
+    if (timerInterval) clearInterval(timerInterval);
+    document.getElementById('screen-game').classList.add('hidden');
+    document.getElementById('screen-result').classList.remove('hidden');
+
+    checkGameEndCondition();
+  }
+
+  function checkGameEndCondition() {
+    const oppId = Object.keys(opponents)[0];
+    const oppScore = oppId ? opponents[oppId].score : 0;
+    const oppName = oppId ? opponents[oppId].name : 'Oponente';
+
+    const resultTitle = document.getElementById('result-title');
+    const resultDetails = document.getElementById('result-details');
+
+    if (score > oppScore) {
+      resultTitle.className = 'winner-title';
+      resultTitle.innerText = 'WINNER 🏆';
+      resultDetails.innerText = `Você venceu! Pontuação: ${score} acertos vs ${oppScore} de ${oppName}.`;
+    } else if (score < oppScore) {
+      resultTitle.className = 'loser-title';
+      resultTitle.innerText = 'LOSER ❌';
+      resultDetails.innerText = `${oppName} venceu! Pontuação: ${oppScore} acertos vs ${score} seus.`;
+    } else {
+      resultTitle.className = 'winner-title';
+      resultTitle.innerText = 'EMPATE 🤝';
+      resultDetails.innerText = `Ambos acertaram ${score} palavras!`;
+    }
+  }
+</script>
+
+</body>
+</html>
