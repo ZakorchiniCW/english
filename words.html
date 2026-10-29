@@ -179,7 +179,7 @@
   <!-- TELA 5: RESULTADO FINAL -->
   <div id="screen-result" class="hidden">
     <h2 id="result-title">RESULTADO</h2>
-    <p id="result-details" style="margin-top: 15px; font-size: 1.1rem; color: var(--text-main);"></p>
+    <p id="result-details" style="margin-top: 15px; font-size: 1.05rem; color: var(--text-main); line-height: 1.5; white-space: pre-line;"></p>
 
     <div id="rematch-controls">
       <button id="rematch-btn" class="btn btn-green" onclick="window.rematch()">⚡ Revanche Imediata</button>
@@ -228,7 +228,6 @@
   let timerInterval = null;
   let timeRemaining = 0;
 
-  // Carregamento dos dados no início
   async function loadAllDatasets() {
     const statusEl = document.getElementById('loading-status');
     let loadedCount = 0;
@@ -392,9 +391,14 @@
         if (opponents[conn.peer]) {
           opponents[conn.peer].score = data.score;
           opponents[conn.peer].errors = data.errors || 0;
-          opponents[conn.peer].finished = data.finished;
-          checkGameEndCondition();
         }
+      } else if (data.type === 'GAME_OVER') {
+        if (opponents[conn.peer]) {
+          opponents[conn.peer].score = data.score;
+          opponents[conn.peer].errors = data.errors || 0;
+          opponents[conn.peer].finished = true;
+        }
+        endGame(data.finisher);
       } else if (data.type === 'BACK_TO_LOBBY' && !isHost) {
         showLobby();
       }
@@ -523,7 +527,7 @@
       updateStatusBar();
       if (timeRemaining <= 0) {
         clearInterval(timerInterval);
-        endGame();
+        endGame(null);
       }
     }, 1000);
   }
@@ -541,7 +545,7 @@
 
   function renderCurrentWord() {
     if (currentWordIndex >= gameDeck.length) {
-      endGame();
+      endGame(myName);
       return;
     }
 
@@ -575,27 +579,34 @@
       conn.send({
         type: 'SCORE_UPDATE',
         score: score,
-        errors: errors,
-        finished: gameConfig.mode === 'words' && currentWordIndex >= gameConfig.limit
+        errors: errors
       });
     }
 
     if (gameConfig.mode === 'words' && currentWordIndex >= gameConfig.limit) {
-      endGame();
+      if (conn && !isSolo) {
+        conn.send({
+          type: 'GAME_OVER',
+          score: score,
+          errors: errors,
+          finisher: myName
+        });
+      }
+      endGame(myName);
     } else {
       renderCurrentWord();
     }
   }
 
-  function endGame() {
+  function endGame(finisherName) {
     if (timerInterval) clearInterval(timerInterval);
     document.getElementById('screen-game').classList.add('hidden');
     document.getElementById('screen-result').classList.remove('hidden');
 
-    checkGameEndCondition();
+    checkGameEndCondition(finisherName);
   }
 
-  function checkGameEndCondition() {
+  function checkGameEndCondition(finisherName) {
     const resultTitle = document.getElementById('result-title');
     const resultDetails = document.getElementById('result-details');
 
@@ -611,18 +622,31 @@
     const oppErrors = oppId ? opponents[oppId].errors : 0;
     const oppName = oppId ? opponents[oppId].name : 'Oponente';
 
+    const finisherMsg = finisherName ? `⏹️ Partida encerrada pois ${finisherName} completou a sequência primeiro!\n\n` : '';
+
     if (score > oppScore) {
       resultTitle.className = 'winner-title';
       resultTitle.innerText = 'WINNER 🏆';
-      resultDetails.innerText = `Você venceu!\nSua pontuação: ${score} acertos, ${errors} erros.\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.`;
+      resultDetails.innerText = `${finisherMsg}Você venceu pelo maior número de acertos!\n\nSua pontuação: ${score} acertos, ${errors} erros.\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.`;
     } else if (score < oppScore) {
       resultTitle.className = 'loser-title';
       resultTitle.innerText = 'LOSER ❌';
-      resultDetails.innerText = `${oppName} venceu!\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.\nVocê: ${score} acertos, ${errors} erros.`;
+      resultDetails.innerText = `${finisherMsg}${oppName} venceu pelo maior número de acertos!\n\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.\nVocê: ${score} acertos, ${errors} erros.`;
     } else {
-      resultTitle.className = 'winner-title';
-      resultTitle.innerText = 'EMPATE 🤝';
-      resultDetails.innerText = `Ambos acertaram ${score} palavras!\nErros: Você (${errors}) vs ${oppName} (${oppErrors}).`;
+      // Empate em acertos -> desempate por menos erros
+      if (errors < oppErrors) {
+        resultTitle.className = 'winner-title';
+        resultTitle.innerText = 'WINNER 🏆';
+        resultDetails.innerText = `${finisherMsg}Você venceu no desempate por ter menos erros!\n\nSua pontuação: ${score} acertos, ${errors} erros.\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.`;
+      } else if (errors > oppErrors) {
+        resultTitle.className = 'loser-title';
+        resultTitle.innerText = 'LOSER ❌';
+        resultDetails.innerText = `${finisherMsg}${oppName} venceu no desempate por ter menos erros!\n\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.\nVocê: ${score} acertos, ${errors} erros.`;
+      } else {
+        resultTitle.className = 'winner-title';
+        resultTitle.innerText = 'EMPATE 🤝';
+        resultDetails.innerText = `${finisherMsg}Empate perfeito!\n\nAmbos com ${score} acertos e ${errors} erros.`;
+      }
     }
   }
 
