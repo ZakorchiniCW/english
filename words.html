@@ -110,7 +110,7 @@
     <header class="text-center mb-4 sm:mb-6 w-full">
       <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/30 px-3 py-1 rounded-full mb-2">
         <i class="fa-solid fa-bolt text-brand-500 text-xs sm:text-sm"></i>
-        <span class="text-xs font-semibold uppercase tracking-wider text-brand-400">P2P Realtime English Duel</span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-brand-400">P2P & Solo English Arena</span>
       </div>
       <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-white flex items-center justify-center gap-2">
         <span>TRANSLATION</span>
@@ -120,7 +120,7 @@
       <!-- Dataset Download Progress Badge -->
       <div id="dataset-loading-bar" class="mt-2 text-xs font-semibold text-gray-400 flex items-center justify-center gap-2">
         <i class="fa-solid fa-cloud-arrow-down text-brand-500 animate-bounce"></i>
-        <span id="dataset-status-text">Carregando dicionários do GitHub...</span>
+        <span id="dataset-status-text">Carregando vocabulários do GitHub...</span>
       </div>
     </header>
 
@@ -140,7 +140,7 @@
         <!-- Mode Selector Tabs (Create vs Join) -->
         <div class="grid grid-cols-2 gap-2 p-1 bg-gray-900 rounded-xl border border-gray-800">
           <button id="tab-create" onclick="switchHomeTab('create')" class="py-2.5 rounded-lg text-sm font-bold transition-all bg-brand-600 text-white shadow">
-            <i class="fa-solid fa-plus-circle mr-1"></i> Criar Sala
+            <i class="fa-solid fa-plus-circle mr-1"></i> Criar / Solo
           </button>
           <button id="tab-join" onclick="switchHomeTab('join')" class="py-2.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white">
             <i class="fa-solid fa-right-to-bracket mr-1"></i> Entrar em Sala
@@ -220,7 +220,7 @@
           </div>
 
           <button onclick="handleCreateRoom()" class="w-full py-4 bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white font-black rounded-xl shadow-lg shadow-brand-500/25 active:scale-[0.98] transition text-base tracking-wide flex items-center justify-center gap-2">
-            <i class="fa-solid fa-gamepad"></i> CRIAR SALA DE DESAFIO
+            <i class="fa-solid fa-gamepad"></i> CRIAR SALA / MODO SOLO
           </button>
         </div>
 
@@ -279,7 +279,7 @@
 
       <!-- Quick Category Adjustment for Host in Lobby -->
       <div id="lobby-host-settings" class="bg-gray-900/90 rounded-xl p-3 border border-gray-800 space-y-1.5 hidden">
-        <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400">Ajustar Categoria para a Próxima Rodada</label>
+        <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400">Ajustar Categoria do Duelo</label>
         <select id="select-lobby-category" onchange="onHostChangeLobbyCategory(this.value)" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-brand-500">
           <option value="all">Todas as Categorias (Misto)</option>
           <option value="1000">1000 Palavras Mais Usadas</option>
@@ -298,7 +298,7 @@
           <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-2">
             <i class="fa-solid fa-users text-brand-500"></i> Participantes (<span id="player-count">1</span>)
           </h2>
-          <span class="text-[10px] text-gray-500 italic">Sincronização P2P direta</span>
+          <span id="lobby-mode-tag" class="text-[10px] text-brand-400 font-bold bg-brand-500/10 px-2 py-0.5 rounded border border-brand-500/20">Modo Solo / Treino Habilitado</span>
         </div>
 
         <div id="lobby-player-list" class="space-y-2 max-h-52 overflow-y-auto pr-1">
@@ -312,7 +312,7 @@
           <button id="btn-start-game" onclick="triggerStartGame()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-black rounded-xl shadow-lg shadow-emerald-500/25 active:scale-[0.98] transition text-base tracking-wider flex items-center justify-center gap-2">
             <i class="fa-solid fa-play"></i> INICIAR DESAFIO
           </button>
-          <p class="text-center text-xs text-gray-400">Somente o anfitrião pode dar o início para todos.</p>
+          <p class="text-center text-xs text-gray-400">Pode iniciar sozinho para treino ou aguardar amigos entrarem.</p>
         </div>
 
         <div id="guest-waiting-msg" class="text-center py-3 text-sm font-semibold text-brand-400 animate-pulse hidden">
@@ -350,7 +350,7 @@
       <div class="bg-gradient-to-b from-gray-900 to-gray-950 border-2 border-brand-500/40 rounded-2xl p-6 sm:p-8 text-center shadow-inner relative overflow-hidden">
         <span class="text-xs font-bold uppercase tracking-widest text-brand-400 mb-1 block">Traduza para o Português:</span>
         <h2 id="target-word" class="text-3xl sm:text-5xl font-black tracking-wide text-white capitalize my-1">
-          LOADING...
+          CARREGANDO...
         </h2>
         <div id="target-word-extra" class="text-xs text-amber-400/90 font-medium italic mt-1 min-h-[1rem]"></div>
         
@@ -420,7 +420,7 @@
   <!-- APPLICATION ENGINE & LOGIC -->
   <script>
     // -------------------------------------------------------------
-    // DATASETS FETCHING & PARSING ENGINE
+    // SANITIZED GITHUB DATASETS FETCHING & PARSING
     // -------------------------------------------------------------
     const DATASET_URLS = {
       '1000': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/1000palavras.txt',
@@ -443,15 +443,18 @@
       'verbos': []
     };
 
-    // Fallback static vocabulary in case offline or network block
+    // Robust Fallback Vocabulary to ensure offline/CORS resilience
     const FALLBACK_DICTIONARY = [
       { en: "house", pt: "casa", extra: "" }, { en: "water", pt: "água", extra: "" },
       { en: "time", pt: "tempo", extra: "" }, { en: "world", pt: "mundo", extra: "" },
       { en: "friend", pt: "amigo", extra: "" }, { en: "life", pt: "vida", extra: "" },
       { en: "book", pt: "livro", extra: "" }, { en: "money", pt: "dinheiro", extra: "" },
       { en: "car", pt: "carro", extra: "" }, { en: "work", pt: "trabalho", extra: "" },
+      { en: "beautiful", pt: "bonito / lindo", extra: "" }, { en: "fast", pt: "rápido", extra: "" },
       { en: "speak", pt: "falar", extra: "(Passado: spoke, Particípio: spoken)" },
-      { en: "run", pt: "correr", extra: "(Passado: ran, Particípio: run)" }
+      { en: "run", pt: "correr", extra: "(Passado: ran, Particípio: run)" },
+      { en: "always", pt: "sempre", extra: "" }, { en: "never", pt: "nunca", extra: "" },
+      { en: "give up", pt: "desistir", extra: "" }, { en: "look for", pt: "procurar", extra: "" }
     ];
 
     let totalWordsLoaded = 0;
@@ -469,19 +472,18 @@
             parseDatasetText(key, text);
           }
         } catch (err) {
-          console.warn(`Erro ao baixar categoria ${key}:`, err);
+          console.warn(`Aviso ao carregar dataset ${key}:`, err);
         }
         completed++;
         statusText.innerText = `Baixando vocabulários (${completed}/${keys.length})...`;
       }
 
-      // Calculate total words
       totalWordsLoaded = Object.values(categoriesData).reduce((acc, curr) => acc + curr.length, 0);
 
       if (totalWordsLoaded > 0) {
         statusText.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check"></i> ${totalWordsLoaded} termos carregados do GitHub!</span>`;
       } else {
-        statusText.innerHTML = `<span class="text-amber-400 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Usando dicionário interno (Offline)</span>`;
+        statusText.innerHTML = `<span class="text-amber-400 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Usando vocabulário embutido</span>`;
       }
     }
 
@@ -638,30 +640,24 @@
     }
 
     // -------------------------------------------------------------
-    // PEERJS NETWORK STATE & PLAYER DATA
+    // NETWORK STATE & PLAYER DATA
     // -------------------------------------------------------------
     let peer = null;
-    let connections = {}; // Host connections map: peerId -> conn
-    let hostConn = null;   // Guest connection to host
+    let connections = {}; 
+    let hostConn = null;   
     let myPeerId = null;
     let myName = '';
     let isHost = false;
     let roomCode = null;
 
-    // Room configurations
     let gameCategory = 'all';
     let gameMode = 'words'; // 'words' | 'time'
     let limitValue = 20;
     let optionCount = 6;
 
-    // Synchronized Question Deck
     let gameDeck = [];
-
-    // Player state map for results
-    // peerId -> { name, isHost, status, score, errors, currentIdx, finished, finishTime }
     let playersState = {};
 
-    // Local Gameplay state
     let myScore = 0;
     let myErrors = 0;
     let myCurrentIdx = 0;
@@ -688,60 +684,76 @@
     // PEERJS CONNECTION HANDLERS
     // -------------------------------------------------------------
     window.handleCreateRoom = function() {
-      myName = document.getElementById('input-nickname').value.trim();
-      if (!myName) { showToast("Digite seu apelido!"); return; }
-
+      myName = document.getElementById('input-nickname').value.trim() || 'Jogador_1';
       gameCategory = document.getElementById('select-category').value;
       roomCode = 'DUEL-' + Math.random().toString(36).substring(2, 7).toUpperCase();
       isHost = true;
 
-      // Initialize Peer
-      peer = new Peer(roomCode);
+      myPeerId = 'host-' + Math.random().toString(36).substring(2, 7);
 
-      peer.on('open', (id) => {
-        myPeerId = id;
-        playersState[myPeerId] = {
-          name: myName,
-          isHost: true,
-          status: 'ready',
-          score: 0,
-          errors: 0,
-          currentIdx: 0,
-          finished: false,
-          finishTime: 0
-        };
+      playersState = {};
+      playersState[myPeerId] = {
+        name: myName,
+        isHost: true,
+        status: 'ready',
+        score: 0,
+        errors: 0,
+        currentIdx: 0,
+        finished: false,
+        finishTime: 0
+      };
 
-        renderLobbyUI();
-        switchView('lobby');
-      });
+      // Try initializing PeerJS for multiplayer
+      try {
+        peer = new Peer(roomCode);
 
-      peer.on('connection', (conn) => {
-        connections[conn.peer] = conn;
-
-        conn.on('data', (data) => {
-          handleHostReceivedData(conn.peer, data);
+        peer.on('open', (id) => {
+          myPeerId = id;
+          playersState[myPeerId] = {
+            name: myName,
+            isHost: true,
+            status: 'ready',
+            score: 0,
+            errors: 0,
+            currentIdx: 0,
+            finished: false,
+            finishTime: 0
+          };
+          renderLobbyUI();
         });
 
-        conn.on('close', () => {
-          if (playersState[conn.peer]) {
-            playersState[conn.peer].status = 'left';
-            broadcastRoomState();
-            renderLobbyUI();
-          }
-        });
-      });
+        peer.on('connection', (conn) => {
+          connections[conn.peer] = conn;
 
-      peer.on('error', (err) => {
-        console.error("Peer Error:", err);
-        showToast("Erro de conexão P2P. Tente novamente.");
-      });
+          conn.on('data', (data) => {
+            handleHostReceivedData(conn.peer, data);
+          });
+
+          conn.on('close', () => {
+            if (playersState[conn.peer]) {
+              playersState[conn.peer].status = 'left';
+              broadcastRoomState();
+              renderLobbyUI();
+            }
+          });
+        });
+
+        peer.on('error', (err) => {
+          console.warn("PeerJS Warning (Modo solo disponível):", err);
+          document.getElementById('badge-network-status').innerText = "Solo Mode";
+        });
+      } catch (e) {
+        console.warn("PeerJS Offline. Ativando Modo Solo.");
+      }
+
+      renderLobbyUI();
+      switchView('lobby');
     };
 
     window.handleJoinRoom = function() {
-      myName = document.getElementById('input-nickname').value.trim();
+      myName = document.getElementById('input-nickname').value.trim() || 'Desafiante';
       const code = document.getElementById('input-room-code').value.trim().toUpperCase();
 
-      if (!myName) { showToast("Digite seu apelido!"); return; }
       if (!code) { showToast("Digite o código da sala!"); return; }
 
       roomCode = code;
@@ -754,7 +766,6 @@
         hostConn = peer.connect(roomCode);
 
         hostConn.on('open', () => {
-          // Send JOIN message to host
           hostConn.send({
             type: 'JOIN',
             name: myName,
@@ -768,18 +779,17 @@
         });
 
         hostConn.on('close', () => {
-          showToast("O anfitrião encerrou ou desconectou.");
+          showToast("O anfitrião encerrou a conexão.");
           leaveRoomAndHome();
         });
       });
 
       peer.on('error', (err) => {
         console.error("Guest Peer Error:", err);
-        showToast("Não foi possível conectar à sala. Verifique o código!");
+        showToast("Não foi possível conectar. Verifique o código da sala.");
       });
     };
 
-    // Host receives messages from Guests
     function handleHostReceivedData(guestPeerId, data) {
       if (data.type === 'JOIN') {
         playersState[guestPeerId] = {
@@ -802,13 +812,10 @@
           playersState[guestPeerId].finished = data.finished;
           playersState[guestPeerId].finishTime = data.finishTime;
         }
-
-        // Check if all players finished
         checkAndTriggerFinish();
       }
     }
 
-    // Guest receives messages from Host
     function handleGuestReceivedData(data) {
       if (data.type === 'ROOM_STATE_UPDATE') {
         playersState = data.playersState;
@@ -851,18 +858,16 @@
     }
 
     // -------------------------------------------------------------
-    // QUESTION DECK GENERATOR (SYNCHRONIZED)
+    // QUESTION DECK GENERATOR
     // -------------------------------------------------------------
     function generateDeck() {
       const pool = getWordPoolForCategory(gameCategory);
       const count = gameMode === 'words' ? limitValue : 100;
 
-      // Shuffle pool
       const shuffledPool = [...pool].sort(() => 0.5 - Math.random());
       const selectedWords = shuffledPool.slice(0, Math.min(count, pool.length));
 
       return selectedWords.map(target => {
-        // Collect distractors
         const distractors = pool
           .filter(item => item.pt !== target.pt)
           .map(item => item.pt)
@@ -881,8 +886,26 @@
     }
 
     // -------------------------------------------------------------
-    // LOBBY & COUNTDOWN FLOW
+    // GAME START & LOBBY LOGIC (FIXED)
     // -------------------------------------------------------------
+    window.triggerStartGame = function() {
+      // Allows starting both SOLO and MULTIPLAYER
+      gameDeck = generateDeck();
+
+      if (isHost && Object.keys(connections).length > 0) {
+        Object.values(connections).forEach(c => {
+          c.send({
+            type: 'GAME_START',
+            gameDeck: gameDeck
+          });
+          c.send({ type: 'COUNTDOWN_START' });
+        });
+      }
+
+      startCountdownOverlay();
+      initGameplayUI();
+    };
+
     function renderLobbyUI() {
       document.getElementById('display-room-code').innerText = roomCode;
 
@@ -896,11 +919,9 @@
       document.getElementById('lobby-rule-mode').innerHTML = `<i class="fa-solid fa-sliders mr-1"></i> ${gameMode === 'words' ? limitValue + ' Palavras' : limitValue + ' Segundos'}`;
       document.getElementById('lobby-rule-options').innerHTML = `<i class="fa-solid fa-grid-2 mr-1"></i> ${optionCount} Opções`;
 
-      // Sync select dropdown in lobby host settings
       const lobbyCatSelect = document.getElementById('select-lobby-category');
       if (lobbyCatSelect) lobbyCatSelect.value = gameCategory;
 
-      // Render players
       const listEl = document.getElementById('lobby-player-list');
       const entries = Object.entries(playersState);
       document.getElementById('player-count').innerText = entries.length;
@@ -910,7 +931,7 @@
         const isMe = pId === myPeerId;
         const isLeft = p.status === 'left';
         const badgeColor = isLeft ? 'bg-rose-500/20 text-rose-400 border-rose-500/30' : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
-        const badgeText = isLeft ? 'Recusou / Saiu' : 'Aguardando Liberação';
+        const badgeText = isLeft ? 'Recusou / Saiu' : 'Pronto na Sala';
 
         const row = document.createElement('div');
         row.className = `flex items-center justify-between p-3 rounded-xl border ${isMe ? 'bg-brand-500/10 border-brand-500/40' : 'bg-gray-900 border-gray-800'}`;
@@ -933,7 +954,7 @@
         listEl.appendChild(row);
       });
 
-      if (isHost) {
+      if (isHost || !peer) {
         document.getElementById('host-controls').classList.remove('hidden');
         document.getElementById('lobby-host-settings').classList.remove('hidden');
         document.getElementById('guest-waiting-msg').classList.add('hidden');
@@ -945,7 +966,6 @@
     }
 
     window.onHostChangeLobbyCategory = function(cat) {
-      if (!isHost) return;
       gameCategory = cat;
       document.getElementById('select-category').value = cat;
       broadcastRoomState();
@@ -1066,18 +1086,18 @@
 
       myCurrentIdx++;
 
-      // Send progress to Host or update local
       const elapsed = ((Date.now() - gameStartTime) / 1000).toFixed(1);
       const isFinished = gameMode === 'words' && myCurrentIdx >= limitValue;
 
-      if (isHost) {
+      if (playersState[myPeerId]) {
         playersState[myPeerId].score = myScore;
         playersState[myPeerId].errors = myErrors;
         playersState[myPeerId].currentIdx = myCurrentIdx;
         playersState[myPeerId].finished = isFinished;
         playersState[myPeerId].finishTime = parseFloat(elapsed);
-        checkAndTriggerFinish();
-      } else if (hostConn) {
+      }
+
+      if (!isHost && hostConn) {
         hostConn.send({
           type: 'PLAYER_PROGRESS',
           score: myScore,
@@ -1086,6 +1106,8 @@
           finished: isFinished,
           finishTime: parseFloat(elapsed)
         });
+      } else if (isHost) {
+        checkAndTriggerFinish();
       }
 
       if (!isFinished) {
@@ -1102,13 +1124,14 @@
 
       const elapsed = ((Date.now() - gameStartTime) / 1000).toFixed(1);
 
-      if (isHost) {
+      if (playersState[myPeerId]) {
         playersState[myPeerId].finished = true;
         playersState[myPeerId].score = myScore;
         playersState[myPeerId].errors = myErrors;
         playersState[myPeerId].finishTime = parseFloat(elapsed);
-        checkAndTriggerFinish();
-      } else if (hostConn) {
+      }
+
+      if (!isHost && hostConn) {
         hostConn.send({
           type: 'PLAYER_PROGRESS',
           score: myScore,
@@ -1118,20 +1141,26 @@
           finishTime: parseFloat(elapsed)
         });
       }
+
+      // If playing SOLO or as Host, finish and show results
+      if (isHost || Object.keys(playersState).length <= 1) {
+        checkAndTriggerFinish();
+      } else {
+        showToast("Finalizado! Aguardando oponente...");
+      }
     }
 
     function checkAndTriggerFinish() {
-      if (!isHost) return;
-
       const playersArr = Object.values(playersState).filter(p => p.status !== 'left');
       const allFinished = playersArr.every(p => p.finished);
 
-      if (allFinished) {
-        // Broadcast GAME_OVER
-        Object.values(connections).forEach(c => c.send({
-          type: 'GAME_OVER',
-          playersState
-        }));
+      if (allFinished || playersArr.length <= 1) {
+        if (isHost && Object.keys(connections).length > 0) {
+          Object.values(connections).forEach(c => c.send({
+            type: 'GAME_OVER',
+            playersState
+          }));
+        }
         showResultsUI();
       }
     }
@@ -1144,7 +1173,6 @@
 
       const players = Object.values(playersState).filter(p => p.status !== 'left');
 
-      // Sort by score (desc), accuracy (desc), time (asc)
       players.sort((a, b) => {
         if (b.score !== a.score) return b.score - a.score;
         const totalA = a.score + a.errors || 1;
@@ -1156,24 +1184,30 @@
       });
 
       const winner = players[0];
+      const isSolo = players.length <= 1;
       const isMeWinner = winner && winner.name === myName;
 
       const badgeRes = document.getElementById('badge-result');
       const subTitle = document.getElementById('result-subtitle');
 
-      if (isMeWinner) {
+      if (isSolo) {
+        badgeRes.innerText = "TREINO CONCLUÍDO! 🏆";
+        badgeRes.className = "text-4xl sm:text-6xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 drop-shadow-2xl animate-bounce-short";
+        subTitle.innerText = `Você acertou ${myScore} palavras nesta sessão de treino!`;
+        sfx.playWinner();
+        fireConfetti();
+      } else if (isMeWinner) {
         badgeRes.innerText = "WINNER 🏆";
         badgeRes.className = "text-5xl sm:text-7xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 drop-shadow-2xl animate-bounce-short";
-        subTitle.innerText = "Parabéns! Você venceu a disputa!";
+        subTitle.innerText = "Parabéns! Você venceu o duelo!";
         sfx.playWinner();
         fireConfetti();
       } else {
         badgeRes.innerText = "LOSER ❌";
         badgeRes.className = "text-5xl sm:text-7xl font-black tracking-widest text-rose-500 drop-shadow-lg";
-        subTitle.innerText = `Vitória de ${winner ? winner.name : 'outro jogador'}. Treine mais para a próxima!`;
+        subTitle.innerText = `Vitória de ${winner ? winner.name : 'outro jogador'}. Continue treinando!`;
       }
 
-      // Render Leaderboard Rows
       const tbody = document.getElementById('leaderboard-rows');
       tbody.innerHTML = '';
 
@@ -1202,7 +1236,7 @@
         tbody.appendChild(row);
       });
 
-      if (isHost) {
+      if (isHost || isSolo) {
         document.getElementById('results-host-actions').classList.remove('hidden');
         document.getElementById('results-guest-msg').classList.add('hidden');
       } else {
@@ -1211,11 +1245,7 @@
       }
     }
 
-    // Revanche Direta e Imediata
     window.triggerDirectRematch = function() {
-      if (!isHost) return;
-
-      // Reseta métricas de jogo
       Object.keys(playersState).forEach(id => {
         playersState[id].score = 0;
         playersState[id].errors = 0;
@@ -1224,25 +1254,21 @@
         playersState[id].finishTime = 0;
       });
 
-      // Gera um novo conjunto de perguntas aleatórias
       gameDeck = generateDeck();
 
-      // Envia evento aos convidados
-      Object.values(connections).forEach(c => c.send({
-        type: 'DIRECT_REMATCH',
-        gameDeck,
-        playersState
-      }));
+      if (isHost && Object.keys(connections).length > 0) {
+        Object.values(connections).forEach(c => c.send({
+          type: 'DIRECT_REMATCH',
+          gameDeck,
+          playersState
+        }));
+      }
 
       startCountdownOverlay();
       initGameplayUI();
     };
 
-    // Retornar ao Lobby para alterar categorias/regras
     window.triggerReturnToLobby = function() {
-      if (!isHost) return;
-
-      // Reseta métricas
       Object.keys(playersState).forEach(id => {
         playersState[id].score = 0;
         playersState[id].errors = 0;
@@ -1251,11 +1277,12 @@
         playersState[id].finishTime = 0;
       });
 
-      // Notifica convidados
-      Object.values(connections).forEach(c => c.send({
-        type: 'RETURN_LOBBY',
-        playersState
-      }));
+      if (isHost && Object.keys(connections).length > 0) {
+        Object.values(connections).forEach(c => c.send({
+          type: 'RETURN_LOBBY',
+          playersState
+        }));
+      }
 
       renderLobbyUI();
       switchView('lobby');
@@ -1366,7 +1393,7 @@
     window.shareEmailDesktop = function() {
       const link = getShareLink();
       const subject = encodeURIComponent("Desafio de Tradução de Inglês - Translation Arena");
-      const body = encodeURIComponent(`Olá!\n\nEstou te convidando para um duelo de tradução em tempo real na Translation Arena.\n\nClique no link abaixo para se conectar à sala:\n${link}\n\nBoa sorte!`);
+      const body = encodeURIComponent(`Olá!\n\nEstou te convidando para um duelo de tradução em tempo real na Translation Arena.\n\nClique no link para entrar na sala:\n${link}\n\nBoa sorte!`);
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     };
 
