@@ -58,7 +58,10 @@
     .option-btn { background: #334155; color: white; padding: 16px; border-radius: 8px; border: none; font-size: 1.05rem; cursor: pointer; transition: background 0.2s; }
     .option-btn:hover { background: var(--accent-blue); }
 
-    .timer-bar { font-size: 1.2rem; font-weight: bold; color: var(--accent-green); margin-bottom: 10px; }
+    .timer-bar { font-size: 1.1rem; font-weight: bold; color: var(--accent-green); margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .stat-hits { color: var(--accent-green); }
+    .stat-errors { color: var(--accent-red); }
+
     .countdown-screen { font-size: 5rem; font-weight: bold; color: var(--accent-yellow); animation: pulse 1s infinite; }
 
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
@@ -203,7 +206,6 @@
   };
 
   let datasets = {};
-  let currentDataset = [];
   let peer = null;
   let conn = null;
   let isHost = false;
@@ -221,7 +223,8 @@
 
   let gameDeck = [];
   let currentWordIndex = 0;
-  let score = 0;
+  let score = 0;      // Acertos
+  let errors = 0;     // Erros
   let timerInterval = null;
   let timeRemaining = 0;
 
@@ -262,14 +265,12 @@
       if (parts.length < 2) return;
 
       if (datasetKey === 'verbos' && parts.length >= 4) {
-        // Formato: verbo pt; presente en; passado en; participio en
         items.push({
           pt: parts[0],
           en: parts[1],
           extra: `Passado: ${parts[2]} | Particípio: ${parts[3]}`
         });
       } else {
-        // Formato: palavra en; palavra pt
         items.push({
           en: parts[0],
           pt: parts[1],
@@ -379,7 +380,7 @@
 
     conn.on('data', (data) => {
       if (data.type === 'JOIN' && isHost) {
-        opponents[conn.peer] = { name: data.name, status: 'ready', score: 0, finished: false };
+        opponents[conn.peer] = { name: data.name, status: 'ready', score: 0, errors: 0, finished: false };
         updateParticipantsList();
         conn.send({ type: 'CONFIG', config: gameConfig });
       } else if (data.type === 'CONFIG' && !isHost) {
@@ -390,6 +391,7 @@
       } else if (data.type === 'SCORE_UPDATE') {
         if (opponents[conn.peer]) {
           opponents[conn.peer].score = data.score;
+          opponents[conn.peer].errors = data.errors || 0;
           opponents[conn.peer].finished = data.finished;
           checkGameEndCondition();
         }
@@ -448,13 +450,12 @@
   function generateDeck() {
     const source = getActiveVocabulary();
     const shuffled = [...source].sort(() => 0.5 - Math.random());
-    const count = gameConfig.mode === 'words' ? gameConfig.limit : 50;
+    const count = gameConfig.mode === 'words' ? gameConfig.limit : 100;
     
     gameDeck = [];
     for (let i = 0; i < count; i++) {
       const item = shuffled[i % shuffled.length];
       
-      // Gera distractors
       const options = [item.pt];
       while (options.length < gameConfig.optionsCount) {
         const randItem = source[Math.floor(Math.random() * source.length)];
@@ -506,6 +507,7 @@
 
     currentWordIndex = 0;
     score = 0;
+    errors = 0;
 
     if (gameConfig.mode === 'time') {
       timeRemaining = gameConfig.limit;
@@ -518,12 +520,23 @@
   function startTimer() {
     timerInterval = setInterval(() => {
       timeRemaining--;
-      document.getElementById('game-status-bar').innerText = `⏱️ Tempo: ${timeRemaining}s | Acertos: ${score}`;
+      updateStatusBar();
       if (timeRemaining <= 0) {
         clearInterval(timerInterval);
         endGame();
       }
     }, 1000);
+  }
+
+  function updateStatusBar() {
+    const statusBar = document.getElementById('game-status-bar');
+    const statsHTML = `<span class="stat-hits">Acertos: ${score}</span> | <span class="stat-errors">Erros: ${errors}</span>`;
+
+    if (gameConfig.mode === 'words') {
+      statusBar.innerHTML = `Palavra ${currentWordIndex + 1} de ${gameConfig.limit} &nbsp;|&nbsp; ${statsHTML}`;
+    } else {
+      statusBar.innerHTML = `⏱️ Tempo: ${timeRemaining}s &nbsp;|&nbsp; ${statsHTML}`;
+    }
   }
 
   function renderCurrentWord() {
@@ -532,9 +545,7 @@
       return;
     }
 
-    if (gameConfig.mode === 'words') {
-      document.getElementById('game-status-bar').innerText = `Palavra ${currentWordIndex + 1} de ${gameConfig.limit} | Acertos: ${score}`;
-    }
+    updateStatusBar();
 
     const currentItem = gameDeck[currentWordIndex];
     document.getElementById('target-word').innerText = currentItem.target.toUpperCase();
@@ -553,13 +564,18 @@
   }
 
   function selectAnswer(isCorrect) {
-    if (isCorrect) score++;
+    if (isCorrect) {
+      score++;
+    } else {
+      errors++;
+    }
     currentWordIndex++;
 
     if (conn && !isSolo) {
       conn.send({
         type: 'SCORE_UPDATE',
         score: score,
+        errors: errors,
         finished: gameConfig.mode === 'words' && currentWordIndex >= gameConfig.limit
       });
     }
@@ -586,26 +602,27 @@
     if (isSolo) {
       resultTitle.className = 'winner-title';
       resultTitle.innerText = 'TREINO CONCLUÍDO 🎯';
-      resultDetails.innerText = `Você acertou ${score} de ${currentWordIndex} palavras!`;
+      resultDetails.innerText = `Você acertou ${score} e errou ${errors} (Total de ${currentWordIndex} palavras respondidas).`;
       return;
     }
 
     const oppId = Object.keys(opponents)[0];
     const oppScore = oppId ? opponents[oppId].score : 0;
+    const oppErrors = oppId ? opponents[oppId].errors : 0;
     const oppName = oppId ? opponents[oppId].name : 'Oponente';
 
     if (score > oppScore) {
       resultTitle.className = 'winner-title';
       resultTitle.innerText = 'WINNER 🏆';
-      resultDetails.innerText = `Você venceu! Pontuação: ${score} acertos vs ${oppScore} de ${oppName}.`;
+      resultDetails.innerText = `Você venceu!\nSua pontuação: ${score} acertos, ${errors} erros.\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.`;
     } else if (score < oppScore) {
       resultTitle.className = 'loser-title';
       resultTitle.innerText = 'LOSER ❌';
-      resultDetails.innerText = `${oppName} venceu! Pontuação: ${oppScore} acertos vs ${score} seus.`;
+      resultDetails.innerText = `${oppName} venceu!\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.\nVocê: ${score} acertos, ${errors} erros.`;
     } else {
       resultTitle.className = 'winner-title';
       resultTitle.innerText = 'EMPATE 🤝';
-      resultDetails.innerText = `Ambos acertaram ${score} palavras!`;
+      resultDetails.innerText = `Ambos acertaram ${score} palavras!\nErros: Você (${errors}) vs ${oppName} (${oppErrors}).`;
     }
   }
 
