@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Translation Duel Arena - Desafio de Inglês</title>
+  <title> Desafio de Inglês </title>
   <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
   <style>
     :root {
@@ -67,8 +67,7 @@
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
 
     /* Tela Final */
-    .winner-title { font-size: 3rem; font-weight: 900; color: var(--accent-green); text-shadow: 0 0 20px rgba(34, 197, 94, 0.5); }
-    .loser-title { font-size: 3rem; font-weight: 900; color: var(--accent-red); text-shadow: 0 0 20px rgba(239, 68, 68, 0.5); }
+    .finish-title { font-size: 3rem; font-weight: 900; color: var(--accent-yellow); text-shadow: 0 0 20px rgba(234, 179, 8, 0.4); margin-bottom: 15px; }
     .loading-banner { background: #1e293b; color: var(--accent-yellow); padding: 8px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 15px; border: 1px solid var(--accent-yellow); }
   </style>
 </head>
@@ -178,10 +177,10 @@
 
   <!-- TELA 5: RESULTADO FINAL -->
   <div id="screen-result" class="hidden">
-    <h2 id="result-title">RESULTADO</h2>
-    <p id="result-details" style="margin-top: 15px; font-size: 1.05rem; color: var(--text-main); line-height: 1.5; white-space: pre-line;"></p>
+    <h2 id="result-title" class="finish-title">FINISH 🏁</h2>
+    <div id="result-details" style="margin-top: 15px; font-size: 1rem; color: var(--text-main); line-height: 1.6;"></div>
 
-    <div id="rematch-controls">
+    <div id="rematch-controls" style="margin-top: 20px;">
       <button id="rematch-btn" class="btn btn-green" onclick="window.rematch()">⚡ Revanche Imediata</button>
       <button id="lobby-btn" class="btn btn-primary" onclick="window.backToLobby()">⚙️ Voltar ao Lobby / Mudar Regras</button>
       <button class="btn btn-secondary" onclick="location.reload()">🚪 Sair da Sala</button>
@@ -607,13 +606,15 @@
   }
 
   function checkGameEndCondition(finisherName) {
-    const resultTitle = document.getElementById('result-title');
     const resultDetails = document.getElementById('result-details');
 
     if (isSolo) {
-      resultTitle.className = 'winner-title';
-      resultTitle.innerText = 'TREINO CONCLUÍDO 🎯';
-      resultDetails.innerText = `Você acertou ${score} e errou ${errors} (Total de ${currentWordIndex} palavras respondidas).`;
+      resultDetails.innerHTML = `
+        <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; color: var(--accent-green);">🎯 Treino Concluído!</div>
+        <div style="font-size: 1.05rem; line-height: 1.8;">
+          <div><b>${myName}</b>: ${score} acertos, ${errors} erros (Total de ${currentWordIndex} palavras).</div>
+        </div>
+      `;
       return;
     }
 
@@ -622,32 +623,35 @@
     const oppErrors = oppId ? opponents[oppId].errors : 0;
     const oppName = oppId ? opponents[oppId].name : 'Oponente';
 
-    const finisherMsg = finisherName ? `⏹️ Partida encerrada pois ${finisherName} completou a sequência primeiro!\n\n` : '';
+    let finisherMsg = finisherName 
+      ? `Partida encerrada pois <b>${finisherName}</b> completou a sequência primeiro!` 
+      : `Partida encerrada pelo tempo limite!`;
+
+    let winnerMsg = '';
 
     if (score > oppScore) {
-      resultTitle.className = 'winner-title';
-      resultTitle.innerText = 'WINNER 🏆';
-      resultDetails.innerText = `${finisherMsg}Você venceu pelo maior número de acertos!\n\nSua pontuação: ${score} acertos, ${errors} erros.\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.`;
-    } else if (score < oppScore) {
-      resultTitle.className = 'loser-title';
-      resultTitle.innerText = 'LOSER ❌';
-      resultDetails.innerText = `${finisherMsg}${oppName} venceu pelo maior número de acertos!\n\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.\nVocê: ${score} acertos, ${errors} erros.`;
+      winnerMsg = `<b>${myName}</b> ganhou pelo maior número de acertos!`;
+    } else if (oppScore > score) {
+      winnerMsg = `<b>${oppName}</b> ganhou pelo maior número de acertos!`;
     } else {
       // Empate em acertos -> desempate por menos erros
       if (errors < oppErrors) {
-        resultTitle.className = 'winner-title';
-        resultTitle.innerText = 'WINNER 🏆';
-        resultDetails.innerText = `${finisherMsg}Você venceu no desempate por ter menos erros!\n\nSua pontuação: ${score} acertos, ${errors} erros.\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.`;
-      } else if (errors > oppErrors) {
-        resultTitle.className = 'loser-title';
-        resultTitle.innerText = 'LOSER ❌';
-        resultDetails.innerText = `${finisherMsg}${oppName} venceu no desempate por ter menos erros!\n\n${oppName}: ${oppScore} acertos, ${oppErrors} erros.\nVocê: ${score} acertos, ${errors} erros.`;
+        winnerMsg = `<b>${myName}</b> ganhou no desempate por ter menos erros!`;
+      } else if (oppErrors < errors) {
+        winnerMsg = `<b>${oppName}</b> ganhou no desempate por ter menos erros!`;
       } else {
-        resultTitle.className = 'winner-title';
-        resultTitle.innerText = 'EMPATE 🤝';
-        resultDetails.innerText = `${finisherMsg}Empate perfeito!\n\nAmbos com ${score} acertos e ${errors} erros.`;
+        winnerMsg = `Empate perfeito! Ambos com os mesmos acertos e erros.`;
       }
     }
+
+    resultDetails.innerHTML = `
+      <div style="margin-bottom: 12px; font-size: 0.95rem; color: var(--text-muted);">${finisherMsg}</div>
+      <div style="font-size: 1.25rem; font-weight: bold; color: var(--accent-green); margin-bottom: 20px;">🏆 ${winnerMsg}</div>
+      <div style="font-size: 1.05rem; line-height: 1.8; background: #0f172a; padding: 12px; border-radius: 8px;">
+        <div><b>${myName}</b>: ${score} acertos, ${errors} erros.</div>
+        <div><b>${oppName}</b>: ${oppScore} acertos, ${oppErrors} erros.</div>
+      </div>
+    `;
   }
 
   window.rematch = function() {
