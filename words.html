@@ -1,1418 +1,648 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Translation Duel Arena - Disputa de Tradução P2P</title>
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              900: '#312e81',
-            },
-            cyber: {
-              dark: '#0b0f19',
-              card: '#111827',
-              border: '#1f2937',
-              neonGreen: '#10b981',
-              neonRed: '#f43f5e',
-              neonGold: '#fbbf24'
-            }
-          },
-          animation: {
-            'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'bounce-short': 'bounce 0.5s ease-in-out 2',
-          }
-        }
-      }
-    }
-  </script>
-
-  <!-- Font Awesome Icons & PeerJS CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translation Duel Arena - Desafio de Inglês</title>
   <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
-
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
-    
-    body {
-      font-family: 'Outfit', sans-serif;
-      background-color: #0b0f19;
-      color: #f3f4f6;
-      touch-action: manipulation;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
+    :root {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-green: #22c55e;
+      --accent-blue: #3b82f6;
+      --accent-red: #ef4444;
+      --accent-yellow: #eab308;
     }
 
-    .glass-panel {
-      background: rgba(17, 24, 39, 0.88);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background-color: var(--bg-primary); color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; }
 
-    .glass-btn {
-      background: rgba(31, 41, 55, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.15s ease-in-out;
-    }
+    .container { width: 100%; max-width: 600px; background: var(--bg-card); padding: 25px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 10px; color: var(--accent-blue); }
+    p { color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem; }
 
-    .glass-btn:hover {
-      background: rgba(99, 102, 241, 0.25);
-      border-color: rgba(99, 102, 241, 0.5);
-    }
+    .input-group { margin-bottom: 15px; text-align: left; }
+    label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted); }
+    input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 1rem; }
 
-    .glass-btn:active {
-      transform: scale(0.96);
-    }
+    .btn { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px; transition: transform 0.1s, opacity 0.2s; }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--accent-blue); color: white; }
+    .btn-green { background: var(--accent-green); color: white; }
+    .btn-whatsapp { background: #25D366; color: white; }
+    .btn-email { background: #ea4335; color: white; }
+    .btn-copy { background: #64748b; color: white; }
+    .btn-secondary { background: #475569; color: white; }
 
-    #confetti-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 999;
-    }
+    .invite-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    @media (max-width: 480px) { .invite-buttons { grid-template-columns: 1fr; } }
 
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0b0f19;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #374151;
-      border-radius: 3px;
-    }
+    .status-list { margin: 20px 0; text-align: left; background: #0f172a; padding: 15px; border-radius: 8px; }
+    .status-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #1e293b; }
+    .status-item:last-child { border-bottom: none; }
+    .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+    .badge-waiting { background: rgba(234, 179, 8, 0.2); color: var(--accent-yellow); }
+    .badge-ready { background: rgba(34, 197, 94, 0.2); color: var(--accent-green); }
+    .badge-left { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+
+    .hidden { display: none !important; }
+
+    /* Arena de Jogo */
+    .word-box { font-size: 2rem; font-weight: 800; color: var(--accent-yellow); margin: 20px 0; padding: 20px; background: #0f172a; border-radius: 12px; border: 2px dashed var(--accent-blue); word-break: break-word; }
+    .extra-info { font-size: 0.9rem; color: var(--text-muted); margin-top: -10px; margin-bottom: 15px; font-style: italic; }
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+    @media (max-width: 400px) { .options-grid { grid-template-columns: 1fr; } }
+    .option-btn { background: #334155; color: white; padding: 16px; border-radius: 8px; border: none; font-size: 1.05rem; cursor: pointer; transition: background 0.2s; }
+    .option-btn:hover { background: var(--accent-blue); }
+
+    .timer-bar { font-size: 1.2rem; font-weight: bold; color: var(--accent-green); margin-bottom: 10px; }
+    .countdown-screen { font-size: 5rem; font-weight: bold; color: var(--accent-yellow); animation: pulse 1s infinite; }
+
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+
+    /* Tela Final */
+    .winner-title { font-size: 3rem; font-weight: 900; color: var(--accent-green); text-shadow: 0 0 20px rgba(34, 197, 94, 0.5); }
+    .loser-title { font-size: 3rem; font-weight: 900; color: var(--accent-red); text-shadow: 0 0 20px rgba(239, 68, 68, 0.5); }
+    .loading-banner { background: #1e293b; color: var(--accent-yellow); padding: 8px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 15px; border: 1px solid var(--accent-yellow); }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between items-center p-3 sm:p-6 relative overflow-x-hidden">
+<body>
 
-  <!-- Canvas layer for Victory Confetti -->
-  <canvas id="confetti-canvas"></canvas>
+<div class="container">
+  
+  <div id="loading-status" class="loading-banner">Carregando listas do GitHub...</div>
 
-  <!-- Main App Shell -->
-  <main class="w-full max-w-xl mx-auto my-auto flex flex-col justify-center items-center">
+  <!-- TELA 1: SETUP -->
+  <div id="screen-setup">
+    <h1>⚔️ Translation Arena</h1>
+    <p>Desafie um amigo para uma disputa de tradução rápida!</p>
 
-    <!-- Header Logo & Dataset Status -->
-    <header class="text-center mb-4 sm:mb-6 w-full">
-      <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/30 px-3 py-1 rounded-full mb-2">
-        <i class="fa-solid fa-bolt text-brand-500 text-xs sm:text-sm"></i>
-        <span class="text-xs font-semibold uppercase tracking-wider text-brand-400">P2P & Solo English Arena</span>
-      </div>
-      <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-white flex items-center justify-center gap-2">
-        <span>TRANSLATION</span>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-purple-400 to-pink-500">ARENA</span>
-      </h1>
-
-      <!-- Dataset Download Progress Badge -->
-      <div id="dataset-loading-bar" class="mt-2 text-xs font-semibold text-gray-400 flex items-center justify-center gap-2">
-        <i class="fa-solid fa-cloud-arrow-down text-brand-500 animate-bounce"></i>
-        <span id="dataset-status-text">Carregando vocabulários do GitHub...</span>
-      </div>
-    </header>
-
-    <!-- SECTION 1: USER HOME / SETUP ROOM -->
-    <section id="view-home" class="w-full glass-panel rounded-2xl p-5 sm:p-7 shadow-2xl space-y-5">
-      <div class="space-y-4">
-        
-        <!-- Player Nickname Input -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Seu Apelido / Player Name</label>
-          <div class="relative">
-            <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-gray-400"></i>
-            <input id="input-nickname" type="text" maxlength="15" placeholder="Ex: Alex_Pro" class="w-full bg-gray-900/90 border border-gray-700 rounded-xl pl-10 pr-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 font-semibold" />
-          </div>
-        </div>
-
-        <!-- Mode Selector Tabs (Create vs Join) -->
-        <div class="grid grid-cols-2 gap-2 p-1 bg-gray-900 rounded-xl border border-gray-800">
-          <button id="tab-create" onclick="switchHomeTab('create')" class="py-2.5 rounded-lg text-sm font-bold transition-all bg-brand-600 text-white shadow">
-            <i class="fa-solid fa-plus-circle mr-1"></i> Criar / Solo
-          </button>
-          <button id="tab-join" onclick="switchHomeTab('join')" class="py-2.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white">
-            <i class="fa-solid fa-right-to-bracket mr-1"></i> Entrar em Sala
-          </button>
-        </div>
-
-        <!-- CREATE ROOM PANEL -->
-        <div id="panel-create" class="space-y-4">
-          
-          <!-- Category Selector -->
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Categoria de Vocabulário</label>
-            <div class="relative">
-              <i class="fa-solid fa-book-bookmark absolute left-3.5 top-3.5 text-brand-400"></i>
-              <select id="select-category" class="w-full bg-gray-900 border border-gray-700 rounded-xl pl-10 pr-4 py-3 text-white font-semibold focus:outline-none focus:border-brand-500 appearance-none">
-                <option value="all">Todas as Categorias (Misto)</option>
-                <option value="1000">1000 Palavras Mais Usadas</option>
-                <option value="adj">Adjetivos</option>
-                <option value="adv">Advérbios</option>
-                <option value="frases">Frases do Dia a Dia</option>
-                <option value="phrasal">Phrasal Verbs</option>
-                <option value="subst">Substantivos</option>
-                <option value="verbos">Verbos (Presente / Passado / Particípio)</option>
-              </select>
-              <i class="fa-solid fa-chevron-down absolute right-3.5 top-3.5 text-gray-400 pointer-events-none"></i>
-            </div>
-          </div>
-
-          <!-- Game Limit Type (Words vs Time) -->
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Modo de Disputa</label>
-            <div class="grid grid-cols-2 gap-2">
-              <button id="btn-mode-words" onclick="setGameMode('words')" class="p-3 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-left transition-all">
-                <div class="text-[10px] font-bold text-gray-400 uppercase">Limitador</div>
-                <div class="text-sm font-extrabold text-white flex items-center justify-between">
-                  <span>Por Palavras</span>
-                  <i class="fa-solid fa-font text-brand-500"></i>
-                </div>
-              </button>
-              <button id="btn-mode-time" onclick="setGameMode('time')" class="p-3 rounded-xl border-2 border-gray-800 bg-gray-900 text-left hover:border-gray-700 transition-all">
-                <div class="text-[10px] font-bold text-gray-400 uppercase">Limitador</div>
-                <div class="text-sm font-extrabold text-white flex items-center justify-between">
-                  <span>Por Tempo</span>
-                  <i class="fa-solid fa-stopwatch text-gray-500"></i>
-                </div>
-              </button>
-            </div>
-          </div>
-
-          <!-- Limit Value Selectors -->
-          <div id="container-limit-value">
-            <label id="lbl-limit-value" class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Quantidade de Palavras</label>
-            <div class="grid grid-cols-4 gap-2" id="group-word-limits">
-              <button onclick="setLimitValue(10)" class="btn-limit py-2 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-xs">10</button>
-              <button onclick="setLimitValue(20)" class="btn-limit py-2 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-xs">20</button>
-              <button onclick="setLimitValue(50)" class="btn-limit py-2 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-xs">50</button>
-              <button onclick="setLimitValue(100)" class="btn-limit py-2 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-xs">100</button>
-            </div>
-            <div class="grid grid-cols-3 gap-2 hidden" id="group-time-limits">
-              <button onclick="setLimitValue(30)" class="btn-limit-time py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-xs">30 Segundos</button>
-              <button onclick="setLimitValue(60)" class="btn-limit-time py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-xs">60 Segundos</button>
-              <button onclick="setLimitValue(120)" class="btn-limit-time py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-xs">120 Segundos</button>
-            </div>
-          </div>
-
-          <!-- Options Grid Count (6 or 8) -->
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Opções de Resposta por Palavra</label>
-            <div class="grid grid-cols-2 gap-2">
-              <button id="btn-opts-6" onclick="setOptionCount(6)" class="py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-sm">
-                6 Botões
-              </button>
-              <button id="btn-opts-8" onclick="setOptionCount(8)" class="py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold text-gray-300 hover:border-brand-500 transition text-sm">
-                8 Botões
-              </button>
-            </div>
-          </div>
-
-          <button onclick="handleCreateRoom()" class="w-full py-4 bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white font-black rounded-xl shadow-lg shadow-brand-500/25 active:scale-[0.98] transition text-base tracking-wide flex items-center justify-center gap-2">
-            <i class="fa-solid fa-gamepad"></i> CRIAR SALA / MODO SOLO
-          </button>
-        </div>
-
-        <!-- JOIN ROOM PANEL -->
-        <div id="panel-join" class="space-y-4 hidden">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Código da Sala</label>
-            <div class="relative">
-              <i class="fa-solid fa-key absolute left-3.5 top-3.5 text-gray-400"></i>
-              <input id="input-room-code" type="text" maxlength="8" placeholder="EX: DUEL-A1B2" class="w-full bg-gray-900/90 border border-gray-700 rounded-xl pl-10 pr-4 py-3 text-white font-mono uppercase font-bold tracking-widest focus:outline-none focus:border-brand-500" />
-            </div>
-          </div>
-
-          <button onclick="handleJoinRoom()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-lg shadow-emerald-600/25 active:scale-[0.98] transition text-base tracking-wide flex items-center justify-center gap-2">
-            <i class="fa-solid fa-right-to-bracket"></i> ENTRAR NA ARENA
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 2: LOBBY / ROOM WAITING ROOM -->
-    <section id="view-lobby" class="w-full glass-panel rounded-2xl p-5 sm:p-7 shadow-2xl space-y-6 hidden">
-      
-      <!-- Room Code Banner & Invites -->
-      <div class="bg-gray-900/90 rounded-xl p-4 border border-gray-800 space-y-3">
-        <div class="flex items-center justify-between">
-          <div>
-            <span class="text-[10px] font-bold uppercase text-gray-400 block">Código da Sala</span>
-            <span id="display-room-code" class="text-xl sm:text-2xl font-mono font-black text-brand-400 tracking-wider">------</span>
-          </div>
-          <span id="badge-network-status" class="px-2.5 py-1 rounded-md text-[10px] font-black uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-            <i class="fa-solid fa-wifi mr-1"></i> PeerJS On
-          </span>
-        </div>
-
-        <!-- Share Buttons (WhatsApp, Email Desktop, Copy) -->
-        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-gray-800">
-          <button onclick="shareWhatsApp()" class="py-2.5 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold text-white shadow flex items-center justify-center gap-1.5 transition">
-            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
-          </button>
-          <button onclick="shareEmailDesktop()" class="py-2.5 bg-rose-600 hover:bg-rose-500 rounded-lg text-xs font-bold text-white shadow flex items-center justify-center gap-1.5 transition">
-            <i class="fa-solid fa-envelope text-sm"></i> E-mail
-          </button>
-          <button onclick="copyRoomLink()" class="py-2.5 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs font-bold text-gray-200 border border-gray-700 flex items-center justify-center gap-1.5 transition">
-            <i class="fa-regular fa-copy"></i> Copiar Link
-          </button>
-        </div>
-      </div>
-
-      <!-- Game Rules Summary -->
-      <div class="flex items-center justify-between text-xs font-semibold px-3 py-2.5 bg-brand-500/10 border border-brand-500/20 rounded-xl text-brand-300">
-        <span id="lobby-rule-cat"><i class="fa-solid fa-book-bookmark mr-1"></i> --</span>
-        <span id="lobby-rule-mode"><i class="fa-solid fa-sliders mr-1"></i> --</span>
-        <span id="lobby-rule-options"><i class="fa-solid fa-grid-2 mr-1"></i> -- Botoes</span>
-      </div>
-
-      <!-- Quick Category Adjustment for Host in Lobby -->
-      <div id="lobby-host-settings" class="bg-gray-900/90 rounded-xl p-3 border border-gray-800 space-y-1.5 hidden">
-        <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400">Ajustar Categoria do Duelo</label>
-        <select id="select-lobby-category" onchange="onHostChangeLobbyCategory(this.value)" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-brand-500">
-          <option value="all">Todas as Categorias (Misto)</option>
-          <option value="1000">1000 Palavras Mais Usadas</option>
-          <option value="adj">Adjetivos</option>
-          <option value="adv">Advérbios</option>
-          <option value="frases">Frases do Dia a Dia</option>
-          <option value="phrasal">Phrasal Verbs</option>
-          <option value="subst">Substantivos</option>
-          <option value="verbos">Verbos (Presente / Passado / Particípio)</option>
-        </select>
-      </div>
-
-      <!-- Players List -->
-      <div>
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-2">
-            <i class="fa-solid fa-users text-brand-500"></i> Participantes (<span id="player-count">1</span>)
-          </h2>
-          <span id="lobby-mode-tag" class="text-[10px] text-brand-400 font-bold bg-brand-500/10 px-2 py-0.5 rounded border border-brand-500/20">Modo Solo / Treino Habilitado</span>
-        </div>
-
-        <div id="lobby-player-list" class="space-y-2 max-h-52 overflow-y-auto pr-1">
-          <!-- Players dynamic items -->
-        </div>
-      </div>
-
-      <!-- Lobby Action Controls -->
-      <div class="pt-2 border-t border-gray-800">
-        <div id="host-controls" class="space-y-2">
-          <button id="btn-start-game" onclick="triggerStartGame()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-black rounded-xl shadow-lg shadow-emerald-500/25 active:scale-[0.98] transition text-base tracking-wider flex items-center justify-center gap-2">
-            <i class="fa-solid fa-play"></i> INICIAR DESAFIO
-          </button>
-          <p class="text-center text-xs text-gray-400">Pode iniciar sozinho para treino ou aguardar amigos entrarem.</p>
-        </div>
-
-        <div id="guest-waiting-msg" class="text-center py-3 text-sm font-semibold text-brand-400 animate-pulse hidden">
-          <i class="fa-solid fa-hourglass-half mr-2"></i> Conectado! Aguardando o anfitrião iniciar...
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: COUNTDOWN OVERLAY -->
-    <div id="view-countdown" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex flex-col items-center justify-center hidden">
-      <div class="text-center space-y-4">
-        <span class="text-xl sm:text-2xl font-black uppercase text-brand-400 tracking-widest block">A disputa vai começar!</span>
-        <div id="countdown-num" class="text-8xl sm:text-9xl font-black text-white animate-bounce-short">3</div>
-        <p class="text-sm text-gray-400 font-semibold">Prepare-se para selecionar a tradução correta!</p>
-      </div>
+    <div class="input-group">
+      <label for="player-name">Seu Nome / Apelido:</label>
+      <input type="text" id="player-name" placeholder="Ex: Cleiton" maxlength="15">
     </div>
 
-    <!-- SECTION 4: GAMEPLAY ARENA -->
-    <section id="view-game" class="w-full glass-panel rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4 hidden">
-      
-      <!-- Top Gameplay Bar -->
-      <div class="flex items-center justify-between gap-2 pb-3 border-b border-gray-800 text-xs sm:text-sm font-bold">
-        <div class="flex items-center gap-2 bg-gray-900 px-3 py-1.5 rounded-lg border border-gray-800">
-          <i class="fa-solid fa-trophy text-amber-400"></i>
-          <span>Acertos: <strong id="game-score" class="text-emerald-400 text-base">0</strong></span>
-        </div>
+    <div class="input-group">
+      <label for="dataset-select">Vocabulário do Desafio:</label>
+      <select id="dataset-select">
+        <option value="1000palavras">1000 Palavras Mais Usadas</option>
+        <option value="substantivos">Substantivos</option>
+        <option value="verbos">Verbos (3 Tempos Verbais)</option>
+        <option value="adjetivos">Adjetivos</option>
+        <option value="adverbios">Advérbios</option>
+        <option value="phrasalverbs">Phrasal Verbs</option>
+        <option value="frases">Frases Completas</option>
+        <option value="todos">Todos os Vocabulários Misturados</option>
+      </select>
+    </div>
 
-        <div id="game-progress-badge" class="flex items-center gap-2 bg-gray-900 px-3 py-1.5 rounded-lg border border-gray-800 text-brand-400">
-          <i class="fa-solid fa-stopwatch"></i>
-          <span id="game-tracker-text">--</span>
-        </div>
-      </div>
+    <div id="mode-selection" class="input-group">
+      <label for="game-mode">Tipo de Limitador do Desafio:</label>
+      <select id="game-mode" onchange="window.toggleModeOptions()">
+        <option value="words">Quantidade de Palavras</option>
+        <option value="time">Tempo Limite (Segundos)</option>
+      </select>
+    </div>
 
-      <!-- Target Word Display Card -->
-      <div class="bg-gradient-to-b from-gray-900 to-gray-950 border-2 border-brand-500/40 rounded-2xl p-6 sm:p-8 text-center shadow-inner relative overflow-hidden">
-        <span class="text-xs font-bold uppercase tracking-widest text-brand-400 mb-1 block">Traduza para o Português:</span>
-        <h2 id="target-word" class="text-3xl sm:text-5xl font-black tracking-wide text-white capitalize my-1">
-          CARREGANDO...
-        </h2>
-        <div id="target-word-extra" class="text-xs text-amber-400/90 font-medium italic mt-1 min-h-[1rem]"></div>
-        
-        <!-- Animated Feedback Flash Overlay -->
-        <div id="flash-feedback" class="absolute inset-0 pointer-events-none transition-opacity duration-200 opacity-0"></div>
-      </div>
+    <div class="input-group" id="limit-words-group">
+      <label for="limit-words">Quantidade de Palavras:</label>
+      <select id="limit-words">
+        <option value="10">10 Palavras</option>
+        <option value="20" selected>20 Palavras</option>
+        <option value="50">50 Palavras</option>
+      </select>
+    </div>
 
-      <!-- Options Grid -->
-      <div id="options-grid" class="grid grid-cols-2 gap-2.5 sm:gap-3 pt-2">
-        <!-- Option buttons dynamically generated -->
-      </div>
-    </section>
+    <div class="input-group hidden" id="limit-time-group">
+      <label for="limit-time">Tempo Total em Segundos:</label>
+      <select id="limit-time">
+        <option value="30">30 Segundos</option>
+        <option value="60" selected>60 Segundos</option>
+        <option value="120">120 Segundos</option>
+      </select>
+    </div>
 
-    <!-- SECTION 5: RESULTS & LEADERBOARD -->
-    <section id="view-results" class="w-full glass-panel rounded-2xl p-5 sm:p-7 shadow-2xl space-y-6 text-center hidden">
-      
-      <!-- Winner / Loser Hero Banner -->
-      <div id="result-hero" class="py-4 space-y-2">
-        <div id="badge-result" class="text-5xl sm:text-7xl font-black tracking-widest drop-shadow-lg">
-          WINNER
-        </div>
-        <p id="result-subtitle" class="text-sm sm:text-base font-semibold text-gray-300">
-          Você venceu a disputa!
-        </p>
-      </div>
+    <div class="input-group">
+      <label for="options-count">Opções de Tradução por Palavra:</label>
+      <select id="options-count">
+        <option value="6" selected>6 Botões de Resposta</option>
+        <option value="8">8 Botões de Resposta</option>
+      </select>
+    </div>
 
-      <!-- Leaderboard Breakdown Table -->
-      <div class="bg-gray-900/90 rounded-xl border border-gray-800 overflow-hidden">
-        <div class="bg-gray-800/80 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-400 grid grid-cols-12 text-left">
-          <span class="col-span-2">Pos</span>
-          <span class="col-span-5">Jogador</span>
-          <span class="col-span-3 text-center">Acertos</span>
-          <span class="col-span-2 text-right">Tempo</span>
-        </div>
-        <div id="leaderboard-rows" class="divide-y divide-gray-800/60 max-h-64 overflow-y-auto">
-          <!-- Rows injected dynamically -->
-        </div>
-      </div>
-
-      <!-- Action Buttons for Rematch and Lobby -->
-      <div id="results-host-actions" class="pt-2 flex flex-col sm:flex-row gap-2">
-        <button onclick="triggerDirectRematch()" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-black rounded-xl shadow-lg shadow-emerald-500/25 active:scale-[0.98] transition flex items-center justify-center gap-2 text-sm">
-          <i class="fa-solid fa-bolt"></i> REVANCHE IMEDIATA
-        </button>
-        <button onclick="triggerReturnToLobby()" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition text-sm flex items-center justify-center gap-2">
-          <i class="fa-solid fa-sliders"></i> LOBBY / TROCAR REGRAS
-        </button>
-      </div>
-
-      <div id="results-guest-msg" class="pt-2 text-center text-sm font-semibold text-brand-400 animate-pulse hidden">
-        <i class="fa-solid fa-hourglass-half mr-2"></i> Aguardando o anfitrião iniciar a revanche ou abrir o lobby...
-      </div>
-
-      <button onclick="leaveRoomAndHome()" class="w-full py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-gray-200 font-bold rounded-xl transition text-xs mt-1">
-        Sair da Sala e Ir ao Menu
-      </button>
-    </section>
-
-  </main>
-
-  <!-- Notification Toast -->
-  <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900 border border-brand-500/50 text-white px-4 py-2.5 rounded-xl shadow-2xl text-xs sm:text-sm font-semibold opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
-    <i class="fa-solid fa-circle-info text-brand-400"></i>
-    <span id="toast-msg">Mensagem</span>
+    <button class="btn btn-primary" onclick="window.createRoom()">Criar Nova Sala (Desafio Multiplayer)</button>
+    <button class="btn btn-secondary" onclick="window.startSoloGame()">Treinar Solo (Sem Oponente)</button>
   </div>
 
-  <!-- APPLICATION ENGINE & LOGIC -->
-  <script>
-    // -------------------------------------------------------------
-    // SANITIZED GITHUB DATASETS FETCHING & PARSING
-    // -------------------------------------------------------------
-    const DATASET_URLS = {
-      '1000': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/1000palavras.txt',
-      'adj': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/adjetivos.txt',
-      'adv': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/adverbios.txt',
-      'frases': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/frases.txt',
-      'phrasal': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/phrasalverbs.txt',
-      'subst': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/substantivos.txt',
-      'verbos': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/verbos.txt'
-    };
+  <!-- TELA 2: LOBBY -->
+  <div id="screen-lobby" class="hidden">
+    <h2>Sala do Desafio</h2>
+    <p>Envie o convite para o seu oponente:</p>
 
-    // Dictionary storage
-    const categoriesData = {
-      '1000': [],
-      'adj': [],
-      'adv': [],
-      'frases': [],
-      'phrasal': [],
-      'subst': [],
-      'verbos': []
-    };
+    <div class="invite-buttons">
+      <button class="btn btn-whatsapp" onclick="window.shareWhatsApp()">📱 WhatsApp</button>
+      <button class="btn btn-email" onclick="window.shareEmailDesktop()">✉️ E-mail (Desktop)</button>
+      <button class="btn btn-copy" onclick="window.copyLink()">📋 Copiar Link</button>
+    </div>
 
-    // Robust Fallback Vocabulary to ensure offline/CORS resilience
-    const FALLBACK_DICTIONARY = [
-      { en: "house", pt: "casa", extra: "" }, { en: "water", pt: "água", extra: "" },
-      { en: "time", pt: "tempo", extra: "" }, { en: "world", pt: "mundo", extra: "" },
-      { en: "friend", pt: "amigo", extra: "" }, { en: "life", pt: "vida", extra: "" },
-      { en: "book", pt: "livro", extra: "" }, { en: "money", pt: "dinheiro", extra: "" },
-      { en: "car", pt: "carro", extra: "" }, { en: "work", pt: "trabalho", extra: "" },
-      { en: "beautiful", pt: "bonito / lindo", extra: "" }, { en: "fast", pt: "rápido", extra: "" },
-      { en: "speak", pt: "falar", extra: "(Passado: spoke, Particípio: spoken)" },
-      { en: "run", pt: "correr", extra: "(Passado: ran, Particípio: run)" },
-      { en: "always", pt: "sempre", extra: "" }, { en: "never", pt: "nunca", extra: "" },
-      { en: "give up", pt: "desistir", extra: "" }, { en: "look for", pt: "procurar", extra: "" }
-    ];
+    <div class="status-list">
+      <div style="font-weight: bold; margin-bottom: 10px;">Participantes na Sala:</div>
+      <div id="participants-container"></div>
+    </div>
 
-    let totalWordsLoaded = 0;
+    <button id="start-btn" class="btn btn-green hidden" onclick="window.triggerStartGame()">🚀 Iniciar Desafio</button>
+    <div id="waiting-host-msg" class="hidden" style="color: var(--accent-yellow); margin-top: 15px;">
+      ⏳ Aguardando o anfitrião iniciar o jogo...
+    </div>
+  </div>
 
-    async function fetchAllDatasets() {
-      const statusText = document.getElementById('dataset-status-text');
-      const keys = Object.keys(DATASET_URLS);
-      let completed = 0;
+  <!-- TELA 3: CONTAGEM REGRESSIVA -->
+  <div id="screen-countdown" class="hidden">
+    <p>O DESAFIO VAI COMECAR EM...</p>
+    <div id="countdown-number" class="countdown-screen">3</div>
+  </div>
 
-      for (const key of keys) {
-        try {
-          const res = await fetch(DATASET_URLS[key]);
-          if (res.ok) {
-            const text = await res.text();
-            parseDatasetText(key, text);
-          }
-        } catch (err) {
-          console.warn(`Aviso ao carregar dataset ${key}:`, err);
-        }
-        completed++;
-        statusText.innerText = `Baixando vocabulários (${completed}/${keys.length})...`;
-      }
+  <!-- TELA 4: ARENA -->
+  <div id="screen-game" class="hidden">
+    <div class="timer-bar" id="game-status-bar">Palavra 1 de 20</div>
+    <div class="word-box" id="target-word">LOADING...</div>
+    <div class="extra-info" id="extra-info"></div>
+    <div class="options-grid" id="options-container"></div>
+  </div>
 
-      totalWordsLoaded = Object.values(categoriesData).reduce((acc, curr) => acc + curr.length, 0);
+  <!-- TELA 5: RESULTADO FINAL -->
+  <div id="screen-result" class="hidden">
+    <h2 id="result-title">RESULTADO</h2>
+    <p id="result-details" style="margin-top: 15px; font-size: 1.1rem; color: var(--text-main);"></p>
 
-      if (totalWordsLoaded > 0) {
-        statusText.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check"></i> ${totalWordsLoaded} termos carregados do GitHub!</span>`;
-      } else {
-        statusText.innerHTML = `<span class="text-amber-400 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Usando vocabulário embutido</span>`;
-      }
-    }
+    <div id="rematch-controls">
+      <button id="rematch-btn" class="btn btn-green" onclick="window.rematch()">⚡ Revanche Imediata</button>
+      <button id="lobby-btn" class="btn btn-primary" onclick="window.backToLobby()">⚙️ Voltar ao Lobby / Mudar Regras</button>
+      <button class="btn btn-secondary" onclick="location.reload()">🚪 Sair da Sala</button>
+    </div>
+    <div id="rematch-waiting-msg" class="hidden" style="margin-top: 15px; color: var(--accent-yellow);">
+      ⏳ Aguardando o anfitrião reiniciar a partida...
+    </div>
+  </div>
 
-    function parseDatasetText(categoryKey, rawText) {
-      const lines = rawText.split(/\r?\n/);
+</div>
 
-      lines.forEach(line => {
-        if (!line.trim()) return;
+<script>
+(function() {
+  const DATASET_URLS = {
+    '1000palavras': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/1000palavras.txt',
+    'adjetivos': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/adjetivos.txt',
+    'adverbios': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/adverbios.txt',
+    'frases': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/frases.txt',
+    'phrasalverbs': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/phrasalverbs.txt',
+    'substantivos': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/substantivos.txt',
+    'verbos': 'https://raw.githubusercontent.com/ZakorchiniCW/english/refs/heads/main/verbos.txt'
+  };
 
-        const parts = line.split(';').map(p => p.trim());
+  let datasets = {};
+  let currentDataset = [];
+  let peer = null;
+  let conn = null;
+  let isHost = false;
+  let isSolo = false;
+  let roomId = null;
+  let myName = '';
+  let opponents = {};
 
-        if (categoryKey === 'verbos') {
-          // Format: verbo_pt;verbo_en_presente;verbo_en_passado;verbo_en_participio;;
-          if (parts.length >= 2 && parts[1]) {
-            const pt = parts[0];
-            const en = parts[1];
-            let extra = '';
-            if (parts[2] && parts[3]) {
-              extra = `(Passado: ${parts[2]}, Particípio: ${parts[3]})`;
-            } else if (parts[2]) {
-              extra = `(Passado: ${parts[2]})`;
-            }
-            categoriesData[categoryKey].push({ en, pt, extra });
-          }
-        } else {
-          // Standard Format: palavra_en;palavra_pt;;
-          if (parts.length >= 2 && parts[0] && parts[1]) {
-            categoriesData[categoryKey].push({ en: parts[0], pt: parts[1], extra: '' });
-          }
-        }
-      });
-    }
+  let gameConfig = {
+    mode: 'words',
+    limit: 20,
+    optionsCount: 6,
+    datasetKey: '1000palavras'
+  };
 
-    function getWordPoolForCategory(catKey) {
-      if (catKey === 'all') {
-        let pool = [];
-        Object.values(categoriesData).forEach(arr => {
-          pool = pool.concat(arr);
-        });
-        return pool.length > 0 ? pool : FALLBACK_DICTIONARY;
-      }
+  let gameDeck = [];
+  let currentWordIndex = 0;
+  let score = 0;
+  let timerInterval = null;
+  let timeRemaining = 0;
 
-      const pool = categoriesData[catKey];
-      return (pool && pool.length > 0) ? pool : FALLBACK_DICTIONARY;
-    }
+  // Carregamento dos dados no início
+  async function loadAllDatasets() {
+    const statusEl = document.getElementById('loading-status');
+    let loadedCount = 0;
+    const keys = Object.keys(DATASET_URLS);
 
-    // -------------------------------------------------------------
-    // WEB AUDIO API SYNTHESIZER
-    // -------------------------------------------------------------
-    class SoundFx {
-      constructor() { this.ctx = null; }
-      init() {
-        if (!this.ctx) {
-          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-      }
-      playCorrect() {
-        this.init(); if (!this.ctx) return;
-        const now = this.ctx.currentTime;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(523.25, now);
-        osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.12);
-        gain.gain.setValueAtTime(0.3, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
-        osc.connect(gain); gain.connect(this.ctx.destination);
-        osc.start(now); osc.stop(now + 0.25);
-      }
-      playError() {
-        this.init(); if (!this.ctx) return;
-        const now = this.ctx.currentTime;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(180, now);
-        osc.frequency.linearRampToValueAtTime(110, now + 0.2);
-        gain.gain.setValueAtTime(0.3, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
-        osc.connect(gain); gain.connect(this.ctx.destination);
-        osc.start(now); osc.stop(now + 0.2);
-      }
-      playTick() {
-        this.init(); if (!this.ctx) return;
-        const now = this.ctx.currentTime;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, now);
-        gain.gain.setValueAtTime(0.2, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
-        osc.connect(gain); gain.connect(this.ctx.destination);
-        osc.start(now); osc.stop(now + 0.08);
-      }
-      playWinner() {
-        this.init(); if (!this.ctx) return;
-        [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
-          const now = this.ctx.currentTime + idx * 0.12;
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq, now);
-          gain.gain.setValueAtTime(0.3, now);
-          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
-          osc.connect(gain); gain.connect(this.ctx.destination);
-          osc.start(now); osc.stop(now + 0.3);
-        });
-      }
-    }
-    const sfx = new SoundFx();
-
-    // -------------------------------------------------------------
-    // CONFETTI ANIMATION ENGINE
-    // -------------------------------------------------------------
-    function fireConfetti() {
-      const canvas = document.getElementById('confetti-canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const pieces = [];
-      const colors = ['#6366f1', '#10b981', '#f43f5e', '#fbbf24', '#a855f7'];
-
-      for (let i = 0; i < 120; i++) {
-        pieces.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height - canvas.height,
-          size: Math.random() * 8 + 4,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          speedY: Math.random() * 4 + 2,
-          speedX: (Math.random() - 0.5) * 2,
-          rot: Math.random() * 360,
-          rotSpeed: (Math.random() - 0.5) * 5
-        });
-      }
-
-      let frame = 0;
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        pieces.forEach(p => {
-          p.y += p.speedY; p.x += p.speedX; p.rot += p.rotSpeed;
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate((p.rot * Math.PI) / 180);
-          ctx.fillStyle = p.color;
-          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-          ctx.restore();
-        });
-        frame++;
-        if (frame < 180) requestAnimationFrame(animate);
-        else ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
-      animate();
-    }
-
-    // -------------------------------------------------------------
-    // NETWORK STATE & PLAYER DATA
-    // -------------------------------------------------------------
-    let peer = null;
-    let connections = {}; 
-    let hostConn = null;   
-    let myPeerId = null;
-    let myName = '';
-    let isHost = false;
-    let roomCode = null;
-
-    let gameCategory = 'all';
-    let gameMode = 'words'; // 'words' | 'time'
-    let limitValue = 20;
-    let optionCount = 6;
-
-    let gameDeck = [];
-    let playersState = {};
-
-    let myScore = 0;
-    let myErrors = 0;
-    let myCurrentIdx = 0;
-    let gameStartTime = null;
-    let gameTimer = null;
-    let isGameActive = false;
-
-    // -------------------------------------------------------------
-    // INITIALIZATION & URL HANDLING
-    // -------------------------------------------------------------
-    window.onload = async () => {
-      await fetchAllDatasets();
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const roomParam = urlParams.get('room');
-      if (roomParam) {
-        document.getElementById('input-room-code').value = roomParam.toUpperCase();
-        switchHomeTab('join');
-        showToast(`Código da sala ${roomParam.toUpperCase()} carregado!`);
-      }
-    };
-
-    // -------------------------------------------------------------
-    // PEERJS CONNECTION HANDLERS
-    // -------------------------------------------------------------
-    window.handleCreateRoom = function() {
-      myName = document.getElementById('input-nickname').value.trim() || 'Jogador_1';
-      gameCategory = document.getElementById('select-category').value;
-      roomCode = 'DUEL-' + Math.random().toString(36).substring(2, 7).toUpperCase();
-      isHost = true;
-
-      myPeerId = 'host-' + Math.random().toString(36).substring(2, 7);
-
-      playersState = {};
-      playersState[myPeerId] = {
-        name: myName,
-        isHost: true,
-        status: 'ready',
-        score: 0,
-        errors: 0,
-        currentIdx: 0,
-        finished: false,
-        finishTime: 0
-      };
-
-      // Try initializing PeerJS for multiplayer
+    for (const key of keys) {
       try {
-        peer = new Peer(roomCode);
-
-        peer.on('open', (id) => {
-          myPeerId = id;
-          playersState[myPeerId] = {
-            name: myName,
-            isHost: true,
-            status: 'ready',
-            score: 0,
-            errors: 0,
-            currentIdx: 0,
-            finished: false,
-            finishTime: 0
-          };
-          renderLobbyUI();
-        });
-
-        peer.on('connection', (conn) => {
-          connections[conn.peer] = conn;
-
-          conn.on('data', (data) => {
-            handleHostReceivedData(conn.peer, data);
-          });
-
-          conn.on('close', () => {
-            if (playersState[conn.peer]) {
-              playersState[conn.peer].status = 'left';
-              broadcastRoomState();
-              renderLobbyUI();
-            }
-          });
-        });
-
-        peer.on('error', (err) => {
-          console.warn("PeerJS Warning (Modo solo disponível):", err);
-          document.getElementById('badge-network-status').innerText = "Solo Mode";
-        });
-      } catch (e) {
-        console.warn("PeerJS Offline. Ativando Modo Solo.");
+        const response = await fetch(DATASET_URLS[key]);
+        if (!response.ok) throw new Error('HTTP Error ' + response.status);
+        const text = await response.text();
+        datasets[key] = parseTxtContent(text, key);
+        loadedCount++;
+      } catch (err) {
+        console.warn(`Falha ao carregar ${key}, usando reserva local.`, err);
+        datasets[key] = getFallbackData(key);
       }
+    }
 
-      renderLobbyUI();
-      switchView('lobby');
-    };
+    statusEl.style.borderColor = '#22c55e';
+    statusEl.style.color = '#22c55e';
+    statusEl.innerText = `✅ Vocabulário sincronizado com o GitHub (${loadedCount}/${keys.length} listas prontas).`;
+    setTimeout(() => statusEl.classList.add('hidden'), 4000);
+  }
 
-    window.handleJoinRoom = function() {
-      myName = document.getElementById('input-nickname').value.trim() || 'Desafiante';
-      const code = document.getElementById('input-room-code').value.trim().toUpperCase();
+  function parseTxtContent(text, datasetKey) {
+    const lines = text.split('\n');
+    const items = [];
 
-      if (!code) { showToast("Digite o código da sala!"); return; }
+    lines.forEach(line => {
+      const trimmed = line.trim();
+      if (!trimmed) return;
 
-      roomCode = code;
-      isHost = false;
+      const parts = trimmed.split(';').map(p => p.trim()).filter(p => p.length > 0);
+      if (parts.length < 2) return;
 
-      peer = new Peer();
-
-      peer.on('open', (id) => {
-        myPeerId = id;
-        hostConn = peer.connect(roomCode);
-
-        hostConn.on('open', () => {
-          hostConn.send({
-            type: 'JOIN',
-            name: myName,
-            peerId: myPeerId
-          });
-          switchView('lobby');
+      if (datasetKey === 'verbos' && parts.length >= 4) {
+        // Formato: verbo pt; presente en; passado en; participio en
+        items.push({
+          pt: parts[0],
+          en: parts[1],
+          extra: `Passado: ${parts[2]} | Particípio: ${parts[3]}`
         });
-
-        hostConn.on('data', (data) => {
-          handleGuestReceivedData(data);
+      } else {
+        // Formato: palavra en; palavra pt
+        items.push({
+          en: parts[0],
+          pt: parts[1],
+          extra: ''
         });
+      }
+    });
 
-        hostConn.on('close', () => {
-          showToast("O anfitrião encerrou a conexão.");
-          leaveRoomAndHome();
-        });
-      });
+    return items;
+  }
 
-      peer.on('error', (err) => {
-        console.error("Guest Peer Error:", err);
-        showToast("Não foi possível conectar. Verifique o código da sala.");
-      });
-    };
+  function getFallbackData(key) {
+    return [
+      { en: "hello", pt: "olá", extra: "" },
+      { en: "world", pt: "mundo", extra: "" },
+      { en: "house", pt: "casa", extra: "" },
+      { en: "book", pt: "livro", extra: "" },
+      { en: "water", pt: "água", extra: "" }
+    ];
+  }
 
-    function handleHostReceivedData(guestPeerId, data) {
-      if (data.type === 'JOIN') {
-        playersState[guestPeerId] = {
-          name: data.name,
-          isHost: false,
-          status: 'ready',
-          score: 0,
-          errors: 0,
-          currentIdx: 0,
-          finished: false,
-          finishTime: 0
-        };
-        broadcastRoomState();
-        renderLobbyUI();
-      } else if (data.type === 'PLAYER_PROGRESS') {
-        if (playersState[guestPeerId]) {
-          playersState[guestPeerId].score = data.score;
-          playersState[guestPeerId].errors = data.errors;
-          playersState[guestPeerId].currentIdx = data.currentIdx;
-          playersState[guestPeerId].finished = data.finished;
-          playersState[guestPeerId].finishTime = data.finishTime;
+  window.toggleModeOptions = function() {
+    const mode = document.getElementById('game-mode').value;
+    if (mode === 'words') {
+      document.getElementById('limit-words-group').classList.remove('hidden');
+      document.getElementById('limit-time-group').classList.add('hidden');
+    } else {
+      document.getElementById('limit-words-group').classList.add('hidden');
+      document.getElementById('limit-time-group').classList.remove('hidden');
+    }
+  };
+
+  window.onload = () => {
+    loadAllDatasets();
+    const urlParams = new URLSearchParams(window.location.search);
+    const room = urlParams.get('room');
+    if (room) {
+      roomId = room;
+      document.getElementById('mode-selection').classList.add('hidden');
+      document.getElementById('limit-words-group').classList.add('hidden');
+      document.getElementById('limit-time-group').classList.add('hidden');
+      document.getElementById('dataset-select').parentElement.classList.add('hidden');
+      document.querySelector('#screen-setup h1').innerText = "⚔️ Entrar no Desafio";
+      document.querySelector('#screen-setup button').innerText = "Entrar na Sala";
+      document.querySelector('#screen-setup button').setAttribute('onclick', 'window.joinRoom()');
+    }
+  };
+
+  window.createRoom = function() {
+    myName = document.getElementById('player-name').value.trim() || 'Anfitrião';
+    isHost = true;
+    isSolo = false;
+
+    updateConfigFromUI();
+    roomId = 'duel-' + Math.random().toString(36).substring(2, 8);
+
+    peer = new Peer(roomId);
+
+    peer.on('open', () => {
+      showLobby();
+      updateParticipantsList();
+      document.getElementById('start-btn').classList.remove('hidden');
+    });
+
+    peer.on('connection', (c) => {
+      conn = c;
+      setupConnectionHandlers();
+    });
+  };
+
+  window.startSoloGame = function() {
+    myName = document.getElementById('player-name').value.trim() || 'Jogador';
+    isHost = true;
+    isSolo = true;
+    updateConfigFromUI();
+    generateDeck();
+    runCountdown();
+  };
+
+  window.joinRoom = function() {
+    myName = document.getElementById('player-name').value.trim() || 'Convidado';
+    isHost = false;
+    isSolo = false;
+
+    peer = new Peer();
+    peer.on('open', () => {
+      conn = peer.connect(roomId);
+      setupConnectionHandlers();
+      showLobby();
+      document.getElementById('waiting-host-msg').classList.remove('hidden');
+    });
+  };
+
+  function updateConfigFromUI() {
+    gameConfig.datasetKey = document.getElementById('dataset-select').value;
+    gameConfig.mode = document.getElementById('game-mode').value;
+    gameConfig.limit = parseInt(document.getElementById(gameConfig.mode === 'words' ? 'limit-words' : 'limit-time').value);
+    gameConfig.optionsCount = parseInt(document.getElementById('options-count').value);
+  }
+
+  function setupConnectionHandlers() {
+    conn.on('open', () => {
+      if (!isHost) {
+        conn.send({ type: 'JOIN', name: myName });
+      }
+    });
+
+    conn.on('data', (data) => {
+      if (data.type === 'JOIN' && isHost) {
+        opponents[conn.peer] = { name: data.name, status: 'ready', score: 0, finished: false };
+        updateParticipantsList();
+        conn.send({ type: 'CONFIG', config: gameConfig });
+      } else if (data.type === 'CONFIG' && !isHost) {
+        gameConfig = data.config;
+      } else if (data.type === 'START') {
+        gameDeck = data.deck;
+        runCountdown();
+      } else if (data.type === 'SCORE_UPDATE') {
+        if (opponents[conn.peer]) {
+          opponents[conn.peer].score = data.score;
+          opponents[conn.peer].finished = data.finished;
+          checkGameEndCondition();
         }
-        checkAndTriggerFinish();
+      } else if (data.type === 'BACK_TO_LOBBY' && !isHost) {
+        showLobby();
       }
-    }
+    });
 
-    function handleGuestReceivedData(data) {
-      if (data.type === 'ROOM_STATE_UPDATE') {
-        playersState = data.playersState;
-        gameCategory = data.gameCategory;
-        gameMode = data.gameMode;
-        limitValue = data.limitValue;
-        optionCount = data.optionCount;
-        renderLobbyUI();
-      } else if (data.type === 'COUNTDOWN_START') {
-        startCountdownOverlay();
-      } else if (data.type === 'GAME_START') {
-        gameDeck = data.gameDeck;
-        initGameplayUI();
-      } else if (data.type === 'DIRECT_REMATCH') {
-        gameDeck = data.gameDeck;
-        playersState = data.playersState;
-        startCountdownOverlay();
-        initGameplayUI();
-      } else if (data.type === 'RETURN_LOBBY') {
-        playersState = data.playersState;
-        renderLobbyUI();
-        switchView('lobby');
-      } else if (data.type === 'GAME_OVER') {
-        playersState = data.playersState;
-        showResultsUI();
+    conn.on('close', () => {
+      if (opponents[conn.peer]) {
+        opponents[conn.peer].status = 'left';
+        updateParticipantsList();
       }
+    });
+  }
+
+  function showLobby() {
+    document.getElementById('screen-setup').classList.add('hidden');
+    document.getElementById('screen-result').classList.add('hidden');
+    document.getElementById('screen-lobby').classList.remove('hidden');
+  }
+
+  function updateParticipantsList() {
+    const container = document.getElementById('participants-container');
+    container.innerHTML = `
+      <div class="status-item">
+        <span>👑 ${myName} (Você)</span>
+        <span class="badge badge-ready">Pronto</span>
+      </div>
+    `;
+
+    Object.keys(opponents).forEach(id => {
+      const opp = opponents[id];
+      const badgeClass = opp.status === 'ready' ? 'badge-ready' : 'badge-left';
+      const statusText = opp.status === 'ready' ? 'Na Sala' : 'Saiu da Sala';
+      container.innerHTML += `
+        <div class="status-item">
+          <span>⚔️ ${opp.name}</span>
+          <span class="badge ${badgeClass}">${statusText}</span>
+        </div>
+      `;
+    });
+  }
+
+  function getActiveVocabulary() {
+    if (gameConfig.datasetKey === 'todos') {
+      let combined = [];
+      Object.keys(datasets).forEach(k => combined = combined.concat(datasets[k]));
+      return combined.length ? combined : getFallbackData('todos');
     }
+    return (datasets[gameConfig.datasetKey] && datasets[gameConfig.datasetKey].length)
+      ? datasets[gameConfig.datasetKey]
+      : getFallbackData('default');
+  }
 
-    function broadcastRoomState() {
-      if (!isHost) return;
-      const payload = {
-        type: 'ROOM_STATE_UPDATE',
-        playersState,
-        gameCategory,
-        gameMode,
-        limitValue,
-        optionCount
-      };
-      Object.values(connections).forEach(c => c.send(payload));
-    }
-
-    // -------------------------------------------------------------
-    // QUESTION DECK GENERATOR
-    // -------------------------------------------------------------
-    function generateDeck() {
-      const pool = getWordPoolForCategory(gameCategory);
-      const count = gameMode === 'words' ? limitValue : 100;
-
-      const shuffledPool = [...pool].sort(() => 0.5 - Math.random());
-      const selectedWords = shuffledPool.slice(0, Math.min(count, pool.length));
-
-      return selectedWords.map(target => {
-        const distractors = pool
-          .filter(item => item.pt !== target.pt)
-          .map(item => item.pt)
-          .sort(() => 0.5 - Math.random())
-          .slice(0, optionCount - 1);
-
-        const options = [...distractors, target.pt].sort(() => 0.5 - Math.random());
-
-        return {
-          en: target.en,
-          pt: target.pt,
-          extra: target.extra || '',
-          options
-        };
-      });
-    }
-
-    // -------------------------------------------------------------
-    // GAME START & LOBBY LOGIC (FIXED)
-    // -------------------------------------------------------------
-    window.triggerStartGame = function() {
-      // Allows starting both SOLO and MULTIPLAYER
-      gameDeck = generateDeck();
-
-      if (isHost && Object.keys(connections).length > 0) {
-        Object.values(connections).forEach(c => {
-          c.send({
-            type: 'GAME_START',
-            gameDeck: gameDeck
-          });
-          c.send({ type: 'COUNTDOWN_START' });
-        });
-      }
-
-      startCountdownOverlay();
-      initGameplayUI();
-    };
-
-    function renderLobbyUI() {
-      document.getElementById('display-room-code').innerText = roomCode;
-
-      const catLabels = {
-        'all': 'Todas (Misto)', '1000': '1000 Palavras', 'adj': 'Adjetivos',
-        'adv': 'Advérbios', 'frases': 'Frases', 'phrasal': 'Phrasal Verbs',
-        'subst': 'Substantivos', 'verbos': 'Verbos'
-      };
-
-      document.getElementById('lobby-rule-cat').innerHTML = `<i class="fa-solid fa-book-bookmark mr-1"></i> ${catLabels[gameCategory] || 'Misto'}`;
-      document.getElementById('lobby-rule-mode').innerHTML = `<i class="fa-solid fa-sliders mr-1"></i> ${gameMode === 'words' ? limitValue + ' Palavras' : limitValue + ' Segundos'}`;
-      document.getElementById('lobby-rule-options').innerHTML = `<i class="fa-solid fa-grid-2 mr-1"></i> ${optionCount} Opções`;
-
-      const lobbyCatSelect = document.getElementById('select-lobby-category');
-      if (lobbyCatSelect) lobbyCatSelect.value = gameCategory;
-
-      const listEl = document.getElementById('lobby-player-list');
-      const entries = Object.entries(playersState);
-      document.getElementById('player-count').innerText = entries.length;
-
-      listEl.innerHTML = '';
-      entries.forEach(([pId, p]) => {
-        const isMe = pId === myPeerId;
-        const isLeft = p.status === 'left';
-        const badgeColor = isLeft ? 'bg-rose-500/20 text-rose-400 border-rose-500/30' : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
-        const badgeText = isLeft ? 'Recusou / Saiu' : 'Pronto na Sala';
-
-        const row = document.createElement('div');
-        row.className = `flex items-center justify-between p-3 rounded-xl border ${isMe ? 'bg-brand-500/10 border-brand-500/40' : 'bg-gray-900 border-gray-800'}`;
-
-        row.innerHTML = `
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center font-bold text-xs text-brand-400 uppercase">
-              ${p.name.substring(0, 2)}
-            </div>
-            <div>
-              <div class="font-bold text-sm text-white flex items-center gap-1.5">
-                ${p.name}
-                ${p.isHost ? '<span class="text-[9px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded border border-amber-500/30 font-black"><i class="fa-solid fa-crown"></i> HOST</span>' : ''}
-                ${isMe ? '<span class="text-[9px] bg-brand-500/20 text-brand-300 px-1.5 py-0.5 rounded">VOCÊ</span>' : ''}
-              </div>
-            </div>
-          </div>
-          <span class="text-[10px] font-extrabold px-2 py-1 rounded-md border ${badgeColor}">${badgeText}</span>
-        `;
-        listEl.appendChild(row);
-      });
-
-      if (isHost || !peer) {
-        document.getElementById('host-controls').classList.remove('hidden');
-        document.getElementById('lobby-host-settings').classList.remove('hidden');
-        document.getElementById('guest-waiting-msg').classList.add('hidden');
-      } else {
-        document.getElementById('host-controls').classList.add('hidden');
-        document.getElementById('lobby-host-settings').classList.add('hidden');
-        document.getElementById('guest-waiting-msg').classList.remove('hidden');
-      }
-    }
-
-    window.onHostChangeLobbyCategory = function(cat) {
-      gameCategory = cat;
-      document.getElementById('select-category').value = cat;
-      broadcastRoomState();
-      renderLobbyUI();
-      showToast(`Categoria alterada para: ${cat}`);
-    };
-
-    function startCountdownOverlay() {
-      switchView('countdown');
-      let count = 3;
-      const numEl = document.getElementById('countdown-num');
-      numEl.innerText = count;
-      sfx.playTick();
-
-      const timer = setInterval(() => {
-        count--;
-        if (count > 0) {
-          numEl.innerText = count;
-          sfx.playTick();
-        } else {
-          clearInterval(timer);
-          sfx.playCorrect();
-          switchView('game');
+  function generateDeck() {
+    const source = getActiveVocabulary();
+    const shuffled = [...source].sort(() => 0.5 - Math.random());
+    const count = gameConfig.mode === 'words' ? gameConfig.limit : 50;
+    
+    gameDeck = [];
+    for (let i = 0; i < count; i++) {
+      const item = shuffled[i % shuffled.length];
+      
+      // Gera distractors
+      const options = [item.pt];
+      while (options.length < gameConfig.optionsCount) {
+        const randItem = source[Math.floor(Math.random() * source.length)];
+        if (!options.includes(randItem.pt)) {
+          options.push(randItem.pt);
         }
-      }, 1000);
+      }
+      
+      options.sort(() => 0.5 - Math.random());
+
+      gameDeck.push({
+        target: item.en,
+        correct: item.pt,
+        extra: item.extra || '',
+        options: options
+      });
     }
+  }
 
-    // -------------------------------------------------------------
-    // GAMEPLAY ENGINE
-    // -------------------------------------------------------------
-    function initGameplayUI() {
-      myScore = 0;
-      myErrors = 0;
-      myCurrentIdx = 0;
-      isGameActive = true;
-      gameStartTime = Date.now();
+  window.triggerStartGame = function() {
+    generateDeck();
+    if (conn && !isSolo) {
+      conn.send({ type: 'START', deck: gameDeck });
+    }
+    runCountdown();
+  };
 
-      document.getElementById('game-score').innerText = '0';
+  function runCountdown() {
+    document.getElementById('screen-lobby').classList.add('hidden');
+    document.getElementById('screen-countdown').classList.remove('hidden');
+    let count = 3;
+    const numEl = document.getElementById('countdown-number');
+    numEl.innerText = count;
 
-      if (gameMode === 'time') {
-        startTimerMode(limitValue);
+    const interval = setInterval(() => {
+      count--;
+      if (count > 0) {
+        numEl.innerText = count;
       } else {
-        updateWordBadge(0, limitValue);
+        clearInterval(interval);
+        startGame();
       }
+    }, 1000);
+  }
 
-      renderWordQuestion();
+  function startGame() {
+    document.getElementById('screen-countdown').classList.add('hidden');
+    document.getElementById('screen-game').classList.remove('hidden');
+
+    currentWordIndex = 0;
+    score = 0;
+
+    if (gameConfig.mode === 'time') {
+      timeRemaining = gameConfig.limit;
+      startTimer();
     }
 
-    function updateWordBadge(current, total) {
-      document.getElementById('game-tracker-text').innerText = `${current} / ${total} Palavras`;
+    renderCurrentWord();
+  }
+
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      timeRemaining--;
+      document.getElementById('game-status-bar').innerText = `⏱️ Tempo: ${timeRemaining}s | Acertos: ${score}`;
+      if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        endGame();
+      }
+    }, 1000);
+  }
+
+  function renderCurrentWord() {
+    if (currentWordIndex >= gameDeck.length) {
+      endGame();
+      return;
     }
 
-    function startTimerMode(seconds) {
-      const endTime = Date.now() + seconds * 1000;
-      if (gameTimer) clearInterval(gameTimer);
-
-      gameTimer = setInterval(() => {
-        const remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
-        document.getElementById('game-tracker-text').innerText = `${remaining}s Restantes`;
-
-        if (remaining <= 0) {
-          clearInterval(gameTimer);
-          finishMyGame();
-        }
-      }, 250);
+    if (gameConfig.mode === 'words') {
+      document.getElementById('game-status-bar').innerText = `Palavra ${currentWordIndex + 1} de ${gameConfig.limit} | Acertos: ${score}`;
     }
 
-    function renderWordQuestion() {
-      if (!gameDeck || gameDeck.length === 0) return;
+    const currentItem = gameDeck[currentWordIndex];
+    document.getElementById('target-word').innerText = currentItem.target.toUpperCase();
+    document.getElementById('extra-info').innerText = currentItem.extra;
 
-      if (gameMode === 'words' && myCurrentIdx >= limitValue) {
-        finishMyGame();
-        return;
-      }
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
 
-      const q = gameDeck[myCurrentIdx % gameDeck.length];
+    currentItem.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerText = opt;
+      btn.onclick = () => selectAnswer(opt === currentItem.correct);
+      optionsContainer.appendChild(btn);
+    });
+  }
 
-      document.getElementById('target-word').innerText = q.en;
-      document.getElementById('target-word-extra').innerText = q.extra || '';
+  function selectAnswer(isCorrect) {
+    if (isCorrect) score++;
+    currentWordIndex++;
 
-      if (gameMode === 'words') {
-        updateWordBadge(myCurrentIdx, limitValue);
-      }
-
-      const grid = document.getElementById('options-grid');
-      grid.innerHTML = '';
-      grid.className = `grid gap-2.5 sm:gap-3 pt-2 ${optionCount === 8 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2 sm:grid-cols-3'}`;
-
-      q.options.forEach(optText => {
-        const btn = document.createElement('button');
-        btn.className = "glass-btn py-3.5 sm:py-4 px-3 rounded-xl font-bold text-sm sm:text-base text-gray-100 text-center capitalize transition shadow";
-        btn.innerText = optText;
-        btn.onclick = () => handleAnswerClick(optText, q.pt, btn);
-        grid.appendChild(btn);
+    if (conn && !isSolo) {
+      conn.send({
+        type: 'SCORE_UPDATE',
+        score: score,
+        finished: gameConfig.mode === 'words' && currentWordIndex >= gameConfig.limit
       });
     }
 
-    function handleAnswerClick(selected, correct, btnEl) {
-      if (!isGameActive) return;
+    if (gameConfig.mode === 'words' && currentWordIndex >= gameConfig.limit) {
+      endGame();
+    } else {
+      renderCurrentWord();
+    }
+  }
 
-      const flash = document.getElementById('flash-feedback');
+  function endGame() {
+    if (timerInterval) clearInterval(timerInterval);
+    document.getElementById('screen-game').classList.add('hidden');
+    document.getElementById('screen-result').classList.remove('hidden');
 
-      if (selected === correct) {
-        myScore++;
-        sfx.playCorrect();
-        btnEl.classList.add('bg-emerald-600', 'border-emerald-400', 'text-white');
-        flash.className = "absolute inset-0 pointer-events-none transition-opacity duration-200 opacity-25 bg-emerald-500";
-      } else {
-        myErrors++;
-        sfx.playError();
-        btnEl.classList.add('bg-rose-600', 'border-rose-400', 'text-white');
-        flash.className = "absolute inset-0 pointer-events-none transition-opacity duration-200 opacity-25 bg-rose-500";
-      }
+    checkGameEndCondition();
+  }
 
-      document.getElementById('game-score').innerText = myScore;
+  function checkGameEndCondition() {
+    const resultTitle = document.getElementById('result-title');
+    const resultDetails = document.getElementById('result-details');
 
-      setTimeout(() => { flash.style.opacity = '0'; }, 150);
-
-      myCurrentIdx++;
-
-      const elapsed = ((Date.now() - gameStartTime) / 1000).toFixed(1);
-      const isFinished = gameMode === 'words' && myCurrentIdx >= limitValue;
-
-      if (playersState[myPeerId]) {
-        playersState[myPeerId].score = myScore;
-        playersState[myPeerId].errors = myErrors;
-        playersState[myPeerId].currentIdx = myCurrentIdx;
-        playersState[myPeerId].finished = isFinished;
-        playersState[myPeerId].finishTime = parseFloat(elapsed);
-      }
-
-      if (!isHost && hostConn) {
-        hostConn.send({
-          type: 'PLAYER_PROGRESS',
-          score: myScore,
-          errors: myErrors,
-          currentIdx: myCurrentIdx,
-          finished: isFinished,
-          finishTime: parseFloat(elapsed)
-        });
-      } else if (isHost) {
-        checkAndTriggerFinish();
-      }
-
-      if (!isFinished) {
-        renderWordQuestion();
-      } else {
-        finishMyGame();
-      }
+    if (isSolo) {
+      resultTitle.className = 'winner-title';
+      resultTitle.innerText = 'TREINO CONCLUÍDO 🎯';
+      resultDetails.innerText = `Você acertou ${score} de ${currentWordIndex} palavras!`;
+      return;
     }
 
-    function finishMyGame() {
-      if (!isGameActive) return;
-      isGameActive = false;
-      if (gameTimer) clearInterval(gameTimer);
+    const oppId = Object.keys(opponents)[0];
+    const oppScore = oppId ? opponents[oppId].score : 0;
+    const oppName = oppId ? opponents[oppId].name : 'Oponente';
 
-      const elapsed = ((Date.now() - gameStartTime) / 1000).toFixed(1);
-
-      if (playersState[myPeerId]) {
-        playersState[myPeerId].finished = true;
-        playersState[myPeerId].score = myScore;
-        playersState[myPeerId].errors = myErrors;
-        playersState[myPeerId].finishTime = parseFloat(elapsed);
-      }
-
-      if (!isHost && hostConn) {
-        hostConn.send({
-          type: 'PLAYER_PROGRESS',
-          score: myScore,
-          errors: myErrors,
-          currentIdx: myCurrentIdx,
-          finished: true,
-          finishTime: parseFloat(elapsed)
-        });
-      }
-
-      // If playing SOLO or as Host, finish and show results
-      if (isHost || Object.keys(playersState).length <= 1) {
-        checkAndTriggerFinish();
-      } else {
-        showToast("Finalizado! Aguardando oponente...");
-      }
+    if (score > oppScore) {
+      resultTitle.className = 'winner-title';
+      resultTitle.innerText = 'WINNER 🏆';
+      resultDetails.innerText = `Você venceu! Pontuação: ${score} acertos vs ${oppScore} de ${oppName}.`;
+    } else if (score < oppScore) {
+      resultTitle.className = 'loser-title';
+      resultTitle.innerText = 'LOSER ❌';
+      resultDetails.innerText = `${oppName} venceu! Pontuação: ${oppScore} acertos vs ${score} seus.`;
+    } else {
+      resultTitle.className = 'winner-title';
+      resultTitle.innerText = 'EMPATE 🤝';
+      resultDetails.innerText = `Ambos acertaram ${score} palavras!`;
     }
+  }
 
-    function checkAndTriggerFinish() {
-      const playersArr = Object.values(playersState).filter(p => p.status !== 'left');
-      const allFinished = playersArr.every(p => p.finished);
-
-      if (allFinished || playersArr.length <= 1) {
-        if (isHost && Object.keys(connections).length > 0) {
-          Object.values(connections).forEach(c => c.send({
-            type: 'GAME_OVER',
-            playersState
-          }));
-        }
-        showResultsUI();
-      }
+  window.rematch = function() {
+    if (isHost) {
+      window.triggerStartGame();
     }
+  };
 
-    // -------------------------------------------------------------
-    // RESULTS & LEADERBOARD
-    // -------------------------------------------------------------
-    function showResultsUI() {
-      switchView('results');
-
-      const players = Object.values(playersState).filter(p => p.status !== 'left');
-
-      players.sort((a, b) => {
-        if (b.score !== a.score) return b.score - a.score;
-        const totalA = a.score + a.errors || 1;
-        const totalB = b.score + b.errors || 1;
-        const accA = a.score / totalA;
-        const accB = b.score / totalB;
-        if (accB !== accA) return accB - accA;
-        return (a.finishTime || 0) - (b.finishTime || 0);
-      });
-
-      const winner = players[0];
-      const isSolo = players.length <= 1;
-      const isMeWinner = winner && winner.name === myName;
-
-      const badgeRes = document.getElementById('badge-result');
-      const subTitle = document.getElementById('result-subtitle');
-
-      if (isSolo) {
-        badgeRes.innerText = "TREINO CONCLUÍDO! 🏆";
-        badgeRes.className = "text-4xl sm:text-6xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 drop-shadow-2xl animate-bounce-short";
-        subTitle.innerText = `Você acertou ${myScore} palavras nesta sessão de treino!`;
-        sfx.playWinner();
-        fireConfetti();
-      } else if (isMeWinner) {
-        badgeRes.innerText = "WINNER 🏆";
-        badgeRes.className = "text-5xl sm:text-7xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 drop-shadow-2xl animate-bounce-short";
-        subTitle.innerText = "Parabéns! Você venceu o duelo!";
-        sfx.playWinner();
-        fireConfetti();
-      } else {
-        badgeRes.innerText = "LOSER ❌";
-        badgeRes.className = "text-5xl sm:text-7xl font-black tracking-widest text-rose-500 drop-shadow-lg";
-        subTitle.innerText = `Vitória de ${winner ? winner.name : 'outro jogador'}. Continue treinando!`;
-      }
-
-      const tbody = document.getElementById('leaderboard-rows');
-      tbody.innerHTML = '';
-
-      players.forEach((p, idx) => {
-        const isMe = p.name === myName;
-        const total = p.score + p.errors || 1;
-        const accPct = Math.round((p.score / total) * 100);
-
-        let posIcon = `${idx + 1}º`;
-        if (idx === 0) posIcon = '🥇';
-        if (idx === 1) posIcon = '🥈';
-        if (idx === 2) posIcon = '🥉';
-
-        const row = document.createElement('div');
-        row.className = `px-4 py-3 text-xs sm:text-sm font-semibold grid grid-cols-12 items-center text-left ${isMe ? 'bg-brand-500/20 border-l-4 border-brand-500 text-white' : 'text-gray-300'}`;
-
-        row.innerHTML = `
-          <span class="col-span-2 text-base font-black">${posIcon}</span>
-          <span class="col-span-5 font-bold truncate ${isMe ? 'text-brand-300' : ''}">${p.name} ${isMe ? '(Você)' : ''}</span>
-          <span class="col-span-3 text-center">
-            <span class="text-emerald-400 font-bold">${p.score}</span> / <span class="text-gray-400">${total}</span>
-            <span class="block text-[10px] text-gray-500">${accPct}% acerto</span>
-          </span>
-          <span class="col-span-2 text-right font-mono text-gray-400">${p.finishTime ? p.finishTime + 's' : '--'}</span>
-        `;
-        tbody.appendChild(row);
-      });
-
-      if (isHost || isSolo) {
-        document.getElementById('results-host-actions').classList.remove('hidden');
-        document.getElementById('results-guest-msg').classList.add('hidden');
-      } else {
-        document.getElementById('results-host-actions').classList.add('hidden');
-        document.getElementById('results-guest-msg').classList.remove('hidden');
-      }
+  window.backToLobby = function() {
+    if (isHost) {
+      if (conn && !isSolo) conn.send({ type: 'BACK_TO_LOBBY' });
+      showLobby();
     }
+  };
 
-    window.triggerDirectRematch = function() {
-      Object.keys(playersState).forEach(id => {
-        playersState[id].score = 0;
-        playersState[id].errors = 0;
-        playersState[id].currentIdx = 0;
-        playersState[id].finished = false;
-        playersState[id].finishTime = 0;
-      });
+  function getShareUrl() {
+    return `${window.location.origin}${window.location.pathname}?room=${roomId}`;
+  }
 
-      gameDeck = generateDeck();
+  window.shareWhatsApp = function() {
+    const text = encodeURIComponent(`⚔️ Desafio de Tradução em Inglês!\nClique no link para entrar na minha sala:\n${getShareUrl()}`);
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  };
 
-      if (isHost && Object.keys(connections).length > 0) {
-        Object.values(connections).forEach(c => c.send({
-          type: 'DIRECT_REMATCH',
-          gameDeck,
-          playersState
-        }));
-      }
+  window.shareEmailDesktop = function() {
+    const subject = encodeURIComponent('Desafio de Tradução em Inglês - Translation Arena');
+    const body = encodeURIComponent(`Olá!\n\nEstou te desafiando para uma disputa de tradução em inglês na Translation Arena!\n\nClique no link abaixo para entrar na sala:\n${getShareUrl()}\n\nBoa sorte!`);
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  };
 
-      startCountdownOverlay();
-      initGameplayUI();
-    };
+  window.copyLink = function() {
+    navigator.clipboard.writeText(getShareUrl());
+    alert('Link da sala copiado para a área de transferência!');
+  };
+})();
+</script>
 
-    window.triggerReturnToLobby = function() {
-      Object.keys(playersState).forEach(id => {
-        playersState[id].score = 0;
-        playersState[id].errors = 0;
-        playersState[id].currentIdx = 0;
-        playersState[id].finished = false;
-        playersState[id].finishTime = 0;
-      });
-
-      if (isHost && Object.keys(connections).length > 0) {
-        Object.values(connections).forEach(c => c.send({
-          type: 'RETURN_LOBBY',
-          playersState
-        }));
-      }
-
-      renderLobbyUI();
-      switchView('lobby');
-    };
-
-    window.leaveRoomAndHome = function() {
-      if (peer) peer.destroy();
-      peer = null;
-      connections = {};
-      hostConn = null;
-      playersState = {};
-      switchView('home');
-    };
-
-    // -------------------------------------------------------------
-    // UI NAVIGATION & SHARE HELPERS
-    // -------------------------------------------------------------
-    window.switchHomeTab = function(tab) {
-      const btnCreate = document.getElementById('tab-create');
-      const btnJoin = document.getElementById('tab-join');
-      const panelCreate = document.getElementById('panel-create');
-      const panelJoin = document.getElementById('panel-join');
-
-      if (tab === 'create') {
-        btnCreate.className = "py-2.5 rounded-lg text-sm font-bold transition-all bg-brand-600 text-white shadow";
-        btnJoin.className = "py-2.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white";
-        panelCreate.classList.remove('hidden');
-        panelJoin.classList.add('hidden');
-      } else {
-        btnJoin.className = "py-2.5 rounded-lg text-sm font-bold transition-all bg-brand-600 text-white shadow";
-        btnCreate.className = "py-2.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white";
-        panelJoin.classList.remove('hidden');
-        panelCreate.classList.add('hidden');
-      }
-    };
-
-    window.setGameMode = function(mode) {
-      gameMode = mode;
-      const btnWords = document.getElementById('btn-mode-words');
-      const btnTime = document.getElementById('btn-mode-time');
-      const groupWords = document.getElementById('group-word-limits');
-      const groupTime = document.getElementById('group-time-limits');
-
-      if (mode === 'words') {
-        btnWords.className = "p-3 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-left transition-all";
-        btnTime.className = "p-3 rounded-xl border-2 border-gray-800 bg-gray-900 text-left hover:border-gray-700 transition-all";
-        groupWords.classList.remove('hidden');
-        groupTime.classList.add('hidden');
-        document.getElementById('lbl-limit-value').innerText = "Quantidade de Palavras";
-        limitValue = 20;
-      } else {
-        btnTime.className = "p-3 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-left transition-all";
-        btnWords.className = "p-3 rounded-xl border-2 border-gray-800 bg-gray-900 text-left hover:border-gray-700 transition-all";
-        groupTime.classList.remove('hidden');
-        groupWords.classList.add('hidden');
-        document.getElementById('lbl-limit-value').innerText = "Tempo de Partida (Segundos)";
-        limitValue = 60;
-      }
-    };
-
-    window.setLimitValue = function(val) {
-      limitValue = val;
-      const targetGroup = gameMode === 'words' ? 'group-word-limits' : 'group-time-limits';
-      const btns = document.querySelectorAll(`#${targetGroup} button`);
-      btns.forEach(b => {
-        if (b.innerText.includes(val.toString())) {
-          b.className = "py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-xs";
-        } else {
-          b.className = "py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold hover:border-brand-500 transition text-xs";
-        }
-      });
-    };
-
-    window.setOptionCount = function(count) {
-      optionCount = count;
-      const btn6 = document.getElementById('btn-opts-6');
-      const btn8 = document.getElementById('btn-opts-8');
-      if (count === 6) {
-        btn6.className = "py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-sm";
-        btn8.className = "py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold text-gray-300 hover:border-brand-500 transition text-sm";
-      } else {
-        btn8.className = "py-2.5 rounded-xl border-2 border-brand-500 bg-brand-500/20 font-bold text-white text-sm";
-        btn6.className = "py-2.5 rounded-xl border border-gray-700 bg-gray-900 font-bold text-gray-300 hover:border-brand-500 transition text-sm";
-      }
-    };
-
-    function getShareLink() {
-      return `${window.location.origin}${window.location.pathname}?room=${roomCode}`;
-    }
-
-    window.copyRoomLink = function() {
-      const link = getShareLink();
-      const tempInput = document.createElement('input');
-      document.body.appendChild(tempInput);
-      tempInput.value = link;
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-      showToast("Link do desafio copiado!");
-    };
-
-    window.shareWhatsApp = function() {
-      const link = getShareLink();
-      const msg = `⚡ Desafio de Tradução em Inglês!\nAceita a disputa? Entre na sala clicando no link:\n${link}`;
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
-    };
-
-    window.shareEmailDesktop = function() {
-      const link = getShareLink();
-      const subject = encodeURIComponent("Desafio de Tradução de Inglês - Translation Arena");
-      const body = encodeURIComponent(`Olá!\n\nEstou te convidando para um duelo de tradução em tempo real na Translation Arena.\n\nClique no link para entrar na sala:\n${link}\n\nBoa sorte!`);
-      window.location.href = `mailto:?subject=${subject}&body=${body}`;
-    };
-
-    function switchView(viewName) {
-      ['home', 'lobby', 'countdown', 'game', 'results'].forEach(v => {
-        const el = document.getElementById(`view-${v}`);
-        if (v === viewName) el.classList.remove('hidden');
-        else el.classList.add('hidden');
-      });
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toast-msg').innerText = msg;
-      toast.classList.remove('opacity-0', 'pointer-events-none');
-      setTimeout(() => {
-        toast.classList.add('opacity-0', 'pointer-events-none');
-      }, 3000);
-    }
-  </script>
 </body>
 </html>
